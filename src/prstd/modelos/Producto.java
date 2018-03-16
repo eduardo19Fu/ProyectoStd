@@ -1,6 +1,6 @@
 package prstd.modelos;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -22,11 +22,14 @@ public class Producto {
     private int tipo_producto;
     private int existencia_minima;
     
+    private String nombre_fabricante;
+    private String nombre_familia;
+    
     public Producto(){
     }
 
     public Producto(String codigo, String nombre, Double precio_compra, Double precio_venta, Timestamp fecha_compra, Date fecha_vencimiento, 
-                    int fabricante, int familia, int existencia, Double porcentaje_ganancia, int tipo_producto, int existencia_minima) {
+                    int fabricante, int familia, int existencia, Double porcentaje_ganancia, int tipo_producto, int existencia_minima,String nombre_fabricante, String nombre_familia) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio_compra = precio_compra;
@@ -39,6 +42,8 @@ public class Producto {
         this.porcentaje_ganancia = porcentaje_ganancia;
         this.tipo_producto = tipo_producto;
         this.existencia_minima = existencia_minima;
+        this.nombre_fabricante = nombre_fabricante;
+        this.nombre_familia = nombre_familia;
     }
 
     public String getCodigo() {
@@ -137,5 +142,20 @@ public class Producto {
         this.existencia_minima = existencia_minima;
     }
     
+    public String getNombre_familia(){
+        return nombre_familia;
+    }
+    
+    public void setNombre_Familia(String nombre_familia){
+        this.nombre_familia = nombre_familia;
+    }
+    
+    public String getNombre_fabricante(){
+        return nombre_fabricante;
+    }
+    
+    public void setNombre_fabricante(String nombre_fabricante){
+        this.nombre_fabricante = nombre_fabricante;
+    }
     
 }

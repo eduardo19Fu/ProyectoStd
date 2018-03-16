@@ -1,4 +1,4 @@
-package prstd.modelos;
+package prstd.gui;
 
 import java.awt.Component;
 import javax.swing.JPanel;
