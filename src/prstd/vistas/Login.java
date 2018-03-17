@@ -5,6 +5,7 @@
  */
 package prstd.vistas;
 
+import com.alee.laf.WebLookAndFeel;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JDialog;
@@ -81,6 +82,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        btnIngresar.setBackground(new java.awt.Color(255, 176, 137));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Login-icon-32.png"))); // NOI18N
         btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -222,10 +224,11 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //UIManager.setLookAndFeel(new UpperEssentialLookAndFeel());
         //UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-        //UIManager.setLookAndFeel(new WebLookAndFeel());
         JFrame.setDefaultLookAndFeelDecorated(false);
         JDialog.setDefaultLookAndFeelDecorated(false);
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        //UIManager.setLookAndFeel(new WebLookAndFeel());
+        UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new Login().setVisible(true);
