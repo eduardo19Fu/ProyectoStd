@@ -61,8 +61,11 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 218, 131));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
         jLabel2.setText("Usuario:");
@@ -74,6 +77,9 @@ public class Login extends javax.swing.JFrame {
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
+        jPanel3.setOpaque(false);
+
+        btnSalir.setBackground(new java.awt.Color(230, 162, 78));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/MetroUI-Folder-OS-Security-Denied-icon-32.png"))); // NOI18N
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +88,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnIngresar.setBackground(new java.awt.Color(255, 176, 137));
+        btnIngresar.setBackground(new java.awt.Color(230, 162, 78));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Login-icon-32.png"))); // NOI18N
         btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -160,7 +166,8 @@ public class Login extends javax.swing.JFrame {
         iconoLogo.setToolTipText("");
         jPanel1.add(iconoLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
 
-        jLabel4.setBackground(new java.awt.Color(255, 204, 51));
+        jLabel4.setBackground(new java.awt.Color(255, 218, 131));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/fondo_login.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +234,7 @@ public class Login extends javax.swing.JFrame {
         JFrame.setDefaultLookAndFeelDecorated(false);
         JDialog.setDefaultLookAndFeelDecorated(false);
         //UIManager.setLookAndFeel(new WebLookAndFeel());
-        UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
