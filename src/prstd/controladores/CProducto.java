@@ -39,6 +39,8 @@ public class CProducto {
             ps.setInt(1, producto.getExistencia());
             ps.setString(2, producto.getCodigo());
             int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,6 +66,8 @@ public class CProducto {
             ps.setInt(11, producto.getTipo_producto());
             ps.setInt(12, producto.getExistencia_minima());
             int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,6 +104,9 @@ public class CProducto {
                 producto.setExistencia_minima(rs.getInt(12));
                 lista.add(producto);
             }
+            rs.close();
+            ps.close();
+            connection.close();
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,6 +139,9 @@ public class CProducto {
                 producto.setExistencia_minima(rs.getInt(12));
                 lista.add(producto);
             }
+            rs.close();
+            ps.close();
+            connection.close();
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);

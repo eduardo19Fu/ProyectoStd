@@ -43,7 +43,7 @@ public class NotificacionExistencias extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(230, 162, 78));
+        jPanel1.setBackground(new java.awt.Color(204, 203, 177));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -60,7 +60,6 @@ public class NotificacionExistencias extends javax.swing.JDialog {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 79));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> ¿Está seguro de querer salir del Sistema<br>de forma definitiva?</html>");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -110,7 +109,7 @@ public class NotificacionExistencias extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

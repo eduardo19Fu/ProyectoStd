@@ -44,12 +44,13 @@ public class NotificacionSalir extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(230, 162, 78));
+        jPanel1.setBackground(new java.awt.Color(204, 203, 177));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N
         btnAceptar.setToolTipText("Aceptar");
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -61,7 +62,6 @@ public class NotificacionSalir extends javax.swing.JDialog {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 79));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> ¿Está seguro de querer salir del Sistema<br>de forma definitiva?</html>");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -69,6 +69,7 @@ public class NotificacionSalir extends javax.swing.JDialog {
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/cancel-32.png"))); // NOI18N
         btnSalir.setToolTipText("Cancelar");
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
