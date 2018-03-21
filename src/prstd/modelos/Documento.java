@@ -6,22 +6,23 @@ import java.sql.Timestamp;
  *
  * @author Edfu-Pro
  */
-public class Factura {
+public class Documento {
     
     private int idtransaccion;
-    private int no_factura;
+    private int no_documento;
     private Timestamp fecha_emision;
     private Double total;
     private int idcliente;
     private int idvendedor;
     private String serie;
+    private int tipo_documento;
 
-    public Factura(){
+    public Documento(){
     }
     
-    public Factura(int idtransaccion, int no_factura, Timestamp fecha_emision, Double total, int idcliente, int idvendedor, String serie) {
+    public Documento(int idtransaccion, int no_documento, Timestamp fecha_emision, Double total, int idcliente, int idvendedor, String serie) {
         this.idtransaccion = idtransaccion;
-        this.no_factura = no_factura;
+        this.no_documento = no_documento;
         this.fecha_emision = fecha_emision;
         this.total = total;
         this.idcliente = idcliente;
@@ -37,12 +38,12 @@ public class Factura {
         this.idtransaccion = idtransaccion;
     }
 
-    public int getNo_factura() {
-        return no_factura;
+    public int getNo_documento() {
+        return no_documento;
     }
 
-    public void setNo_factura(int no_factura) {
-        this.no_factura = no_factura;
+    public void setNo_documento(int no_documento) {
+        this.no_documento = no_documento;
     }
 
     public Timestamp getFecha_emision() {
@@ -83,6 +84,14 @@ public class Factura {
 
     public void setSerie(String serie) {
         this.serie = serie;
+    }
+
+    public int getTipo_documento() {
+        return tipo_documento;
+    }
+
+    public void setTipo_documento(int tipo_documento) {
+        this.tipo_documento = tipo_documento;
     }
     
     

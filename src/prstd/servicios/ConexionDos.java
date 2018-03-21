@@ -25,7 +25,7 @@ public class ConexionDos {
         pass = "1992";
         db = "std_db";
         driver = "com.mysql.jdbc.Driver";
-        url = "";
+        url = "jdbc:mysql://localhost/" + db;
     }
     
     private Connection conectar(){

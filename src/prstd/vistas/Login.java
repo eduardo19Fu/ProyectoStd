@@ -5,13 +5,12 @@
  */
 package prstd.vistas;
 
-import com.alee.laf.WebLookAndFeel;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import prstd.modelos.Usuario;
 import prstd.notificaciones.NotificacionSalir;
 
 /**
@@ -112,6 +111,11 @@ public class Login extends javax.swing.JFrame {
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Login-icon-32.png"))); // NOI18N
         btnIngresar.setToolTipText("Ingresar al Sistema");
         btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
         panelBotones.setLayout(panelBotonesLayout);
@@ -200,6 +204,10 @@ public class Login extends javax.swing.JFrame {
         ns.setVisible(true);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
     /**
      * @param args the command line arguments
      * @throws javax.swing.UnsupportedLookAndFeelException
@@ -263,4 +271,13 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void hacerLogin(String user, String password){
+        Usuario usuario = new Usuario();
+        usuario.setUsuario(user);
+        usuario.setPassword(password);
+        if(usuario.login(usuario)){
+            
+        }
+    }
 }

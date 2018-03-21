@@ -90,7 +90,7 @@ public class CUsuario {
     }
     
     public List<Usuario> consultar(){
-        String sql = "select * from usuario";
+        String sql = "select * from tbl_usuario";
         List<Usuario> lista = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -130,6 +130,21 @@ public class CUsuario {
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public boolean hacerLogin(Usuario usuario){
+        String sql = "select 1 from tbl_usuario where usuario = ? and password = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, usuario.getUsuario());
+            ps.setString(2, usuario.getPassword());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 }
