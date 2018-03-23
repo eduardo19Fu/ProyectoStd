@@ -205,7 +205,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
+        hacerLogin(txtUsuario.getText(), new String(txtPassword.getPassword()));
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
@@ -277,7 +277,9 @@ public class Login extends javax.swing.JFrame {
         usuario.setUsuario(user);
         usuario.setPassword(password);
         if(usuario.login(usuario)){
-            
+            Principal principal = new Principal();
+            principal.setVisible(true);
+            this.dispose();
         }
     }
 }

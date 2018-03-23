@@ -30,9 +30,20 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btnSistema = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnVentas = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnReportes = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -41,13 +52,76 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 159));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 80, 1163, 656));
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 1163, 77));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 740));
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel5.setText("Sistema");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
+
+        btnSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Monitor-icon(72).png"))); // NOI18N
+        btnSistema.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        btnSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSistema.setPreferredSize(new java.awt.Dimension(160, 160));
+        btnSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSistemaMouseEntered(evt);
+            }
+        });
+        jPanel2.add(btnSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 190));
+
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel6.setText("Modulo de Ventas");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, -1));
+
+        btnVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Shopping-basket-accept-icon(72).png"))); // NOI18N
+        btnVentas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setPreferredSize(new java.awt.Dimension(160, 160));
+        jPanel2.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 200, 190));
+
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel7.setText("Modulo de Reportes");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, -1));
+
+        btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Upline-icon-72.png"))); // NOI18N
+        btnReportes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setPreferredSize(new java.awt.Dimension(160, 160));
+        jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 200, 190));
+
+        jLabel1.setText("jLabel1");
+        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jLabel1.setPreferredSize(new java.awt.Dimension(160, 160));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 200, 190));
+
+        jLabel3.setText("jLabel1");
+        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jLabel3.setPreferredSize(new java.awt.Dimension(160, 160));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 200, 190));
+
+        jLabel4.setText("jLabel1");
+        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jLabel4.setPreferredSize(new java.awt.Dimension(160, 160));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 200, 190));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 80, 1204, 696));
+
+        jPanel3.setBackground(new java.awt.Color(153, 0, 51));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 1208, 77));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSistemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSistemaMouseEntered
+        
+    }//GEN-LAST:event_btnSistemaMouseEntered
 
     /**
      * @param args the command line arguments
@@ -83,6 +157,15 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnReportes;
+    private javax.swing.JLabel btnSistema;
+    private javax.swing.JLabel btnVentas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
