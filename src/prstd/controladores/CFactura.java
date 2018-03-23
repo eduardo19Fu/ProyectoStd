@@ -2,7 +2,7 @@ package prstd.controladores;
 
 import java.util.Date;
 import java.util.List;
-import prstd.modelos.Factura;
+import prstd.modelos.Documento;
 
 /**
  *
@@ -13,7 +13,7 @@ public class CFactura {
     public CFactura(){
     }
     
-    private int crearFactura(Factura factura){
+    private int crearFactura(Documento factura){
         return 0;
     }
     
@@ -21,15 +21,15 @@ public class CFactura {
         return 0;
     }
     
-    private List<Factura> consultarTransacciones(){
+    private List<Documento> consultarTransacciones(){
         return null;
     }
     
-    private List<Factura> consultarTransacciones(int no_factura){
+    private List<Documento> consultarTransacciones(int no_factura){
         return null;
     }
     
-    private List<Factura> consultarTransacciones(Date fecha_emision){
+    private List<Documento> consultarTransacciones(Date fecha_emision){
         return null;
     }
 }

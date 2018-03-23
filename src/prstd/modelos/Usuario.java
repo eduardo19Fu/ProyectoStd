@@ -1,5 +1,7 @@
 package prstd.modelos;
 
+import prstd.controladores.CUsuario;
+
 /**
  *
  * @author Edfu-Pro
@@ -73,6 +75,10 @@ public class Usuario {
         this.estado = estado;
     }
     
+    public boolean login(Usuario usuario){
+        CUsuario cu = new CUsuario();
+        return cu.hacerLogin(usuario);
+    }
     
     
 }
