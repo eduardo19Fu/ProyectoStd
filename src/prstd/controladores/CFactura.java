@@ -14,6 +14,7 @@ public class CFactura {
     }
     
     private int crearFactura(Documento factura){
+        String sql = "{call }";
         return 0;
     }
     

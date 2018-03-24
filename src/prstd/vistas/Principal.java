@@ -5,6 +5,9 @@
  */
 package prstd.vistas;
 
+import javax.swing.BorderFactory;
+import AppPackage.AnimationClass;
+
 /**
  *
  * @author Edfu-Pro
@@ -34,12 +37,15 @@ public class Principal extends javax.swing.JFrame {
         btnSistema = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnVentas = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnReportes = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnConfiguracion = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -60,12 +66,14 @@ public class Principal extends javax.swing.JFrame {
 
         btnSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Monitor-icon(72).png"))); // NOI18N
-        btnSistema.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSistema.setPreferredSize(new java.awt.Dimension(160, 160));
         btnSistema.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSistemaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSistemaMouseExited(evt);
             }
         });
         jPanel2.add(btnSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, 190));
@@ -77,42 +85,87 @@ public class Principal extends javax.swing.JFrame {
 
         btnVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Shopping-basket-accept-icon(72).png"))); // NOI18N
-        btnVentas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVentas.setPreferredSize(new java.awt.Dimension(160, 160));
+        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVentasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVentasMouseExited(evt);
+            }
+        });
         jPanel2.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 200, 190));
 
-        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(153, 0, 51));
-        jLabel7.setText("Modulo de Reportes");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, -1));
+        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel8.setText("Modulo de Reportes");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, -1));
 
         btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Upline-icon-72.png"))); // NOI18N
-        btnReportes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setPreferredSize(new java.awt.Dimension(160, 160));
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportesMouseExited(evt);
+            }
+        });
         jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 110, 200, 190));
 
-        jLabel1.setText("jLabel1");
-        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jLabel1.setPreferredSize(new java.awt.Dimension(160, 160));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 390, 200, 190));
+        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel9.setText("Opciones de Salida");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 520, -1, -1));
 
-        jLabel3.setText("jLabel1");
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jLabel3.setPreferredSize(new java.awt.Dimension(160, 160));
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 200, 190));
+        btnSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Logout-icon-72.png"))); // NOI18N
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setPreferredSize(new java.awt.Dimension(160, 160));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
+        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 200, 190));
 
-        jLabel4.setText("jLabel1");
-        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jLabel4.setPreferredSize(new java.awt.Dimension(160, 160));
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 200, 190));
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel7.setText("Configuraciones");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, -1, -1));
+
+        btnConfiguracion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/cogs-icon(90).png"))); // NOI18N
+        btnConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfiguracion.setPreferredSize(new java.awt.Dimension(160, 160));
+        btnConfiguracion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfiguracionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfiguracionMouseExited(evt);
+            }
+        });
+        jPanel2.add(btnConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 200, 190));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 80, 1204, 696));
 
         jPanel3.setBackground(new java.awt.Color(153, 0, 51));
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 1208, 77));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("jLabel1");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 30, -1, -1));
+
+        jLabel2.setText("jLabel1");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 1208, 80));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 780));
 
@@ -120,8 +173,44 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSistemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSistemaMouseEntered
-        
+        btnSistema.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51),2));
     }//GEN-LAST:event_btnSistemaMouseEntered
+
+    private void btnSistemaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSistemaMouseExited
+        btnSistema.setBorder(null);
+    }//GEN-LAST:event_btnSistemaMouseExited
+
+    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
+        btnVentas.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51),2));
+    }//GEN-LAST:event_btnVentasMouseEntered
+
+    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
+        btnVentas.setBorder(null);
+    }//GEN-LAST:event_btnVentasMouseExited
+
+    private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
+        btnReportes.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51),2));
+    }//GEN-LAST:event_btnReportesMouseEntered
+
+    private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
+        btnReportes.setBorder(null);
+    }//GEN-LAST:event_btnReportesMouseExited
+
+    private void btnConfiguracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiguracionMouseEntered
+        btnConfiguracion.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51),2));
+    }//GEN-LAST:event_btnConfiguracionMouseEntered
+
+    private void btnConfiguracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiguracionMouseExited
+        btnConfiguracion.setBorder(null);
+    }//GEN-LAST:event_btnConfiguracionMouseExited
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        btnSalir.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 0, 51),2));
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        btnSalir.setBorder(null);
+    }//GEN-LAST:event_btnSalirMouseExited
 
     /**
      * @param args the command line arguments
@@ -157,15 +246,18 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnConfiguracion;
     private javax.swing.JLabel btnReportes;
+    private javax.swing.JLabel btnSalir;
     private javax.swing.JLabel btnSistema;
     private javax.swing.JLabel btnVentas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

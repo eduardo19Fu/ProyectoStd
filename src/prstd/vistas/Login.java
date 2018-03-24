@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UnsupportedLookAndFeelException;
 import prstd.modelos.Usuario;
+import prstd.notificaciones.NotificacionIngreso;
 import prstd.notificaciones.NotificacionSalir;
 
 /**
@@ -280,6 +281,9 @@ public class Login extends javax.swing.JFrame {
             Principal principal = new Principal();
             principal.setVisible(true);
             this.dispose();
+        } else{
+            NotificacionIngreso ni = new NotificacionIngreso(this, true);
+            ni.setVisible(true);
         }
     }
 }
