@@ -8,7 +8,7 @@ import prstd.modelos.Usuario;
  *
  * @author Edfu-Pro
  */
-public class PreubasMain {
+public class PruebasMain {
 
     /**
      * @param args the command line arguments

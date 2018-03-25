@@ -113,10 +113,32 @@ public class CUsuario {
         }
     }
     
-    private List<Usuario> consultar(String usuario){
+    public List<Usuario> consultar(String usuario){
         String sql = "select * from usuario where usuario like ?";
+        List<Usuario> lista = new ArrayList<>();
+        this.usuario = new Usuario();
         
-        return null;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + usuario + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                this.usuario.setIdusuario(rs.getInt(1));
+                this.usuario.setUsuario(rs.getString(2));
+                this.usuario.setNombre(rs.getString("nombre"));
+                this.usuario.setApellido(rs.getString("apellido"));
+                this.usuario.setEstado(rs.getString("estado"));
+                lista.add(this.usuario);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
     }
     
     public int consultarUsuario(String usuario){
