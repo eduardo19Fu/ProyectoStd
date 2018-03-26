@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.UnsupportedLookAndFeelException;
 import prstd.modelos.Usuario;
+import prstd.notificaciones.NotificacionIngreso;
 import prstd.notificaciones.NotificacionSalir;
 
 /**
@@ -66,36 +67,40 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        panelPrincipal.setBackground(new java.awt.Color(255, 255, 159));
-        panelPrincipal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 51), 3, true));
+        panelPrincipal.setBackground(new java.awt.Color(0, 153, 153));
+        panelPrincipal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 153), 3, true));
         panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelControles.setOpaque(false);
         panelControles.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel2.setFont(new java.awt.Font("Consolas", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario:");
         panelControles.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel3.setFont(new java.awt.Font("Consolas", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
         panelControles.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
 
-        txtUsuario.setBackground(new java.awt.Color(255, 255, 159));
-        txtUsuario.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtUsuario.setBackground(new java.awt.Color(0, 153, 153));
+        txtUsuario.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.setBorder(null);
+        txtUsuario.setOpaque(false);
         panelControles.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 79, 260, -1));
 
-        txtPassword.setBackground(new java.awt.Color(255, 255, 159));
-        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtPassword.setBackground(new java.awt.Color(0, 153, 153));
+        txtPassword.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPassword.setBorder(null);
+        txtPassword.setOpaque(false);
         panelControles.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 169, 260, -1));
 
-        panelBotones.setBackground(new java.awt.Color(153, 0, 51));
+        panelBotones.setBackground(new java.awt.Color(0, 212, 186));
 
         btnSalir.setBackground(new java.awt.Color(230, 162, 78));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/MetroUI-Folder-OS-Security-Denied-icon-32.png"))); // NOI18N
@@ -126,7 +131,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +143,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        panelControles.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 465, 103));
+        panelControles.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 230, 462, 103));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         panelControles.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 290, 10));
@@ -146,10 +151,10 @@ public class Login extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         panelControles.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 290, 4));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/key-icon-32-2.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/key-icon-32.png"))); // NOI18N
         panelControles.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 40, 40));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/User-icon-32.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/User-yellow-icon-32.png"))); // NOI18N
         panelControles.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 30, 40));
 
         panelPrincipal.add(panelControles, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 465, 330));
@@ -280,6 +285,9 @@ public class Login extends javax.swing.JFrame {
             Principal principal = new Principal();
             principal.setVisible(true);
             this.dispose();
+        } else{
+            NotificacionIngreso ni = new NotificacionIngreso(this, true);
+            ni.setVisible(true);
         }
     }
 }

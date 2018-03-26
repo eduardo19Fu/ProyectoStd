@@ -1,8 +1,10 @@
 package prstd.controladores;
 
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import prstd.modelos.Documento;
+import prstd.servicios.ConexionDos;
 
 /**
  *
@@ -10,10 +12,17 @@ import prstd.modelos.Documento;
  */
 public class CFactura {
     
+    private Connection connection;
+    private ConexionDos conexion;
+    private Documento documento;
+    
     public CFactura(){
+        conexion = new ConexionDos();
+        connection = conexion.getConnection();
     }
     
     private int crearFactura(Documento factura){
+        String sql = "{call sp_factura()}";
         return 0;
     }
     
