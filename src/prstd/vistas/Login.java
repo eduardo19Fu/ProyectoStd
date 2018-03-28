@@ -5,6 +5,7 @@
  */
 package prstd.vistas;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JDialog;
@@ -68,7 +69,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
 
         panelPrincipal.setBackground(new java.awt.Color(0, 153, 153));
-        panelPrincipal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 153), 3, true));
+        panelPrincipal.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 120, 116), 3, true));
         panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelControles.setOpaque(false);
@@ -98,6 +99,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPassword.setBorder(null);
         txtPassword.setOpaque(false);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
         panelControles.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 169, 260, -1));
 
         panelBotones.setBackground(new java.awt.Color(0, 212, 186));
@@ -136,14 +142,14 @@ public class Login extends javax.swing.JFrame {
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
-        panelControles.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 230, 462, 103));
+        panelControles.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 230, 462, 98));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         panelControles.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 290, 10));
@@ -212,6 +218,12 @@ public class Login extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         hacerLogin(txtUsuario.getText(), new String(txtPassword.getPassword()));
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            hacerLogin(txtUsuario.getText(),new String(txtPassword.getPassword()));
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments

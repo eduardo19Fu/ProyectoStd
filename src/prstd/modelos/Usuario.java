@@ -75,10 +75,23 @@ public class Usuario {
         this.estado = estado;
     }
     
+    /*
+        * Métodos que devuelven las funcionas del controlador de Usuario. *
+    */
+    
     public boolean login(Usuario usuario){
         CUsuario cu = new CUsuario();
         return cu.hacerLogin(usuario);
     }
     
+    public int crear(Usuario usuario){
+        CUsuario cu = new CUsuario();
+        return cu.crear(usuario);
+    }
+    
+    public int actualizar(Usuario usuario){
+        CUsuario cu = new CUsuario();
+        return cu.actualizar(usuario);
+    }
     
 }

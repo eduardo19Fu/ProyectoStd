@@ -28,7 +28,7 @@ public class CUsuario {
         connection = conexion.getConnection();
     }
     
-    private int crear(Usuario usuario){
+    public int crear(Usuario usuario){
         String sql = "insert into tbl_usuario values (?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -37,6 +37,8 @@ public class CUsuario {
             ps.setString(3, usuario.getNombre());
             ps.setString(4,usuario.getApellido());
             int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
             return rs;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: Excepcion Ocurrida => " + e.getMessage(),"Error Fatal",JOptionPane.ERROR_MESSAGE);
@@ -44,11 +46,7 @@ public class CUsuario {
         }
     }
     
-    public int getCrear(Usuario usuario){
-        return crear(usuario);
-    }
-    
-    private int actualizar(Usuario usuario){
+    public int actualizar(Usuario usuario){
         String sql = "update tbl_usuario set usuario = ?, password = ?, nombre = ?, apellido = ?, estado = ? where idusuario = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -59,6 +57,8 @@ public class CUsuario {
             ps.setString(5, usuario.getEstado());
             ps.setInt(6, usuario.getIdusuario());
             int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
             return rs;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error: Excepción Ocurrida => " + e.getMessage(), "Error Fatal", JOptionPane.ERROR_MESSAGE);
@@ -66,11 +66,7 @@ public class CUsuario {
         }
     }
     
-    public int getActualizar(Usuario usuario){
-        return actualizar(usuario);
-    }
-    
-    private int eliminar(Usuario usuario){
+    public int eliminar(Usuario usuario){
         String sql = "delete from tbl_usuario where idusuario = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -83,10 +79,6 @@ public class CUsuario {
             JOptionPane.showMessageDialog(null, "Error: Excepción Ocurrida => " + e.getMessage(), "Error Fatal", JOptionPane.ERROR_MESSAGE);
             return 0;
         }
-    }
-    
-    public int getEliminar(Usuario usuario){
-        return eliminar(usuario);
     }
     
     public List<Usuario> consultar(){
@@ -148,7 +140,11 @@ public class CUsuario {
             ps.setString(1, usuario);
             ResultSet rs = ps.executeQuery();
             rs.next();
-            return rs.getInt(1);
+            int id = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
@@ -163,7 +159,11 @@ public class CUsuario {
             ps.setString(1, usuario.getUsuario());
             ps.setString(2, usuario.getPassword());
             ResultSet rs = ps.executeQuery();
-            return rs.next();
+            boolean log = rs.next();
+            rs.close();
+            ps.close();
+            connection.close();
+            return log;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;

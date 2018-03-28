@@ -48,6 +48,7 @@ public class NotificacionSalir extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAceptar.setBackground(new java.awt.Color(0, 153, 153));
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N
         btnAceptar.setToolTipText("Aceptar");
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -67,6 +68,7 @@ public class NotificacionSalir extends javax.swing.JDialog {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 59, 380, 79));
 
+        btnSalir.setBackground(new java.awt.Color(0, 153, 153));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/cancel-32.png"))); // NOI18N
         btnSalir.setToolTipText("Cancelar");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -77,7 +79,7 @@ public class NotificacionSalir extends javax.swing.JDialog {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 145, -1, 45));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel5.setBackground(new java.awt.Color(0, 212, 186));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Advertencia");

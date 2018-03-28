@@ -8,8 +8,11 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import prstd.modelos.Permiso;
 
 /**
  *
@@ -27,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        initPaneles();
     }
 
     /**
@@ -44,9 +48,22 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        panelSistema = new javax.swing.JPanel();
+        btnUsuarios = new javax.swing.JLabel();
+        btnProductos = new javax.swing.JLabel();
+        btnNotasCredito = new javax.swing.JLabel();
+        btnFamilias = new javax.swing.JLabel();
+        btnFabricantes = new javax.swing.JLabel();
+        btnCorrelativos = new javax.swing.JLabel();
+        panelCobros = new javax.swing.JPanel();
+        btnVentas = new javax.swing.JLabel();
+        btnProformas = new javax.swing.JLabel();
+        btnConsultaPagos = new javax.swing.JLabel();
+        btnFamilias1 = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jPanel3 = new javax.swing.JPanel();
         btnSistema = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,6 +73,9 @@ public class Principal extends javax.swing.JFrame {
         btnReportes = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -63,13 +83,16 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 153), 3, true));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 120, 116), 3, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Compress_32px.png"))); // NOI18N
         btnMinimizar.setToolTipText("Minimiza la Pantalla Principal");
         btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseEntered(evt);
             }
@@ -94,6 +117,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 120, 116), 3));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 216, 148));
@@ -104,6 +128,170 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 680, 90));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 810, 180));
+
+        panelSistema.setOpaque(false);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
+        flowLayout1.setAlignOnBaseline(true);
+        panelSistema.setLayout(flowLayout1);
+
+        btnUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Team_72px.png"))); // NOI18N
+        btnUsuarios.setToolTipText("Administración de Usuarios");
+        btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuarios.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUsuariosMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnUsuarios);
+
+        btnProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Trolley_72px.png"))); // NOI18N
+        btnProductos.setToolTipText("Administración de Productos");
+        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProductos.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProductosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProductosMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnProductos);
+
+        btnNotasCredito.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnNotasCredito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Bank_Cards_72px.png"))); // NOI18N
+        btnNotasCredito.setToolTipText("Administración de Notas de Crédito");
+        btnNotasCredito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNotasCredito.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnNotasCredito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNotasCreditoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNotasCreditoMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnNotasCredito);
+
+        btnFamilias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnFamilias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Family_72px.png"))); // NOI18N
+        btnFamilias.setToolTipText("Administración de Familias de Prodcutos");
+        btnFamilias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFamilias.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnFamilias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFamiliasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFamiliasMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnFamilias);
+
+        btnFabricantes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Deployment_72px.png"))); // NOI18N
+        btnFabricantes.setToolTipText("Administración de Fabricantes de Productos");
+        btnFabricantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFabricantes.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnFabricantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFabricantesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFabricantesMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnFabricantes);
+
+        btnCorrelativos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCorrelativos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Receipt_72px.png"))); // NOI18N
+        btnCorrelativos.setToolTipText("Administración de Correlativos");
+        btnCorrelativos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCorrelativos.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCorrelativos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCorrelativosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCorrelativosMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnCorrelativos);
+
+        jPanel2.add(panelSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
+
+        panelCobros.setOpaque(false);
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
+        flowLayout2.setAlignOnBaseline(true);
+        panelCobros.setLayout(flowLayout2);
+
+        btnVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Sell_72px.png"))); // NOI18N
+        btnVentas.setToolTipText("Opciones de Ventas");
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVentasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVentasMouseExited(evt);
+            }
+        });
+        panelCobros.add(btnVentas);
+
+        btnProformas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProformas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_New_Resume_Template_72px.png"))); // NOI18N
+        btnProformas.setToolTipText("Creación de Proformas para Clientes");
+        btnProformas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProformas.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnProformas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProformasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProformasMouseExited(evt);
+            }
+        });
+        panelCobros.add(btnProformas);
+
+        btnConsultaPagos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultaPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Bank_Cards_72px.png"))); // NOI18N
+        btnConsultaPagos.setToolTipText("Administración de Notas de Crédito");
+        btnConsultaPagos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultaPagos.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnConsultaPagos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConsultaPagosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConsultaPagosMouseExited(evt);
+            }
+        });
+        panelCobros.add(btnConsultaPagos);
+
+        btnFamilias1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnFamilias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Family_72px.png"))); // NOI18N
+        btnFamilias1.setToolTipText("Administración de Familias de Prodcutos");
+        btnFamilias1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFamilias1.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnFamilias1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFamilias1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFamilias1MouseExited(evt);
+            }
+        });
+        panelCobros.add(btnFamilias1);
+
+        jPanel2.add(panelCobros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 0, 810, 780));
 
@@ -116,9 +304,16 @@ public class Principal extends javax.swing.JFrame {
         panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 370, 50));
         panelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 122, 360, 10));
 
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 25));
+
         btnSistema.setBackground(new java.awt.Color(0, 153, 153));
         btnSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSistema.setPreferredSize(new java.awt.Dimension(400, 50));
         btnSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSistemaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSistemaMouseEntered(evt);
             }
@@ -133,13 +328,14 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Sistema");
-        btnSistema.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jLabel3.setText("Administración");
+        btnSistema.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
-        panelOpciones.add(btnSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 400, 50));
+        jPanel3.add(btnSistema);
 
         btnCobros.setBackground(new java.awt.Color(0, 153, 153));
         btnCobros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCobros.setPreferredSize(new java.awt.Dimension(400, 50));
         btnCobros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCobrosMouseEntered(evt);
@@ -158,10 +354,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setText("Opciones de Cobro");
         btnCobros.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
-        panelOpciones.add(btnCobros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 400, 50));
+        jPanel3.add(btnCobros);
 
         btnReportes.setBackground(new java.awt.Color(0, 153, 153));
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setPreferredSize(new java.awt.Dimension(400, 50));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
@@ -180,7 +377,32 @@ public class Principal extends javax.swing.JFrame {
         jLabel8.setText("Opciones de Reportes");
         btnReportes.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
-        panelOpciones.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 400, 50));
+        jPanel3.add(btnReportes);
+
+        btnSalir.setBackground(new java.awt.Color(0, 153, 153));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Shutdown_50px.png"))); // NOI18N
+        btnSalir.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Salir");
+        btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        jPanel3.add(btnSalir);
+
+        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 400, 480));
 
         jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 780));
 
@@ -231,6 +453,102 @@ public class Principal extends javax.swing.JFrame {
         resetColor(btnReportes);// Invoca al metodo resetColor y le pasa como parametro el panel que funciona como boton para la opcion de Reportes.
     }//GEN-LAST:event_btnReportesMouseExited
 
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);// Invoca al metodo setColor y le pasa como parametro el panel que funciona como boton para la opcion de Salir.
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);// Invoca al metodo resetColor y le pasa como parametro el panel que funciona como boton para la opcion de Salir.
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);// Minimiza la ventana Principal
+    }//GEN-LAST:event_btnMinimizarMouseClicked
+
+    private void btnSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSistemaMouseClicked
+        configPanelSistema();
+    }//GEN-LAST:event_btnSistemaMouseClicked
+
+    private void btnUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseEntered
+        setBorder(btnUsuarios);// Crea un line border alrededor del botón de Administración de Usuarios.
+    }//GEN-LAST:event_btnUsuariosMouseEntered
+
+    private void btnUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseExited
+        resetBorder(btnUsuarios);// Elimina todo borde creado cuando el cursor sale del rengo
+    }//GEN-LAST:event_btnUsuariosMouseExited
+
+    private void btnProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseEntered
+        setBorder(btnProductos);// Crea un lineBorder alrededor del botón de Administración de Productos.
+    }//GEN-LAST:event_btnProductosMouseEntered
+
+    private void btnProductosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseExited
+        resetBorder(btnProductos);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnProductosMouseExited
+
+    private void btnNotasCreditoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNotasCreditoMouseEntered
+        setBorder(btnNotasCredito);// Crea un lineBorder alrededor del botón de Administración de Notas de Crédito.
+    }//GEN-LAST:event_btnNotasCreditoMouseEntered
+
+    private void btnNotasCreditoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNotasCreditoMouseExited
+        resetBorder(btnNotasCredito);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnNotasCreditoMouseExited
+
+    private void btnFamiliasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamiliasMouseExited
+        resetBorder(btnFamilias);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnFamiliasMouseExited
+
+    private void btnFamiliasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamiliasMouseEntered
+        setBorder(btnFamilias);// Crea un lineBorder alrededor del botón de Administración de Familias de Productos.
+    }//GEN-LAST:event_btnFamiliasMouseEntered
+
+    private void btnFabricantesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFabricantesMouseEntered
+        setBorder(btnFabricantes);// Crea un lineBorder alrededor del botón de Administración de Fabricantes de Productos.
+    }//GEN-LAST:event_btnFabricantesMouseEntered
+
+    private void btnFabricantesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFabricantesMouseExited
+        resetBorder(btnFabricantes);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnFabricantesMouseExited
+
+    private void btnCorrelativosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCorrelativosMouseEntered
+        setBorder(btnCorrelativos);// Crea un lineBorder alrededor del botón de Administración de Correlativos.
+    }//GEN-LAST:event_btnCorrelativosMouseEntered
+
+    private void btnCorrelativosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCorrelativosMouseExited
+        resetBorder(btnCorrelativos);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnCorrelativosMouseExited
+
+    private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVentasMouseEntered
+
+    private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVentasMouseExited
+
+    private void btnProformasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProformasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProformasMouseEntered
+
+    private void btnProformasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProformasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProformasMouseExited
+
+    private void btnConsultaPagosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultaPagosMouseEntered
+
+    private void btnConsultaPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultaPagosMouseExited
+
+    private void btnFamilias1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamilias1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFamilias1MouseEntered
+
+    private void btnFamilias1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamilias1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFamilias1MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -266,10 +584,23 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCobros;
+    private javax.swing.JLabel btnConsultaPagos;
+    private javax.swing.JLabel btnCorrelativos;
+    private javax.swing.JLabel btnFabricantes;
+    private javax.swing.JLabel btnFamilias;
+    private javax.swing.JLabel btnFamilias1;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JLabel btnNotasCredito;
+    private javax.swing.JLabel btnProductos;
+    private javax.swing.JLabel btnProformas;
     private javax.swing.JPanel btnReportes;
+    private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSistema;
+    private javax.swing.JLabel btnUsuarios;
+    private javax.swing.JLabel btnVentas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -279,10 +610,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
+    private javax.swing.JPanel panelSistema;
     // End of variables declaration//GEN-END:variables
 
     private void setColor(JPanel panel){
@@ -293,4 +627,40 @@ public class Principal extends javax.swing.JFrame {
         panel.setBackground(new Color(0,153,153));
     }
     
+    private void setBorder(JLabel label){
+        label.setBorder(BorderFactory.createLineBorder(new Color(0,153,153),2));
+    }
+    
+    private void resetBorder(JLabel label){
+        label.setBorder(null);
+    }
+    
+    private void configPanelSistema(){
+        if(!panelSistema.isVisible()){
+            lblTitulo.setText("Opciones de Administración");
+            panelSistema.setVisible(true);
+        }else{
+            lblTitulo.setText("");
+            initPaneles();
+        }
+    }
+    
+    private void configPanelCobros(){
+        if(!panelCobros.isVisible()){
+            lblTitulo.setText("Opciones de Cobros");
+            panelCobros.setVisible(true);
+        }else{
+            lblTitulo.setText("");
+            initPaneles();
+        }
+    }
+    
+    private void permiso(){
+        
+    }
+    
+    private void initPaneles(){
+        panelSistema.setVisible(false);
+        panelCobros.setVisible(false);
+    }
 }
