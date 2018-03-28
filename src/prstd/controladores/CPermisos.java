@@ -10,4 +10,8 @@ package prstd.controladores;
  */
 public class CPermisos {
     
+    private int idrol;
+    private int idpermiso;
+    private int idusuario;
+    
 }

@@ -151,10 +151,10 @@ public class Login extends javax.swing.JFrame {
 
         panelControles.add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 230, 462, 98));
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         panelControles.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 290, 10));
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         panelControles.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 290, 4));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/key-icon-32.png"))); // NOI18N

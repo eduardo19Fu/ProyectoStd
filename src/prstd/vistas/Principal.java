@@ -8,11 +8,11 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import prstd.modelos.Permiso;
+import prstd.notificaciones.NotificacionCerrarSesion;
+import prstd.notificaciones.NotificacionSalir;
 
 /**
  *
@@ -26,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
     
     // Variables que guardarán los enteros de la posición de la ventana.
     int x,y;
+    public int sign1;
     
     public Principal() {
         initComponents();
@@ -59,7 +60,10 @@ public class Principal extends javax.swing.JFrame {
         btnVentas = new javax.swing.JLabel();
         btnProformas = new javax.swing.JLabel();
         btnConsultaPagos = new javax.swing.JLabel();
-        btnFamilias1 = new javax.swing.JLabel();
+        btnConsultaProformas = new javax.swing.JLabel();
+        panelSalir = new javax.swing.JPanel();
+        btnCerrarSesion = new javax.swing.JLabel();
+        btnCerrarSistema = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -262,8 +266,8 @@ public class Principal extends javax.swing.JFrame {
         panelCobros.add(btnProformas);
 
         btnConsultaPagos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultaPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Bank_Cards_72px.png"))); // NOI18N
-        btnConsultaPagos.setToolTipText("Administración de Notas de Crédito");
+        btnConsultaPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Check_72px.png"))); // NOI18N
+        btnConsultaPagos.setToolTipText("Consulta de Pagos");
         btnConsultaPagos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultaPagos.setPreferredSize(new java.awt.Dimension(120, 120));
         btnConsultaPagos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -276,22 +280,65 @@ public class Principal extends javax.swing.JFrame {
         });
         panelCobros.add(btnConsultaPagos);
 
-        btnFamilias1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnFamilias1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Family_72px.png"))); // NOI18N
-        btnFamilias1.setToolTipText("Administración de Familias de Prodcutos");
-        btnFamilias1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFamilias1.setPreferredSize(new java.awt.Dimension(120, 120));
-        btnFamilias1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnConsultaProformas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultaProformas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Timesheet_72px.png"))); // NOI18N
+        btnConsultaProformas.setToolTipText("Consulta de Proformas");
+        btnConsultaProformas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultaProformas.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnConsultaProformas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnFamilias1MouseEntered(evt);
+                btnConsultaProformasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnFamilias1MouseExited(evt);
+                btnConsultaProformasMouseExited(evt);
             }
         });
-        panelCobros.add(btnFamilias1);
+        panelCobros.add(btnConsultaProformas);
 
         jPanel2.add(panelCobros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
+
+        panelSalir.setOpaque(false);
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
+        flowLayout3.setAlignOnBaseline(true);
+        panelSalir.setLayout(flowLayout3);
+
+        btnCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Shutdown_72px.png"))); // NOI18N
+        btnCerrarSesion.setToolTipText("Brinda al Usuario la opción de Cerrar la Sesión actual");
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseExited(evt);
+            }
+        });
+        panelSalir.add(btnCerrarSesion);
+
+        btnCerrarSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrarSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Close_Window_72px.png"))); // NOI18N
+        btnCerrarSistema.setToolTipText("Brinda al Usuario de Cerrar el Sistema de forma definitiva");
+        btnCerrarSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSistema.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCerrarSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSistemaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSistemaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSistemaMouseExited(evt);
+            }
+        });
+        panelSalir.add(btnCerrarSistema);
+
+        jPanel2.add(panelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 0, 810, 780));
 
@@ -337,6 +384,9 @@ public class Principal extends javax.swing.JFrame {
         btnCobros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCobros.setPreferredSize(new java.awt.Dimension(400, 50));
         btnCobros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCobrosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCobrosMouseEntered(evt);
             }
@@ -383,6 +433,9 @@ public class Principal extends javax.swing.JFrame {
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.setPreferredSize(new java.awt.Dimension(400, 50));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSalirMouseEntered(evt);
             }
@@ -466,7 +519,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
     private void btnSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSistemaMouseClicked
-        configPanelSistema();
+        configPanelSistema();// Invoca al método de configuración del Panel de sistema.
     }//GEN-LAST:event_btnSistemaMouseClicked
 
     private void btnUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseEntered
@@ -518,36 +571,70 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCorrelativosMouseExited
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
-        // TODO add your handling code here:
+        setBorder(btnVentas);// Crea un lineBorder alrededor del botón de Ventas.
     }//GEN-LAST:event_btnVentasMouseEntered
 
     private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
-        // TODO add your handling code here:
+        resetBorder(btnVentas);// Elimina todo borde creado cuando el cursor sale del rango.
     }//GEN-LAST:event_btnVentasMouseExited
 
     private void btnProformasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProformasMouseEntered
-        // TODO add your handling code here:
+        setBorder(btnProformas);// Crea un lineBorder alrededor del botón de Creación de Proformas.
     }//GEN-LAST:event_btnProformasMouseEntered
 
     private void btnProformasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProformasMouseExited
-        // TODO add your handling code here:
+        resetBorder(btnProformas);// Elimina todo borde creado cuando el cursor sale del rango.
     }//GEN-LAST:event_btnProformasMouseExited
 
     private void btnConsultaPagosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseEntered
-        // TODO add your handling code here:
+        setBorder(btnConsultaPagos);// Crea un lineBorder alrededor del botón de Consulta de Pagos.
     }//GEN-LAST:event_btnConsultaPagosMouseEntered
 
     private void btnConsultaPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseExited
-        // TODO add your handling code here:
+        resetBorder(btnConsultaPagos);// Elimina todo borde creado cuando el cursor sale del rango.
     }//GEN-LAST:event_btnConsultaPagosMouseExited
 
-    private void btnFamilias1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamilias1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFamilias1MouseEntered
+    private void btnConsultaProformasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaProformasMouseEntered
+        setBorder(btnConsultaProformas);// Crea un lineBorder alrededor del botón de Consulta Proformas.
+    }//GEN-LAST:event_btnConsultaProformasMouseEntered
 
-    private void btnFamilias1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFamilias1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFamilias1MouseExited
+    private void btnConsultaProformasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaProformasMouseExited
+        resetBorder(btnConsultaProformas);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnConsultaProformasMouseExited
+
+    private void btnCobrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCobrosMouseClicked
+        configPanelCobros();// Invoca al metodo encargado de la configuración del Panel de Cobros.
+    }//GEN-LAST:event_btnCobrosMouseClicked
+
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+        setBorder(btnCerrarSesion);// Crea un lineBorder alrededor del botón de Cerrar Sesión.
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
+
+    private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
+        resetBorder(btnCerrarSesion);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnCerrarSesionMouseExited
+
+    private void btnCerrarSistemaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSistemaMouseEntered
+        setBorder(btnCerrarSistema);// Crea un lineBorder alrededor del botón de Cerrar Definitivamente el Sistema.
+    }//GEN-LAST:event_btnCerrarSistemaMouseEntered
+
+    private void btnCerrarSistemaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSistemaMouseExited
+        resetBorder(btnCerrarSistema);// Elimina todo borde creado cuando el cursor sale del rango.
+    }//GEN-LAST:event_btnCerrarSistemaMouseExited
+
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
+        NotificacionCerrarSesion cs = new NotificacionCerrarSesion(this, true, this);// Instacia un Objeto de la Clase de Opciones Para cerrar sesion actual;
+        cs.setVisible(true);// Hacemos visible la ventana de opciones.
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
+
+    private void btnCerrarSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSistemaMouseClicked
+        NotificacionSalir ns = new NotificacionSalir(this,true);
+        ns.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSistemaMouseClicked
+
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        configPanelSalir();
+    }//GEN-LAST:event_btnSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -583,12 +670,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnCerrarSesion;
+    private javax.swing.JLabel btnCerrarSistema;
     private javax.swing.JPanel btnCobros;
     private javax.swing.JLabel btnConsultaPagos;
+    private javax.swing.JLabel btnConsultaProformas;
     private javax.swing.JLabel btnCorrelativos;
     private javax.swing.JLabel btnFabricantes;
     private javax.swing.JLabel btnFamilias;
-    private javax.swing.JLabel btnFamilias1;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnNotasCredito;
     private javax.swing.JLabel btnProductos;
@@ -616,9 +705,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
+    private javax.swing.JPanel panelSalir;
     private javax.swing.JPanel panelSistema;
     // End of variables declaration//GEN-END:variables
 
+    public void cerrarVentanaPrincipal(){
+        this.dispose();
+    }
+    
     private void setColor(JPanel panel){
         panel.setBackground(new Color(0,212,186));
     }
@@ -635,8 +729,10 @@ public class Principal extends javax.swing.JFrame {
         label.setBorder(null);
     }
     
+    // Configura la Visibilidad del panel de opciones de Sistema/Administración.
     private void configPanelSistema(){
         if(!panelSistema.isVisible()){
+            initPaneles();
             lblTitulo.setText("Opciones de Administración");
             panelSistema.setVisible(true);
         }else{
@@ -645,10 +741,24 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     
+    // Configura la Visibilidad del panel de opciones de cobros.
     private void configPanelCobros(){
         if(!panelCobros.isVisible()){
+            initPaneles();
             lblTitulo.setText("Opciones de Cobros");
             panelCobros.setVisible(true);
+        }else{
+            lblTitulo.setText("");
+            initPaneles();
+        }
+    }
+    
+    // Configura la visibilidad del panel de Opciones para Salir.
+    private void configPanelSalir(){
+        if(!panelSalir.isVisible()){
+            initPaneles();
+            lblTitulo.setText("Opciones de Salida");
+            panelSalir.setVisible(true);
         }else{
             lblTitulo.setText("");
             initPaneles();
@@ -659,8 +769,10 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
+    // Inicializa los paneles de las opciones disponibles.
     private void initPaneles(){
         panelSistema.setVisible(false);
         panelCobros.setVisible(false);
+        panelSalir.setVisible(false);
     }
 }
