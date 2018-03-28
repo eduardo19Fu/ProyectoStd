@@ -8,6 +8,7 @@ public class Rol {
     
     private int idrol;
     private String rol;
+    private String descripcion;
     private String estado;
 
     public Rol(){
@@ -33,6 +34,14 @@ public class Rol {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    public void setDescripcion(String descripcion){
+        this.descripcion = descripcion;
     }
 
     public String getEstado() {

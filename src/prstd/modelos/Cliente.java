@@ -1,5 +1,8 @@
 package prstd.modelos;
 
+import java.util.List;
+import prstd.controladores.CCliente;
+
 /**
  *
  * @author Edfu-Pro
@@ -53,6 +56,23 @@ public class Cliente {
         this.direccion = direccion;
     }
     
+    public List<Cliente> consultar(){
+        CCliente cliente = new CCliente();
+        return cliente.consultar();
+    } 
     
+    public int eliminar(int idcliente){
+        CCliente cliente = new CCliente();
+        return cliente.eliminar(idcliente);
+    }
     
+    public int grabar(Cliente c){
+        CCliente cliente = new CCliente();
+        return cliente.grabar(c);
+    }
+    
+    public List<Cliente> consultar(String n){
+        CCliente cliente = new CCliente();
+        return cliente.consultarNit(n);
+    }
 }
