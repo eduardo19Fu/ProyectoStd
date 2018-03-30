@@ -144,6 +144,9 @@ public class Principal extends javax.swing.JFrame {
         btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuarios.setPreferredSize(new java.awt.Dimension(120, 120));
         btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUsuariosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnUsuariosMouseEntered(evt);
             }
@@ -635,6 +638,11 @@ public class Principal extends javax.swing.JFrame {
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         configPanelSalir();
     }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
+        Usuarios usuario = new Usuarios();
+        usuario.setVisible(true);
+    }//GEN-LAST:event_btnUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
