@@ -57,7 +57,7 @@ public class ConfirmarEdicion extends javax.swing.JDialog {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 59, 350, 79));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel5.setBackground(new java.awt.Color(0, 212, 186));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Mensaje Importante");
@@ -74,6 +74,7 @@ public class ConfirmarEdicion extends javax.swing.JDialog {
         });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 516, 50));
 
+        btnAceptar2.setBackground(new java.awt.Color(0, 153, 153));
         btnAceptar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N
         btnAceptar2.setToolTipText("Aceptar");
         btnAceptar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -84,6 +85,7 @@ public class ConfirmarEdicion extends javax.swing.JDialog {
         });
         jPanel1.add(btnAceptar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 145, -1, 45));
 
+        btnSalir.setBackground(new java.awt.Color(0, 153, 153));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/cancel-32.png"))); // NOI18N
         btnSalir.setToolTipText("Cancelar");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -172,8 +174,6 @@ public class ConfirmarEdicion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnAceptar1;
     private javax.swing.JButton btnAceptar2;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;

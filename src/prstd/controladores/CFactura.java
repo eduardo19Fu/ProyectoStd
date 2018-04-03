@@ -21,10 +21,11 @@ public class CFactura {
         connection = conexion.getConnection();
     }
     
-    private int crearFactura(Documento factura){
+    public int crearFactura(Documento factura){
         String sql = "{call sp_factura()}";
         return 0;
     }
+    
     
     private int anular(int idtransaccion){
         return 0;
