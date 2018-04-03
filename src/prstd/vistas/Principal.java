@@ -30,7 +30,6 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
-        this.setLocationRelativeTo(null);
         initPaneles();
     }
 
@@ -51,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         panelSistema = new javax.swing.JPanel();
         btnUsuarios = new javax.swing.JLabel();
+        btnRoles = new javax.swing.JLabel();
         btnProductos = new javax.swing.JLabel();
         btnNotasCredito = new javax.swing.JLabel();
         btnFamilias = new javax.swing.JLabel();
@@ -134,7 +134,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 810, 180));
 
         panelSistema.setOpaque(false);
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 25);
         flowLayout1.setAlignOnBaseline(true);
         panelSistema.setLayout(flowLayout1);
 
@@ -156,12 +156,30 @@ public class Principal extends javax.swing.JFrame {
         });
         panelSistema.add(btnUsuarios);
 
+        btnRoles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRoles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Motion_Detector_72px.png"))); // NOI18N
+        btnRoles.setToolTipText("Administración de ");
+        btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRoles.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRolesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRolesMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnRoles);
+
         btnProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Trolley_72px.png"))); // NOI18N
         btnProductos.setToolTipText("Administración de Productos");
         btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProductos.setPreferredSize(new java.awt.Dimension(120, 120));
         btnProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnProductosMouseEntered(evt);
             }
@@ -465,6 +483,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 780));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseDragged
@@ -644,6 +663,19 @@ public class Principal extends javax.swing.JFrame {
         usuario.setVisible(true);
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
+    private void btnRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseEntered
+        setBorder(btnRoles);
+    }//GEN-LAST:event_btnRolesMouseEntered
+
+    private void btnRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseExited
+        resetBorder(btnRoles);
+    }//GEN-LAST:event_btnRolesMouseExited
+
+    private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
+        Productos productos = new Productos();
+        productos.setVisible(true);
+    }//GEN-LAST:event_btnProductosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -691,6 +723,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel btnProductos;
     private javax.swing.JLabel btnProformas;
     private javax.swing.JPanel btnReportes;
+    private javax.swing.JLabel btnRoles;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSistema;
     private javax.swing.JLabel btnUsuarios;

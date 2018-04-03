@@ -104,7 +104,21 @@ public class CRol {
         return null;
     }
     
-    public List<Rol> consultar(String rol){
-        return null;
+    public int consultar(String rol){
+        String sql = "select idrol from tbl_rol where rol = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, rol);
+            ResultSet rs = ps.executeQuery();
+            int id = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(CRol.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
 }

@@ -8,9 +8,11 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Usuario;
 
 /**
@@ -21,9 +23,10 @@ public class Usuarios extends javax.swing.JFrame {
 
     int x,y;
     private Usuario usuario;
+    
     public Usuarios() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -199,6 +202,9 @@ public class Usuarios extends javax.swing.JFrame {
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.setPreferredSize(new java.awt.Dimension(250, 50));
         btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNuevoMouseEntered(evt);
             }
@@ -264,7 +270,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         jPanel3.add(btnEliminar);
 
-        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 280));
+        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 250));
 
         jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 250, 780));
 
@@ -280,6 +286,7 @@ public class Usuarios extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseDragged
@@ -327,6 +334,11 @@ public class Usuarios extends javax.swing.JFrame {
     private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
         resetColor(btnEliminar);
     }//GEN-LAST:event_btnEliminarMouseExited
+
+    private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
+        CrearUsuarios cu = new CrearUsuarios();
+        cu.setVisible(true);
+    }//GEN-LAST:event_btnNuevoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -410,5 +422,16 @@ public class Usuarios extends javax.swing.JFrame {
     
     private void resetBorder(JLabel label){
         label.setBorder(null);
+    }
+    
+    private void cargarUsuarios(){
+        this.usuario = new Usuario();
+        String[] titulos = {"ID Usuario","Usuario","Nombre","Apellido","Estado","Teléfono","E-mail"};
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        Object[] datos = new Object[8];
+        List<Usuario> lista = usuario.listar();
+        for(int i = 0; i < lista.size(); i++){
+            
+        }
     }
 }

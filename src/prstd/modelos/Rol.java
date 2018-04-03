@@ -1,5 +1,9 @@
 package prstd.modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+import prstd.controladores.CRol;
+
 /**
  *
  * @author Edfu-Pro
@@ -52,4 +56,15 @@ public class Rol {
         this.estado = estado;
     }
     
+    public List<Rol> consultar(){
+        CRol rols = new CRol();
+        List<Rol> lista = new ArrayList<>();
+        lista = rols.consultar();
+        return lista;
+    }
+    
+    public int consultar(String rol){
+        CRol cr = new CRol();
+        return cr.consultar(rol);
+    }
 }

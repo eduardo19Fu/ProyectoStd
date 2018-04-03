@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import prstd.modelos.Rol;
 import prstd.servicios.ConexionDos;
 
 /**
@@ -20,6 +21,7 @@ public class CRoles {
     
     private Connection connection;
     private ConexionDos conexion;
+    private Rol rol;
     
     public CRoles(){
         conexion = new ConexionDos();
@@ -29,10 +31,12 @@ public class CRoles {
     public int grabar(int idusuario, DefaultTableModel modelo){
         String sql = "insert into tbl_usuario_rol values(?,?)";
         int rs = 0;
+        rol = new Rol();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             for(int i = 0; i<= modelo.getRowCount(); i++){
-            
+                ps.setInt(1, idusuario);
+                ps.setInt(2, rol.consultar(String.valueOf(modelo.getValueAt(i, 0))));
             }
             return rs;
         } catch (SQLException ex) {

@@ -1,5 +1,6 @@
 package prstd.modelos;
 
+import java.util.List;
 import prstd.controladores.CUsuario;
 
 /**
@@ -14,17 +15,21 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String estado;
+    private String email;
+    private String telefono;
     
     public Usuario(){
     }
 
-    public Usuario(int idusuario, String usuario, String password, String nombre, String apellido, String estado) {
+    public Usuario(int idusuario, String usuario, String password, String nombre, String apellido, String estado, String email, String telefono) {
         this.idusuario = idusuario;
         this.usuario = usuario;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.estado = estado;
+        this.email = email;
+        this.telefono = telefono;
     }
 
     public int getIdusuario() {
@@ -74,6 +79,24 @@ public class Usuario {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    
     
     /*
         * Métodos que devuelven las funcionas del controlador de Usuario. *
@@ -94,4 +117,13 @@ public class Usuario {
         return cu.actualizar(usuario);
     }
     
+    public List<Usuario> listar(){
+        CUsuario cu = new CUsuario();
+        return cu.consultar();
+    }
+    
+    public int consultarUsuario(String usuario){
+        CUsuario cu = new CUsuario();
+        return cu.consultarUsuario(usuario);
+    }
 }

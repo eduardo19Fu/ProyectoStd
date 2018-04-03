@@ -93,6 +93,8 @@ public class CUsuario {
                 usuario.setNombre("nombre");
                 usuario.setApellido("apellido");
                 usuario.setEstado("estado");
+                usuario.setEmail("email");
+                usuario.setTelefono("telefono");
                 lista.add(usuario);
             }
             rs.close();
