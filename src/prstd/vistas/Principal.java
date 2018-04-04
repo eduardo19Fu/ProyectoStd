@@ -158,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnRoles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRoles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Motion_Detector_72px.png"))); // NOI18N
-        btnRoles.setToolTipText("Administración de ");
+        btnRoles.setToolTipText("Administración de Roles");
         btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRoles.setPreferredSize(new java.awt.Dimension(120, 120));
         btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {

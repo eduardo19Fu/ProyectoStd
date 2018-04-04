@@ -48,6 +48,7 @@ public class NotificacionIngreso extends javax.swing.JDialog {
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N
         btnAceptar.setToolTipText("Aceptar");
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -64,7 +65,7 @@ public class NotificacionIngreso extends javax.swing.JDialog {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 59, 350, 79));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel5.setBackground(new java.awt.Color(0, 212, 186));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Mensaje Importante");

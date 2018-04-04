@@ -439,7 +439,7 @@ public class CrearRol extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        asignarRol(String.valueOf(comboRoles.getSelectedItem()));
+        
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
@@ -556,7 +556,7 @@ public class CrearRol extends javax.swing.JFrame {
     
     // Método encargado de colocar en la tabla de roles los roles que el usuario desea asignar 
     // al nuevo usuario creado.
-    private void asignarRol(String rol){
+    private void asignarPermiso(String rol){
         boolean bandera = false;// variable que servira como bandera para saber cuando insertar nuevo row en la tabla.
         DefaultTableModel modelo = new DefaultTableModel(null,new String[]{"Rol"});
         Object[] datos = new Object[1];// Declaración de arreglo para datos del modelo.

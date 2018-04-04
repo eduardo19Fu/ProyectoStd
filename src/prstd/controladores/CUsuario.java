@@ -153,6 +153,24 @@ public class CUsuario {
         }
     }
     
+    public int consultarUsuario(){
+        String sql = "select max(idusuario) from tbl_usuario";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
     public boolean hacerLogin(Usuario usuario){
         String sql = "select 1 from tbl_usuario where usuario = ? and password = ?";
         

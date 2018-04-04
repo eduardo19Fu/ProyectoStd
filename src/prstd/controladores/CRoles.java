@@ -72,4 +72,8 @@ public class CRoles {
             return null;
         }
     }
+    
+    public int insertarRoles(DefaultTableModel modelo){
+        return 0;
+    }
 }
