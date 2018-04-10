@@ -36,7 +36,7 @@ public class CProducto {
         producto = new Producto();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, producto.getExistencia());
+            ps.setInt(1, producto.getExistencia_tienda());
             ps.setString(2, producto.getCodigo());
             int rs = ps.executeUpdate();
             ps.close();
@@ -49,7 +49,7 @@ public class CProducto {
     }
     
     public int registroProducto(Producto productos){
-        String sql = "insert into tbl_producto values (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tbl_producto values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         producto = new Producto();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -61,10 +61,12 @@ public class CProducto {
             ps.setDate(6, new java.sql.Date(producto.getFecha_vencimiento().getTime()));
             ps.setInt(7, producto.getFabricante());
             ps.setInt(8, producto.getFamilia());
-            ps.setInt(9, producto.getExistencia());
-            ps.setDouble(10, producto.getPorcentaje_ganancia());
-            ps.setInt(11, producto.getTipo_producto());
-            ps.setInt(12, producto.getExistencia_minima());
+            ps.setInt(9, producto.getExistencia_tienda());
+            ps.setInt(10, producto.getExistencia_bodega());
+            ps.setDouble(11, producto.getPorcentaje_ganancia());
+            ps.setInt(12, producto.getTipo_producto());
+            ps.setInt(13, producto.getExistencia_minima_tienda());
+            ps.setInt(14, producto.getExsitencia_minima_bodega());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -98,10 +100,12 @@ public class CProducto {
                 producto.setFecha_vencimiento(rs.getDate(6));
                 producto.setNombre_fabricante(rs.getString(7));
                 producto.setNombre_Familia(rs.getString(8));
-                producto.setExistencia(rs.getInt(9));
-                producto.setPorcentaje_ganancia(rs.getDouble(10));
-                producto.setTipo_producto(rs.getInt(11));
-                producto.setExistencia_minima(rs.getInt(12));
+                producto.setExistencia_tienda(rs.getInt(9));
+                producto.setExistencia_bodega(rs.getInt(10));
+                producto.setPorcentaje_ganancia(rs.getDouble(11));
+                producto.setTipo_producto(rs.getInt(12));
+                producto.setExistencia_minima_tienda(rs.getInt(13));
+                producto.setExistencia_minima_bodega(rs.getInt(14));
                 lista.add(producto);
             }
             rs.close();
@@ -133,10 +137,12 @@ public class CProducto {
                 producto.setFecha_vencimiento(rs.getDate(6));
                 producto.setNombre_fabricante(rs.getString(7));
                 producto.setNombre_Familia(rs.getString(8));
-                producto.setExistencia(rs.getInt(9));
-                producto.setPorcentaje_ganancia(rs.getDouble(10));
-                producto.setTipo_producto(rs.getInt(11));
-                producto.setExistencia_minima(rs.getInt(12));
+                producto.setExistencia_tienda(rs.getInt(9));
+                producto.setExistencia_bodega(rs.getInt(10));
+                producto.setPorcentaje_ganancia(rs.getDouble(11));
+                producto.setTipo_producto(rs.getInt(12));
+                producto.setExistencia_minima_tienda(rs.getInt(13));
+                producto.setExistencia_minima_bodega(rs.getInt(14));
                 lista.add(producto);
             }
             rs.close();

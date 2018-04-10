@@ -83,11 +83,11 @@ public class CRol {
     public List<Rol> consultar(){
         List<Rol> lista = new ArrayList<>();
         String sql = "select * from tbl_rol";
-        rol = new Rol();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                rol = new Rol();
                 rol.setIdrol(rs.getInt(1));
                 rol.setRol(rs.getString(2));
                 rol.setDescripcion(rs.getString(3));

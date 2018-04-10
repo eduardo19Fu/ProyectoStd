@@ -1,7 +1,9 @@
 package pruebas;
 
 import java.util.List;
+import prstd.controladores.CPermiso;
 import prstd.controladores.CUsuario;
+import prstd.modelos.Permiso;
 import prstd.modelos.Usuario;
 
 /**
@@ -15,9 +17,11 @@ public class PruebasMain {
      */
     public static void main(String[] args) {
         CUsuario uc = new CUsuario();
+        CPermiso cp = new CPermiso();
         List<Usuario> lista = uc.consultar();
-        for(int i = 0; i < lista.size(); i++){
-            System.out.println(lista.get(i).getUsuario());
+        List<Permiso> listap = cp.listar();
+        for(int i = 0; i < listap.size(); i++){
+            System.out.println(listap.get(i).getPermiso());
         }
     }
     

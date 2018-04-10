@@ -37,7 +37,10 @@ public class CRoles {
             for(int i = 0; i<= modelo.getRowCount(); i++){
                 ps.setInt(1, idusuario);
                 ps.setInt(2, rol.consultar(String.valueOf(modelo.getValueAt(i, 0))));
+                rs = ps.executeUpdate();
             }
+            ps.close();
+            connection.close();
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CRoles.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,7 +76,4 @@ public class CRoles {
         }
     }
     
-    public int insertarRoles(DefaultTableModel modelo){
-        return 0;
-    }
 }

@@ -88,6 +88,7 @@ public class CUsuario {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                this.usuario = new Usuario();
                 usuario.setIdusuario(rs.getInt("idusuario"));
                 usuario.setUsuario(rs.getString("usuario"));
                 usuario.setNombre("nombre");
@@ -110,13 +111,14 @@ public class CUsuario {
     public List<Usuario> consultar(String usuario){
         String sql = "select * from usuario where usuario like ?";
         List<Usuario> lista = new ArrayList<>();
-        this.usuario = new Usuario();
+        
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + usuario + "%");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                this.usuario = new Usuario();
                 this.usuario.setIdusuario(rs.getInt(1));
                 this.usuario.setUsuario(rs.getString(2));
                 this.usuario.setNombre(rs.getString("nombre"));

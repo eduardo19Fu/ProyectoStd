@@ -79,13 +79,13 @@ public class CPermiso {
     
     public List<Permiso> listar(){
         List<Permiso> lista = new ArrayList<>();
-        permiso = new Permiso();
         String sql = "select * from tbl_permiso";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                permiso = new Permiso();
                 permiso.setIdpermiso(rs.getInt(1));
                 permiso.setPermiso(rs.getString(2));
                 permiso.setEstado(rs.getString(3));

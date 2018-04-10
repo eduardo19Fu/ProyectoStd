@@ -53,12 +53,14 @@ public class CrearUsuarios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblListaUsuarios = new javax.swing.JTable();
+        tblListaRoles = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -126,7 +128,8 @@ public class CrearUsuarios extends javax.swing.JFrame {
 
         jScrollPane2.setBorder(null);
 
-        tblListaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        tblListaRoles.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        tblListaRoles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -134,16 +137,17 @@ public class CrearUsuarios extends javax.swing.JFrame {
                 "Roles"
             }
         ));
-        tblListaUsuarios.setGridColor(new java.awt.Color(255, 255, 255));
-        tblListaUsuarios.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        tblListaUsuarios.setShowHorizontalLines(false);
-        tblListaUsuarios.setShowVerticalLines(false);
-        tblListaUsuarios.getTableHeader().setResizingAllowed(false);
-        jScrollPane2.setViewportView(tblListaUsuarios);
+        tblListaRoles.setFillsViewportHeight(true);
+        tblListaRoles.setGridColor(new java.awt.Color(255, 255, 255));
+        tblListaRoles.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tblListaRoles.setShowVerticalLines(false);
+        tblListaRoles.getTableHeader().setResizingAllowed(false);
+        jScrollPane2.setViewportView(tblListaRoles);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 590, 200));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 590, 240));
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3), "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 8, 20));
 
         btnGuardar.setBackground(new java.awt.Color(0, 153, 153));
@@ -211,7 +215,38 @@ public class CrearUsuarios extends javax.swing.JFrame {
 
         jPanel3.add(btnLimpiar);
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 170, 150));
+        btnEliminar.setBackground(new java.awt.Color(0, 153, 153));
+        btnEliminar.setToolTipText("Limpiar Registro");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(170, 50));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseExited(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Minus_50px.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnEliminarLayout = new javax.swing.GroupLayout(btnEliminar);
+        btnEliminar.setLayout(btnEliminarLayout);
+        btnEliminarLayout.setHorizontalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarLayout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
+        );
+        btnEliminarLayout.setVerticalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(btnEliminar);
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 170, 240));
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 153));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -379,9 +414,9 @@ public class CrearUsuarios extends javax.swing.JFrame {
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, 810, 140));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 620));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 640));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 620));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 640));
 
         pack();
         setLocationRelativeTo(null);
@@ -441,6 +476,14 @@ public class CrearUsuarios extends javax.swing.JFrame {
         asignarRol(String.valueOf(comboRoles.getSelectedItem()));
     }//GEN-LAST:event_btnAddMouseClicked
 
+    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
+        setColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseEntered
+
+    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
+        resetColor(btnEliminar);
+    }//GEN-LAST:event_btnEliminarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -484,12 +527,14 @@ public class CrearUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAdd;
     private javax.swing.JLabel btnCerrar;
+    private javax.swing.JPanel btnEliminar;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnLimpiar;
     private java.awt.Choice comboRoles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -511,12 +556,12 @@ public class CrearUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTable tblListaUsuarios;
+    private javax.swing.JTable tblListaRoles;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
     private void setFormato(JLabel label){
-        label.setBorder(BorderFactory.createLineBorder(new Color(0,153,153),2));
+        //label.setBorder(BorderFactory.createLineBorder(new Color(0,153,153),2));
         label.setBackground(new Color(255,204,102));
     }
     
@@ -554,9 +599,9 @@ public class CrearUsuarios extends javax.swing.JFrame {
         Object[] datos = new Object[1];// Declaración de arreglo para datos del modelo.
         datos[0] = rol;// Almacena el dato rol dentro del arreglo.
         // Recorre todos los datos insertados en el JTable tblListausuarios.
-        for(int i = 0; i < tblListaUsuarios.getRowCount(); i++){
+        for(int i = 0; i < tblListaRoles.getRowCount(); i++){
             // Valida si existe un valor en la tabla igual al valor que se envia como parámetro.
-            if(tblListaUsuarios.getValueAt(i, 0).equals(rol)){
+            if(tblListaRoles.getValueAt(i, 0).equals(rol)){
                 JOptionPane.showMessageDialog(this, "Rol ya se encuentra asignado");
                 bandera = true;
             }else{
@@ -565,7 +610,7 @@ public class CrearUsuarios extends javax.swing.JFrame {
         }
         if(bandera == false){
             modelo.addRow(datos);
-            tblListaUsuarios.setModel(modelo);
+            tblListaRoles.setModel(modelo);
         }
     }
 }
