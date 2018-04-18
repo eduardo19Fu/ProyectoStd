@@ -5,6 +5,8 @@
  */
 package prstd.controladores;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -153,5 +155,17 @@ public class CProducto {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    public String calcularPrecioVenta(String precioCosto, String porcentaje) throws NumberFormatException, ArithmeticException{
+        double precioc = Double.parseDouble(precioCosto);
+        double percent = (Double.parseDouble(porcentaje)/100); // Convertimos el entero en un valor de porcentaje al dividirlo dentro de 100%.
+        
+        double preciov =  (precioc*percent) + precioc; // Almacenamos el resultado en una nueva variable la cual sirve como precioVenta.
+        
+        BigDecimal bd = new BigDecimal(preciov); // Creamos una variable BigDecimal para almacenar el precioVenta.
+        bd = bd.setScale(2,RoundingMode.HALF_UP); // Decidimos el formato de redondeo y la cantidad de decimales que deseamos.
+        
+        return String.format("%.2f",bd.doubleValue()); // Devolvemos el valor resultante como un String.
     }
 }

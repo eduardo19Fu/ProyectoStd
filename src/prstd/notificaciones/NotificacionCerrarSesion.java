@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JLabel;
-import prstd.vistas.Login;
+import prstd.vistas.VLogin;
 
 /**
  *
@@ -141,7 +141,7 @@ public class NotificacionCerrarSesion extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        Login lg = new Login();
+        VLogin lg = new VLogin();
         lg.setVisible(true);
         principal.dispose();
         this.dispose();

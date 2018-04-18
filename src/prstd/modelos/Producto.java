@@ -2,6 +2,7 @@ package prstd.modelos;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import prstd.controladores.CProducto;
 
 /**
@@ -185,5 +186,15 @@ public class Producto {
     public int crear(Producto producto){
         CProducto cp = new CProducto();
         return cp.registroProducto(producto);
+    }
+    
+    public List<Producto> buscarProductos(){
+        CProducto cp = new CProducto();
+        return cp.buscarProductos();
+    }
+    
+    public String calcularPrecioVenta(String precioCosto, String porcentaje) throws NumberFormatException{
+        CProducto cp = new CProducto();
+        return cp.calcularPrecioVenta(precioCosto, porcentaje);
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import prstd.controladores.CPermiso;
 import prstd.controladores.CUsuario;
 import prstd.modelos.Permiso;
+import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 
 /**
@@ -20,8 +21,9 @@ public class PruebasMain {
         CPermiso cp = new CPermiso();
         List<Usuario> lista = uc.consultar();
         List<Permiso> listap = cp.listar();
+        Producto producto = new Producto();
         for(int i = 0; i < listap.size(); i++){
-            System.out.println(listap.get(i).getPermiso());
+            System.out.println(producto.calcularPrecioVenta("10", "5"));
         }
     }
     
