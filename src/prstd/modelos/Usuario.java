@@ -126,4 +126,9 @@ public class Usuario {
         CUsuario cu = new CUsuario();
         return cu.consultarUsuario(usuario);
     }
+    
+    public int consultarUsuario(){
+        CUsuario cu = new CUsuario();
+        return cu.consultarUsuario();
+    }
 }

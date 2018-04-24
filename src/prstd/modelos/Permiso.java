@@ -1,5 +1,8 @@
 package prstd.modelos;
 
+import java.util.List;
+import prstd.controladores.CPermiso;
+
 /**
  *
  * @author Edfu-Pro
@@ -42,5 +45,18 @@ public class Permiso {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    
+    /*
+        * Invocación de los metodos de controlador a través del modelo
+    */
+    public List<Permiso> listar(){
+        CPermiso cp = new CPermiso();
+        return cp.listar();
+    }
+    
+    public int getIdPermiso(String permiso){
+        CPermiso cp = new CPermiso();
+        return cp.getIdPermiso(permiso);
     }
 }

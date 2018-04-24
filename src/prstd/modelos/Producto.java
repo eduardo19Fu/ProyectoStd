@@ -2,6 +2,8 @@ package prstd.modelos;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+import prstd.controladores.CProducto;
 
 /**
  *
@@ -17,10 +19,12 @@ public class Producto {
     private Date fecha_vencimiento;
     private int fabricante;
     private int familia;
-    private int existencia;
+    private int existencia_tienda;
+    private int existencia_bodega;
     private Double porcentaje_ganancia;
     private int tipo_producto;
-    private int existencia_minima;
+    private int existencia_minima_tienda;
+    private int existencia_minima_bodega;
     
     private String nombre_fabricante;
     private String nombre_familia;
@@ -29,7 +33,10 @@ public class Producto {
     }
 
     public Producto(String codigo, String nombre, Double precio_compra, Double precio_venta, Timestamp fecha_compra, Date fecha_vencimiento, 
-                    int fabricante, int familia, int existencia, Double porcentaje_ganancia, int tipo_producto, int existencia_minima,String nombre_fabricante, String nombre_familia) {
+                    int fabricante, int familia, int existencia_tienda, int existencia_bodega,Double porcentaje_ganancia, int tipo_producto, int existencia_minima_tienda,
+                    int existencia_minima_bodega,String nombre_fabricante, String nombre_familia) 
+    
+    {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio_compra = precio_compra;
@@ -38,10 +45,12 @@ public class Producto {
         this.fecha_vencimiento = fecha_vencimiento;
         this.fabricante = fabricante;
         this.familia = familia;
-        this.existencia = existencia;
+        this.existencia_tienda = existencia_tienda;
+        this.existencia_bodega = existencia_bodega;
         this.porcentaje_ganancia = porcentaje_ganancia;
         this.tipo_producto = tipo_producto;
-        this.existencia_minima = existencia_minima;
+        this.existencia_minima_tienda = existencia_minima_tienda;
+        this.existencia_minima_bodega = existencia_minima_bodega;
         this.nombre_fabricante = nombre_fabricante;
         this.nombre_familia = nombre_familia;
     }
@@ -110,12 +119,20 @@ public class Producto {
         this.familia = familia;
     }
 
-    public int getExistencia() {
-        return existencia;
+    public int getExistencia_tienda() {
+        return existencia_tienda;
     }
 
-    public void setExistencia(int existencia) {
-        this.existencia = existencia;
+    public void setExistencia_tienda(int existencia_tienda) {
+        this.existencia_tienda = existencia_tienda;
+    }
+    
+    public int getExistencia_bodega(){
+        return existencia_bodega;
+    }
+    
+    public void setExistencia_bodega(int existencia_bodega){
+        this.existencia_bodega = existencia_bodega;
     }
 
     public Double getPorcentaje_ganancia() {
@@ -134,12 +151,20 @@ public class Producto {
         this.tipo_producto = tipo_producto;
     }
 
-    public int getExistencia_minima() {
-        return existencia_minima;
+    public int getExistencia_minima_tienda() {
+        return existencia_minima_tienda;
     }
 
-    public void setExistencia_minima(int existencia_minima) {
-        this.existencia_minima = existencia_minima;
+    public void setExistencia_minima_tienda(int existencia_minima_tienda) {
+        this.existencia_minima_tienda = existencia_minima_tienda;
+    }
+    
+    public int getExsitencia_minima_bodega(){
+        return existencia_minima_bodega;
+    }
+    
+    public void setExistencia_minima_bodega(int existencia_minima_bodega){
+        this.existencia_minima_bodega = existencia_minima_bodega;
     }
     
     public String getNombre_familia(){
@@ -158,4 +183,18 @@ public class Producto {
         this.nombre_fabricante = nombre_fabricante;
     }
     
+    public int crear(Producto producto){
+        CProducto cp = new CProducto();
+        return cp.registroProducto(producto);
+    }
+    
+    public List<Producto> buscarProductos(){
+        CProducto cp = new CProducto();
+        return cp.buscarProductos();
+    }
+    
+    public String calcularPrecioVenta(String precioCosto, String porcentaje) throws NumberFormatException{
+        CProducto cp = new CProducto();
+        return cp.calcularPrecioVenta(precioCosto, porcentaje);
+    }
 }
