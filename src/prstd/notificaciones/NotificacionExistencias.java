@@ -38,6 +38,8 @@ public class NotificacionExistencias extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -54,7 +56,7 @@ public class NotificacionExistencias extends javax.swing.JDialog {
                 btnAceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 145, -1, 45));
+        jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 520, -1, 45));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-info-icon-64.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 79));
@@ -63,9 +65,9 @@ public class NotificacionExistencias extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> ¿Está seguro de querer salir del Sistema<br>de forma definitiva?</html>");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 59, 350, 79));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 59, 570, 79));
 
-        jLabel5.setBackground(new java.awt.Color(204, 255, 153));
+        jLabel5.setBackground(new java.awt.Color(0, 212, 186));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Mensaje Importante");
@@ -80,19 +82,32 @@ public class NotificacionExistencias extends javax.swing.JDialog {
                 jLabel5MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 516, 50));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 798, 50));
+
+        jScrollPane1.setBorder(null);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nombre", "Existencias Actuales", "Existencias Minimas"
+            }
+        ));
+        jTable1.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 680, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,5 +174,7 @@ public class NotificacionExistencias extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
