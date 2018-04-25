@@ -21,28 +21,19 @@ import prstd.modelos.Usuario;
  *
  * @author Edfu-Pro
  */
-public class VCrearUsuarios extends javax.swing.JFrame {
+public class VCrearUsuarios extends javax.swing.JDialog {
 
     /**
      * Creates new form CrearUsuarios
      */
-    private int contador,
-
-    /**
-     * Creates new form VCrearUsuarios
-     */
-    x,
-
-    /**
-     * Creates new form VCrearUsuarios
-     */
-    y;
+    private int contador,x,y;
     private Usuario usuario;
     private Rol rol;
     List<Usuario> listaUsuario;
     List<Rol> listaRol;
     
-    public VCrearUsuarios() {
+    public VCrearUsuarios(java.awt.Frame parent, boolean modal) {
+        super(parent,modal);
         initComponents();
         contador = 0;
         cargarChoice();
@@ -538,7 +529,14 @@ public class VCrearUsuarios extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VCrearUsuarios().setVisible(true);
+            VCrearUsuarios dialog = new VCrearUsuarios(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

@@ -664,7 +664,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-        VUsuarios usuario = new VUsuarios();
+        VUsuarios usuario = new VUsuarios(this,true);
         usuario.setVisible(true);
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
@@ -677,7 +677,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRolesMouseExited
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        VProductos productos = new VProductos();
+        VProductos productos = new VProductos(this,true); // Invoca la ventana de Administración de Productos
         productos.setVisible(true);
     }//GEN-LAST:event_btnProductosMouseClicked
 

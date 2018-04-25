@@ -16,11 +16,12 @@ import javax.swing.JPanel;
  *
  * @author Edfu-Pro
  */
-public class VProductos extends javax.swing.JFrame {
+public class VProductos extends javax.swing.JDialog {
 
     int x,y;
     
-    public VProductos() {
+    public VProductos(java.awt.Frame parent, boolean modal) {
+        super(parent,modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -65,7 +66,7 @@ public class VProductos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
@@ -331,7 +332,7 @@ public class VProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VRegistroProducto vregistro = new VRegistroProducto();
+        VRegistroProducto vregistro = new VRegistroProducto(null,true);
         vregistro.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -396,10 +397,14 @@ public class VProductos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VProductos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            VProductos dialog = new VProductos(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windoClosing(java.awt.event.WindowEvent e){
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 

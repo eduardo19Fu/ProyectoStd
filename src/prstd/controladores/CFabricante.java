@@ -72,4 +72,40 @@ public class CFabricante {
             return 0;
         }
     }
+    
+    public int registrar(Fabricante fabricante){
+        String sql = "insert into tbl_fabricante(idfabricante,nombre_fabricante,observaciones) values(?,?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, fabricante.getIdfabricante());
+            ps.setString(2, fabricante.getNombre_fabricante());
+            ps.setString(3, fabricante.getObservaciones());
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int getMaxFabricante(){
+        String sql = "select getMaxFabricante()";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int max = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return max;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 }

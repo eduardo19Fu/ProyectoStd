@@ -70,4 +70,40 @@ public class CFamilia {
             return 0;
         }
     }
+    
+    public int registrar(Familia familia){
+        String sql = "insert into tbl_producto_familia(idproducto_familia,nombre_familia) values(?,?)";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, familia.getIdfamilia());
+            ps.setString(2, familia.getNombre_familia());
+            int rs;
+            rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFamilia.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int getMaxFamilia(){
+        String sql = "select getMaxFamilia()";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int max = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return max;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFamilia.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 }

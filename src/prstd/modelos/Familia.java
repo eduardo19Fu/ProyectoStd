@@ -36,6 +36,10 @@ public class Familia {
         this.nombre_familia = nombre_familia;
     }
     
+    /*
+     * Metodos Controlador de la Clase Familia.
+    */
+    
     public List<Familia> listar(){
         CFamilia cf = new CFamilia();
         return cf.listar();
@@ -44,5 +48,15 @@ public class Familia {
     public int getId(String familia){
         CFamilia cf = new CFamilia();
         return cf.getId(familia);
+    }
+    
+    public int registrar(Familia familia){
+        CFamilia cf = new CFamilia();
+        return cf.registrar(familia);
+    }
+    
+    public int getMaxFamilia(){
+        CFamilia cf = new CFamilia();
+        return cf.getMaxFamilia();
     }
 }

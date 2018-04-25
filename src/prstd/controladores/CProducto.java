@@ -35,7 +35,7 @@ public class CProducto {
     
     public int altaProducto(Producto producto){
         String sql = "update tbl_producto set existencia = ? where codigo = ?";
-        producto = new Producto();
+        
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, producto.getExistencia_tienda());
@@ -51,24 +51,27 @@ public class CProducto {
     }
     
     public int registroProducto(Producto productos){
-        String sql = "insert into tbl_producto values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        producto = new Producto();
+        String sql = "insert into tbl_producto values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, producto.getCodigo());
-            ps.setString(2, producto.getNombre());
-            ps.setDouble(3, producto.getPrecio_compra());
-            ps.setDouble(4, producto.getPrecio_venta());
-            ps.setTimestamp(5, producto.getFecha_compra());
-            ps.setDate(6, new java.sql.Date(producto.getFecha_vencimiento().getTime()));
-            ps.setInt(7, producto.getFabricante());
-            ps.setInt(8, producto.getFamilia());
-            ps.setInt(9, producto.getExistencia_tienda());
-            ps.setInt(10, producto.getExistencia_bodega());
-            ps.setDouble(11, producto.getPorcentaje_ganancia());
-            ps.setInt(12, producto.getTipo_producto());
-            ps.setInt(13, producto.getExistencia_minima_tienda());
-            ps.setInt(14, producto.getExsitencia_minima_bodega());
+            ps.setString(1, productos.getCodigo());
+            ps.setString(2, productos.getNombre());
+            ps.setDouble(3, productos.getPrecio_compra());
+            ps.setDouble(4, productos.getPrecio_venta());
+            ps.setDate(5, new java.sql.Date(productos.getFecha_compra().getTime()));
+            System.out.println("");
+            if(productos.getFecha_vencimiento() != null)
+                ps.setDate(6, new java.sql.Date(productos.getFecha_vencimiento().getTime()));
+            else
+                ps.setDate(6, null);
+            ps.setInt(7, productos.getFabricante());
+            ps.setInt(8, productos.getFamilia());
+            ps.setInt(9, productos.getExistencia_tienda());
+            ps.setInt(10, productos.getExistencia_bodega());
+            ps.setDouble(11, productos.getPorcentaje_ganancia());
+            ps.setInt(12, productos.getExistencia_minima_tienda());
+            ps.setInt(13, productos.getExsitencia_minima_bodega());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
