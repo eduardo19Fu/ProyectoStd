@@ -42,4 +42,8 @@ public class CFactura {
     private List<Documento> consultarTransacciones(Date fecha_emision){
         return null;
     }
+    
+    private int facturaVarios(){
+        return 0;
+    }
 }

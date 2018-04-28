@@ -183,7 +183,7 @@ public class Producto {
         this.nombre_fabricante = nombre_fabricante;
     }
     /*
-    * Métodos controlador de la clase Producto  
+        * Métodos controlador de la clase Producto  
     */
     public int crear(Producto producto){
         CProducto cp = new CProducto();
@@ -203,5 +203,10 @@ public class Producto {
     public List<Producto> buscarProductos(String codigo, String nombre){
         CProducto cp = new CProducto();
         return cp.buscarProductos(codigo,nombre);
+    }
+    
+    public String getCodigo(Producto producto){
+        CProducto cp = new CProducto();
+        return cp.getCodigo(producto);
     }
 }

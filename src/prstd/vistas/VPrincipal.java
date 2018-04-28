@@ -369,6 +369,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 0, 810, 780));
 
         panelOpciones.setBackground(new java.awt.Color(0, 153, 153));
+        panelOpciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 216, 148), 2));
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
@@ -382,7 +383,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnSistema.setBackground(new java.awt.Color(0, 153, 153));
         btnSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSistema.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnSistema.setPreferredSize(new java.awt.Dimension(393, 50));
         btnSistema.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSistemaMouseClicked(evt);
@@ -408,7 +409,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnCobros.setBackground(new java.awt.Color(0, 153, 153));
         btnCobros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCobros.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnCobros.setPreferredSize(new java.awt.Dimension(393, 50));
         btnCobros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCobrosMouseClicked(evt);
@@ -434,7 +435,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnReportes.setBackground(new java.awt.Color(0, 153, 153));
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnReportes.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnReportes.setPreferredSize(new java.awt.Dimension(393, 50));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
@@ -457,7 +458,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnSalir.setBackground(new java.awt.Color(0, 153, 153));
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSalir.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnSalir.setPreferredSize(new java.awt.Dimension(393, 50));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalirMouseClicked(evt);
@@ -481,7 +482,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jPanel3.add(btnSalir);
 
-        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 400, 480));
+        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 180, 393, 480));
 
         jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 780));
 

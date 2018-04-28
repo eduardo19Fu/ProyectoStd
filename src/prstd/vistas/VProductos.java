@@ -59,10 +59,10 @@ public class VProductos extends javax.swing.JDialog {
         btnEditar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JPanel();
+        btnAlta = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        btnEliminar1 = new javax.swing.JPanel();
+        btnEliminar = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
@@ -101,7 +101,7 @@ public class VProductos extends javax.swing.JDialog {
                 jLabel5MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 40));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 120, 116), 3));
@@ -127,7 +127,7 @@ public class VProductos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código", "Nombre", "Precio Costo", "% Ganancia", "Stuck Tienda", "Stuck Bodega"
             }
         ));
         jTable1.setFillsViewportHeight(true);
@@ -136,6 +136,12 @@ public class VProductos extends javax.swing.JDialog {
         jTable1.setShowVerticalLines(false);
         jTable1.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(jTable1);
+
+        choice2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        choice3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        choice1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 153, 153));
@@ -146,22 +152,21 @@ public class VProductos extends javax.swing.JDialog {
         panelCobrosLayout.setHorizontalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCobrosLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
                 .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(panelCobrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         panelCobrosLayout.setVerticalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +248,30 @@ public class VProductos extends javax.swing.JDialog {
 
         jPanel3.add(btnEditar);
 
+        btnAlta.setBackground(new java.awt.Color(0, 153, 153));
+        btnAlta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlta.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAltaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAltaMouseExited(evt);
+            }
+        });
+        btnAlta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Alta de Producto");
+        jLabel7.setToolTipText("");
+        btnAlta.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Downloading_Updates_50px.png"))); // NOI18N
+        btnAlta.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.add(btnAlta);
+
         btnEliminar.setBackground(new java.awt.Color(0, 153, 153));
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.setPreferredSize(new java.awt.Dimension(250, 50));
@@ -256,40 +285,16 @@ public class VProductos extends javax.swing.JDialog {
         });
         btnEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Alta de Producto");
-        jLabel7.setToolTipText("");
-        btnEliminar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Downloading_Updates_50px.png"))); // NOI18N
-        btnEliminar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jPanel3.add(btnEliminar);
-
-        btnEliminar1.setBackground(new java.awt.Color(0, 153, 153));
-        btnEliminar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminar1.setPreferredSize(new java.awt.Dimension(250, 50));
-        btnEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseExited(evt);
-            }
-        });
-        btnEliminar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel9.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Eliminar Producto");
         jLabel9.setToolTipText("");
-        btnEliminar1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        btnEliminar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Delete_Archive_50px_1.png"))); // NOI18N
-        btnEliminar1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnEliminar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.add(btnEliminar1);
+        jPanel3.add(btnEliminar);
 
         panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 330));
 
@@ -352,6 +357,14 @@ public class VProductos extends javax.swing.JDialog {
         resetColor(btnEditar);
     }//GEN-LAST:event_btnEditarMouseExited
 
+    private void btnAltaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaMouseEntered
+        setColor(btnAlta);
+    }//GEN-LAST:event_btnAltaMouseEntered
+
+    private void btnAltaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaMouseExited
+        resetColor(btnAlta);
+    }//GEN-LAST:event_btnAltaMouseExited
+
     private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
         setColor(btnEliminar);
     }//GEN-LAST:event_btnEliminarMouseEntered
@@ -359,14 +372,6 @@ public class VProductos extends javax.swing.JDialog {
     private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
         resetColor(btnEliminar);
     }//GEN-LAST:event_btnEliminarMouseExited
-
-    private void btnEliminar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1MouseEntered
-
-    private void btnEliminar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1MouseExited
 
     /**
      * @param args the command line arguments
@@ -409,9 +414,9 @@ public class VProductos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnAlta;
     private javax.swing.JPanel btnEditar;
     private javax.swing.JPanel btnEliminar;
-    private javax.swing.JPanel btnEliminar1;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JPanel btnNuevo;
     private java.awt.Choice choice1;
