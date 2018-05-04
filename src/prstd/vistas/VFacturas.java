@@ -321,8 +321,8 @@ public class VFacturas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VRegistroProducto vregistro = new VRegistroProducto(null,true);
-        vregistro.setVisible(true);
+        VCrearFactura vcf = new VCrearFactura(null,true); // Instancia de un objeto de la Clase VCrearFactura.
+        vcf.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnNuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseEntered
