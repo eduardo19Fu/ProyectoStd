@@ -5,8 +5,13 @@
         <group>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Usuario.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Producto.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VUsuarios.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/pruebas/PruebasMain.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VProductos.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VRoles.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VEditarUsuario.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CProducto.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VPrincipal.java</file>
         </group>
     </open-files>
 </project-private>

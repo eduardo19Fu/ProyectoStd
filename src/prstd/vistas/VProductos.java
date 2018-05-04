@@ -8,9 +8,13 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import prstd.modelos.Producto;
 
 /**
  *
@@ -19,11 +23,12 @@ import javax.swing.JPanel;
 public class VProductos extends javax.swing.JDialog {
 
     int x,y;
-    
+    private Producto producto;
     public VProductos(java.awt.Frame parent, boolean modal) {
         super(parent,modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        cargarProductos();
     }
 
     /**
@@ -44,7 +49,7 @@ public class VProductos extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         panelCobros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProductos = new javax.swing.JTable();
         choice2 = new java.awt.Choice();
         choice3 = new java.awt.Choice();
         choice1 = new java.awt.Choice();
@@ -122,7 +127,7 @@ public class VProductos extends javax.swing.JDialog {
 
         panelCobros.setOpaque(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -130,12 +135,12 @@ public class VProductos extends javax.swing.JDialog {
                 "Código", "Nombre", "Precio Costo", "% Ganancia", "Stuck Tienda", "Stuck Bodega"
             }
         ));
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setFocusTraversalPolicyProvider(true);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 153, 153));
-        jTable1.setShowVerticalLines(false);
-        jTable1.setSurrendersFocusOnKeystroke(true);
-        jScrollPane1.setViewportView(jTable1);
+        tblProductos.setFillsViewportHeight(true);
+        tblProductos.setFocusTraversalPolicyProvider(true);
+        tblProductos.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tblProductos.setShowVerticalLines(false);
+        tblProductos.setSurrendersFocusOnKeystroke(true);
+        jScrollPane1.setViewportView(tblProductos);
 
         choice2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -439,11 +444,11 @@ public class VProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
+    private javax.swing.JTable tblProductos;
     // End of variables declaration//GEN-END:variables
 
     public void cerrarVentanaPrincipal(){
@@ -464,5 +469,23 @@ public class VProductos extends javax.swing.JDialog {
     
     private void resetBorder(JLabel label){
         label.setBorder(null);
+    }
+    
+    private void cargarProductos(){
+        producto = new Producto();
+        String[] titulos = {"Código","Nombre","Precio Costo","% Ganancia","Stuck Tienda","Stuck Bodega"};
+        Object[] datos = new Object[6];
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        List<Producto> lista = producto.buscarProductos();
+        for(int i = 0; i < lista.size(); i++){
+            datos[0] = lista.get(i).getCodigo();
+            datos[1] = lista.get(i).getNombre();
+            datos[2] = lista.get(i).getPrecio_compra();
+            datos[3] = lista.get(i).getPorcentaje_ganancia();
+            datos[4] = lista.get(i).getExistencia_tienda();
+            datos[5] = lista.get(i).getExistencia_bodega();
+            modelo.addRow(datos);
+        }
+        tblProductos.setModel(modelo);
     }
 }

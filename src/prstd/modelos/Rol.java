@@ -56,6 +56,10 @@ public class Rol {
         this.estado = estado;
     }
     
+    /*
+     *  Métodos controlador de la Clase Rol.
+    */
+    
     public List<Rol> consultar(){
         CRol rols = new CRol();
         List<Rol> lista = new ArrayList<>();
@@ -66,5 +70,10 @@ public class Rol {
     public int consultar(String rol){
         CRol cr = new CRol();
         return cr.consultar(rol);
+    }
+    
+    public int crear(Rol rol){
+        CRol cr = new CRol();
+        return cr.crear(rol);
     }
 }

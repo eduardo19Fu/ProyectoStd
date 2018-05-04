@@ -167,6 +167,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRoles.setPreferredSize(new java.awt.Dimension(120, 120));
         btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRolesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRolesMouseEntered(evt);
             }
@@ -211,7 +214,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnFamilias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnFamilias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Family_72px.png"))); // NOI18N
-        btnFamilias.setToolTipText("Administración de Familias de Prodcutos");
+        btnFamilias.setToolTipText("Administración de Familias de Productos");
         btnFamilias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnFamilias.setPreferredSize(new java.awt.Dimension(120, 120));
         btnFamilias.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -665,22 +668,27 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-        VUsuarios usuario = new VUsuarios(this,true);
-        usuario.setVisible(true);
+        VUsuarios usuario = new VUsuarios(this,true); // Instancia un Objeto de la Clase VUsuarios.
+        usuario.setVisible(true); // Invoca la ventana de Administración de Usuarios.
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
     private void btnRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseEntered
-        setBorder(btnRoles);
+        setBorder(btnRoles); // Invoca al método setBorder que se encarga de darle formato a los botones.
     }//GEN-LAST:event_btnRolesMouseEntered
 
     private void btnRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseExited
-        resetBorder(btnRoles);
+        resetBorder(btnRoles); // Invoca al método setBorder que se encarga de quitarle formato a los botones.
     }//GEN-LAST:event_btnRolesMouseExited
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        VProductos productos = new VProductos(this,true); // Invoca la ventana de Administración de Productos
-        productos.setVisible(true);
+        VProductos productos = new VProductos(this,true); // Instancia la Clase VProductos.
+        productos.setVisible(true); //Invoca la ventana de Administración de Productos
     }//GEN-LAST:event_btnProductosMouseClicked
+
+    private void btnRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseClicked
+        VRoles roles = new VRoles(this,true); // Instancia la Clase VRoles.
+        roles.setVisible(true); // Invoca la ventana de Administración de Roles.
+    }//GEN-LAST:event_btnRolesMouseClicked
 
     /**
      * @param args the command line arguments
