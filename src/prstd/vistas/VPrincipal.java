@@ -167,6 +167,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRoles.setPreferredSize(new java.awt.Dimension(120, 120));
         btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRolesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnRolesMouseEntered(evt);
             }
@@ -211,7 +214,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnFamilias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnFamilias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Family_72px.png"))); // NOI18N
-        btnFamilias.setToolTipText("Administración de Familias de Prodcutos");
+        btnFamilias.setToolTipText("Administración de Familias de Productos");
         btnFamilias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnFamilias.setPreferredSize(new java.awt.Dimension(120, 120));
         btnFamilias.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -369,6 +372,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 0, 810, 780));
 
         panelOpciones.setBackground(new java.awt.Color(0, 153, 153));
+        panelOpciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 216, 148), 2));
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
@@ -382,7 +386,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnSistema.setBackground(new java.awt.Color(0, 153, 153));
         btnSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSistema.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnSistema.setPreferredSize(new java.awt.Dimension(393, 50));
         btnSistema.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSistemaMouseClicked(evt);
@@ -408,7 +412,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnCobros.setBackground(new java.awt.Color(0, 153, 153));
         btnCobros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCobros.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnCobros.setPreferredSize(new java.awt.Dimension(393, 50));
         btnCobros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCobrosMouseClicked(evt);
@@ -434,7 +438,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnReportes.setBackground(new java.awt.Color(0, 153, 153));
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnReportes.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnReportes.setPreferredSize(new java.awt.Dimension(393, 50));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
@@ -457,7 +461,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         btnSalir.setBackground(new java.awt.Color(0, 153, 153));
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSalir.setPreferredSize(new java.awt.Dimension(400, 50));
+        btnSalir.setPreferredSize(new java.awt.Dimension(393, 50));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalirMouseClicked(evt);
@@ -481,7 +485,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jPanel3.add(btnSalir);
 
-        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 400, 480));
+        panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 180, 393, 480));
 
         jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 780));
 
@@ -664,22 +668,27 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-        VUsuarios usuario = new VUsuarios(this,true);
-        usuario.setVisible(true);
+        VUsuarios usuario = new VUsuarios(this,true); // Instancia un Objeto de la Clase VUsuarios.
+        usuario.setVisible(true); // Invoca la ventana de Administración de Usuarios.
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
     private void btnRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseEntered
-        setBorder(btnRoles);
+        setBorder(btnRoles); // Invoca al método setBorder que se encarga de darle formato a los botones.
     }//GEN-LAST:event_btnRolesMouseEntered
 
     private void btnRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseExited
-        resetBorder(btnRoles);
+        resetBorder(btnRoles); // Invoca al método setBorder que se encarga de quitarle formato a los botones.
     }//GEN-LAST:event_btnRolesMouseExited
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        VProductos productos = new VProductos(this,true); // Invoca la ventana de Administración de Productos
-        productos.setVisible(true);
+        VProductos productos = new VProductos(this,true); // Instancia la Clase VProductos.
+        productos.setVisible(true); //Invoca la ventana de Administración de Productos
     }//GEN-LAST:event_btnProductosMouseClicked
+
+    private void btnRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseClicked
+        VRoles roles = new VRoles(this,true); // Instancia la Clase VRoles.
+        roles.setVisible(true); // Invoca la ventana de Administración de Roles.
+    }//GEN-LAST:event_btnRolesMouseClicked
 
     /**
      * @param args the command line arguments

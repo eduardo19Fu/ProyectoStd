@@ -1,8 +1,12 @@
 package prstd.controladores;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import prstd.modelos.Documento;
 import prstd.servicios.ConexionDos;
 
@@ -23,11 +27,23 @@ public class CFactura {
     
     public int crearFactura(Documento factura){
         String sql = "{call sp_factura()}";
+        String sql2 = "{call sp_detalleFactura()}";
+        
+        try {
+            CallableStatement cl = connection.prepareCall(sql);
+            int rs = cl.executeUpdate();
+            if(rs > 0){
+                CallableStatement cl2 = connection.prepareCall(sql2);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return 0;
     }
     
     
-    private int anular(int idtransaccion){
+    private int anular(int idtransaccion, int no_documento, String serie){
         return 0;
     }
     
@@ -41,5 +57,9 @@ public class CFactura {
     
     private List<Documento> consultarTransacciones(Date fecha_emision){
         return null;
+    }
+    
+    private int facturaVarios(){
+        return 0;
     }
 }

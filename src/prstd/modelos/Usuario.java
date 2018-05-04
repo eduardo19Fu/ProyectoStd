@@ -96,8 +96,6 @@ public class Usuario {
         this.telefono = telefono;
     }
     
-    
-    
     /*
         * Métodos que devuelven las funcionas del controlador de Usuario. *
     */
