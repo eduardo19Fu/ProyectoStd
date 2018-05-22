@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import prstd.modelos.Cliente;
 
 /**
  *
@@ -169,6 +172,12 @@ public class VCrearFactura extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nombre:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 63, -1, -1));
+
+        txtNit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNitKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 11, 125, -1));
         jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 58, 199, -1));
 
@@ -195,7 +204,7 @@ public class VCrearFactura extends javax.swing.JDialog {
 
         jCheckBox1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("Factura Individual");
+        jCheckBox1.setText("Clientes Varios");
         jCheckBox1.setToolTipText("");
         jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCheckBox1.setOpaque(false);
@@ -488,6 +497,11 @@ public class VCrearFactura extends javax.swing.JDialog {
         resetBorde(btnAdd);
     }//GEN-LAST:event_btnAddMouseExited
 
+    private void txtNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyTyped
+        
+        
+    }//GEN-LAST:event_txtNitKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -563,7 +577,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNit;
+    public static javax.swing.JTextField txtNit;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtProducto;
     private javax.swing.JTextField txtTotal;
@@ -591,5 +605,17 @@ public class VCrearFactura extends javax.swing.JDialog {
     
     private void resetBorde(JLabel label){
         label.setBorder(null);
+    }
+    
+    private void buscarNit(){
+        Cliente cliente = new Cliente();
+        List<Cliente> lista = new ArrayList<>();
+        lista = cliente.buscarNit(txtNit.getText());
+        if(lista != null){
+            for(int i = 0; i < lista.size(); i++){
+                txtNombre.setText(lista.get(i).getNombre());
+                txtDireccion.setText(lista.get(i).getDireccion());
+            }
+        }
     }
 }

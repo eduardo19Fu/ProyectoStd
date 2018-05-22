@@ -3,15 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VCrearFactura.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VRegistroClientes.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Usuario.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/notificaciones/ConfirmarEdicion.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Cliente.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Producto.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VUsuarios.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/pruebas/PruebasMain.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VProductos.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VRoles.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VEditarUsuario.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/notificaciones/NotificacionExistencias.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CFactura.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CCliente.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CProducto.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VPrincipal.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/notificaciones/NotificacionGuardado.java</file>
         </group>
     </open-files>
 </project-private>
