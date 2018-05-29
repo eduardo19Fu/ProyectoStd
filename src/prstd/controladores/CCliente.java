@@ -85,6 +85,32 @@ public class CCliente {
         }
     }
     
+    public List<Cliente> buscarNit(String nit){
+        String sql = "select * from cliente where nit = ?";
+        List<Cliente> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, nit);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                cliente = new Cliente();
+                cliente.setIdcliente(rs.getInt(1));
+                cliente.setNombre(rs.getString(2));
+                cliente.setDireccion(rs.getString(3));
+                cliente.setNit(rs.getString(4));
+                lista.add(cliente);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public List<Cliente> consultarNit(String parametro){
         cliente = new Cliente();
         List<Cliente> lista = new ArrayList<>();
@@ -131,6 +157,42 @@ public class CCliente {
         } catch (SQLException ex) {
             Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    
+    public int getMaxCliente(){
+        String sql = "select getMaxCliente()";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int max = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return max;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public boolean comprobarCliente(String nit){
+        String sql = "select 1 from tbl_cliente where nit = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, nit);
+            ResultSet rs = ps.executeQuery();
+            boolean existe = rs.next();
+            rs.close();
+            ps.close();
+            connection.close();
+            return existe;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 }

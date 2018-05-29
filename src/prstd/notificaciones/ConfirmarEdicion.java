@@ -72,7 +72,7 @@ public class ConfirmarEdicion extends javax.swing.JDialog {
                 jLabel5MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 516, 50));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 517, 50));
 
         btnAceptar2.setBackground(new java.awt.Color(0, 153, 153));
         btnAceptar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N

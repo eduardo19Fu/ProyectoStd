@@ -19,12 +19,13 @@ import prstd.modelos.Usuario;
  *
  * @author Edfu-Pro
  */
-public class VUsuarios extends javax.swing.JFrame {
+public class VUsuarios extends javax.swing.JDialog {
 
     int x,y;
     private Usuario usuario;
     
-    public VUsuarios() {
+    public VUsuarios(java.awt.Frame parent, boolean modal) {
+        super(parent,modal);
         initComponents();
         
     }
@@ -39,7 +40,7 @@ public class VUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnMinimizar = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -66,28 +67,28 @@ public class VUsuarios extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Multiply_32px.png"))); // NOI18N
-        btnMinimizar.setToolTipText("Minimiza la Pantalla Principal");
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Multiply_32px.png"))); // NOI18N
+        btnCerrar.setToolTipText("Minimiza la Pantalla Principal");
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinimizarMouseClicked(evt);
+                btnCerrarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMinimizarMouseEntered(evt);
+                btnCerrarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMinimizarMouseExited(evt);
+                btnCerrarMouseExited(evt);
             }
         });
-        jPanel1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(204, 255, 153));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -278,7 +279,7 @@ public class VUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,17 +300,17 @@ public class VUsuarios extends javax.swing.JFrame {
         this.y = evt.getY(); // Obtenemos la posición de Y de la ventana y la guardamos en nuestra variable de clase declarada anteriormente.
     }//GEN-LAST:event_jLabel5MousePressed
 
-    private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
         this.dispose();// Cierra la ventana de Productos.
-    }//GEN-LAST:event_btnMinimizarMouseClicked
+    }//GEN-LAST:event_btnCerrarMouseClicked
 
-    private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
-        btnMinimizar.setBorder(BorderFactory.createLineBorder(new Color(153, 138, 147),2)); // Coloca un borde griseaceo para el botón de minimizar a manera de remarcarlo.
-    }//GEN-LAST:event_btnMinimizarMouseEntered
+    private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
+        btnCerrar.setBorder(BorderFactory.createLineBorder(new Color(153, 138, 147),2)); // Coloca un borde griseaceo para el botón de minimizar a manera de remarcarlo.
+    }//GEN-LAST:event_btnCerrarMouseEntered
 
-    private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
-        btnMinimizar.setBorder(null); // Restablece el boton de minimizar.
-    }//GEN-LAST:event_btnMinimizarMouseExited
+    private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
+        btnCerrar.setBorder(null); // Restablece el boton de minimizar.
+    }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnNuevoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseExited
         resetColor(btnNuevo);
@@ -336,7 +337,7 @@ public class VUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VCrearUsuarios cu = new VCrearUsuarios();
+        VCrearUsuarios cu = new VCrearUsuarios(null,true);
         cu.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -372,14 +373,21 @@ public class VUsuarios extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VUsuarios().setVisible(true);
+            VUsuarios dialog = new VUsuarios(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnCerrar;
     private javax.swing.JPanel btnEditar;
     private javax.swing.JPanel btnEliminar;
-    private javax.swing.JLabel btnMinimizar;
     private javax.swing.JPanel btnNuevo;
     private java.awt.Choice choice1;
     private java.awt.Choice choice2;

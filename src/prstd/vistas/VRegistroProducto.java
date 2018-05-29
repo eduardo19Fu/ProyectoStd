@@ -9,8 +9,10 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.util.List;
+import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import prstd.modelos.Fabricante;
 import prstd.modelos.Familia;
@@ -22,7 +24,7 @@ import prstd.modelos.Usuario;
  *
  * @author Edfu-Pro
  */
-public class VRegistroProducto extends javax.swing.JFrame {
+public class VRegistroProducto extends javax.swing.JDialog {
 
     /**
      * Creates new form CrearUsuarios
@@ -33,7 +35,8 @@ public class VRegistroProducto extends javax.swing.JFrame {
     List<Familia> listaFamilia;
     List<Fabricante> listaFabricante;
     
-    public VRegistroProducto() {
+    public VRegistroProducto(java.awt.Frame parent, boolean modal) {
+        super(parent,modal);
         initComponents();
         contador = 0;
         cargarChoiceFabricante();
@@ -80,13 +83,15 @@ public class VRegistroProducto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dateCompra = new org.jdesktop.swingx.JXDatePicker();
         dateVencimiento = new org.jdesktop.swingx.JXDatePicker();
-        choiceFamilia = new java.awt.Choice();
         jLabel6 = new javax.swing.JLabel();
-        choiceFabricante = new java.awt.Choice();
         txtNombre = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkVencimiento = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        choiceFamilia = new javax.swing.JComboBox<>();
+        choiceFabricante = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
@@ -314,13 +319,12 @@ public class VRegistroProducto extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel15))
                             .addComponent(jLabel18)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
-                                .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
@@ -335,108 +339,84 @@ public class VRegistroProducto extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 153));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Datos de Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Codigo:");
+        jPanel7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         txtCodigo.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        jPanel7.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 43, 215, -1));
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre Producto:");
+        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 45, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fabricante:");
-
-        choiceFamilia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 180, -1, -1));
+        jPanel7.add(dateCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 108, 210, -1));
+        jPanel7.add(dateVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 210, -1));
 
         jLabel6.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Familia:");
-
-        choiceFabricante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 178, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
+        jPanel7.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 43, 220, -1));
 
         jLabel10.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Fecha Compra:");
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 113, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Fecha Vencimiento:");
+        jPanel7.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 113, -1, -1));
 
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCheckBox1.setOpaque(false);
+        checkVencimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        checkVencimiento.setOpaque(false);
+        checkVencimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkVencimientoMouseClicked(evt);
+            }
+        });
+        jPanel7.add(checkVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 108, -1, -1));
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(choiceFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(134, 134, 134)
-                                .addComponent(jLabel5)))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(choiceFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(dateVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCheckBox1))))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(jLabel4)))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(dateCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)
-                        .addComponent(dateVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(choiceFamilia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(choiceFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(69, 69, 69))
-        );
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText(". . .");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.setOpaque(true);
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 34, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText(". . .");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.setOpaque(true);
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, 34, -1));
+
+        choiceFamilia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.add(choiceFamilia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 176, 160, -1));
+
+        choiceFabricante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.add(choiceFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 176, 160, -1));
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, 920, 270));
 
@@ -446,9 +426,13 @@ public class VRegistroProducto extends javax.swing.JFrame {
         btnLimpiar.setBackground(new java.awt.Color(0, 153, 153));
         btnLimpiar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Broom_50px.png"))); // NOI18N
+        btnLimpiar.setToolTipText("Limpiar Campos");
         btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpiar.setOpaque(true);
         btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnLimpiarMouseEntered(evt);
             }
@@ -460,9 +444,13 @@ public class VRegistroProducto extends javax.swing.JFrame {
         btnGuardar.setBackground(new java.awt.Color(0, 153, 153));
         btnGuardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Save_50px.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar Producto");
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.setOpaque(true);
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
             }
@@ -590,6 +578,39 @@ public class VRegistroProducto extends javax.swing.JFrame {
         resetFormato(btnLimpiar);
     }//GEN-LAST:event_btnLimpiarMouseExited
 
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        int op = JOptionPane.showOptionDialog(this, "¿Seguro que desea registrar este producto?", "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, 
+                                              null,new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+        if(op != -1){
+            if((op + 1) == 1){
+                registrar();
+            }else{
+                
+            }
+        }
+    }//GEN-LAST:event_btnGuardarMouseClicked
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        VRegistroFamilias rf = new VRegistroFamilias(null,true);
+        rf.setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        VRegistroFabricantes rf = new VRegistroFabricantes(null, true);
+        rf.setVisible(true);
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void checkVencimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkVencimientoMouseClicked
+        if(checkVencimiento.isSelected())
+            dateVencimiento.setEnabled(true);
+        else
+            dateVencimiento.setEnabled(false);
+    }//GEN-LAST:event_checkVencimientoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -650,7 +671,14 @@ public class VRegistroProducto extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VRegistroProducto().setVisible(true);
+            VRegistroProducto dialog = new VRegistroProducto(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
@@ -658,15 +686,16 @@ public class VRegistroProducto extends javax.swing.JFrame {
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JLabel btnLimpiar;
-    private java.awt.Choice choiceFabricante;
-    private java.awt.Choice choiceFamilia;
+    private javax.swing.JCheckBox checkVencimiento;
+    private javax.swing.JComboBox<String> choiceFabricante;
+    private javax.swing.JComboBox<String> choiceFamilia;
     private org.jdesktop.swingx.JXDatePicker dateCompra;
     private org.jdesktop.swingx.JXDatePicker dateVencimiento;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -680,6 +709,7 @@ public class VRegistroProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -717,8 +747,41 @@ public class VRegistroProducto extends javax.swing.JFrame {
     
     private void registrar(){
         Producto producto = new Producto();
-        producto.setCodigo(txtCodigo.getText());
+        Familia familia = new Familia();
+        Fabricante fabricante = new Fabricante();
+        
+        // Datos Generales:
+        if(!txtCodigo.getText().isEmpty()){
+            producto.setCodigo(txtCodigo.getText());
+        }else{
+            int rand;
+            Random random = new Random();
+            rand = random.nextInt(5000) + 1;
+            producto.setCodigo(String.valueOf(rand) + txtNombre.getText().substring(0,1));
+        }
         producto.setNombre(txtNombre.getText());
+        producto.setFecha_compra(dateCompra.getDate());
+        producto.setFecha_vencimiento(dateVencimiento.getDate());
+        producto.setFamilia(familia.getId(choiceFamilia.getSelectedItem().toString()));
+        producto.setFabricante(fabricante.getId(choiceFabricante.getSelectedItem().toString()));
+        
+        // Datos de Venta y Almacén:
+        producto.setPrecio_compra(Double.parseDouble(txtPrecioC.getText()));
+        producto.setPorcentaje_ganancia(Double.parseDouble(txtPorcentaje.getText()));
+        producto.setPrecio_venta(Double.parseDouble(txtPrecioVenta.getText()));
+        producto.setExistencia_tienda(Integer.parseInt(txtStuckTienda.getText()));
+        producto.setExistencia_minima_tienda(Integer.parseInt(txtStuckMinTienda.getText()));
+        producto.setExistencia_bodega(Integer.parseInt(txtStuckBodega.getText()));
+        producto.setExistencia_minima_bodega(Integer.parseInt(txtStuckMinBodega.getText()));
+        
+        // Registrar nuevo Producto
+        if(producto.crear(producto) > 0){
+            JOptionPane.showMessageDialog(this, "Producto Registrado con éxito","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(this, "Resulta imposible registrar el producto, revise los campos ingresados para prevenir errores.","Error",JOptionPane.ERROR_MESSAGE);
+            txtCodigo.grabFocus();
+        }
     }
     
     private void cargarChoiceFabricante(){
@@ -738,7 +801,26 @@ public class VRegistroProducto extends javax.swing.JFrame {
     }
     
     private void config(){
-        //dateCompra.setEnabled(false);
+        dateCompra.setDate(new java.util.Date());
         dateVencimiento.setEnabled(false);
+    }
+    
+    private void limpiar(){
+        // Datos Generales
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        dateCompra.setDate(new java.util.Date());
+        dateVencimiento.setEnabled(false);
+        dateVencimiento.setDate(null);
+        checkVencimiento.setSelected(false);
+        
+        // Datos de venta y compra
+        txtPrecioC.setText("0.00");
+        txtPorcentaje.setText("0.00");
+        txtPrecioVenta.setText("0.00");
+        txtStuckTienda.setText("");
+        txtStuckMinTienda.setText("");
+        txtStuckBodega.setText("");
+        txtStuckMinBodega.setText("");
     }
 }

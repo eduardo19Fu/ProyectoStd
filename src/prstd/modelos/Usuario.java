@@ -96,8 +96,6 @@ public class Usuario {
         this.telefono = telefono;
     }
     
-    
-    
     /*
         * Métodos que devuelven las funcionas del controlador de Usuario. *
     */
@@ -130,5 +128,10 @@ public class Usuario {
     public int consultarUsuario(){
         CUsuario cu = new CUsuario();
         return cu.consultarUsuario();
+    }
+    
+    public String getVendedor(){
+        CUsuario cu = new CUsuario();
+        return cu.getVendedor(usuario);
     }
 }

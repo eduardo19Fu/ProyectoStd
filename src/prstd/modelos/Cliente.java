@@ -56,6 +56,10 @@ public class Cliente {
         this.direccion = direccion;
     }
     
+    /*
+     *  Métodos Controlador de la clase Cliente   
+    */
+    
     public List<Cliente> consultar(){
         CCliente cliente = new CCliente();
         return cliente.consultar();
@@ -74,5 +78,20 @@ public class Cliente {
     public List<Cliente> consultar(String n){
         CCliente cliente = new CCliente();
         return cliente.consultarNit(n);
+    }
+    
+    public int getMaxCliente(){
+        CCliente cliente = new CCliente();
+        return cliente.getMaxCliente();
+    }
+    
+    public List<Cliente> buscarNit(String nit){
+        CCliente cliente = new CCliente();
+        return cliente.buscarNit(nit);
+    }
+    
+    public boolean comprobarCliente(String nit){
+        CCliente cliente = new CCliente();
+        return cliente.comprobarCliente(nit);
     }
 }

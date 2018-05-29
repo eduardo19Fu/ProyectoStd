@@ -56,4 +56,14 @@ public class Fabricante {
         CFabricante cf = new CFabricante();
         return cf.getId(fabricante);
     }
+    
+    public int registrar(Fabricante fabricante){
+        CFabricante cf = new CFabricante();
+        return cf.registrar(fabricante);
+    }
+    
+    public int getMaxFabricante(){
+        CFabricante cf = new CFabricante();
+        return cf.getMaxFabricante();
+    }
 }

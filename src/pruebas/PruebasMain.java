@@ -17,14 +17,13 @@ public class PruebasMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CUsuario uc = new CUsuario();
-        CPermiso cp = new CPermiso();
-        List<Usuario> lista = uc.consultar();
-        List<Permiso> listap = cp.listar();
-        Producto producto = new Producto();
-        for(int i = 0; i < listap.size(); i++){
-            System.out.println(producto.calcularPrecioVenta("10", "5"));
-        }
+//        CUsuario uc = new CUsuario();
+//        CPermiso cp = new CPermiso();
+//        List<Usuario> lista = uc.consultar();
+//        List<Permiso> listap = cp.listar();
+//        Producto producto = new Producto();
+//        for(int i = 0; i < listap.size(); i++){
+//            System.out.println(producto.calcularPrecioVenta("10", "5"));
+//        }
     }
-    
 }

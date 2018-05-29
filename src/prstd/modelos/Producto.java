@@ -15,7 +15,7 @@ public class Producto {
     private String nombre;
     private Double precio_compra;
     private Double precio_venta;
-    private Timestamp fecha_compra;
+    private Date fecha_compra;
     private Date fecha_vencimiento;
     private int fabricante;
     private int familia;
@@ -32,7 +32,7 @@ public class Producto {
     public Producto(){
     }
 
-    public Producto(String codigo, String nombre, Double precio_compra, Double precio_venta, Timestamp fecha_compra, Date fecha_vencimiento, 
+    public Producto(String codigo, String nombre, Double precio_compra, Double precio_venta, Date fecha_compra, Date fecha_vencimiento, 
                     int fabricante, int familia, int existencia_tienda, int existencia_bodega,Double porcentaje_ganancia, int tipo_producto, int existencia_minima_tienda,
                     int existencia_minima_bodega,String nombre_fabricante, String nombre_familia) 
     
@@ -87,11 +87,11 @@ public class Producto {
         this.precio_venta = precio_venta;
     }
 
-    public Timestamp getFecha_compra() {
+    public Date getFecha_compra() {
         return fecha_compra;
     }
 
-    public void setFecha_compra(Timestamp fecha_compra) {
+    public void setFecha_compra(Date fecha_compra) {
         this.fecha_compra = fecha_compra;
     }
 
@@ -182,7 +182,9 @@ public class Producto {
     public void setNombre_fabricante(String nombre_fabricante){
         this.nombre_fabricante = nombre_fabricante;
     }
-    
+    /*
+        * Métodos controlador de la clase Producto  
+    */
     public int crear(Producto producto){
         CProducto cp = new CProducto();
         return cp.registroProducto(producto);
@@ -196,5 +198,15 @@ public class Producto {
     public String calcularPrecioVenta(String precioCosto, String porcentaje) throws NumberFormatException{
         CProducto cp = new CProducto();
         return cp.calcularPrecioVenta(precioCosto, porcentaje);
+    }
+    
+    public List<Producto> buscarProductos(String codigo, String nombre){
+        CProducto cp = new CProducto();
+        return cp.buscarProductos(codigo,nombre);
+    }
+    
+    public String getCodigo(Producto producto){
+        CProducto cp = new CProducto();
+        return cp.getCodigo(producto);
     }
 }
