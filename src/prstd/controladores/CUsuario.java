@@ -191,4 +191,24 @@ public class CUsuario {
             return false;
         }
     }
+    
+    public String getVendedor(String usuario){
+        String sql = "select concat(nombre,' ',apellido) from tbl_usuario where usuario = ?";
+        
+        try{
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String vendedor = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return vendedor;
+        }
+        catch(SQLException ex){
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

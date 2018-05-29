@@ -129,4 +129,9 @@ public class Usuario {
         CUsuario cu = new CUsuario();
         return cu.consultarUsuario();
     }
+    
+    public String getVendedor(){
+        CUsuario cu = new CUsuario();
+        return cu.getVendedor(usuario);
+    }
 }
