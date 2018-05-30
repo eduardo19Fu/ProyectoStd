@@ -19,11 +19,12 @@ import javax.swing.JPanel;
 public class VFacturas extends javax.swing.JDialog {
 
     int x,y;
-    
-    public VFacturas(java.awt.Frame parent, boolean modal) {
+    String vendedor;
+    public VFacturas(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent,modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.vendedor = vendedor;
     }
 
     /**
@@ -200,7 +201,7 @@ public class VFacturas extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Productos");
+        jLabel1.setText("Ventas");
         panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, 50));
         panelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 122, 170, 10));
 
@@ -321,7 +322,7 @@ public class VFacturas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VCrearFactura vcf = new VCrearFactura(null,true); // Instancia de un objeto de la Clase VCrearFactura.
+        VCrearFactura vcf = new VCrearFactura(null,true,vendedor); // Instancia de un objeto de la Clase VCrearFactura.
         vcf.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -381,7 +382,7 @@ public class VFacturas extends javax.swing.JDialog {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            VFacturas dialog = new VFacturas(new javax.swing.JFrame(), true);
+            VFacturas dialog = new VFacturas(new javax.swing.JFrame(), true, null);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windoClosing(java.awt.event.WindowEvent e){
                     System.exit(0);

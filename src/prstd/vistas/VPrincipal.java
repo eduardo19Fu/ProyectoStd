@@ -8,9 +8,12 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import prstd.modelos.Permisos;
+import prstd.modelos.Roles;
 import prstd.notificaciones.NotificacionCerrarSesion;
 import prstd.notificaciones.NotificacionSalir;
 
@@ -20,22 +23,16 @@ import prstd.notificaciones.NotificacionSalir;
  */
 public class VPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
-    
+   
     // Variables que guardarán los enteros de la posición de la ventana.
-    int x,
-
-    /**
-     * Creates new form VPrincipal
-     */
-    y;
+    int x,y;
     public int sign1;
+    private String usuario;
     
-    public VPrincipal() {
+    public VPrincipal(String usuario) {
         initComponents();
         initPaneles();
+        this.usuario = usuario;
     }
 
     /**
@@ -270,6 +267,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVentas.setPreferredSize(new java.awt.Dimension(120, 120));
         btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVentasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVentasMouseEntered(evt);
             }
@@ -690,6 +690,11 @@ public class VPrincipal extends javax.swing.JFrame {
         roles.setVisible(true); // Invoca la ventana de Administración de Roles.
     }//GEN-LAST:event_btnRolesMouseClicked
 
+    private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
+        VFacturas vf = new VFacturas(this,true,usuario);
+        vf.setVisible(true);
+    }//GEN-LAST:event_btnVentasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -720,7 +725,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VPrincipal().setVisible(true);
+            new VPrincipal(null).setVisible(true);
         });
     }
 
@@ -821,7 +826,7 @@ public class VPrincipal extends javax.swing.JFrame {
         }
     }
     
-    private void permiso(){
+    private void acceso(List<Roles> listaRol, List<Permisos> listaPermiso){
         
     }
     
