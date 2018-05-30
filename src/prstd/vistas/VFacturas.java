@@ -201,7 +201,7 @@ public class VFacturas extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Productos");
+        jLabel1.setText("Ventas");
         panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, 50));
         panelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 122, 170, 10));
 
