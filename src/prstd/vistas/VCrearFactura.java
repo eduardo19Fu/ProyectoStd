@@ -1,5 +1,6 @@
 package prstd.vistas;
 
+import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -537,8 +538,9 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddMouseExited
 
     private void txtNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyTyped
-        
-        
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            
+        }        
     }//GEN-LAST:event_txtNitKeyTyped
 
     /**

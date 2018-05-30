@@ -8,9 +8,12 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import prstd.modelos.Permisos;
+import prstd.modelos.Roles;
 import prstd.notificaciones.NotificacionCerrarSesion;
 import prstd.notificaciones.NotificacionSalir;
 
@@ -823,7 +826,7 @@ public class VPrincipal extends javax.swing.JFrame {
         }
     }
     
-    private void permiso(){
+    private void acceso(List<Roles> listaRol, List<Permisos> listaPermiso){
         
     }
     
