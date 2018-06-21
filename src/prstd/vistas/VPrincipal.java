@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import prstd.modelos.Permiso;
 import prstd.modelos.Permisos;
 import prstd.modelos.Roles;
 import prstd.notificaciones.NotificacionCerrarSesion;
@@ -827,7 +828,15 @@ public class VPrincipal extends javax.swing.JFrame {
     }
     
     private void acceso(List<Roles> listaRol, List<Permisos> listaPermiso){
-        
+        Permiso permiso;
+//        for(int i = 0; i < listaRol.size(); i++){
+//            for(int j = 0; j < listaPermiso.size(); j++){
+//                permiso = new Permiso();
+//                if(permiso.getNombrePermiso(listaPermiso.get(j).getIdpermiso()) == "main"){
+//                    
+//                }
+//            }
+//        }
     }
     
     // Inicializa los paneles de las opciones disponibles.
@@ -835,5 +844,9 @@ public class VPrincipal extends javax.swing.JFrame {
         panelSistema.setVisible(false);
         panelCobros.setVisible(false);
         panelSalir.setVisible(false);
+    }
+    
+    private void permisoMain(){
+        
     }
 }

@@ -66,4 +66,9 @@ public class Fabricante {
         CFabricante cf = new CFabricante();
         return cf.getMaxFabricante();
     }
+    
+    public String getNombre(int id){
+        CFabricante cf = new CFabricante();
+        return cf.getNombre(id);
+    }
 }

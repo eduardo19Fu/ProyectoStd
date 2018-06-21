@@ -138,6 +138,7 @@ public class VProductos extends javax.swing.JDialog {
         tblProductos.setFillsViewportHeight(true);
         tblProductos.setFocusTraversalPolicyProvider(true);
         tblProductos.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        tblProductos.setShowHorizontalLines(false);
         tblProductos.setShowVerticalLines(false);
         tblProductos.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(tblProductos);

@@ -3,6 +3,8 @@
  */
 package prstd.modelos;
 
+import prstd.controladores.CUsuarioCorrelativo;
+
 /**
  *
  * @author Edfu-Pro
@@ -61,5 +63,14 @@ public class UsuarioCorrelativo extends Usuario{
         this.correlativo_act = correlativo_act;
     }
     
+    public int grabar(UsuarioCorrelativo uc){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.grabar(uc);
+    }
+    
+    public boolean verificarUsuario(int idusuario){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.verificarUsuario(idusuario);
+    }
     
 }

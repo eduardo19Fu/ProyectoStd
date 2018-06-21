@@ -120,4 +120,23 @@ public class CPermiso {
             return 0;
         }
     }
+    
+    public String getNombrePermiso(int id){
+        String sql = "select permiso from tbl_permiso where idpermiso = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String nombre = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return nombre;
+        } catch (SQLException ex) {
+            Logger.getLogger(CPermiso.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

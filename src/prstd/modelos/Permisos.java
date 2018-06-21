@@ -3,6 +3,9 @@
  */
 package prstd.modelos;
 
+import java.util.List;
+import prstd.controladores.CPermisos;
+
 /**
  *
  * @author Edfu-Pro
@@ -44,5 +47,14 @@ public class Permisos {
 
     public void setUsuario(int usuario) {
         this.usuario = usuario;
+    }
+    
+    /*
+    
+    */
+    
+    public List<Permisos> listar(int idrol){
+        CPermisos cp = new CPermisos();
+        return cp.listar(idrol);
     }
 }
