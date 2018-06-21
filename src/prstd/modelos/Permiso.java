@@ -55,8 +55,23 @@ public class Permiso {
         return cp.listar();
     }
     
+    public int editar(Permiso permiso){
+        CPermiso cp = new CPermiso();
+        return cp.editar(permiso);
+    }
+    
+    public int crear(Permiso permiso){
+        CPermiso cp = new CPermiso();
+        return cp.crear(permiso);
+    }
+    
     public int getIdPermiso(String permiso){
         CPermiso cp = new CPermiso();
         return cp.getIdPermiso(permiso);
+    }
+    
+    public String getNombrePermiso(int id){
+        CPermiso cp = new CPermiso();
+        return cp.getNombrePermiso(id);
     }
 }

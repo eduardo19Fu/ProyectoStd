@@ -18,12 +18,15 @@ public class VRegistroClientes extends javax.swing.JDialog {
 
     int x,y;
     private String texto;
+    private String nit;
     
-    public VRegistroClientes(java.awt.Frame parent, boolean modal) {
+    public VRegistroClientes(java.awt.Frame parent, boolean modal, String nit) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         limpiar();
+        this.nit = nit;
+        txtNit.setText(this.nit);
     }
 
     
@@ -83,6 +86,7 @@ public class VRegistroClientes extends javax.swing.JDialog {
         txtNit.setForeground(new java.awt.Color(0, 0, 0));
         txtNit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNit.setBorder(null);
+        txtNit.setEnabled(false);
         jPanel2.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 265, 20));
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -151,6 +155,9 @@ public class VRegistroClientes extends javax.swing.JDialog {
         btnGuardar.setOpaque(true);
         btnGuardar.setPreferredSize(new java.awt.Dimension(78, 54));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseEntered(evt);
             }
@@ -256,6 +263,10 @@ public class VRegistroClientes extends javax.swing.JDialog {
         resetFormato(btnCancelar);
     }//GEN-LAST:event_btnCancelarMouseExited
 
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        registrar();
+    }//GEN-LAST:event_btnGuardarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -285,7 +296,7 @@ public class VRegistroClientes extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            VRegistroClientes dialog = new VRegistroClientes(new javax.swing.JFrame(), true);
+            VRegistroClientes dialog = new VRegistroClientes(new javax.swing.JFrame(), true, null);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

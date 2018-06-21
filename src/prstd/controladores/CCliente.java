@@ -27,13 +27,13 @@ public class CCliente {
     }
     
     public int grabar(Cliente cliente){
-        String sql = "insert into tbl_cliente values(?,?,?)";
+        String sql = "insert into tbl_cliente(nombre,direccion,nit) values(?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, cliente.getNombre());
-            ps.setString(2, cliente.getDireccion());
-            ps.setString(3, cliente.getNit());
+            ps.setString(1, cliente.getNombre().toUpperCase());
+            ps.setString(2, cliente.getDireccion().toUpperCase());
+            ps.setString(3, cliente.getNit().toUpperCase());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -86,21 +86,21 @@ public class CCliente {
     }
     
     public List<Cliente> buscarNit(String nit){
-        String sql = "select * from cliente where nit = ?";
+        String sql = "select * from tbl_cliente where nit = ?";
         List<Cliente> lista = new ArrayList<>();
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, nit);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                cliente = new Cliente();
-                cliente.setIdcliente(rs.getInt(1));
-                cliente.setNombre(rs.getString(2));
-                cliente.setDireccion(rs.getString(3));
-                cliente.setNit(rs.getString(4));
-                lista.add(cliente);
-            }
+            rs.next();
+            cliente = new Cliente();
+            cliente.setIdcliente(rs.getInt(1));
+            cliente.setNombre(rs.getString(2));
+            cliente.setDireccion(rs.getString(3));
+            cliente.setNit(rs.getString(4));
+            lista.add(cliente);
+            
             rs.close();
             ps.close();
             connection.close();

@@ -35,7 +35,7 @@ public class CProducto {
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, producto.getNombre());
+            ps.setString(1, producto.getNombre().toUpperCase());
             ps.setDouble(2, producto.getPrecio_compra());
             ps.setDouble(3, producto.getPrecio_venta());
             ps.setDate(4, new java.sql.Date(producto.getFecha_compra().getTime()));
@@ -50,7 +50,7 @@ public class CProducto {
             ps.setDouble(10, producto.getPorcentaje_ganancia());
             ps.setInt(11, producto.getExistencia_minima_tienda());
             ps.setInt(12, producto.getExsitencia_minima_bodega());
-            ps.setString(13, producto.getCodigo());
+            ps.setString(13, producto.getCodigo().toUpperCase());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -83,8 +83,8 @@ public class CProducto {
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, productos.getCodigo());
-            ps.setString(2, productos.getNombre());
+            ps.setString(1, productos.getCodigo().toUpperCase());
+            ps.setString(2, productos.getNombre().toUpperCase());
             ps.setDouble(3, productos.getPrecio_compra());
             ps.setDouble(4, productos.getPrecio_venta());
             ps.setDate(5, new java.sql.Date(productos.getFecha_compra().getTime()));

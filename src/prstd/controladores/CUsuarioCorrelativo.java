@@ -6,6 +6,7 @@ package prstd.controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,4 +53,21 @@ public class CUsuarioCorrelativo {
         return 0;
     }
     
+    public boolean verificarUsuario(int idusuario){
+        String sql = "select 1 from tbl_usuario_correlativo where idusuario = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            boolean resultado = rs.next();
+            rs.close();
+            ps.close();
+            connection.close();
+            return resultado;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 }

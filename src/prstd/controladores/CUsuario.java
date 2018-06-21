@@ -91,11 +91,11 @@ public class CUsuario {
                 this.usuario = new Usuario();
                 usuario.setIdusuario(rs.getInt("idusuario"));
                 usuario.setUsuario(rs.getString("usuario"));
-                usuario.setNombre("nombre");
-                usuario.setApellido("apellido");
-                usuario.setEstado("estado");
-                usuario.setEmail("email");
-                usuario.setTelefono("telefono");
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setEstado(rs.getString("estado"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setTelefono(rs.getString("telefono"));
                 lista.add(usuario);
             }
             rs.close();

@@ -59,4 +59,9 @@ public class Familia {
         CFamilia cf = new CFamilia();
         return cf.getMaxFamilia();
     }
+    
+    public String getNombre(int id){
+        CFamilia cf = new CFamilia();
+        return cf.getNombre(id);
+    }
 }
