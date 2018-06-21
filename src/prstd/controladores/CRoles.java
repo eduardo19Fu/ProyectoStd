@@ -7,10 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Rol;
+import prstd.modelos.Roles;
 import prstd.servicios.ConexionDos;
 
 /**
@@ -22,6 +25,7 @@ public class CRoles {
     private Connection connection;
     private ConexionDos conexion;
     private Rol rol;
+    private Roles roles;
     
     public CRoles(){
         conexion = new ConexionDos();
@@ -76,4 +80,26 @@ public class CRoles {
         }
     }
     
+    public List<Roles> listar(int idusuario){
+        String sql = "select idrol from tbl_usuario_rol where idusuario = ?";
+        List<Roles> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                roles = new Roles();
+                roles.setIdrol(rs.getInt(1));
+                lista.add(roles);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CRoles.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

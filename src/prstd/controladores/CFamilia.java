@@ -106,4 +106,23 @@ public class CFamilia {
             return 0;
         }
     }
+    
+    public String getNombre(int id){
+        String sql = "select nombre_familia from tbl_producto_familia where idproducto_familia = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String nombre = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return nombre;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFamilia.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

@@ -3,6 +3,9 @@
  */
 package prstd.modelos;
 
+import java.util.List;
+import prstd.controladores.CDetalleDocumento;
+
 /**
  *
  * @author Edfu-Pro
@@ -14,6 +17,7 @@ public class DetalleDocumento{
     private int cantidad;
     private String serie;
     private double subtotal;
+    private double descuento;
     
     public DetalleDocumento(){
     
@@ -57,5 +61,18 @@ public class DetalleDocumento{
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
+    }
+    
+    public double getDescuento(){
+        return descuento;
+    }
+    
+    public void setDescuento(double descuento){
+        this.descuento = descuento;
+    }
+    
+    public int detalleFactura(List<DetalleDocumento> dc){
+        CDetalleDocumento cd = new CDetalleDocumento();
+        return cd.detalleFactura(dc);
     }
 }

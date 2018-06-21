@@ -72,7 +72,7 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&#xa1;Cliente Registrado con Exito!"/>
+            <Property name="text" type="java.lang.String" value="&#xa1;Registro Creado con Exito!"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Constraints>

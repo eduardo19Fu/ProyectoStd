@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prstd.vistas;
 
 import java.awt.Color;
@@ -18,10 +13,7 @@ import prstd.modelos.Permiso;
 import prstd.modelos.Rol;
 import prstd.modelos.Usuario;
 
-/**
- *
- * @author Edfu-Pro
- */
+
 public class VCrearRol extends javax.swing.JFrame {
 
     /**

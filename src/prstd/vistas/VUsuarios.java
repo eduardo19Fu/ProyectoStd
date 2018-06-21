@@ -12,6 +12,9 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Usuario;
 
@@ -27,7 +30,8 @@ public class VUsuarios extends javax.swing.JDialog {
     public VUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent,modal);
         initComponents();
-        
+        cargarUsuarios();
+        configurarTabla(tblListaUsuarios);
     }
 
     /**
@@ -130,7 +134,7 @@ public class VUsuarios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Usuario", "Nombre", "Estado", "E-mail", "Teléfono"
             }
         ));
         tblListaUsuarios.setFillsViewportHeight(true);
@@ -149,20 +153,23 @@ public class VUsuarios extends javax.swing.JDialog {
         panelCobros.setLayout(panelCobrosLayout);
         panelCobrosLayout.setHorizontalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCobrosLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
+            .addGroup(panelCobrosLayout.createSequentialGroup()
+                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCobrosLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel9))
+                    .addGroup(panelCobrosLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCobrosLayout.setVerticalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,6 +236,9 @@ public class VUsuarios extends javax.swing.JDialog {
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.setPreferredSize(new java.awt.Dimension(250, 50));
         btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEditarMouseEntered(evt);
             }
@@ -341,6 +351,11 @@ public class VUsuarios extends javax.swing.JDialog {
         cu.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        VCrearUsuarios cu = new VCrearUsuarios(null,true);
+        
+    }//GEN-LAST:event_btnEditarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -436,12 +451,38 @@ public class VUsuarios extends javax.swing.JDialog {
     
     private void cargarUsuarios(){
         this.usuario = new Usuario();
-        String[] titulos = {"ID Usuario","Usuario","Nombre","Apellido","Estado","Teléfono","E-mail"};
+        String[] titulos = {"ID","Usuario","Nombre","Estado","E-mail","Teléfono"};
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-        Object[] datos = new Object[8];
+        Object[] datos = new Object[6];
         List<Usuario> lista = usuario.listar();
         for(int i = 0; i < lista.size(); i++){
-            
+            datos[0] = lista.get(i).getIdusuario();
+            datos[1] = lista.get(i).getUsuario();
+            datos[2] = lista.get(i).getNombre() + " " + lista.get(i).getApellido();
+            if(lista.get(i).getEstado().equals("ACTIVO"))
+                datos[3] = "A";
+            else
+                datos[3] = "I";
+            datos[4] = lista.get(i).getEmail();
+            datos[5] = lista.get(i).getTelefono();
+            modelo.addRow(datos);
         }
+        tblListaUsuarios.setModel(modelo);
+    }
+    
+    private void configurarTabla(JTable table){
+        // Configuración del tamaño que ocuparán las columnas que muestran la información
+        // de las cuentas disponibles bajo el nombre ingresado.
+        table.getColumn("ID").setPreferredWidth(20);
+        table.getColumn("Usuario").setPreferredWidth(60);
+        table.getColumn("Nombre").setPreferredWidth(250);
+        table.getColumn("Estado").setPreferredWidth(50);
+        table.getColumn("E-mail").setPreferredWidth(50);
+        table.getColumn("Teléfono").setPreferredWidth(100);
+        
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        // Indicamos la alineación que tendrán las columnas.
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);
     }
 }

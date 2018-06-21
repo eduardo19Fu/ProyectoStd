@@ -1,6 +1,7 @@
 package prstd.modelos;
 
 import java.sql.Timestamp;
+import prstd.controladores.CFactura;
 
 /**
  *
@@ -94,5 +95,14 @@ public class Documento {
         this.tipo_documento = tipo_documento;
     }
     
+    public int getMaxTransaccion(){
+        CFactura cf = new CFactura();
+        return cf.getMaxTransaccion();
+    }
+    
+    public int crearFactura(Documento documento){
+        CFactura cf = new CFactura();
+        return cf.crearFactura(documento);
+    }
     
 }

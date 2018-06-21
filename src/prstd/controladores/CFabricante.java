@@ -108,4 +108,23 @@ public class CFabricante {
             return 0;
         }
     }
+    
+    public String getNombre(int id){
+        String sql = "select nombre_fabricante from tbl_fabricante where idfabricante = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String nombre = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return nombre;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }
