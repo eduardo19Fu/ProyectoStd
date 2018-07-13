@@ -152,14 +152,18 @@ public class CProducto {
         }
     }
     
-    public List<Producto> buscarProductos(String codigo, String nombre){
+    public List<Producto> buscarProductos(String codigo){
         List<Producto> lista = new ArrayList<>();
-        String sql = "{call pr_listarProductos(?,?)}";
+        String sql = "select p.codigo, p.nombre_producto, p.precio_compra, p.precio_venta, p.fecha_compra, p.fecha_vencimiento, f.nombre_fabricante, fa.nombre_familia,"
+                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega "
+                    + "from tbl_producto p "
+                    + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
+                    + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
+                    + "where p.codigo = ?";
         
         try {
-            PreparedStatement ps = connection.prepareCall(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, codigo);
-            ps.setString(2, nombre);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 producto = new Producto();

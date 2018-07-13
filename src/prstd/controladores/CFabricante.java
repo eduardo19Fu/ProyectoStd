@@ -79,8 +79,8 @@ public class CFabricante {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, fabricante.getIdfabricante());
-            ps.setString(2, fabricante.getNombre_fabricante());
-            ps.setString(3, fabricante.getObservaciones());
+            ps.setString(2, fabricante.getNombre_fabricante().toUpperCase());
+            ps.setString(3, fabricante.getObservaciones().toUpperCase());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
