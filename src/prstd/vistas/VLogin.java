@@ -313,7 +313,7 @@ public class VLogin extends javax.swing.JFrame {
         usuario.setUsuario(user);
         usuario.setPassword(password);
         if(usuario.login(usuario)){
-            VPrincipal principal = new VPrincipal(usuario.getVendedor());
+            VPrincipal principal = new VPrincipal(usuario.getUsuario());
             principal.setVisible(true);
             this.dispose();
         } else{
