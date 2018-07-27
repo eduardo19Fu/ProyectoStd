@@ -192,6 +192,40 @@ public class CProducto {
         }
     }
     
+    public Producto buscarProducto(String codigo){
+        String sql = "select p.codigo, p.nombre_producto, p.precio_compra, p.precio_venta, p.fecha_compra, p.fecha_vencimiento, f.nombre_fabricante, fa.nombre_familia,"
+                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega "
+                    + "from tbl_producto p "
+                    + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
+                    + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
+                    + "where p.codigo = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            producto = new Producto();
+            producto.setCodigo(rs.getString(1));
+            producto.setNombre(rs.getString(2));
+            producto.setPrecio_compra(rs.getDouble(3));
+            producto.setPrecio_venta(rs.getDouble(4));
+            producto.setFecha_compra(rs.getTimestamp(5));
+            producto.setFecha_vencimiento(rs.getDate(6));
+            producto.setNombre_fabricante(rs.getString(7));
+            producto.setNombre_Familia(rs.getString(8));
+            producto.setExistencia_tienda(rs.getInt(9));
+            producto.setExistencia_bodega(rs.getInt(10));
+            producto.setPorcentaje_ganancia(rs.getDouble(11));
+            producto.setExistencia_minima_tienda(rs.getInt(12));
+            producto.setExistencia_minima_bodega(rs.getInt(13));
+            return producto;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public String getCodigo(Producto producto){
         String sql = "select codigo from tbl_producto where nombre_producto = ?";
         String codigo;
@@ -222,5 +256,12 @@ public class CProducto {
         bd = bd.setScale(2,RoundingMode.HALF_UP); // Decidimos el formato de redondeo y la cantidad de decimales que deseamos.
         
         return String.format("%.2f",bd.doubleValue()); // Devolvemos el valor resultante como un String.
+    }
+    
+    public String redondearPrecio(double precio){
+        BigDecimal bd = new BigDecimal(precio);
+        bd = bd.setScale(2,RoundingMode.HALF_UP);
+        
+        return String.valueOf(bd);
     }
 }

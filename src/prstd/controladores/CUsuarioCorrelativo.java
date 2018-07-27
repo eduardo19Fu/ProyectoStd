@@ -70,4 +70,46 @@ public class CUsuarioCorrelativo {
             return false;
         }
     }
+    
+    public UsuarioCorrelativo getActual(int idusuario){
+        String sql = "select * from tbl_usuario_correlativo where idusuario = ?";
+        UsuarioCorrelativo ucorr = new UsuarioCorrelativo();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            ucorr.setIdusuario(rs.getInt(1));
+            ucorr.setSerie(rs.getString(2));
+            ucorr.setCorrelativo_ini(rs.getInt(3));
+            ucorr.setCorrelativo_fin(rs.getInt(4));
+            ucorr.setCorrelativo_act(rs.getInt(5));
+            rs.close();
+            ps.close();
+            connection.close();
+            return ucorr;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public String serie(int idusuario){
+        String sql = "select serie from tbl_usuario_correlativo where idusuario = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String serie = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return serie;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

@@ -111,6 +111,7 @@ public class CRol {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, rol);
             ResultSet rs = ps.executeQuery();
+            rs.next();
             int id = rs.getInt(1);
             rs.close();
             ps.close();
@@ -119,6 +120,25 @@ public class CRol {
         } catch (SQLException ex) {
             Logger.getLogger(CRol.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public String consultar(int id){
+        String sql = "select rol from tbl_rol where idrol = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String rol = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return rol;
+        } catch (SQLException ex) {
+            Logger.getLogger(CRol.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }
