@@ -94,4 +94,9 @@ public class Cliente {
         CCliente cliente = new CCliente();
         return cliente.comprobarCliente(nit);
     }
+    
+    public int consultarCliente(String nit){
+        CCliente cliente = new CCliente();
+        return cliente.consultarCliente(nit);
+    }
 }

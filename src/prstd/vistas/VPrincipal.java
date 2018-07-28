@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import prstd.modelos.Permiso;
 import prstd.modelos.Permisos;
+import prstd.modelos.Rol;
 import prstd.modelos.Roles;
+import prstd.modelos.Usuario;
 import prstd.notificaciones.NotificacionCerrarSesion;
 import prstd.notificaciones.NotificacionSalir;
 
@@ -29,11 +31,13 @@ public class VPrincipal extends javax.swing.JFrame {
     int x,y;
     public int sign1;
     private String usuario;
+    private Rol rol;
     
     public VPrincipal(String usuario) {
         initComponents();
-        initPaneles();
         this.usuario = usuario;
+        initPaneles();
+        System.out.println(this.usuario);
     }
 
     /**
@@ -51,6 +55,11 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        panelReportes = new javax.swing.JPanel();
+        btnPolizas = new javax.swing.JLabel();
+        btnVentasMensuales = new javax.swing.JLabel();
+        btnProductosDisponibles = new javax.swing.JLabel();
+        btnReporteNotas = new javax.swing.JLabel();
         panelSistema = new javax.swing.JPanel();
         btnUsuarios = new javax.swing.JLabel();
         btnRoles = new javax.swing.JLabel();
@@ -135,6 +144,79 @@ public class VPrincipal extends javax.swing.JFrame {
         jPanel4.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 680, 90));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 810, 180));
+
+        panelReportes.setOpaque(false);
+        java.awt.FlowLayout flowLayout4 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 25);
+        flowLayout4.setAlignOnBaseline(true);
+        panelReportes.setLayout(flowLayout4);
+
+        btnPolizas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnPolizas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Cash_in_Hand_72px_1.png"))); // NOI18N
+        btnPolizas.setToolTipText("Pólizas de ventas realizadas por rango de fechas.");
+        btnPolizas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPolizas.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnPolizas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnPolizasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnPolizasMouseExited(evt);
+            }
+        });
+        panelReportes.add(btnPolizas);
+
+        btnVentasMensuales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnVentasMensuales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Fee_72px.png"))); // NOI18N
+        btnVentasMensuales.setToolTipText("Genera el reporte para verificar las ventas mensuales.");
+        btnVentasMensuales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentasMensuales.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnVentasMensuales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVentasMensualesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVentasMensualesMouseExited(evt);
+            }
+        });
+        panelReportes.add(btnVentasMensuales);
+
+        btnProductosDisponibles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProductosDisponibles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Choice_72px.png"))); // NOI18N
+        btnProductosDisponibles.setToolTipText("Genera un reporte de productos disponibles.");
+        btnProductosDisponibles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProductosDisponibles.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnProductosDisponibles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductosDisponiblesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnProductosDisponiblesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProductosDisponiblesMouseExited(evt);
+            }
+        });
+        panelReportes.add(btnProductosDisponibles);
+
+        btnReporteNotas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnReporteNotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_online_payment_with_a_credit_card_72px.png"))); // NOI18N
+        btnReporteNotas.setToolTipText("Genera un reporte ");
+        btnReporteNotas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReporteNotas.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnReporteNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReporteNotasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReporteNotasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReporteNotasMouseExited(evt);
+            }
+        });
+        panelReportes.add(btnReporteNotas);
+
+        jPanel2.add(panelReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
         panelSistema.setOpaque(false);
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 25);
@@ -246,6 +328,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnCorrelativos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCorrelativos.setPreferredSize(new java.awt.Dimension(120, 120));
         btnCorrelativos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCorrelativosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCorrelativosMouseEntered(evt);
             }
@@ -441,6 +526,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setPreferredSize(new java.awt.Dimension(393, 50));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
             }
@@ -696,6 +784,55 @@ public class VPrincipal extends javax.swing.JFrame {
         vf.setVisible(true);
     }//GEN-LAST:event_btnVentasMouseClicked
 
+    private void btnCorrelativosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCorrelativosMouseClicked
+        VUsuarioCorrelativos ucorr = new VUsuarioCorrelativos(this,true);
+        ucorr.setVisible(true);
+    }//GEN-LAST:event_btnCorrelativosMouseClicked
+
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        configPanelReportes();
+    }//GEN-LAST:event_btnReportesMouseClicked
+
+    private void btnPolizasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPolizasMouseEntered
+        setBorder(btnPolizas);// Crea un lineBorder alrededor del botón de Polizas.
+    }//GEN-LAST:event_btnPolizasMouseEntered
+
+    private void btnPolizasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPolizasMouseExited
+        resetBorder(btnPolizas);
+    }//GEN-LAST:event_btnPolizasMouseExited
+
+    private void btnVentasMensualesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMensualesMouseEntered
+        setBorder(btnVentasMensuales);
+    }//GEN-LAST:event_btnVentasMensualesMouseEntered
+
+    private void btnVentasMensualesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMensualesMouseExited
+        resetBorder(btnVentasMensuales);
+    }//GEN-LAST:event_btnVentasMensualesMouseExited
+
+    private void btnProductosDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosDisponiblesMouseClicked
+        
+    }//GEN-LAST:event_btnProductosDisponiblesMouseClicked
+
+    private void btnProductosDisponiblesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosDisponiblesMouseEntered
+        setBorder(btnProductosDisponibles);
+    }//GEN-LAST:event_btnProductosDisponiblesMouseEntered
+
+    private void btnProductosDisponiblesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosDisponiblesMouseExited
+       resetBorder(btnProductosDisponibles);
+    }//GEN-LAST:event_btnProductosDisponiblesMouseExited
+
+    private void btnReporteNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteNotasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReporteNotasMouseClicked
+
+    private void btnReporteNotasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteNotasMouseEntered
+        setBorder(btnReporteNotas);
+    }//GEN-LAST:event_btnReporteNotasMouseEntered
+
+    private void btnReporteNotasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteNotasMouseExited
+        resetBorder(btnReporteNotas);
+    }//GEN-LAST:event_btnReporteNotasMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -741,14 +878,18 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnFamilias;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnNotasCredito;
+    private javax.swing.JLabel btnPolizas;
     private javax.swing.JLabel btnProductos;
+    private javax.swing.JLabel btnProductosDisponibles;
     private javax.swing.JLabel btnProformas;
+    private javax.swing.JLabel btnReporteNotas;
     private javax.swing.JPanel btnReportes;
     private javax.swing.JLabel btnRoles;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSistema;
     private javax.swing.JLabel btnUsuarios;
     private javax.swing.JLabel btnVentas;
+    private javax.swing.JLabel btnVentasMensuales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -767,6 +908,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
+    private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelSalir;
     private javax.swing.JPanel panelSistema;
     // End of variables declaration//GEN-END:variables
@@ -827,26 +969,71 @@ public class VPrincipal extends javax.swing.JFrame {
         }
     }
     
-    private void acceso(List<Roles> listaRol, List<Permisos> listaPermiso){
-        Permiso permiso;
-//        for(int i = 0; i < listaRol.size(); i++){
-//            for(int j = 0; j < listaPermiso.size(); j++){
-//                permiso = new Permiso();
-//                if(permiso.getNombrePermiso(listaPermiso.get(j).getIdpermiso()) == "main"){
-//                    
-//                }
-//            }
-//        }
+    // Configura la visibilidad del panel de Opciones para Reportes.
+    private void configPanelReportes(){
+        if(!panelReportes.isVisible()){
+            initPaneles();
+            lblTitulo.setText("Módulo de Reportes");
+            panelReportes.setVisible(true);
+        }else{
+            lblTitulo.setText("");
+            initPaneles();
+        }
     }
     
     // Inicializa los paneles de las opciones disponibles.
     private void initPaneles(){
+        Usuario usuario = new Usuario();
+        
         panelSistema.setVisible(false);
         panelCobros.setVisible(false);
         panelSalir.setVisible(false);
+        panelReportes.setVisible(false);
+        btnRoles.setVisible(false);
+        
+        // Decide las opciones visibles dependiendo del nivel de acceso que el usuario tenga.
+        switch(usuario.comprobarRol(usuario.consultarUsuario(this.usuario))){
+            case 1:
+                permisoAdmin();
+                break;
+            case 2:
+                permisoVendedor();
+                break;
+            case 3:
+                permisoBodega();
+                break;
+            default:
+                break;
+        }
     }
     
-    private void permisoMain(){
+    private void permisoAdmin(){
+        btnSistema.setVisible(true);
+        btnCobros.setVisible(true);
+        btnReportes.setVisible(true);
+        btnSalir.setVisible(true);
+    }
+    
+    private void permisoVendedor(){
+        btnSistema.setVisible(false);
+        btnCobros.setVisible(true);
+        btnReportes.setVisible(false);
+        btnSalir.setVisible(true);
+    }
+    
+    private void permisoBodega(){
+        btnSistema.setVisible(true);
+        btnCobros.setVisible(false);
+        btnReportes.setVisible(true);
+        btnSalir.setVisible(true);
         
+        // Opciones deshabilitadas para el módulo de Administración
+        btnUsuarios.setVisible(false);
+        btnNotasCredito.setVisible(false);
+        btnCorrelativos.setVisible(false);
+        
+        // Opciones deshabilitadas para el módulo de reportes
+        btnPolizas.setVisible(false);
+        btnReporteNotas.setVisible(false);
     }
 }

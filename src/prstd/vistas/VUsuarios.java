@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -248,6 +249,9 @@ public class VUsuarios extends javax.swing.JDialog {
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.setPreferredSize(new java.awt.Dimension(250, 50));
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEliminarMouseEntered(evt);
             }
@@ -333,14 +337,40 @@ public class VUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VCrearUsuarios cu = new VCrearUsuarios(null,true);
+        VCrearUsuarios cu = new VCrearUsuarios(null,true,0);
         cu.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        VCrearUsuarios cu = new VCrearUsuarios(null,true);
-        
+        int id;
+        if(tblListaUsuarios.getValueAt(tblListaUsuarios.getSelectedRow(), 0) != null){
+            id = Integer.parseInt(tblListaUsuarios.getValueAt(tblListaUsuarios.getSelectedRow(), 0).toString());
+            VCrearUsuarios cu = new VCrearUsuarios(null,true,id);
+            cu.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione por favor seleccione a un usuario para editar.","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int op = JOptionPane.showOptionDialog(this, "¿Desea eliminar el registro seleccionado?", "Eliminar", JOptionPane.YES_NO_CANCEL_OPTION, 
+                 JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+        if(op != -1){
+            if((op + 1) == 1){
+                int id;
+                id = Integer.parseInt(tblListaUsuarios.getValueAt(tblListaUsuarios.getSelectedRow(), 0).toString());
+                Usuario us = new Usuario();
+                if(us.eliminar(id) > 0){
+                    JOptionPane.showMessageDialog(this, "Usuario eliminado con éxito","Eliminar",JOptionPane.INFORMATION_MESSAGE);
+                    cargarUsuarios();
+                }else{
+                    JOptionPane.showMessageDialog(this, "No se fue posible eliminar el registro seleccionado.","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     /**
      * @param args the command line arguments

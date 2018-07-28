@@ -63,6 +63,10 @@ public class UsuarioCorrelativo extends Usuario{
         this.correlativo_act = correlativo_act;
     }
     
+    /*
+        Métodos del comunicación con el controlador de Usuario Correlativo
+    */
+    
     public int grabar(UsuarioCorrelativo uc){
         CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
         return uco.grabar(uc);
@@ -71,6 +75,16 @@ public class UsuarioCorrelativo extends Usuario{
     public boolean verificarUsuario(int idusuario){
         CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
         return uco.verificarUsuario(idusuario);
+    }
+    
+    public UsuarioCorrelativo getActual(int idusuario){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.getActual(idusuario);
+    }
+    
+    public int avanzaCorrelativo(int id, int correlativo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.avanzaCorrelativo(id, correlativo);
     }
     
 }

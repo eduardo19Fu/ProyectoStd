@@ -76,4 +76,9 @@ public class Rol {
         CRol cr = new CRol();
         return cr.crear(rol);
     }
+    
+    public String consultar(int id){
+        CRol cr = new CRol();
+        return cr.consultar(id);
+    }
 }

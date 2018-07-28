@@ -195,4 +195,23 @@ public class CCliente {
             return false;
         }
     }
+    
+    public int consultarCliente(String nit){
+        String sql = "select idcliente from tbl_cliente where nit = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, nit);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 }

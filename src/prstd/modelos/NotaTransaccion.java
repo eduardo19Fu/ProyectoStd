@@ -6,30 +6,30 @@ package prstd.modelos;
  */
 public class NotaTransaccion {
     
-    private NotaCredito nota;
-    private Documento documento;
+    private int nota;
+    private int documento;
 
     public NotaTransaccion() {
     }
 
-    public NotaTransaccion(NotaCredito nota, Documento documento) {
+    public NotaTransaccion(int nota, int documento) {
         this.nota = nota;
         this.documento = documento;
     }
 
-    public NotaCredito getNota() {
+    public int getNota() {
         return nota;
     }
 
-    public void setNota(NotaCredito nota) {
+    public void setNota(int nota) {
         this.nota = nota;
     }
 
-    public Documento getDocumento() {
+    public int getDocumento() {
         return documento;
     }
 
-    public void setDocumento(Documento documento) {
+    public void setDocumento(int documento) {
         this.documento = documento;
     }
 }
