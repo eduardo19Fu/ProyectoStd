@@ -10,7 +10,10 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import prstd.modelos.Usuario;
+import prstd.modelos.UsuarioCorrelativo;
 
 /**
  *
@@ -322,8 +325,14 @@ public class VFacturas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VCrearFactura vcf = new VCrearFactura(null,true,vendedor); // Instancia de un objeto de la Clase VCrearFactura.
-        vcf.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
+        UsuarioCorrelativo uc = new UsuarioCorrelativo();
+        Usuario usuario = new Usuario();
+        if(uc.verificarUsuario(usuario.consultarUsuario(this.vendedor))){
+            VCrearFactura vcf = new VCrearFactura(null,true,vendedor); // Instancia de un objeto de la Clase VCrearFactura.
+            vcf.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
+        }else{
+            JOptionPane.showMessageDialog(this, "Este usuario no cuenta con un correlativo asignado");
+        }
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnNuevoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseEntered

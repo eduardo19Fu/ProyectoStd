@@ -17,11 +17,12 @@ public class Usuario {
     private String estado;
     private String email;
     private String telefono;
-    
+    private int idrol;
+
     public Usuario(){
     }
-
-    public Usuario(int idusuario, String usuario, String password, String nombre, String apellido, String estado, String email, String telefono) {
+    
+    public Usuario(int idusuario, String usuario, String password, String nombre, String apellido, String estado, String email, String telefono, int idrol) {
         this.idusuario = idusuario;
         this.usuario = usuario;
         this.password = password;
@@ -30,6 +31,7 @@ public class Usuario {
         this.estado = estado;
         this.email = email;
         this.telefono = telefono;
+        this.idrol = idrol;
     }
 
     public int getIdusuario() {
@@ -96,6 +98,14 @@ public class Usuario {
         this.telefono = telefono;
     }
     
+    public int getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(int idrol) {
+        this.idrol = idrol;
+    }
+    
     /*
         * Métodos que devuelven las funcionas del controlador de Usuario. *
     */
@@ -133,5 +143,20 @@ public class Usuario {
     public String getVendedor(){
         CUsuario cu = new CUsuario();
         return cu.getVendedor(usuario);
+    }
+    
+    public int comprobarRol(int usuario){
+        CUsuario cu = new CUsuario();
+        return cu.comprobarRol(usuario);
+    }
+    
+    public Usuario cargarUsuario(int id){
+        CUsuario cu = new CUsuario();
+        return cu.cargarUsuario(id);
+    }
+    
+    public int eliminar(int id){
+        CUsuario cu = new CUsuario();
+        return cu.eliminar(id);
     }
 }

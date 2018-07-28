@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VCrearFactura.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Documento.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VUsuarios.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CDetalleDocumento.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CFactura.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CCliente.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/DetalleDocumento.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/NotaTransaccion.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CNotaTransaccion.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CNotaCredito.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/NotaCredito.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CProducto.java</file>
         </group>
     </open-files>
 </project-private>

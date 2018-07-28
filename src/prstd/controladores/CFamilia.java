@@ -77,7 +77,7 @@ public class CFamilia {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, familia.getIdfamilia());
-            ps.setString(2, familia.getNombre_familia());
+            ps.setString(2, familia.getNombre_familia().toUpperCase());
             int rs;
             rs = ps.executeUpdate();
             ps.close();

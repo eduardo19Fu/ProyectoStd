@@ -200,13 +200,23 @@ public class Producto {
         return cp.calcularPrecioVenta(precioCosto, porcentaje);
     }
     
-    public List<Producto> buscarProductos(String codigo, String nombre){
+    public List<Producto> buscarProductos(String codigo){
         CProducto cp = new CProducto();
-        return cp.buscarProductos(codigo,nombre);
+        return cp.buscarProductos(codigo);
     }
     
     public String getCodigo(Producto producto){
         CProducto cp = new CProducto();
         return cp.getCodigo(producto);
+    }
+    
+    public Producto buscarProducto(String codigo){
+        CProducto cp = new CProducto();
+        return cp.buscarProducto(codigo);
+    }
+    
+    public String redondearPrecio(double precio){
+        CProducto cp = new CProducto();
+        return cp.redondearPrecio(precio);
     }
 }
