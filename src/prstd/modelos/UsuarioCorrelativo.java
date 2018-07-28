@@ -82,4 +82,9 @@ public class UsuarioCorrelativo extends Usuario{
         return uco.getActual(idusuario);
     }
     
+    public int avanzaCorrelativo(int id, int correlativo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.avanzaCorrelativo(id, correlativo);
+    }
+    
 }

@@ -132,4 +132,9 @@ public class Documento {
         CFactura cf = new CFactura();
         return cf.detalleFactura(modelo, transaccion, serie);
     }
+    
+    public int actualizarExistencias(DefaultTableModel modelo){
+        CFactura cf = new CFactura();
+        return cf.actualizarExistencias(modelo);
+    }
 }

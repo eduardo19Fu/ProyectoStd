@@ -30,18 +30,19 @@ public class CFactura {
     }
     
     public int crearFactura(Documento factura){
-        String sql = "insert into tbl_documento values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into tbl_documento values(?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, factura.getNo_documento());
-            ps.setTimestamp(2, factura.getFecha_emision());
-            ps.setDouble(3, factura.getTotal());
-            ps.setInt(4, factura.getIdcliente());
-            ps.setInt(5, factura.getIdvendedor());
-            ps.setString(6, factura.getSerie());
-            ps.setString(7, "PAGADA");
-            ps.setInt(8, factura.getTipo_documento());
+            ps.setInt(1, factura.getIdtransaccion());
+            ps.setInt(2, factura.getNo_documento());
+            ps.setTimestamp(3, factura.getFecha_emision());
+            ps.setDouble(4, factura.getTotal());
+            ps.setInt(5, factura.getIdcliente());
+            ps.setInt(6, factura.getIdvendedor());
+            ps.setString(7, factura.getSerie());
+            ps.setString(8, factura.getEstado());
+            ps.setInt(9, factura.getTipo_documento());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -166,7 +167,7 @@ public class CFactura {
     }
     
     public int detalleFactura(DefaultTableModel modelo, int transaccion,String serie){
-        String sql = "insert into tbl_detalle_docuemento values(?,?,?,?,?,?)";
+        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?)";
         int rs = 0;
         Producto producto = new Producto();
         
@@ -176,10 +177,10 @@ public class CFactura {
                 ps.setInt(1, transaccion);
                 ps.setString(2, modelo.getValueAt(i, 1).toString());
                 ps.setInt(3, (int) modelo.getValueAt(i, 0));
-                ps.setDouble(4, (int) modelo.getValueAt(i, 3));
+                ps.setDouble(4, (double) modelo.getValueAt(i, 3));
                 
                 // Validación del campo de descuento.
-                if(modelo.getValueAt(i, 6) != null){
+                if(modelo.getValueAt(i, 4) != null){
                     ps.setDouble(5, (double) modelo.getValueAt(i, 4)); // si el campo no esta vacio se inserta en la db
                 }else{
                     ps.setDouble(5, 0.00); // por el contrario si lo esta, se inserta el valor de 0.00
@@ -196,5 +197,27 @@ public class CFactura {
     
     public void imprimir(){
         
+    }
+    
+    public int actualizarExistencias(DefaultTableModel modelo){
+        String sql = "update tbl_producto set stuckTienda = ? where codigo = ?";
+        Producto producto;
+        int rs = 0;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            for(int i = 0; i < modelo.getRowCount(); i++){
+                producto = new Producto().buscarProducto(modelo.getValueAt(i, 1).toString());
+                ps.setInt(1, (producto.getExistencia_tienda() - (int) modelo.getValueAt(i, 0)));
+                ps.setString(2, modelo.getValueAt(i, 1).toString());
+                rs = ps.executeUpdate();
+            }
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Cliente;
 import prstd.modelos.Documento;
+import prstd.modelos.NotaCredito;
 import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
@@ -342,7 +344,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         btnImprimir.setBackground(new java.awt.Color(230, 162, 78));
         btnImprimir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Print_32px.png"))); // NOI18N
-        btnImprimir.setToolTipText("Generar Factura");
+        btnImprimir.setToolTipText("Generar Factura (F1)");
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.setOpaque(true);
         btnImprimir.setPreferredSize(new java.awt.Dimension(78, 54));
@@ -425,6 +427,9 @@ public class VCrearFactura extends javax.swing.JDialog {
         txtDescuento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDescuento.setText("0.00");
         txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDescuentoKeyTyped(evt);
             }
@@ -606,7 +611,51 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
+        Cliente cl= new Cliente();
+        UsuarioCorrelativo ucorr;
+        Documento documento = new Documento();
+        int transaccion;
+        if(documento.getMaxTransaccion() == 0)
+            transaccion = 1;
+        else
+            transaccion = documento.getMaxTransaccion() + 1;
+        int no_factura = Integer.parseInt(lblFactura.getText());
+        Timestamp time = new Timestamp(new Date().getTime());
+        double total = Double.parseDouble(txtTotal.getText());
+        int idusuario = usuario.consultarUsuario(vendedor);
+        ucorr = new UsuarioCorrelativo().getActual(idusuario);
+        String serie = lblSerie.getText().replaceAll("\"", "");
+        int cliente = cl.consultarCliente(txtNit.getText());
+        int actual = ucorr.getCorrelativo_act();
         
+        if(!(no_factura == 0)){
+            if(!(no_factura > actual)){
+                documento.setIdtransaccion(transaccion);
+                documento.setNo_documento(no_factura);
+                documento.setFecha_emision(time);
+                documento.setTotal(total);
+                documento.setIdcliente(cliente);
+                documento.setIdvendedor(idusuario);
+                documento.setEstado("PAGADA");
+                documento.setTipo_documento(1);
+                documento.setSerie(serie);
+                
+                if(documento.crearFactura(documento) > 0){
+                    if(documento.detalleFactura((DefaultTableModel) tblDetalle.getModel(), transaccion, serie) > 0){
+                        if(documento.actualizarExistencias((DefaultTableModel) tblDetalle.getModel()) > 0){
+                            if(ucorr.avanzaCorrelativo(idusuario, no_factura) > 0){
+                                JOptionPane.showMessageDialog(this, "FacturaCreada");
+                                init();
+                            }
+                        }
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
+        }
     }//GEN-LAST:event_btnImprimirMouseClicked
 
     private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
@@ -642,6 +691,21 @@ public class VCrearFactura extends javax.swing.JDialog {
 //            
 //        }
     }//GEN-LAST:event_checkVariosMouseClicked
+
+    private void txtDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyPressed
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            
+            try {
+                double porcentaje = Double.parseDouble(txtDescuento.getText());
+                String codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
+                descuento(porcentaje, codigo);
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun producto para aplicar descuento","Advertencia",JOptionPane.WARNING_MESSAGE);
+                txtDescuento.setText("");
+                txtDescuento.grabFocus();
+            }
+        }
+    }//GEN-LAST:event_txtDescuentoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -728,7 +792,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void init(){
-        txtDescuento.setVisible(false);
+        limpiar();
         //txtDescuento.setEditable(true);
         Date fechaAct = new Date();
         Documento factura = new Documento();
@@ -739,10 +803,27 @@ public class VCrearFactura extends javax.swing.JDialog {
         if(factura.getMaxTransaccion() == 0)
             lblTransac.setText("1");
         else
-            lblTransac.setText(String.valueOf(factura.getMaxTransaccion()));
+            lblTransac.setText(String.valueOf(factura.getMaxTransaccion() + 1));
         lblFactura.setText(String.valueOf(ucorr.getCorrelativo_act()));
-        lblSerie.setText(ucorr.getSerie());
+        lblSerie.setText("\"" + ucorr.getSerie() + "\"");
+        modelo = new DefaultTableModel(null,titulos);
+        tblDetalle.removeAll();
+        tblDetalle.setModel(modelo);
         configurarTabla(tblDetalle);
+        
+    }
+    
+    void limpiar(){
+        txtNit.setText("");
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        txtCodigo.setText("");
+        txtProducto.setText("");
+        txtCantidad.setText("");
+        txtTotal.setText("0.00");
+        txtDescuento.setText("0.00");
+        txtDescuento.setVisible(false);
+        txtNit.grabFocus();
     }
     
     private void setFormato(JLabel label){
@@ -867,7 +948,17 @@ public class VCrearFactura extends javax.swing.JDialog {
                         bandera = true;
                     }else{
                         // Crear nota de crédito
-                        bandera = true;
+                        int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
+                                "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+                        if(op != -1){
+                            if((op + 1) == 1){
+                                crearNotaCredito(nCantidad);
+                                double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
+                                tblDetalle.setValueAt(nCantidad, i, 0);
+                                tblDetalle.setValueAt(nPrecio, i, 3);
+                                bandera = true;
+                            }
+                        }
                     }
                 }
             }
@@ -885,7 +976,30 @@ public class VCrearFactura extends javax.swing.JDialog {
             txtTotal.setText(String.valueOf(sumatoria));
         }else{
             // aqui va la creacion de notas de crédito
-            txtCantidad.grabFocus();
+            int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
+                                "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+            if(op != -1){
+                if((op + 1) == 1){
+                    crearNotaCredito(cantidad);
+                    datos[0] = cantidad;
+                    datos[1] = producto.getCodigo();
+                    datos[2] = producto.getNombre();
+                    datos[3] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
+                    datos[4] = 0.00;
+                    if(bandera == false){
+                        modelo.addRow(datos);
+                        tblDetalle.setModel(modelo);
+                    }
+                    int conteoTabla = tblDetalle.getRowCount();
+                    double suma = 0;
+                    sumatoria = 0;
+                    for(int i = 0; i<= (conteoTabla - 1); i++){
+                        suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
+                        sumatoria += suma;
+                    }
+                    txtTotal.setText(String.valueOf(sumatoria));
+                }
+            }
         }
     }
     
@@ -903,8 +1017,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     }
     
     private void descuento(double porcentaje, String codigo){
-        Producto producto = new Producto();
-        producto.buscarProductos(codigo);
+        Producto producto = new Producto().buscarProducto(codigo);
         double subtotal = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 3);
         double pcostoTotal = ((int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0)) * ((double) producto.getPrecio_compra());
         double nPrecio = subtotal - ((porcentaje/100)* subtotal);
@@ -936,6 +1049,37 @@ public class VCrearFactura extends javax.swing.JDialog {
         configurarTabla(tblDetalle);
     }
     
+    // Método encargado de generar la nota de crédito pertinente para los productos cuyas existencias
+    // no fueron suficientes para complacer la demanda de la factura generada.    
+    private void crearNotaCredito(int nCantidad){
+        NotaCredito nc = new NotaCredito();
+        Producto producto = new Producto();
+        String codigo = txtCodigo.getText();
+        producto = producto.buscarProducto(codigo);
+        double saldo_total = 0;
+        Timestamp time = new Timestamp(new Date().getTime());
+        int cantidad = nCantidad - producto.getExistencia_tienda();
+        
+        saldo_total = (cantidad * producto.getPrecio_venta());
+        
+        nc.setCod_producto(codigo);
+        nc.setSaldo_pendiente(saldo_total);
+        nc.setFecha_creacion(time);
+        nc.setEstado("ACTIVA");
+        
+        if(nc.crear(nc) > 0){
+            JOptionPane.showMessageDialog(this, "Nota de Crédito para el producto " + codigo + " generada con éxito.");
+            txtCodigo.setText("");
+            txtProducto.setText("");
+            txtCantidad.setText("");
+            txtCodigo.grabFocus();
+            configurarTabla(tblDetalle);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se logro generar la nota de crédtio.","Error",JOptionPane.ERROR_MESSAGE);
+            txtCantidad.grabFocus();
+        }
+    }
+    
     private void configurarTabla(JTable table){
         // Configuración del tamaño que ocuparán las columnas que muestran la información
         // del pago a realizar
@@ -953,4 +1097,5 @@ public class VCrearFactura extends javax.swing.JDialog {
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);
         table.getColumnModel().getColumn(4).setCellRenderer(tcr);
     }
+    
 }

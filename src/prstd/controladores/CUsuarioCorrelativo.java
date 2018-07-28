@@ -112,4 +112,21 @@ public class CUsuarioCorrelativo {
             return null;
         }
     }
+    
+    public int avanzaCorrelativo(int id, int correlativo){
+        String sql = "update tbl_usuario_correlativo set correlativo_actual = ? where idusuario = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, correlativo + 1);
+            ps.setInt(2, id);
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 }

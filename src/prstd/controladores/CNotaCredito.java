@@ -29,14 +29,14 @@ public class CNotaCredito {
     }
     
     public int crear(NotaCredito nc){
-        String sql = "insert into tbl_nota_credito values(?,?,?,?)";
+        String sql = "insert into tbl_nota_credito(cod_producto,saldo_pendiente,fecha_creacion,estado) values(?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, nc.getIdnota());
-            ps.setString(2, nc.getCod_producto());
-            ps.setDouble(3, nc.getSaldo_pendiente());
-            ps.setDate(4, new java.sql.Date(nc.getFecha_creacion().getTime()));
+            ps.setString(1, nc.getCod_producto());
+            ps.setDouble(2, nc.getSaldo_pendiente());
+            ps.setTimestamp(3, nc.getFecha_creacion());
+            ps.setString(4, nc.getEstado());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -58,7 +58,8 @@ public class CNotaCredito {
                 nota_credito.setIdnota(rs.getInt(1));
                 nota_credito.setCod_producto(rs.getString(2));
                 nota_credito.setSaldo_pendiente(rs.getDouble(3));
-                nota_credito.setFecha_creacion(rs.getDate(4));
+                nota_credito.setFecha_creacion(rs.getTimestamp(4));
+                nota_credito.setEstado(rs.getString(5));
                 lista.add(nota_credito);
             }
             rs.close();
