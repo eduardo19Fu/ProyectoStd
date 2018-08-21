@@ -190,6 +190,11 @@ public class Producto {
         return cp.registroProducto(producto);
     }
     
+    public int actualizar(Producto producto){
+        CProducto cp = new CProducto();
+        return cp.actualizarProducto(producto);
+    }
+    
     public List<Producto> buscarProductos(){
         CProducto cp = new CProducto();
         return cp.buscarProductos();
@@ -218,5 +223,15 @@ public class Producto {
     public String redondearPrecio(double precio){
         CProducto cp = new CProducto();
         return cp.redondearPrecio(precio);
+    }
+    
+    public int escogerUbicacion(String ubicacion, String codigo){
+        CProducto cp = new CProducto();
+        return cp.escogerUbicacion(ubicacion, codigo);
+    }
+    
+    public int altaProducto(String ubicacion, String codigo, int stuck){
+        CProducto cp = new CProducto();
+        return cp.altaProducto(ubicacion, codigo, stuck);
     }
 }

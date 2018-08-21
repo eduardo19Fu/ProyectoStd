@@ -13,12 +13,14 @@ import prstd.modelos.Producto;
 public class VBusquedaProductos extends javax.swing.JDialog {
     
     int x,y;
+    int flag;
 
-    public VBusquedaProductos(java.awt.Frame parent, boolean modal) {
+    public VBusquedaProductos(java.awt.Frame parent, boolean modal, int flag) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         cargarProductos();
+        this.flag = flag;
     }
 
     @SuppressWarnings("unchecked")
@@ -204,10 +206,16 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         if(evt.getClickCount() > 1){
             String codigo = tblProductos.getValueAt(tblProductos.getSelectedRow(), 0).toString();
             String nombre = tblProductos.getValueAt(tblProductos.getSelectedRow(), 1).toString();
-            VCrearFactura.txtCodigo.setText(codigo);
-            VCrearFactura.txtProducto.setText(nombre);
-            this.dispose();
-            VCrearFactura.txtCantidad.grabFocus();
+            if(this.flag == 1){    
+                VCrearFactura.txtCodigo.setText(codigo);
+                VCrearFactura.txtProducto.setText(nombre);
+                this.dispose();
+                VCrearFactura.txtCantidad.grabFocus();
+            }else if(this.flag == 2){
+                VCreacionProforma.txtCodigo.setText(codigo);
+                VCreacionProforma.txtProducto.setText(nombre);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_tblProductosMousePressed
 
@@ -245,7 +253,7 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VBusquedaProductos dialog = new VBusquedaProductos(new javax.swing.JFrame(), true);
+                VBusquedaProductos dialog = new VBusquedaProductos(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -34,13 +34,21 @@ public class VRegistroProducto extends javax.swing.JDialog {
     private Rol rol;
     List<Familia> listaFamilia;
     List<Fabricante> listaFabricante;
+    private String codigo;
     
-    public VRegistroProducto(java.awt.Frame parent, boolean modal) {
+    public VRegistroProducto(java.awt.Frame parent, boolean modal, String codigo) {
         super(parent,modal);
         initComponents();
+        this.codigo = codigo;
         contador = 0;
-        cargarChoiceFabricante();
-        cargarChoiceFamilia();
+        if(!this.codigo.isEmpty()){
+            cargarChoiceFabricante();
+            cargarChoiceFamilia();
+            cargarProducto();
+        }else{
+            cargarChoiceFabricante();
+            cargarChoiceFamilia();
+        }
         config();
     }
 
@@ -579,6 +587,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLimpiarMouseExited
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        
         int op = JOptionPane.showOptionDialog(this, "¿Seguro que desea registrar este producto?", "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, 
                                               null,new Object[]{"Aceptar","Cancelar"}, "Cancelar");
         if(op != -1){
@@ -671,7 +680,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            VRegistroProducto dialog = new VRegistroProducto(new javax.swing.JFrame(), true);
+            VRegistroProducto dialog = new VRegistroProducto(new javax.swing.JFrame(), true, null);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -775,12 +784,22 @@ public class VRegistroProducto extends javax.swing.JDialog {
         producto.setExistencia_minima_bodega(Integer.parseInt(txtStuckMinBodega.getText()));
         
         // Registrar nuevo Producto
-        if(producto.crear(producto) > 0){
-            JOptionPane.showMessageDialog(this, "Producto Registrado con éxito","Mensaje",JOptionPane.INFORMATION_MESSAGE);
-            limpiar();
+        if(this.codigo.isEmpty()){
+            if(producto.crear(producto) > 0){
+                JOptionPane.showMessageDialog(this, "Producto Registrado con éxito","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+            }else{
+                JOptionPane.showMessageDialog(this, "Resulta imposible registrar el producto, revise los campos ingresados para prevenir errores.","Error",JOptionPane.ERROR_MESSAGE);
+                txtCodigo.grabFocus();
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Resulta imposible registrar el producto, revise los campos ingresados para prevenir errores.","Error",JOptionPane.ERROR_MESSAGE);
-            txtCodigo.grabFocus();
+            if(producto.actualizar(producto) > 0){
+                JOptionPane.showMessageDialog(this, "Producto Registrado con éxito","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+            }else{
+                JOptionPane.showMessageDialog(this, "Resulta imposible registrar el producto, revise los campos ingresados para prevenir errores.","Error",JOptionPane.ERROR_MESSAGE);
+                txtCodigo.grabFocus();
+            }
         }
     }
     
@@ -803,6 +822,28 @@ public class VRegistroProducto extends javax.swing.JDialog {
     private void config(){
         dateCompra.setDate(new java.util.Date());
         dateVencimiento.setEnabled(false);
+    }
+    
+    private void cargarProducto(){
+        Producto producto = new Producto().buscarProducto(this.codigo);
+        
+        txtCodigo.setText(producto.getCodigo());
+        txtNombre.setText(producto.getNombre());
+        dateCompra.setDate(producto.getFecha_compra());
+        if(producto.getFecha_vencimiento() != null)
+            dateVencimiento.setDate(producto.getFecha_vencimiento());
+        else
+            dateVencimiento.setDate(null);
+        choiceFabricante.setSelectedItem(producto.getNombre_fabricante());
+        choiceFamilia.setSelectedItem(producto.getNombre_familia());
+        
+        txtPrecioC.setText(String.valueOf(producto.getPrecio_compra()));
+        txtPrecioVenta.setText(String.valueOf(producto.getPrecio_venta()));
+        txtPorcentaje.setText(String.valueOf(producto.getPorcentaje_ganancia()));
+        txtStuckTienda.setText(String.valueOf(producto.getExistencia_tienda()));
+        txtStuckMinTienda.setText(String.valueOf(producto.getExistencia_minima_tienda()));
+        txtStuckBodega.setText(String.valueOf(producto.getExistencia_bodega()));
+        txtStuckMinBodega.setText(String.valueOf(producto.getExsitencia_minima_bodega()));
     }
     
     private void limpiar(){

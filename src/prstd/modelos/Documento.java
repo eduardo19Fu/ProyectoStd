@@ -1,9 +1,12 @@
 package prstd.modelos;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import prstd.controladores.CFactura;
+import prstd.controladores.CProforma;
 
 /**
  *
@@ -128,6 +131,16 @@ public class Documento {
         return cf.consultarClientesVarios();
     }
     
+    public List<Documento> consultarTransacciones(){
+        CFactura cf = new CFactura();
+        return cf.consultarTransacciones();
+    }
+    
+    public List<Documento> consultarTransacciones(Date fechaIni, Date fechaFin){
+        CFactura cf = new CFactura();
+        return cf.consultarTransacciones(fechaIni, fechaFin);
+    }
+    
     public int detalleFactura(DefaultTableModel modelo, int transaccion, String serie){
         CFactura cf = new CFactura();
         return cf.detalleFactura(modelo, transaccion, serie);
@@ -136,5 +149,45 @@ public class Documento {
     public int actualizarExistencias(DefaultTableModel modelo){
         CFactura cf = new CFactura();
         return cf.actualizarExistencias(modelo);
+    }
+    
+    public int anular(int transac, int no_factura, String serie){
+        CFactura cf = new CFactura();
+        return cf.anular(transac, no_factura, serie);
+    }
+    
+    public int restaurarExistencias(int idtransaccion, int no_docuemento, String serie){
+        CFactura cf = new CFactura();
+        return cf.restaurarExistencias(idtransaccion, no_docuemento, serie);
+    }
+    
+    public javax.swing.JFrame imprimir(int transac, int factura, String serie, double total) throws SQLException{
+        CFactura cf = new CFactura();
+        return cf.imprimir(transac, factura, serie, total);
+    }
+    
+    public int insert(Documento documento){
+        CProforma proforma = new CProforma();
+        return proforma.insert(documento);
+    }
+    
+    public int insertDetalle(DefaultTableModel modelo, int transaccion, String serie){
+        CProforma proforma = new CProforma();
+        return proforma.insertDetalle(modelo, transaccion, serie);
+    }
+    
+    public javax.swing.JFrame imprimirProforma(int transac, int factura, String serie, double total){
+        CProforma proforma = new CProforma();
+        return proforma.imprimirProforma(transac, factura, serie, total);
+    }
+    
+    public double totalDocumento(int idtransaccion){
+        CFactura cf = new CFactura();
+        return cf.totalDocumento(idtransaccion);
+    }
+    
+    public javax.swing.JFrame imprimir(int usuario, Date fecha){
+        CFactura cf = new CFactura();
+        return cf.imprimir(usuario, fecha);
     }
 }

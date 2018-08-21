@@ -29,7 +29,7 @@ public class CUsuarioCorrelativo {
     }
     
     public int grabar(UsuarioCorrelativo uc){
-        String sql = "insert into tbl_usuario_correlativo values (?,?,?,?,?)";
+        String sql = "insert into tbl_usuario_correlativo values (?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -38,6 +38,7 @@ public class CUsuarioCorrelativo {
             ps.setInt(3, uc.getCorrelativo_ini());
             ps.setInt(4, uc.getCorrelativo_fin());
             ps.setInt(5,uc.getCorrelativo_act());
+            ps.setInt(6, uc.getTipo_correlativo());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -54,7 +55,25 @@ public class CUsuarioCorrelativo {
     }
     
     public boolean verificarUsuario(int idusuario){
-        String sql = "select 1 from tbl_usuario_correlativo where idusuario = ?";
+        String sql = "select 1 from tbl_usuario_correlativo where idusuario = ? and tipo_correlativo = 1";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            boolean resultado = rs.next();
+            rs.close();
+            ps.close();
+            connection.close();
+            return resultado;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public boolean verificarProforma(int idusuario){
+        String sql = "select 1 from tbl_usuario_correlativo where idusuario = ? and tipo_correlativo = 2";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -72,7 +91,30 @@ public class CUsuarioCorrelativo {
     }
     
     public UsuarioCorrelativo getActual(int idusuario){
-        String sql = "select * from tbl_usuario_correlativo where idusuario = ?";
+        String sql = "select * from tbl_usuario_correlativo where idusuario = ? and tipo_correlativo = 1";
+        UsuarioCorrelativo ucorr = new UsuarioCorrelativo();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idusuario);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            ucorr.setIdusuario(rs.getInt(1));
+            ucorr.setSerie(rs.getString(2));
+            ucorr.setCorrelativo_ini(rs.getInt(3));
+            ucorr.setCorrelativo_fin(rs.getInt(4));
+            ucorr.setCorrelativo_act(rs.getInt(5));
+            rs.close();
+            ps.close();
+            connection.close();
+            return ucorr;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuarioCorrelativo.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public UsuarioCorrelativo getProformaActual(int idusuario){
+        String sql = "select * from tbl_usuario_correlativo where idusuario = ? and tipo_correlativo = 2";
         UsuarioCorrelativo ucorr = new UsuarioCorrelativo();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -113,13 +155,14 @@ public class CUsuarioCorrelativo {
         }
     }
     
-    public int avanzaCorrelativo(int id, int correlativo){
-        String sql = "update tbl_usuario_correlativo set correlativo_actual = ? where idusuario = ?";
+    public int avanzaCorrelativo(int id, int correlativo, int tipo){
+        String sql = "update tbl_usuario_correlativo set correlativo_actual = ? where idusuario = ? and tipo_correlativo = ?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, correlativo + 1);
             ps.setInt(2, id);
+            ps.setInt(3, tipo);
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();

@@ -29,8 +29,8 @@ public class CProducto {
     }
     
     public int actualizarProducto(Producto producto){
-        String sql = "update tbl_producto set nombre_producto = ?, precio_compra = ?, precio_venta = ?,fecha_compra = ?,fecha_venicimiento = ?,idfabricante = ?,idfamilia = ?,"
-                    + "stuck_tienda = ?,stuck_bodega = ?,porcentaje_ganancia = ?,stuck_minimo_tienda = ?,stuck_minimo_bodega = ? "
+        String sql = "update tbl_producto set nombre_producto = ?, precio_compra = ?, precio_venta = ?,fecha_compra = ?,fecha_vencimiento = ?,idfabricante = ?,idfamilia = ?,"
+                    + "stuckTienda = ?,stuckBodega = ?,porcentaje_ganancia = ?,stuck_minimo_tienda = ?,stuck_minimo_bodega = ? "
                     + "where codigo = ?";
         
         try {
@@ -51,23 +51,6 @@ public class CProducto {
             ps.setInt(11, producto.getExistencia_minima_tienda());
             ps.setInt(12, producto.getExsitencia_minima_bodega());
             ps.setString(13, producto.getCodigo().toUpperCase());
-            int rs = ps.executeUpdate();
-            ps.close();
-            connection.close();
-            return rs;
-        } catch (SQLException ex) {
-            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
-    }
-    
-    public int altaProducto(Producto producto){
-        String sql = "update tbl_producto set existencia = ? where codigo = ?";
-        
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, producto.getExistencia_tienda());
-            ps.setString(2, producto.getCodigo());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -219,6 +202,9 @@ public class CProducto {
             producto.setPorcentaje_ganancia(rs.getDouble(11));
             producto.setExistencia_minima_tienda(rs.getInt(12));
             producto.setExistencia_minima_bodega(rs.getInt(13));
+            rs.close();
+            ps.close();
+            connection.close();
             return producto;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +230,61 @@ public class CProducto {
             return null;
         }
         
+    }
+    
+    public int escogerUbicacion(String ubicacion, String codigo){
+        String sql = "";
+        switch(ubicacion){
+            case "TIENDA":
+                sql = "select stuckTienda from tbl_producto where codigo = ?";
+                break;
+            case "BODEGA":
+                sql = "select stuckBodega from tbl_producto where codigo = ?";
+                break;
+            default:
+                break;
+        }
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int stuck = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return stuck;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int altaProducto(String ubicacion,String codigo, int stuck){
+        String sql = "";
+        switch(ubicacion){
+            case "TIENDA":
+                sql = "update tbl_producto set stuckTienda = stuckTienda + ? where codigo = ?";
+                break;
+            case "BODEGA":
+                sql = "update tbl_producto set stuckBodega = stuckBodega + ? where codigo = ?";
+                break;
+            default:
+                break;
+        }
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, stuck);
+            ps.setString(2, codigo);
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
     
     public String calcularPrecioVenta(String precioCosto, String porcentaje) throws NumberFormatException, ArithmeticException{

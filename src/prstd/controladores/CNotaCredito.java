@@ -8,13 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import prstd.modelos.NotaCredito;
 import prstd.servicios.ConexionDos;
 
-/**
- *
- * @author Edfu-Pro
- */
 public class CNotaCredito {
     
     private ConexionDos conexion;
@@ -47,6 +44,43 @@ public class CNotaCredito {
         }
     }
     
+    public int update(DefaultTableModel modelo){
+        String sql = "update tbl_nota_credito set estado = 'ACTIVA' where idnota = ?";
+        int rs = 0;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            for(int i = 0; i < modelo.getRowCount(); i++){
+                if(!modelo.getValueAt(i, 5).toString().equals("")){
+                    ps.setInt(1, (int) modelo.getValueAt(i, 5));
+                    rs = ps.executeUpdate();
+                }
+            }
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int anular(int idnota){
+        String sql = "update tbl_nota_credito set estado = 'ANULADA' where idnota = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idnota);
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
     public List<NotaCredito> listar(){
         String sql = "select * from tbl_nota_credito";
         List<NotaCredito> lista = new ArrayList<>();
@@ -69,6 +103,59 @@ public class CNotaCredito {
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    
+    public List<Object> consultar(){
+        String sql = "select nc.idnota,p.nombre_producto,cl.nombre,dc.no_documento,nc.fecha_creacion,nc.estado\n" +
+                    "from tbl_nota_credito nc\n" +
+                    "inner join tbl_producto p on nc.cod_producto = p.codigo\n" +
+                    "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
+                    "inner join tbl_cliente cl on ncl.idcliente = cl.idcliente\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion";
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[6];
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getInt(4);
+                datos[4] = rs.getTimestamp(5);
+                datos[5] = rs.getString(6);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public int notaMax(String codigo){
+        String sql = "select max(idnota) from tbl_nota_credito where cod_producto = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int nota = rs.getInt(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return nota;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
 }

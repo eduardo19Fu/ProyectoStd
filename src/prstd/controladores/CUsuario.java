@@ -146,7 +146,7 @@ public class CUsuario {
         }
         
     }
-    
+        
     public Usuario cargarUsuario(int id){
         String sql = "select * from tbl_usuario where idusuario = ?";
         
@@ -266,6 +266,36 @@ public class CUsuario {
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public List<Usuario> vendedores(){
+        String sql = "select * from tbl_usuario where rol != 3";
+        List<Usuario> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                this.usuario = new Usuario();
+                usuario.setIdusuario(rs.getInt(1));
+                usuario.setUsuario(rs.getString(2));
+                usuario.setPassword(rs.getString(3));
+                usuario.setNombre(rs.getString(4));
+                usuario.setApellido(rs.getString(5));
+                usuario.setEstado(rs.getString(6));
+                usuario.setTelefono(rs.getString(7));
+                usuario.setEmail(rs.getString(8));
+                usuario.setIdrol(rs.getInt(9));
+                lista.add(usuario);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }

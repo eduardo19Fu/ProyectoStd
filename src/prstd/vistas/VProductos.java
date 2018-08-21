@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Producto;
@@ -28,6 +29,7 @@ public class VProductos extends javax.swing.JDialog {
         super(parent,modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        btnEliminar.setVisible(false);
         cargarProductos();
     }
 
@@ -235,6 +237,9 @@ public class VProductos extends javax.swing.JDialog {
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.setPreferredSize(new java.awt.Dimension(250, 50));
         btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEditarMouseEntered(evt);
             }
@@ -258,6 +263,9 @@ public class VProductos extends javax.swing.JDialog {
         btnAlta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlta.setPreferredSize(new java.awt.Dimension(250, 50));
         btnAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAltaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAltaMouseEntered(evt);
             }
@@ -343,7 +351,7 @@ public class VProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        VRegistroProducto vregistro = new VRegistroProducto(null,true);
+        VRegistroProducto vregistro = new VRegistroProducto(null,true, "");
         vregistro.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
@@ -378,6 +386,27 @@ public class VProductos extends javax.swing.JDialog {
     private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
         resetColor(btnEliminar);
     }//GEN-LAST:event_btnEliminarMouseExited
+
+    private void btnAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaMouseClicked
+        try{
+            String codigo = tblProductos.getValueAt(tblProductos.getSelectedRow(), 0).toString();
+            VAltaProducto va = new VAltaProducto(null, true, codigo);
+            va.setVisible(true);
+        }catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para poderle dar de Alta.");
+        }
+    }//GEN-LAST:event_btnAltaMouseClicked
+
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        String codigo;
+        try{
+            codigo = tblProductos.getValueAt(tblProductos.getSelectedRow(), 0).toString();
+            VRegistroProducto vr = new VRegistroProducto(null, true, codigo);
+            vr.setVisible(true);
+        }catch(ArrayIndexOutOfBoundsException ex){
+            JOptionPane.showMessageDialog(this, "Seleccione por favor seleccione un producto para editar.","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarMouseClicked
 
     /**
      * @param args the command line arguments

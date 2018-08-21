@@ -159,4 +159,9 @@ public class Usuario {
         CUsuario cu = new CUsuario();
         return cu.eliminar(id);
     }
+    
+    public List<Usuario> vendedores(){
+        CUsuario cu = new CUsuario();
+        return cu.vendedores();
+    }
 }

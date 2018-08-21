@@ -45,6 +45,8 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
         jSeparator3 = new javax.swing.JSeparator();
         txtFin = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        comboTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -62,12 +64,12 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Serie:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 189, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         txtSerie.setBackground(new java.awt.Color(255, 255, 255));
         txtSerie.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSerie.setBorder(null);
-        jPanel1.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 180, 174, 20));
+        jPanel1.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 224, 174, 20));
 
         comboUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         comboUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -110,12 +112,12 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Corr. Inicial:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 233, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 270, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Corr. Final:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 284, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 320, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPanel2.setOpaque(false);
@@ -159,29 +161,39 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
         });
         jPanel2.add(btnLimpiar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 408, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 408, -1));
 
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 200, 174, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 244, 174, 20));
 
         txtIni.setBackground(new java.awt.Color(255, 255, 255));
         txtIni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIni.setBorder(null);
-        jPanel1.add(txtIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 226, 174, 20));
+        jPanel1.add(txtIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 174, 20));
 
         jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 247, 174, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 174, 20));
 
         txtFin.setBackground(new java.awt.Color(255, 255, 255));
         txtFin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFin.setBorder(null);
-        jPanel1.add(txtFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 280, 174, 20));
+        jPanel1.add(txtFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 317, 174, 20));
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 300, 174, 20));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 338, 174, 20));
+
+        jLabel6.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Tipo:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 185, -1, -1));
+
+        comboTipo.setBackground(new java.awt.Color(255, 255, 255));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FACTURA", "PROFORMA" }));
+        comboTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(comboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 180, 174, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +203,7 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
 
         pack();
@@ -289,12 +301,14 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JLabel btnLimpiar;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JComboBox<String> comboUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -327,28 +341,59 @@ public class VUsuarioCorrelativos extends javax.swing.JDialog {
     private void registrar(){
         UsuarioCorrelativo uc = new UsuarioCorrelativo();
         Usuario usuario = new Usuario();
+        int tipo = 0;
+        if(comboTipo.getSelectedItem().toString().equals("FACTURA"))
+            tipo = 1;
+        else if(comboTipo.getSelectedItem().toString().equals("PROFORMA"))
+            tipo = 2;
         
         // Verificamos que el usuario no tenga un correlativo ya asignado
-        if(!(uc.verificarUsuario(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString())))){
-            uc.setIdusuario(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString()));
-            uc.setSerie(txtSerie.getText());
-            uc.setCorrelativo_ini(Integer.parseInt(txtIni.getText()));
-            uc.setCorrelativo_fin(Integer.parseInt(txtFin.getText()));
-            uc.setCorrelativo_act(Integer.parseInt(txtIni.getText()));
-            // Se verifica que el metodo grabar() devuelva un valor mayor que cero.
-            if(uc.grabar(uc) > 0){
-                NotificacionGuardado ng = new NotificacionGuardado(null, true, null);
-                ng.setVisible(true);
-                limpiar();
+        if(tipo == 1){
+            if(!(uc.verificarUsuario(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString())))){
+                uc.setIdusuario(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString()));
+                uc.setSerie(txtSerie.getText());
+                uc.setCorrelativo_ini(Integer.parseInt(txtIni.getText()));
+                uc.setCorrelativo_fin(Integer.parseInt(txtFin.getText()));
+                uc.setCorrelativo_act(Integer.parseInt(txtIni.getText()));
+                uc.setTipo_correlativo(tipo);
+                // Se verifica que el metodo grabar() devuelva un valor mayor que cero.
+                if(uc.grabar(uc) > 0){
+                    NotificacionGuardado ng = new NotificacionGuardado(null, true, null);
+                    ng.setVisible(true);
+                    limpiar();
+                }else{
+                    NotificacionError ne = new NotificacionError(null, true, null);
+                    ne.setVisible(true);
+                    txtSerie.grabFocus();
+                }
             }else{
-                NotificacionError ne = new NotificacionError(null, true, null);
-                ne.setVisible(true);
-                txtSerie.grabFocus();
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "El usuario elegido ya posee un correlativo existente, si desea modificarlo por favor utilice la opción de edición de correlativos."
+                JOptionPane.showMessageDialog(this, "El usuario elegido ya posee un correlativo existente, si desea modificarlo por favor utilice la opción de edición de correlativos."
                                             ,"Advertencia",JOptionPane.WARNING_MESSAGE);
-            this.dispose();
+                this.dispose();
+            }
+        }else if(tipo == 2){
+            if(!(uc.verificarProforma(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString())))){
+                uc.setIdusuario(usuario.consultarUsuario(comboUsuarios.getSelectedItem().toString()));
+                uc.setSerie(txtSerie.getText());
+                uc.setCorrelativo_ini(Integer.parseInt(txtIni.getText()));
+                uc.setCorrelativo_fin(Integer.parseInt(txtFin.getText()));
+                uc.setCorrelativo_act(Integer.parseInt(txtIni.getText()));
+                uc.setTipo_correlativo(tipo);
+                // Se verifica que el metodo grabar() devuelva un valor mayor que cero.
+                if(uc.grabar(uc) > 0){
+                    NotificacionGuardado ng = new NotificacionGuardado(null, true, null);
+                    ng.setVisible(true);
+                    limpiar();
+                }else{
+                    NotificacionError ne = new NotificacionError(null, true, null);
+                    ne.setVisible(true);
+                    txtSerie.grabFocus();
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "El usuario elegido ya posee un correlativo existente, si desea modificarlo por favor utilice la opción de edición de correlativos."
+                                            ,"Advertencia",JOptionPane.WARNING_MESSAGE);
+                this.dispose();
+            }
         }
     }
     

@@ -8,15 +8,13 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import prstd.modelos.Permiso;
-import prstd.modelos.Permisos;
 import prstd.modelos.Rol;
-import prstd.modelos.Roles;
 import prstd.modelos.Usuario;
+import prstd.modelos.UsuarioCorrelativo;
 import prstd.notificaciones.NotificacionCerrarSesion;
 import prstd.notificaciones.NotificacionSalir;
 
@@ -37,7 +35,6 @@ public class VPrincipal extends javax.swing.JFrame {
         initComponents();
         this.usuario = usuario;
         initPaneles();
-        System.out.println(this.usuario);
     }
 
     /**
@@ -71,7 +68,6 @@ public class VPrincipal extends javax.swing.JFrame {
         panelCobros = new javax.swing.JPanel();
         btnVentas = new javax.swing.JLabel();
         btnProformas = new javax.swing.JLabel();
-        btnConsultaPagos = new javax.swing.JLabel();
         btnConsultaProformas = new javax.swing.JLabel();
         panelSalir = new javax.swing.JPanel();
         btnCerrarSesion = new javax.swing.JLabel();
@@ -156,6 +152,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnPolizas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPolizas.setPreferredSize(new java.awt.Dimension(120, 120));
         btnPolizas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPolizasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnPolizasMouseEntered(evt);
             }
@@ -283,6 +282,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnNotasCredito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNotasCredito.setPreferredSize(new java.awt.Dimension(120, 120));
         btnNotasCredito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNotasCreditoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNotasCreditoMouseEntered(evt);
             }
@@ -371,6 +373,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnProformas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProformas.setPreferredSize(new java.awt.Dimension(120, 120));
         btnProformas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProformasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnProformasMouseEntered(evt);
             }
@@ -379,21 +384,6 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
         panelCobros.add(btnProformas);
-
-        btnConsultaPagos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultaPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Check_72px.png"))); // NOI18N
-        btnConsultaPagos.setToolTipText("Consulta de Pagos");
-        btnConsultaPagos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultaPagos.setPreferredSize(new java.awt.Dimension(120, 120));
-        btnConsultaPagos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConsultaPagosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConsultaPagosMouseExited(evt);
-            }
-        });
-        panelCobros.add(btnConsultaPagos);
 
         btnConsultaProformas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnConsultaProformas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Timesheet_72px.png"))); // NOI18N
@@ -706,14 +696,6 @@ public class VPrincipal extends javax.swing.JFrame {
         resetBorder(btnProformas);// Elimina todo borde creado cuando el cursor sale del rango.
     }//GEN-LAST:event_btnProformasMouseExited
 
-    private void btnConsultaPagosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseEntered
-        setBorder(btnConsultaPagos);// Crea un lineBorder alrededor del botón de Consulta de Pagos.
-    }//GEN-LAST:event_btnConsultaPagosMouseEntered
-
-    private void btnConsultaPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaPagosMouseExited
-        resetBorder(btnConsultaPagos);// Elimina todo borde creado cuando el cursor sale del rango.
-    }//GEN-LAST:event_btnConsultaPagosMouseExited
-
     private void btnConsultaProformasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaProformasMouseEntered
         setBorder(btnConsultaProformas);// Crea un lineBorder alrededor del botón de Consulta Proformas.
     }//GEN-LAST:event_btnConsultaProformasMouseEntered
@@ -780,7 +762,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRolesMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
-        VFacturas vf = new VFacturas(this,true,usuario);
+        VFacturas vf = new VFacturas(this,false,usuario);
         vf.setVisible(true);
     }//GEN-LAST:event_btnVentasMouseClicked
 
@@ -833,6 +815,27 @@ public class VPrincipal extends javax.swing.JFrame {
         resetBorder(btnReporteNotas);
     }//GEN-LAST:event_btnReporteNotasMouseExited
 
+    private void btnNotasCreditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNotasCreditoMouseClicked
+        VNotasCredito vn = new VNotasCredito(this, true, usuario);
+        vn.setVisible(true);
+    }//GEN-LAST:event_btnNotasCreditoMouseClicked
+
+    private void btnProformasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProformasMouseClicked
+        UsuarioCorrelativo uc = new UsuarioCorrelativo();
+        Usuario usuario = new Usuario();
+        if(uc.verificarProforma(usuario.consultarUsuario(this.usuario))){
+            VCreacionProforma vcp = new VCreacionProforma(null,false,this.usuario); // Instancia de un objeto de la Clase VCrearFactura.
+            vcp.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
+        }else{
+            JOptionPane.showMessageDialog(this, "Este usuario no cuenta con un correlativo asignado");
+        }
+    }//GEN-LAST:event_btnProformasMouseClicked
+
+    private void btnPolizasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPolizasMouseClicked
+        VPolizas poli = new VPolizas(null, false);
+        poli.setVisible(true);
+    }//GEN-LAST:event_btnPolizasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -871,7 +874,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnCerrarSesion;
     private javax.swing.JLabel btnCerrarSistema;
     private javax.swing.JPanel btnCobros;
-    private javax.swing.JLabel btnConsultaPagos;
     private javax.swing.JLabel btnConsultaProformas;
     private javax.swing.JLabel btnCorrelativos;
     private javax.swing.JLabel btnFabricantes;
