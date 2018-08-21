@@ -215,6 +215,7 @@ public class VBusquedaProductos extends javax.swing.JDialog {
                 VCreacionProforma.txtCodigo.setText(codigo);
                 VCreacionProforma.txtProducto.setText(nombre);
                 this.dispose();
+                VCreacionProforma.txtCantidad.grabFocus();
             }
         }
     }//GEN-LAST:event_tblProductosMousePressed

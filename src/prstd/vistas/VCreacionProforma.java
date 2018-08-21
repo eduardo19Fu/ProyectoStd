@@ -21,6 +21,9 @@ import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
 import static prstd.vistas.VCrearFactura.lblFactura;
 import static prstd.vistas.VCrearFactura.lblTransac;
+import static prstd.vistas.VCrearFactura.txtCantidad;
+import static prstd.vistas.VCrearFactura.txtCodigo;
+import static prstd.vistas.VCrearFactura.txtProducto;
 
 public class VCreacionProforma extends javax.swing.JDialog {
     
@@ -90,7 +93,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 120, 116), 3));
@@ -455,7 +457,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(radioSimple)
                     .addComponent(radioNormal))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,12 +466,21 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 .addComponent(radioNormal)
                 .addGap(18, 18, 18)
                 .addComponent(radioSimple)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 93, 144, 197));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 698));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -511,7 +522,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 txtProducto.setText("");
                 txtCantidad.setText("");
                 txtCodigo.grabFocus();
-                configurarTabla(tblDetalle);
             }else{
                 JOptionPane.showMessageDialog(this, "Nit no válido");
                 txtNit.grabFocus();
@@ -741,9 +751,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     
     private void init(){
         limpiar();
-        //txtDescuento.setEditable(true);
         Date fechaAct = new Date();
-        Documento proforma = new Documento();
         UsuarioCorrelativo ucorr = new UsuarioCorrelativo();
         ucorr = ucorr.getProformaActual(usuario.consultarUsuario(this.vendedor));
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -753,7 +761,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
         modelo = new DefaultTableModel(null,titulos);
         tblDetalle.removeAll();
         tblDetalle.setModel(modelo);
-        //configurarTabla(tblDetalle);
     }
     
     private void buscarNit(){
@@ -813,10 +820,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtTotal.setText(String.valueOf(producto.redondearPrecio(sumatoria)));
     }
     
-    private void configurarTabla(JTable table){
-        
-    }
-    
     private void limpiar(){
         txtNit.setText("");
         txtNombre.setText("");
@@ -829,11 +832,16 @@ public class VCreacionProforma extends javax.swing.JDialog {
     }
     
     private void buscarProducto(){
-        Producto producto = new Producto().buscarProducto(txtCodigo.getText());
-        
-        txtCodigo.setText(producto.getCodigo());
-        txtProducto.setText(producto.getNombre());
-        txtCantidad.grabFocus();
+                
+        if(new Producto().buscarProducto(txtCodigo.getText()) != null){
+            Producto producto = new Producto().buscarProducto(txtCodigo.getText());
+            txtCodigo.setText(producto.getCodigo());
+            txtProducto.setText(producto.getNombre());
+            txtCantidad.grabFocus();
+        }else{
+            JOptionPane.showMessageDialog(this, "El código del próducto que desea no se encuentra registrado, por favor verifiquelo de nuevo.","Advertencia",JOptionPane.WARNING_MESSAGE);
+            txtCodigo.grabFocus();
+        }
     }
     
     private void eliminarProducto(DefaultTableModel modelo){

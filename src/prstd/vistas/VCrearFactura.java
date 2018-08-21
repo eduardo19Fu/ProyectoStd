@@ -305,6 +305,11 @@ public class VCrearFactura extends javax.swing.JDialog {
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
 
         txtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
         jPanel5.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 5, 180, 28));
 
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -725,6 +730,17 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDescuentoKeyPressed
 
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            if(txtCodigo.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Código no puede estar vacío.","Advertencia",JOptionPane.WARNING_MESSAGE);
+                txtCodigo.grabFocus();
+            }else{
+                buscarProducto();
+            }
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -999,6 +1015,18 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
     }
     
+    private void buscarProducto(){
+        if(new Producto().buscarProducto(txtCodigo.getText()) != null){
+            Producto producto = new Producto().buscarProducto(txtCodigo.getText());
+            txtCodigo.setText(producto.getCodigo());
+            txtProducto.setText(producto.getNombre());
+            txtCantidad.grabFocus();
+        }else{
+            JOptionPane.showMessageDialog(this, "El código del próducto que desea no se encuentra registrado, por favor verifiquelo de nuevo.","Advertencia",JOptionPane.WARNING_MESSAGE);
+            txtCodigo.grabFocus();
+        }
+    }
+    
     private void descuento(double porcentaje, String codigo){
         Producto producto = new Producto().buscarProducto(codigo);
         double subtotal = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 3);
@@ -1022,6 +1050,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
     }
     
+    // Método utilizado para limpiar los campos ingresados.
     private void limpiar(DefaultTableModel modelo){
         modelo = new DefaultTableModel();
         sumatoria = 0;
