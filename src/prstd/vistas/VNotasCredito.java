@@ -50,7 +50,7 @@ public class VNotasCredito extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
-        btnEditar = new javax.swing.JPanel();
+        btnImprimir = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnAnular = new javax.swing.JPanel();
@@ -213,28 +213,28 @@ public class VNotasCredito extends javax.swing.JDialog {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 25));
 
-        btnEditar.setBackground(new java.awt.Color(0, 153, 153));
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.setPreferredSize(new java.awt.Dimension(250, 50));
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnImprimir.setBackground(new java.awt.Color(0, 153, 153));
+        btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnImprimir.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
+                btnImprimirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
+                btnImprimirMouseExited(evt);
             }
         });
-        btnEditar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnImprimir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Imprimir");
-        btnEditar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        btnImprimir.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Print_50px.png"))); // NOI18N
-        btnEditar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnImprimir.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.add(btnEditar);
+        jPanel3.add(btnImprimir);
 
         btnAnular.setBackground(new java.awt.Color(0, 153, 153));
         btnAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -303,13 +303,13 @@ public class VNotasCredito extends javax.swing.JDialog {
         btnMinimizar.setBorder(null); // Restablece el boton de minimizar.
     }//GEN-LAST:event_btnMinimizarMouseExited
 
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        setColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseEntered
+    private void btnImprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseEntered
+        setColor(btnImprimir);
+    }//GEN-LAST:event_btnImprimirMouseEntered
 
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        resetColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseExited
+    private void btnImprimirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseExited
+        resetColor(btnImprimir);
+    }//GEN-LAST:event_btnImprimirMouseExited
 
     private void btnAnularMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseEntered
         setColor(btnAnular);
@@ -383,8 +383,8 @@ public class VNotasCredito extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAnular;
-    private javax.swing.JPanel btnEditar;
     private javax.swing.JLabel btnFiltro;
+    private javax.swing.JPanel btnImprimir;
     private javax.swing.JLabel btnMinimizar;
     private org.jdesktop.swingx.JXDatePicker dateFin;
     private org.jdesktop.swingx.JXDatePicker dateIni;

@@ -61,19 +61,20 @@ where
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="113" splitType="Stretch">
+		<band height="123" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="0" y="0" width="274" height="75"/>
+				<reportElement x="0" y="0" width="274" height="55"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="7" y="1" width="257" height="34"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="7" y="1" width="257" height="51"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="17" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Libreria Carmelita]]></text>
+				<text><![CDATA[Libreria y Variedades 
+Carmelita]]></text>
 			</staticText>
 			<rectangle radius="10">
-				<reportElement mode="Opaque" x="294" y="0" width="278" height="113" backcolor="#009999"/>
+				<reportElement mode="Opaque" x="294" y="0" width="278" height="122" backcolor="#009999"/>
 			</rectangle>
 			<textField>
 				<reportElement x="441" y="6" width="118" height="24" forecolor="#FFFFFF"/>
@@ -104,22 +105,8 @@ where
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{date_format(dc.fecha_emision,'%d/%m/%Y')}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="10">
-				<reportElement x="0" y="83" width="274" height="29"/>
+				<reportElement x="0" y="72" width="274" height="50"/>
 			</rectangle>
-			<textField>
-				<reportElement x="65" y="83" width="200" height="20"/>
-				<textElement>
-					<font fontName="Arial"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendedor}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="7" y="83" width="53" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Vendedor:]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="441" y="32" width="118" height="20" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center">
@@ -135,12 +122,14 @@ where
 				<text><![CDATA[Serie:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="35" width="257" height="35"/>
+				<reportElement x="6" y="72" width="257" height="50"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Venta de útiles escolares, de oficina, fotocopias, encuadernados, artículos de belleza y mucho más.
-1a. Calle A 4-32 Zona 2, Jalapa, Jalapa]]></text>
+1a. Calle A 4-32 Zona 2, Jalapa, Jalapa
+NIT: 4961449-5
+Teléfonos: 4582-1048/5728-2246]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -197,8 +186,8 @@ where
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="101" y="6" width="173" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="9" y="6" width="265" height="20"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Producto]]></text>
@@ -217,51 +206,37 @@ where
 				</textElement>
 				<text><![CDATA[Subtotal]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="7" y="6" width="87" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Código]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
 				<reportElement x="295" y="2" width="73" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="101" y="2" width="173" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="9" y="2" width="265" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_producto}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="402" y="2" width="78" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{precio_venta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="490" y="2" width="69" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{subtotal}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="7" y="0" width="87" height="20"/>
-				<textElement>
-					<font fontName="Arial"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -306,12 +281,26 @@ where
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{texto}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="180" y="57" width="222" height="38"/>
+				<reportElement x="323" y="67" width="222" height="38"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[________________________________
 Firma]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="33" width="214" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="33" width="53" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendedor:]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

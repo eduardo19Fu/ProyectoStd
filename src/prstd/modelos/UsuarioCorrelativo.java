@@ -3,6 +3,7 @@
  */
 package prstd.modelos;
 
+import java.util.List;
 import prstd.controladores.CUsuarioCorrelativo;
 
 /**
@@ -22,12 +23,11 @@ public class UsuarioCorrelativo extends Usuario{
         
     }
 
-    @Override
+    
     public int getIdusuario() {
         return idusuario;
     }
-
-    @Override
+    
     public void setIdusuario(int idusuario) {
         this.idusuario = idusuario;
     }
@@ -107,4 +107,33 @@ public class UsuarioCorrelativo extends Usuario{
         return uco.avanzaCorrelativo(id, correlativo, tipo);
     }
     
+    public List<Object> consultar(){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.listar();
+    }
+    
+    public List<Object> consultar(String usuario){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.listar(usuario);
+    }
+    
+    public int actualizar(UsuarioCorrelativo uc, int idusuario, int tipo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.actualizar(uc, idusuario, tipo);
+    }
+    
+    public UsuarioCorrelativo consultarCorr(int idusuario, int tipo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.consultarCorr(idusuario, tipo);
+    }
+    
+    public int consultarTipo(String tipo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.consultarTipo(tipo);
+    }
+    
+    public String consultarTipo(int tipo){
+        CUsuarioCorrelativo uco = new CUsuarioCorrelativo();
+        return uco.consultarTipo(tipo);
+    }
 }

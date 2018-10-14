@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,18 +14,13 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Cliente;
 import prstd.modelos.Documento;
 import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
-import static prstd.vistas.VCrearFactura.lblFactura;
-import static prstd.vistas.VCrearFactura.lblTransac;
-import static prstd.vistas.VCrearFactura.txtCantidad;
-import static prstd.vistas.VCrearFactura.txtCodigo;
-import static prstd.vistas.VCrearFactura.txtProducto;
+import static prstd.vistas.VCrearFactura.tblDetalle;
 
 public class VCreacionProforma extends javax.swing.JDialog {
     
@@ -31,9 +28,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private String vendedor;
     private Usuario usuario;
     private double sumatoria;
-    private String[] titulos = {"Cantidad","Codigo","Producto","Sub-total",};
+    private String[] titulos = {"Cantidad","Codigo","Producto","Sub-total","Descuento"};
     private DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-    private Object[] datos = new Object[4];
+    private Object[] datos = new Object[5];
 
     public VCreacionProforma(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent, modal);
@@ -79,10 +76,13 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtCantidad = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JLabel();
+        txtDescuento = new javax.swing.JTextField();
+        lblDescuento = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         btnImprimir = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JLabel();
+        btnDescuento = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMinimizar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -235,7 +235,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cantidad", "Codigo", "Producto", "Sub-total"
+                "Cantidad", "Codigo", "Producto", "Sub-total", "Descuento"
             }
         ));
         tblDetalle.setFillsViewportHeight(true);
@@ -327,6 +327,21 @@ public class VCreacionProforma extends javax.swing.JDialog {
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 25, 860, 40));
 
+        txtDescuento.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        txtDescuento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDescuento.setText("0.00");
+        txtDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescuentoKeyTyped(evt);
+            }
+        });
+        jPanel4.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 133, 43));
+
+        lblDescuento.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        lblDescuento.setForeground(new java.awt.Color(0, 0, 0));
+        lblDescuento.setText("Descuento:");
+        jPanel4.add(lblDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 321, 872, 350));
 
         panelOpciones.setBackground(new java.awt.Color(255, 255, 255));
@@ -393,7 +408,27 @@ public class VCreacionProforma extends javax.swing.JDialog {
         });
         panelOpciones.add(btnLimpiar);
 
-        jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 409, 144, 262));
+        btnDescuento.setBackground(new java.awt.Color(230, 162, 78));
+        btnDescuento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Discount_32px.png"))); // NOI18N
+        btnDescuento.setToolTipText("Generar Descuento");
+        btnDescuento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDescuento.setOpaque(true);
+        btnDescuento.setPreferredSize(new java.awt.Dimension(78, 54));
+        btnDescuento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDescuentoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDescuentoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDescuentoMouseExited(evt);
+            }
+        });
+        panelOpciones.add(btnDescuento);
+
+        jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 371, 144, 300));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -444,6 +479,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         radioNormal.setOpaque(false);
 
         buttonGroup1.add(radioSimple);
+        radioSimple.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         radioSimple.setForeground(new java.awt.Color(0, 102, 102));
         radioSimple.setText("Simple");
         radioSimple.setOpaque(false);
@@ -531,7 +567,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         if(!Character.isDigit(evt.getKeyChar()))
-        evt.consume();
+            evt.consume();
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
@@ -581,7 +617,10 @@ public class VCreacionProforma extends javax.swing.JDialog {
                         if(ucorr.avanzaCorrelativo(idusuario, no_proforma, 2) > 0){
                                 //JOptionPane.showMessageDialog(this, "FacturaCreada");
                             Documento dc = new Documento();
-                            dc.imprimirProforma(documento.getMaxTransaccion(), no_proforma, serie, total);
+                            if(radioNormal.isSelected())
+                                dc.imprimirProforma(documento.getMaxTransaccion(), no_proforma, serie, total);
+                            else if(radioSimple.isSelected())
+                                dc.imprimirSimple(documento.getMaxTransaccion(), no_proforma, serie, total);
                             init();
                         }
                     }
@@ -649,6 +688,40 @@ public class VCreacionProforma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
+    private void btnDescuentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescuentoMouseClicked
+        if(txtDescuento.isVisible()){
+            txtDescuento.setVisible(false);
+            txtDescuento.setText("0.00");
+            lblDescuento.setVisible(false);
+        }else{
+            txtDescuento.setVisible(true);
+            txtDescuento.setText("0.00");
+            lblDescuento.setVisible(true);
+        }
+    }//GEN-LAST:event_btnDescuentoMouseClicked
+
+    private void btnDescuentoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescuentoMouseEntered
+        setFormato(btnDescuento);
+    }//GEN-LAST:event_btnDescuentoMouseEntered
+
+    private void btnDescuentoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDescuentoMouseExited
+        resetFormato(btnDescuento);
+    }//GEN-LAST:event_btnDescuentoMouseExited
+
+    private void txtDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyTyped
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+             try {
+                double porcentaje = Double.parseDouble(txtDescuento.getText());
+                String codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
+                descuento(porcentaje, codigo);
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun producto para aplicar descuento","Advertencia",JOptionPane.WARNING_MESSAGE);
+                txtDescuento.setText("");
+                txtDescuento.grabFocus();
+            }
+        }
+    }//GEN-LAST:event_txtDescuentoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -692,6 +765,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAdd;
     private javax.swing.JLabel btnBuscarCodigo;
+    private javax.swing.JLabel btnDescuento;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnImprimir;
     private javax.swing.JLabel btnLimpiar;
@@ -714,6 +788,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblProforma;
     private javax.swing.JLabel lblSerie;
@@ -724,6 +799,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     public static javax.swing.JTable tblDetalle;
     public static javax.swing.JTextField txtCantidad;
     public static javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtDescuento;
     public static javax.swing.JTextField txtDireccion;
     public static javax.swing.JTextField txtNit;
     public static javax.swing.JTextField txtNombre;
@@ -793,7 +869,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         datos[1] = producto.getCodigo();
         datos[2] = producto.getNombre();
         datos[3] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
-        
+        datos[4] = 0.00;
         // Evitar datos duplicados en el detalle de la proforma
         for(int i = 0; i < tblDetalle.getRowCount(); i++){
             if(tblDetalle.getValueAt(i, 1).toString().trim().equals(codigo)){
@@ -820,6 +896,31 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtTotal.setText(String.valueOf(producto.redondearPrecio(sumatoria)));
     }
     
+    private void descuento(double porcentaje, String codigo){
+        Producto producto = new Producto().buscarProducto(codigo);
+        double subtotal = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 3);
+        double pcostoTotal = ((int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0)) * ((double) producto.getPrecio_compra());
+        double nPrecio = subtotal - ((porcentaje/100)* subtotal);
+        
+        if(nPrecio >= pcostoTotal){
+            tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 4);
+            BigDecimal bd = new BigDecimal(nPrecio);// Almacena el valor resultante dentro de una variable BigDecimal
+            bd.setScale(2,RoundingMode.HALF_UP); // Redondea a dos decimales hacia arriba
+            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3); // Coloca el nuevo valor en la tabla de detalle
+            int conteoTabla = tblDetalle.getRowCount();
+            double suma = 0;
+            sumatoria = 0;
+            for(int i = 0; i <= (conteoTabla - 1); i++){
+                suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
+                sumatoria += suma;
+            }
+            txtTotal.setText(String.valueOf(sumatoria));
+        }else{
+            JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
+            // aqui va el campo donde se ingresa el descuento a realizar
+        }
+    }
+    
     private void limpiar(){
         txtNit.setText("");
         txtNombre.setText("");
@@ -829,6 +930,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtCantidad.setText("");
         txtTotal.setText("0.00");
         txtNit.grabFocus();
+        txtDescuento.setText("0.00");
+        txtDescuento.setVisible(false);
+        lblDescuento.setVisible(false);
     }
     
     private void buscarProducto(){

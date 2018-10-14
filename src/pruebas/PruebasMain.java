@@ -1,6 +1,6 @@
 package pruebas;
 
-import prstd.gui.Auxiliar;
+import prstd.controladores.CProducto;
 
 /**
  *
@@ -24,5 +24,7 @@ public class PruebasMain {
 //        Auxiliar aux = new Auxiliar();
 //        String valor = "1555.50";
 //        System.out.println(aux.Convertir(valor, true));
+        CProducto cp = new CProducto();
+        System.out.println(cp.calcularPrecioVenta("25.32", "50"));
     }
 }

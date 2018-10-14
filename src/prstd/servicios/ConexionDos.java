@@ -25,7 +25,7 @@ public class ConexionDos {
         pass = "1992";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://localhost/" + db + "?userTimezone=true&serverTimezone=UTC";
+        url = "jdbc:mysql://localhost/" + db + "?userTimezone=true&serverTimezone=UTC&useSSL=false";
     }   
     
     private Connection conectar(){

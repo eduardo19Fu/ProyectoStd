@@ -247,7 +247,7 @@ public class CFactura {
                 ps.setInt(1, transaccion);
                 ps.setString(2, modelo.getValueAt(i, 1).toString());
                 ps.setInt(3, (int) modelo.getValueAt(i, 0));
-                ps.setDouble(4, (double) modelo.getValueAt(i, 3));
+                ps.setDouble(4, Double.parseDouble(modelo.getValueAt(i, 3).toString()));
                 
                 // Validación del campo de descuento.
                 if(modelo.getValueAt(i, 4) != null){
@@ -267,6 +267,7 @@ public class CFactura {
         }
     }
     
+    // Contrlador que se encarga de la impresion de la factura
     public javax.swing.JFrame imprimir(int transac, int no_factura, String serie, double total) throws SQLException{
         try {
             Auxiliar aux = new Auxiliar();
@@ -274,7 +275,7 @@ public class CFactura {
             parametro.put("no_factura", no_factura);
             parametro.put("serie", serie);
             parametro.put("transac", transac);
-            parametro.put("texto", aux.Convertir(String.valueOf(total), true));
+            parametro.put("texto", aux.Convertir(String.format("%.2f",total), true));
             reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\factura.jrxml");
             JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
             JasperViewer jv = new JasperViewer(print,false);
@@ -295,7 +296,7 @@ public class CFactura {
             Map parametro = new HashMap();
             parametro.put("usuario", usuario);
             parametro.put("fechaIni", fecha);
-            reporte = reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\poliza.jrxml");
+            reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\poliza.jrxml");
             JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
             JasperViewer jv = new JasperViewer(print,false);
             jv.setTitle("Poliza");

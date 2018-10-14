@@ -181,6 +181,11 @@ public class Documento {
         return proforma.imprimirProforma(transac, factura, serie, total);
     }
     
+    public javax.swing.JFrame imprimirSimple(int transac, int factura, String serie, double total){
+        CProforma proforma = new CProforma();
+        return proforma.imprimirSimple(transac, factura, serie, total);
+    }
+    
     public double totalDocumento(int idtransaccion){
         CFactura cf = new CFactura();
         return cf.totalDocumento(idtransaccion);
@@ -189,5 +194,20 @@ public class Documento {
     public javax.swing.JFrame imprimir(int usuario, Date fecha){
         CFactura cf = new CFactura();
         return cf.imprimir(usuario, fecha);
+    }
+    
+    public List<Documento> consultarProformas(){
+        CProforma cp = new CProforma();
+        return cp.consultar();
+    }
+    
+    public List<Documento> consultarProformas(Date fechaIni, Date fechaFin){
+        CProforma cp = new CProforma();
+        return cp.consultar(fechaIni, fechaFin);
+    }
+    
+    public int anularProforma(int transaccion){
+        CProforma cp = new CProforma();
+        return cp.delete(transaccion);
     }
 }

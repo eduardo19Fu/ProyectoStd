@@ -14,12 +14,14 @@ import prstd.notificaciones.NotificacionGuardado;
 
 public class VUsuarioCorrelativos extends javax.swing.JDialog {
 
-    int x,y;
+    private int x,y,bandera;
+    private String usuario;
     
     public VUsuarioCorrelativos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.usuario = usuario;
         limpiar();
     }
     

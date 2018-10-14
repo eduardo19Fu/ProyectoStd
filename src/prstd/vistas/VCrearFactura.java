@@ -4,6 +4,8 @@ import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -1035,7 +1037,10 @@ public class VCrearFactura extends javax.swing.JDialog {
         
         if(nPrecio >= pcostoTotal){
             tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 4);
-            tblDetalle.setValueAt(nPrecio, tblDetalle.getSelectedRow(), 3);
+            BigDecimal bd = new BigDecimal(nPrecio);// Almacena el valor resultante dentro de una variable BigDecimal
+            bd = bd.setScale(2,RoundingMode.HALF_UP); // Redondea a dos decimales hacia arriba
+            System.out.println(bd);
+            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3); // Coloca el nuevo valor en la tabla de detalle
             int conteoTabla = tblDetalle.getRowCount();
             double suma = 0;
             sumatoria = 0;
@@ -1109,5 +1114,4 @@ public class VCrearFactura extends javax.swing.JDialog {
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);
         table.getColumnModel().getColumn(4).setCellRenderer(tcr);
     }
-    
 }
