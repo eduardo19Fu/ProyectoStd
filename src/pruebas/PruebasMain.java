@@ -1,11 +1,6 @@
 package pruebas;
 
-import java.util.List;
-import prstd.controladores.CPermiso;
-import prstd.controladores.CUsuario;
-import prstd.modelos.Permiso;
-import prstd.modelos.Producto;
-import prstd.modelos.Usuario;
+import prstd.controladores.CProducto;
 
 /**
  *
@@ -25,5 +20,11 @@ public class PruebasMain {
 //        for(int i = 0; i < listap.size(); i++){
 //            System.out.println(producto.calcularPrecioVenta("10", "5"));
 //        }
+/*Prueba de clase para retornar total en letrass*/
+//        Auxiliar aux = new Auxiliar();
+//        String valor = "1555.50";
+//        System.out.println(aux.Convertir(valor, true));
+        CProducto cp = new CProducto();
+        System.out.println(cp.calcularPrecioVenta("25.32", "50"));
     }
 }

@@ -53,6 +53,53 @@ public class CFabricante {
         }
     }
     
+    public Fabricante consultar(int id){
+        String sql = "select * from tbl_fabricante where idfabricante = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            this.fabricante = new Fabricante();
+            this.fabricante.setIdfabricante(rs.getInt(1));
+            this.fabricante.setNombre_fabricante(rs.getString(2));
+            this.fabricante.setObservaciones(rs.getString(3));
+            rs.close();
+            ps.close();
+            connection.close();
+            return this.fabricante;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public List<Fabricante> filtrar(String fabricante){
+        String sql = "select * from tbl_fabricante where nombre_fabricante like ?";
+        List<Fabricante> lista = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + fabricante +"%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                this.fabricante = new Fabricante();
+                this.fabricante.setIdfabricante(rs.getInt(1));
+                this.fabricante.setNombre_fabricante(rs.getString(2));
+                this.fabricante.setObservaciones(rs.getString(3));
+                lista.add(this.fabricante);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public int getId(String fabricante){
         String sql = "select idfabricante from tbl_fabricante where nombre_fabricante = ?";
         int id = 0;
@@ -81,6 +128,24 @@ public class CFabricante {
             ps.setInt(1, fabricante.getIdfabricante());
             ps.setString(2, fabricante.getNombre_fabricante().toUpperCase());
             ps.setString(3, fabricante.getObservaciones().toUpperCase());
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFabricante.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int actualizar(Fabricante fabricante){
+        String sql = "update tbl_fabricante set nombre_fabricante = ?, observaciones = ? where idfabricante = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, fabricante.getNombre_fabricante());
+            ps.setString(2, fabricante.getObservaciones());
+            ps.setInt(3, fabricante.getIdfabricante());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();

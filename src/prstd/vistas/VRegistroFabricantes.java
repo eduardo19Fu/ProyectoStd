@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prstd.vistas;
 
 import java.awt.Color;
@@ -14,24 +9,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import prstd.modelos.Fabricante;
 
-/**
- *
- * @author Edfu-Pro
- */
 public class VRegistroFabricantes extends javax.swing.JDialog {
 
-    /**
-     * Creates new form VRegistroFamilias
-     * @param parent
-     * @param modal
-     */
-    int x,y;
     
-    public VRegistroFabricantes(java.awt.Frame parent, boolean modal) {
+    private int x,y,id;
+    
+    public VRegistroFabricantes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        limpiar();
+        this.id = id;
+        if(this.id == 0)
+            limpiar();
+        else
+            cargar();
     }
 
     /**
@@ -197,11 +188,14 @@ public class VRegistroFabricantes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        int op = JOptionPane.showOptionDialog(this, "¿Seguro que desea registrar este producto?", "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,
+        int op = JOptionPane.showOptionDialog(this, "¿Seguro que desea guardar este registro?", "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE,
             null,new Object[]{"Aceptar","Cancelar"}, "Cancelar");
         if(op != -1){
             if((op + 1) == 1){
-                registrar();
+                if(this.id == 0)
+                    registrar();
+                else
+                    actualizar();
             }else{
                 limpiar();
                 this.dispose();
@@ -247,7 +241,7 @@ public class VRegistroFabricantes extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            VRegistroFabricantes dialog = new VRegistroFabricantes(new javax.swing.JFrame(), true);
+            VRegistroFabricantes dialog = new VRegistroFabricantes(new javax.swing.JFrame(), true, 0);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -292,6 +286,13 @@ public class VRegistroFabricantes extends javax.swing.JDialog {
         panel.setBackground(new Color(0,153,153));
     }
     
+    private void cargar(){
+        Fabricante fabricante = new Fabricante().consultar(this.id);
+        txtId.setText(String.valueOf(fabricante.getIdfabricante()));
+        txtNombre.setText(fabricante.getNombre_fabricante());
+        txtObservaciones.setText(fabricante.getObservaciones());
+    }
+    
     private void registrar(){
         Fabricante fabricante = new Fabricante();
         
@@ -303,6 +304,25 @@ public class VRegistroFabricantes extends javax.swing.JDialog {
         // Invocamos al metodo Fabricante.registrar() para guardar el fabricante.
         if(fabricante.registrar(fabricante) > 0){
             JOptionPane.showMessageDialog(this, "Fabricante registrado con éxito.","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+            VRegistroProducto.choiceFabricante.addItem(fabricante.getNombre_fabricante().toUpperCase());
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error, notifique a al Administrador para más información.","Error",JOptionPane.ERROR_MESSAGE);
+            limpiar();
+        }
+    }
+    
+    private void actualizar(){
+        Fabricante fabricante = new Fabricante();
+        
+        // Almacenamos los valores de las variables en los metodos set de Fabricante.
+        fabricante.setIdfabricante(Integer.parseInt(txtId.getText()));
+        fabricante.setNombre_fabricante(txtNombre.getText());
+        fabricante.setObservaciones(txtObservaciones.getText());
+        
+        // Invocamos al metodo Fabricante.actualizar() para actualizar el fabricante.
+        if(fabricante.actualizar(fabricante) > 0){
+            JOptionPane.showMessageDialog(this, "Fabricante actualizado con éxito.","Mensaje",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error, notifique a al Administrador para más información.","Error",JOptionPane.ERROR_MESSAGE);

@@ -99,4 +99,9 @@ public class Cliente {
         CCliente cliente = new CCliente();
         return cliente.consultarCliente(nit);
     }
+    
+    public Cliente consultarCliente(int idcliente){
+        CCliente cliente = new CCliente();
+        return cliente.consultarCliente(idcliente);
+    }
 }

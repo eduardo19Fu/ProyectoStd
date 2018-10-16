@@ -214,4 +214,27 @@ public class CCliente {
             return 0;
         }
     }
+    
+    public Cliente consultarCliente(int idcliente){
+        String sql = "select * from tbl_cliente where idcliente = ?";
+        Cliente cliente = new Cliente();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idcliente);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            cliente.setIdcliente(rs.getInt(1));
+            cliente.setNombre(rs.getString(2));
+            cliente.setDireccion(rs.getString(3));
+            cliente.setNit(rs.getString(4));
+            rs.close();
+            ps.close();
+            connection.close();
+            return cliente;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

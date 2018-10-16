@@ -25,6 +25,7 @@ public class Producto {
     private int tipo_producto;
     private int existencia_minima_tienda;
     private int existencia_minima_bodega;
+    private String estado;
     
     private String nombre_fabricante;
     private String nombre_familia;
@@ -34,7 +35,7 @@ public class Producto {
 
     public Producto(String codigo, String nombre, Double precio_compra, Double precio_venta, Date fecha_compra, Date fecha_vencimiento, 
                     int fabricante, int familia, int existencia_tienda, int existencia_bodega,Double porcentaje_ganancia, int tipo_producto, int existencia_minima_tienda,
-                    int existencia_minima_bodega,String nombre_fabricante, String nombre_familia) 
+                    int existencia_minima_bodega,String nombre_fabricante, String nombre_familia, String estado) 
     
     {
         this.codigo = codigo;
@@ -53,6 +54,7 @@ public class Producto {
         this.existencia_minima_bodega = existencia_minima_bodega;
         this.nombre_fabricante = nombre_fabricante;
         this.nombre_familia = nombre_familia;
+        this.estado = estado;
     }
 
     public String getCodigo() {
@@ -182,12 +184,26 @@ public class Producto {
     public void setNombre_fabricante(String nombre_fabricante){
         this.nombre_fabricante = nombre_fabricante;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     /*
         * Métodos controlador de la clase Producto  
     */
     public int crear(Producto producto){
         CProducto cp = new CProducto();
         return cp.registroProducto(producto);
+    }
+    
+    public int actualizar(Producto producto){
+        CProducto cp = new CProducto();
+        return cp.actualizarProducto(producto);
     }
     
     public List<Producto> buscarProductos(){
@@ -218,5 +234,45 @@ public class Producto {
     public String redondearPrecio(double precio){
         CProducto cp = new CProducto();
         return cp.redondearPrecio(precio);
+    }
+    
+    public int escogerUbicacion(String ubicacion, String codigo){
+        CProducto cp = new CProducto();
+        return cp.escogerUbicacion(ubicacion, codigo);
+    }
+    
+    public int altaProducto(String ubicacion, String codigo, int stuck){
+        CProducto cp = new CProducto();
+        return cp.altaProducto(ubicacion, codigo, stuck);
+    }
+    
+    public List<Producto> busquedaNombre(String nombre){
+        CProducto cp = new CProducto();
+        return cp.buscarNombre(nombre);
+    }
+    
+    public List<Producto> busquedaFamilia(String familia){
+        CProducto cp = new CProducto();
+        return cp.buscarFamilia(familia);
+    }
+    
+    public List<Producto> busquedaFabricante(String fabricante){
+        CProducto cp = new CProducto();
+        return cp.buscarFabricante(fabricante);
+    }
+    
+    public int descontinuar(String codigo){
+        CProducto cp = new CProducto();
+        return cp.descontinuar(codigo);
+    }
+    
+    public javax.swing.JFrame reportTienda(){
+        CProducto cp = new CProducto();
+        return cp.reportTienda();
+    }
+    
+    public javax.swing.JFrame reportBodega(){
+        CProducto cp = new CProducto();
+        return cp.reportBodega();
     }
 }
