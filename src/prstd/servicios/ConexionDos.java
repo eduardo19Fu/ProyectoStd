@@ -14,19 +14,19 @@ import javax.swing.JOptionPane;
 public class ConexionDos {
     
     private Connection connection;
-    private String user;
-    private String pass;
-    private String db;
-    private String driver;
-    private String url;
+    private final String user;
+    private final String pass;
+    private final String db;
+    private final String driver;
+    private final String url;
 
     public ConexionDos() {
         user = "root";
         pass = "1992";
         db = "std_db";
-        driver = "com.mysql.jdbc.Driver";
-        url = "jdbc:mysql://localhost/" + db;
-    }
+        driver = "com.mysql.cj.jdbc.Driver";
+        url = "jdbc:mysql://localhost/" + db + "?userTimezone=true&serverTimezone=UTC&useSSL=false";
+    }   
     
     private Connection conectar(){
         try{

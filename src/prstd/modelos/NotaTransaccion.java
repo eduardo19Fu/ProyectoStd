@@ -1,5 +1,8 @@
 package prstd.modelos;
 
+import javax.swing.table.DefaultTableModel;
+import prstd.controladores.CNotaTransaccion;
+
 /**
  *
  * @author Edfu-Pro
@@ -31,5 +34,10 @@ public class NotaTransaccion {
 
     public void setDocumento(int documento) {
         this.documento = documento;
+    }
+    
+    public int crear(DefaultTableModel modelo, int transaccion){
+        CNotaTransaccion cn = new CNotaTransaccion();
+        return cn.crear(modelo, transaccion);
     }
 }

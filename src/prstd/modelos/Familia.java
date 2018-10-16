@@ -45,6 +45,16 @@ public class Familia {
         return cf.listar();
     }
     
+    public Familia consultar(int id){
+        CFamilia cf = new CFamilia();
+        return cf.consultar(id);
+    }
+    
+    public List<Familia> filtrar(String nombre){
+        CFamilia cf = new CFamilia();
+        return cf.filtrar(nombre);
+    }
+    
     public int getId(String familia){
         CFamilia cf = new CFamilia();
         return cf.getId(familia);
@@ -53,6 +63,11 @@ public class Familia {
     public int registrar(Familia familia){
         CFamilia cf = new CFamilia();
         return cf.registrar(familia);
+    }
+    
+    public int actualizar(Familia familia){
+        CFamilia cf = new CFamilia();
+        return cf.actualizar(familia);
     }
     
     public int getMaxFamilia(){

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="simple" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="transaccion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="serie" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="no_proforma" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="texto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 	cl.nombre, 
+	dc.no_documento,
+	cl.direccion,
+        	cl.nit,
+        	-- date_format(dc.fecha_emision,'%d/%m/%Y'),
+	day(dc.fecha_emision),
+	month(dc.fecha_emision),
+	year(dc.fecha_emision),
+        	de.cantidad,
+        	pro.nombre_producto,
+        	round((pro.precio_venta*0.07) + pro.precio_venta,2) as precio_venta,
+        	round((de.subtotal * 0.07) + de.subtotal,2) as sub_total,
+        	round((dc.total * 0.07) + dc.total,2) as total,
+	$P{texto} as letras,
+	concat(u.nombre,' ', u.apellido) as vendedor,
+	dc.serie as serie,
+ 	pro.codigo
+from 
+	tbl_documento dc
+inner join 
+	tbl_detalle_documento de on de.idtransaccion = dc.idtransaccion
+inner join 
+	tbl_producto pro on pro.codigo = de.codigo
+inner join 
+	tbl_cliente cl on cl.idcliente = dc.idcliente
+inner join
+	tbl_usuario u on u.idusuario = dc.idvendedor
+where 
+	dc.no_documento = $P{no_proforma} and dc.serie = $P{serie} and dc.idtransaccion = $P{transaccion};]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="no_documento" class="java.lang.Integer"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="nit" class="java.lang.String"/>
+	<field name="day(dc.fecha_emision)" class="java.lang.Long"/>
+	<field name="month(dc.fecha_emision)" class="java.lang.Long"/>
+	<field name="year(dc.fecha_emision)" class="java.lang.Long"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<field name="nombre_producto" class="java.lang.String"/>
+	<field name="precio_venta" class="java.math.BigDecimal"/>
+	<field name="sub_total" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="letras" class="java.lang.Object"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="serie" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<variable name="suma" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{precio_venta}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="2" width="178" height="29"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro Bold" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Libreria Mary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="41" width="207" height="59"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro" size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Barrio el Porvenir Jalapa, Jalapa
+
+NIT: 4514625-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="11" width="140" height="30"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro" size="22"/>
+				</textElement>
+				<text><![CDATA[PROFORMA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="395" y="64" width="177" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="395" y="84" width="177" height="32" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="397" y="64" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<text><![CDATA[DÍA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="64" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="64" width="50" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<text><![CDATA[AÑO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="447" y="64" width="1" height="52"/>
+			</line>
+			<line>
+				<reportElement x="501" y="64" width="1" height="52"/>
+			</line>
+			<textField>
+				<reportElement x="397" y="84" width="50" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{day(dc.fecha_emision)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="84" width="47" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{month(dc.fecha_emision)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="502" y="84" width="70" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{year(dc.fecha_emision)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="8" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="8" width="393" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="32" width="480" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="32" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="56" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[NIT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="372" y="56" width="95" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="1" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="18"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="21" width="571" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="1" width="571" height="1"/>
+			</line>
+			<line>
+				<reportElement x="86" y="1" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="1" y="1" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="572" y="1" width="1" height="21"/>
+			</line>
+			<staticText>
+				<reportElement x="97" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro" size="16"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<line>
+				<reportElement x="317" y="1" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement x="320" y="2" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="16"/>
+				</textElement>
+				<text><![CDATA[Valor U.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="433" y="1" width="1" height="21"/>
+			</line>
+			<staticText>
+				<reportElement x="446" y="2" width="106" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="16"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="1" width="66" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="1" width="207" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="1" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{precio_venta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="1" width="105" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="22" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="86" y="-1" width="1" height="23"/>
+			</line>
+			<line>
+				<reportElement x="317" y="-2" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="433" y="-1" width="1" height="23"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-2" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="572" y="-2" width="1" height="24"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="9" y="7" width="117" height="20"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro Bold" size="16"/>
+				</textElement>
+				<text><![CDATA[Total a Pagar:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="433" y="0" width="1" height="35"/>
+			</line>
+			<textField>
+				<reportElement x="125" y="7" width="295" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{letras}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="-1" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="34" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="572" y="-1" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="1" height="34"/>
+			</line>
+			<textField>
+				<reportElement x="452" y="7" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Adobe Garamond Pro Bold" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

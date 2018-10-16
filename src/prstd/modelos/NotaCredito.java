@@ -1,6 +1,8 @@
 package prstd.modelos;
 
 import java.sql.Timestamp;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import prstd.controladores.CNotaCredito;
 
 /**
@@ -63,7 +65,7 @@ public class NotaCredito {
     }
     
     /*
-   
+        Métodos controlador de Nota Credito
     */
 
     public void setFecha_creacion(Timestamp fecha_creacion) {
@@ -73,5 +75,30 @@ public class NotaCredito {
     public int crear(NotaCredito nc){
         CNotaCredito cn = new CNotaCredito();
         return cn.crear(nc);
+    }
+    
+    public int notaMax(String codigo){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.notaMax(codigo);
+    }
+    
+    public int update(DefaultTableModel modelo){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.update(modelo);
+    }
+    
+    public int anular(int idnota){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.anular(idnota);
+    }
+    
+    public List<NotaCredito> listar(){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.listar();
+    }
+    
+    public List<Object> consultar(){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.consultar();
     }
 }

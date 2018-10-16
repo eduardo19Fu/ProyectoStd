@@ -1,26 +1,29 @@
 package prstd.modelos;
 
+import javax.swing.table.DefaultTableModel;
+import prstd.controladores.CNotaCliente;
+
 /**
  *
  * @author Edfu-Pro
  */
 public class NotaCliente {
-    private NotaCredito nota_credito;
+    private int nota_credito;
     private int idcliente;
 
     public NotaCliente() {
     }
 
-    public NotaCliente(NotaCredito nota_credito, int idcliente) {
+    public NotaCliente(int nota_credito, int idcliente) {
         this.nota_credito = nota_credito;
         this.idcliente = idcliente;
     }
 
-    public NotaCredito getNota_credito() {
+    public int getNota_credito() {
         return nota_credito;
     }
 
-    public void setNota_credito(NotaCredito nota_credito) {
+    public void setNota_credito(int nota_credito) {
         this.nota_credito = nota_credito;
     }
 
@@ -30,5 +33,10 @@ public class NotaCliente {
 
     public void setIdcliente(int idcliente) {
         this.idcliente = idcliente;
+    }
+    
+    public int crear(DefaultTableModel modelo, int idcliente){
+        CNotaCliente cc = new CNotaCliente();
+        return cc.crear(modelo, idcliente);
     }
 }

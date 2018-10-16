@@ -3,6 +3,7 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
@@ -13,12 +14,14 @@ import prstd.modelos.Producto;
 public class VBusquedaProductos extends javax.swing.JDialog {
     
     int x,y;
+    int flag;
 
-    public VBusquedaProductos(java.awt.Frame parent, boolean modal) {
+    public VBusquedaProductos(java.awt.Frame parent, boolean modal, int flag) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         cargarProductos();
+        this.flag = flag;
     }
 
     @SuppressWarnings("unchecked")
@@ -33,9 +36,9 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtArticulo = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radioNombre = new javax.swing.JRadioButton();
+        radioFamilia = new javax.swing.JRadioButton();
+        radioFabricante = new javax.swing.JRadioButton();
         btnCerrar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -83,24 +86,24 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setForeground(new java.awt.Color(0, 102, 51));
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Nombre");
-        jRadioButton1.setOpaque(false);
-        jPanel3.add(jRadioButton1);
+        buttonGroup1.add(radioNombre);
+        radioNombre.setForeground(new java.awt.Color(0, 102, 51));
+        radioNombre.setSelected(true);
+        radioNombre.setText("Nombre");
+        radioNombre.setOpaque(false);
+        jPanel3.add(radioNombre);
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setForeground(new java.awt.Color(0, 102, 51));
-        jRadioButton3.setText("Familia");
-        jRadioButton3.setOpaque(false);
-        jPanel3.add(jRadioButton3);
+        buttonGroup1.add(radioFamilia);
+        radioFamilia.setForeground(new java.awt.Color(0, 102, 51));
+        radioFamilia.setText("Familia");
+        radioFamilia.setOpaque(false);
+        jPanel3.add(radioFamilia);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setForeground(new java.awt.Color(0, 102, 51));
-        jRadioButton2.setText("Fabricante");
-        jRadioButton2.setOpaque(false);
-        jPanel3.add(jRadioButton2);
+        buttonGroup1.add(radioFabricante);
+        radioFabricante.setForeground(new java.awt.Color(0, 102, 51));
+        radioFabricante.setText("Fabricante");
+        radioFabricante.setOpaque(false);
+        jPanel3.add(radioFabricante);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -204,15 +207,22 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         if(evt.getClickCount() > 1){
             String codigo = tblProductos.getValueAt(tblProductos.getSelectedRow(), 0).toString();
             String nombre = tblProductos.getValueAt(tblProductos.getSelectedRow(), 1).toString();
-            VCrearFactura.txtCodigo.setText(codigo);
-            VCrearFactura.txtProducto.setText(nombre);
-            this.dispose();
-            VCrearFactura.txtCantidad.grabFocus();
+            if(this.flag == 1){    
+                VCrearFactura.txtCodigo.setText(codigo);
+                VCrearFactura.txtProducto.setText(nombre);
+                this.dispose();
+                VCrearFactura.txtCantidad.grabFocus();
+            }else if(this.flag == 2){
+                VCreacionProforma.txtCodigo.setText(codigo);
+                VCreacionProforma.txtProducto.setText(nombre);
+                this.dispose();
+                VCreacionProforma.txtCantidad.grabFocus();
+            }
         }
     }//GEN-LAST:event_tblProductosMousePressed
 
     private void txtArticuloKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtArticuloKeyReleased
-        
+        cargarNombre();
     }//GEN-LAST:event_txtArticuloKeyReleased
 
     /**
@@ -245,7 +255,7 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VBusquedaProductos dialog = new VBusquedaProductos(new javax.swing.JFrame(), true);
+                VBusquedaProductos dialog = new VBusquedaProductos(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -265,10 +275,10 @@ public class VBusquedaProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton radioFabricante;
+    private javax.swing.JRadioButton radioFamilia;
+    private javax.swing.JRadioButton radioNombre;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtArticulo;
     // End of variables declaration//GEN-END:variables
@@ -282,6 +292,33 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         Object[] datos = new Object[6];
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         List<Producto> lista = producto.buscarProductos();
+        
+        for(int i = 0; i < lista.size(); i++){
+            datos[0] = lista.get(i).getCodigo();
+            datos[1] = lista.get(i).getNombre();
+            datos[2] = lista.get(i).getPrecio_venta();
+            datos[3] = lista.get(i).getNombre_familia();
+            datos[4] = lista.get(i).getNombre_fabricante();
+            datos[5] = lista.get(i).getExistencia_tienda();
+            modelo.addRow(datos);
+        }
+        tblProductos.setModel(modelo);
+    }
+    
+    private void cargarNombre(){
+        Producto producto = new Producto();
+        String titulos[] = {"Código","Nombre","Precio Venta","Familia","Fabricante","Existencias"};
+        Object[] datos = new Object[6];
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        List<Producto> lista = new ArrayList<>();
+        
+        if(radioNombre.isSelected())
+            lista = producto.busquedaNombre(txtArticulo.getText());
+        else if(radioFamilia.isSelected())
+            lista = producto.busquedaFamilia(txtArticulo.getText());
+        else if(radioFabricante.isSelected())
+            lista = producto.busquedaFabricante(txtArticulo.getText());
+            
         
         for(int i = 0; i < lista.size(); i++){
             datos[0] = lista.get(i).getCodigo();
