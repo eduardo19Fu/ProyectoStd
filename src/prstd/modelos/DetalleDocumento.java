@@ -18,6 +18,7 @@ public class DetalleDocumento{
     private String serie;
     private double subtotal;
     private double descuento;
+    private double nprecio_venta;
     
     public DetalleDocumento(){
     
@@ -70,6 +71,15 @@ public class DetalleDocumento{
     public void setDescuento(double descuento){
         this.descuento = descuento;
     }
+
+    public double getNprecio_venta() {
+        return nprecio_venta;
+    }
+
+    public void setNprecio_venta(double nprecio_venta) {
+        this.nprecio_venta = nprecio_venta;
+    }
+    
     
     public int detalleFactura(List<DetalleDocumento> dc){
         CDetalleDocumento cd = new CDetalleDocumento();

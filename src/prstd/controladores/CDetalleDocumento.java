@@ -29,7 +29,7 @@ public class CDetalleDocumento {
     }
     
     public int detalleFactura(List<DetalleDocumento> dc){
-        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?)";
+        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?)";
         Documento factura = new Documento();
         int rs = 0;
         try {
@@ -40,6 +40,7 @@ public class CDetalleDocumento {
                 ps.setInt(3, dc.get(i).getCantidad());
                 ps.setString(4, dc.get(i).getSerie());
                 ps.setDouble(5, dc.get(i).getDescuento());
+                ps.setDouble(6, dc.get(i).getNprecio_venta());
                 rs = ps.executeUpdate();
             }
             ps.close();

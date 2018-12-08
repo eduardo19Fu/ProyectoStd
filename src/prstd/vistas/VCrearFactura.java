@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ import prstd.modelos.NotaTransaccion;
 import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
+import static prstd.vistas.VCreacionProforma.tblDetalle;
 
 public class VCrearFactura extends javax.swing.JDialog {
 
@@ -557,7 +559,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
-        limpiar((DefaultTableModel)tblDetalle.getModel());
+        limpiarDetalle();
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -723,7 +725,7 @@ public class VCrearFactura extends javax.swing.JDialog {
             try {
                 double porcentaje = Double.parseDouble(txtDescuento.getText());
                 String codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
-                descuento(porcentaje, codigo);
+                descuento_dos(porcentaje, codigo);
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun producto para aplicar descuento","Advertencia",JOptionPane.WARNING_MESSAGE);
                 txtDescuento.setText("");
@@ -1055,14 +1057,61 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
     }
     
+    private void descuento_dos(double porcentaje, String codigo){
+        Producto producto = new Producto().buscarProducto(codigo);// Instancia un objeto de la clase producto.
+        int cant = (int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0); // almacena la cantidad del producto ingresada
+        double precio_unidad = (double) producto.getPrecio_venta(); // almacena el precio por unidad del producto deseado
+        double precio_costo = (double) producto.getPrecio_compra(); // almacena el precio costo del producto elegido
+
+        double nprecio_unidad = (double) precio_unidad - (precio_unidad * (porcentaje/100)); // almacena el nuevo precio con descuento ya aplicado.
+        double nprecio_total = cant * nprecio_unidad; // almacena el subtotal del nuevo precio de venta con descuento ya aplicado
+        
+        if(nprecio_unidad >= precio_costo){
+            tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 4);
+            BigDecimal bd = new BigDecimal(nprecio_total);
+            String original = String.valueOf(bd);
+            
+            System.out.println(nprecio_total);
+            
+            String[] partes = original.split(Pattern.quote("."));
+            String entero = partes[0];
+            String decimal = partes[1];
+            
+            int valor1 = Integer.parseInt(entero);  // variable que almacena la parte entera de nuestro valor decimal.
+            int valor2 = Integer.parseInt(String.valueOf(decimal.charAt(0))); // variable que almacena el primer digíto de la parte decimal.
+            int valor3 = Integer.parseInt(String.valueOf(decimal.charAt(1))); // variable que almacena el segundo digíto de la parte decimal.
+            int valor4 = Integer.parseInt(String.valueOf(decimal.charAt(2))); // variable que almacena el tercer digíto de la parte decimal.
+            
+            
+            if(valor4 >= 5){
+                bd = bd.setScale(2,RoundingMode.HALF_UP);
+            }else if(valor4 < 5){
+                bd = bd.setScale(2,RoundingMode.DOWN);
+            }
+
+            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3);
+            int conteoTabla = tblDetalle.getRowCount();
+            double suma = 0;
+            sumatoria = 0;
+            for(int i = 0; i <= (conteoTabla - 1); i++){
+                suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
+                sumatoria += suma;
+            }
+            txtTotal.setText(String.valueOf(sumatoria));
+        }else{
+            JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
+        }
+        
+    }
+    
     // Método utilizado para limpiar los campos ingresados.
-    private void limpiar(DefaultTableModel modelo){
+    private void limpiarDetalle(){
+        tblDetalle.removeAll();
         modelo = new DefaultTableModel();
         sumatoria = 0;
-        tblDetalle.removeAll();
         modelo = new DefaultTableModel(null,titulos);
         tblDetalle.setModel(modelo);
-        
+        txtTotal.setText("0.00");
         configurarTabla(tblDetalle);
     }
     
