@@ -47,6 +47,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        checkVarios.setVisible(false);
         this.vendedor = vendedor;
         usuario = new Usuario();
         usuario.setUsuario(this.vendedor);
