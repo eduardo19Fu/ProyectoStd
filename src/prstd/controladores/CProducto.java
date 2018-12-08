@@ -309,14 +309,11 @@ public class CProducto {
         bd = bd.setScale(2,RoundingMode.HALF_UP); // Decidimos el formato de redondeo y la cantidad de decimales que deseamos.
 
         String precio = String.format("%.2f",bd.doubleValue()); // Devolvemos el valor resultante como un String.
-        System.out.println(precio);
         String[] partes = precio.split(Pattern.quote(".")); // Separa el valor del precio en componentes usando el . como separador
         String entero = partes[0]; // Variable que almacena el valor entero.
         String decimal = partes[1]; // Variable que almacena el valor decimal.
-        System.out.println(decimal);
         int valor1 = Integer.parseInt(String.valueOf(decimal.charAt(0))); // guarda el primer digito despues del punto decimal.
         int valor2 = Integer.parseInt(String.valueOf(decimal.charAt(1))); // guarda el segundo digito despues del punto decimal.
-        System.out.println(valor2);
         int valor3 = Integer.parseInt(entero); // guarda la parte entera del valor ingresado antes del punto decimal.
         String nvalor = "";
         

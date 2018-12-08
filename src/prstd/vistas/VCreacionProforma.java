@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -897,16 +898,38 @@ public class VCreacionProforma extends javax.swing.JDialog {
     }
     
     private void descuento(double porcentaje, String codigo){
-        Producto producto = new Producto().buscarProducto(codigo);
-        double subtotal = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 3);
-        double pcostoTotal = ((int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0)) * ((double) producto.getPrecio_compra());
-        double nPrecio = subtotal - ((porcentaje/100)* subtotal);
+        Producto producto = new Producto().buscarProducto(codigo);// Instancia un objeto de la clase producto.
+        int cant = (int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0); // almacena la cantidad del producto ingresada
+        double precio_unidad = (double) producto.getPrecio_venta(); // almacena el precio por unidad del producto deseado
+        double precio_costo = (double) producto.getPrecio_compra(); // almacena el precio costo del producto elegido
+
+        double nprecio_unidad = (double) precio_unidad - (precio_unidad * (porcentaje/100)); // almacena el nuevo precio con descuento ya aplicado.
+        double nprecio_total = cant * nprecio_unidad; // almacena el subtotal del nuevo precio de venta con descuento ya aplicado
         
-        if(nPrecio >= pcostoTotal){
+        if(nprecio_unidad >= precio_costo){
             tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 4);
-            BigDecimal bd = new BigDecimal(nPrecio);// Almacena el valor resultante dentro de una variable BigDecimal
-            bd.setScale(2,RoundingMode.HALF_UP); // Redondea a dos decimales hacia arriba
-            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3); // Coloca el nuevo valor en la tabla de detalle
+            BigDecimal bd = new BigDecimal(nprecio_total);
+            String original = String.valueOf(bd);
+            
+            System.out.println(nprecio_total);
+            
+            String[] partes = original.split(Pattern.quote("."));
+            String entero = partes[0];
+            String decimal = partes[1];
+            
+            int valor1 = Integer.parseInt(entero);  // variable que almacena la parte entera de nuestro valor decimal.
+            int valor2 = Integer.parseInt(String.valueOf(decimal.charAt(0))); // variable que almacena el primer digíto de la parte decimal.
+            int valor3 = Integer.parseInt(String.valueOf(decimal.charAt(1))); // variable que almacena el segundo digíto de la parte decimal.
+            int valor4 = Integer.parseInt(String.valueOf(decimal.charAt(2))); // variable que almacena el tercer digíto de la parte decimal.
+            
+            
+            if(valor4 >= 5){
+                bd = bd.setScale(2,RoundingMode.HALF_UP);
+            }else if(valor4 < 5){
+                bd = bd.setScale(2,RoundingMode.DOWN);
+            }
+
+            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3);
             int conteoTabla = tblDetalle.getRowCount();
             double suma = 0;
             sumatoria = 0;
@@ -917,7 +940,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
             txtTotal.setText(String.valueOf(sumatoria));
         }else{
             JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
-            // aqui va el campo donde se ingresa el descuento a realizar
         }
     }
     
