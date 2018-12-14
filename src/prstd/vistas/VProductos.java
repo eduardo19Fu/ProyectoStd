@@ -37,13 +37,10 @@ public class VProductos extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         panelCobros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
-        choice2 = new java.awt.Choice();
-        choice3 = new java.awt.Choice();
-        choice1 = new java.awt.Choice();
         jLabel11 = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -111,8 +108,13 @@ public class VProductos extends javax.swing.JDialog {
         lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Search_32px.png"))); // NOI18N
         jPanel4.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, 30));
 
-        jTextField1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 280, -1));
+        txtBusqueda.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 280, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 810, 120));
 
@@ -134,48 +136,29 @@ public class VProductos extends javax.swing.JDialog {
         tblProductos.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(tblProductos);
 
-        choice2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        choice3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        choice1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jLabel11.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel11.setText("Filtros");
+        jLabel11.setText("Productos Disponibles");
 
         javax.swing.GroupLayout panelCobrosLayout = new javax.swing.GroupLayout(panelCobros);
         panelCobros.setLayout(panelCobrosLayout);
         panelCobrosLayout.setHorizontalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCobrosLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(panelCobrosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panelCobrosLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCobrosLayout.setVerticalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addGap(39, 39, 39)
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addGap(90, 90, 90)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
@@ -417,6 +400,10 @@ public class VProductos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
 
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        filtrar();
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -463,9 +450,6 @@ public class VProductos extends javax.swing.JDialog {
     private javax.swing.JPanel btnEliminar;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JPanel btnNuevo;
-    private java.awt.Choice choice1;
-    private java.awt.Choice choice2;
-    private java.awt.Choice choice3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -483,11 +467,11 @@ public class VProductos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 
     public void cerrarVentanaPrincipal(){
@@ -516,6 +500,26 @@ public class VProductos extends javax.swing.JDialog {
         Object[] datos = new Object[7];
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         List<Producto> lista = producto.buscarProductos();
+        for(int i = 0; i < lista.size(); i++){
+            datos[0] = lista.get(i).getCodigo();
+            datos[1] = lista.get(i).getNombre();
+            datos[2] = lista.get(i).getPrecio_compra();
+            datos[3] = lista.get(i).getPorcentaje_ganancia();
+            datos[4] = lista.get(i).getExistencia_tienda();
+            datos[5] = lista.get(i).getExistencia_bodega();
+            datos[6] = lista.get(i).getEstado();
+            modelo.addRow(datos);
+        }
+        tblProductos.setModel(modelo);
+    }
+
+    private void filtrar() {
+        producto = new Producto();
+        String[] titulos = {"Código","Nombre","Precio Costo","% Ganancia","Stuck Tienda","Stuck Bodega","Estado"};
+        Object[] datos = new Object[7];
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        List<Producto> lista = producto.filtrarProductos(txtBusqueda.getText());
+        
         for(int i = 0; i < lista.size(); i++){
             datos[0] = lista.get(i).getCodigo();
             datos[1] = lista.get(i).getNombre();
