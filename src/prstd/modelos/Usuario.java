@@ -164,4 +164,9 @@ public class Usuario {
         CUsuario cu = new CUsuario();
         return cu.vendedores();
     }
+    
+    public List<Usuario> filtrarUsuarios(String valor){
+        CUsuario cu = new CUsuario();
+        return cu.filtrarUsuarios(valor);
+    }
 }
