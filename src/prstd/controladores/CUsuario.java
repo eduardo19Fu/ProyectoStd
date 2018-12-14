@@ -116,7 +116,7 @@ public class CUsuario {
     }
     
     public List<Usuario> consultar(String usuario){
-        String sql = "select * from usuario where usuario like ?";
+        String sql = "select * from tbl_usuario where usuario like ?";
         List<Usuario> lista = new ArrayList<>();
                 
         try {
@@ -208,6 +208,42 @@ public class CUsuario {
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    // Método encargado de realizar el filtro para la ventana de Usuarios
+    // Pretende realizar un filtro según el valor que el usuario desee buscar.
+    public List<Usuario> filtrarUsuarios(String valor){
+        String sql = "select * from tbl_usuario where usuario like ? or nombre like ? or apellido like ? or estado like ?";
+        List<Usuario> lista = new ArrayList<>();
+                
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + valor + "%");
+            ps.setString(2, "%" + valor + "%");
+            ps.setString(3, "%" + valor + "%");
+            ps.setString(4, "%" + valor + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                this.usuario = new Usuario();
+                this.usuario.setIdusuario(rs.getInt("idusuario"));
+                this.usuario.setUsuario(rs.getString("usuario"));
+                this.usuario.setPassword(rs.getString("password"));
+                this.usuario.setNombre(rs.getString("nombre"));
+                this.usuario.setApellido(rs.getString("apellido"));
+                this.usuario.setEstado(rs.getString("estado"));
+                this.usuario.setTelefono(rs.getString("telefono"));
+                this.usuario.setEmail(rs.getString("email"));
+                this.usuario.setIdrol(rs.getInt("rol"));
+                lista.add(this.usuario);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
     

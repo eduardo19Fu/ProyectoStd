@@ -41,9 +41,6 @@ public class VUsuarios extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblListaUsuarios = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        choice1 = new java.awt.Choice();
-        choice2 = new java.awt.Choice();
-        choice3 = new java.awt.Choice();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -108,6 +105,11 @@ public class VUsuarios extends javax.swing.JDialog {
         jPanel4.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, 30));
 
         txtBusqueda.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
         jPanel4.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 360, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 810, 120));
@@ -140,14 +142,6 @@ public class VUsuarios extends javax.swing.JDialog {
         panelCobros.setLayout(panelCobrosLayout);
         panelCobrosLayout.setHorizontalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
-                .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
             .addGroup(panelCobrosLayout.createSequentialGroup()
                 .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCobrosLayout.createSequentialGroup()
@@ -156,25 +150,16 @@ public class VUsuarios extends javax.swing.JDialog {
                     .addGroup(panelCobrosLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         panelCobrosLayout.setVerticalGroup(
             panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCobrosLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel9)
-                .addGap(39, 39, 39)
-                .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addGroup(panelCobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(choice2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74))
-                    .addGroup(panelCobrosLayout.createSequentialGroup()
-                        .addComponent(choice3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
 
         jPanel2.add(panelCobros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 790, 600));
@@ -372,6 +357,10 @@ public class VUsuarios extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnEliminarMouseClicked
 
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        filtrar();
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -420,9 +409,6 @@ public class VUsuarios extends javax.swing.JDialog {
     private javax.swing.JPanel btnEditar;
     private javax.swing.JPanel btnEliminar;
     private javax.swing.JPanel btnNuevo;
-    private java.awt.Choice choice1;
-    private java.awt.Choice choice2;
-    private java.awt.Choice choice3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -500,5 +486,26 @@ public class VUsuarios extends javax.swing.JDialog {
         // Indicamos la alineación que tendrán las columnas.
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);
+    }
+
+    private void filtrar() {
+        this.usuario = new Usuario();
+        String[] titulos = {"ID","Usuario","Nombre","Estado","E-mail","Teléfono"};
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        Object[] datos = new Object[6];
+        List<Usuario> lista = usuario.filtrarUsuarios(txtBusqueda.getText());
+        for(int i = 0; i < lista.size(); i++){
+            datos[0] = lista.get(i).getIdusuario();
+            datos[1] = lista.get(i).getUsuario();
+            datos[2] = lista.get(i).getNombre() + " " + lista.get(i).getApellido();
+            if(lista.get(i).getEstado().equals("ACTIVO"))
+                datos[3] = "A";
+            else
+                datos[3] = "I";
+            datos[4] = lista.get(i).getEmail();
+            datos[5] = lista.get(i).getTelefono();
+            modelo.addRow(datos);
+        }
+        tblListaUsuarios.setModel(modelo);
     }
 }
