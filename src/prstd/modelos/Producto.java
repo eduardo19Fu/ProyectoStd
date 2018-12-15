@@ -266,6 +266,11 @@ public class Producto {
         return cp.descontinuar(codigo);
     }
     
+    public List<Producto> filtrarProductos(String valor){
+        CProducto cp = new CProducto();
+        return cp.filtrarProductos(valor);
+    }
+    
     public javax.swing.JFrame reportTienda(){
         CProducto cp = new CProducto();
         return cp.reportTienda();

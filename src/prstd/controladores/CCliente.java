@@ -61,7 +61,6 @@ public class CCliente {
     }
     
     public List<Cliente> consultar(){
-        cliente = new Cliente();
         List<Cliente> lista = new ArrayList<>();
         String sql = "select * from tbl_cliente";
         
@@ -69,6 +68,7 @@ public class CCliente {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                cliente = new Cliente();
                 cliente.setIdcliente(rs.getInt(1));
                 cliente.setNombre(rs.getString(2));
                 cliente.setDireccion(rs.getString(3));
@@ -85,26 +85,24 @@ public class CCliente {
         }
     }
     
-    public List<Cliente> buscarNit(String nit){
+    public Cliente buscarNit(String nit){
         String sql = "select * from tbl_cliente where nit = ?";
-        List<Cliente> lista = new ArrayList<>();
+        Cliente cliente = new Cliente();
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, nit);
             ResultSet rs = ps.executeQuery();
             rs.next();
-            cliente = new Cliente();
             cliente.setIdcliente(rs.getInt(1));
             cliente.setNombre(rs.getString(2));
             cliente.setDireccion(rs.getString(3));
             cliente.setNit(rs.getString(4));
-            lista.add(cliente);
             
             rs.close();
             ps.close();
             connection.close();
-            return lista;
+            return cliente;
         } catch (SQLException ex) {
             Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -112,15 +110,17 @@ public class CCliente {
     }
     
     public List<Cliente> consultarNit(String parametro){
-        cliente = new Cliente();
         List<Cliente> lista = new ArrayList<>();
-        String sql = "select * from tbl_cliente where nit like  ?";
+        String sql = "select * from tbl_cliente where nit like ? or nombre like ? or direccion like ?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + parametro + "%");
+            ps.setString(2, "%" + parametro + "%");
+            ps.setString(3, "%" + parametro + "%");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                cliente = new Cliente();
                 cliente.setIdcliente(rs.getInt(1));
                 cliente.setNombre(rs.getString(2));
                 cliente.setDireccion(rs.getString(3));

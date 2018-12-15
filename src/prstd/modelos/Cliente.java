@@ -75,9 +75,9 @@ public class Cliente {
         return cliente.grabar(c);
     }
     
-    public List<Cliente> consultar(String n){
+    public List<Cliente> consultar(String parametro){
         CCliente cliente = new CCliente();
-        return cliente.consultarNit(n);
+        return cliente.consultarNit(parametro);
     }
     
     public int getMaxCliente(){
@@ -85,7 +85,7 @@ public class Cliente {
         return cliente.getMaxCliente();
     }
     
-    public List<Cliente> buscarNit(String nit){
+    public Cliente buscarNit(String nit){
         CCliente cliente = new CCliente();
         return cliente.buscarNit(nit);
     }
