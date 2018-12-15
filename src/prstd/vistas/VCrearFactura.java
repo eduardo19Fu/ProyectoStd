@@ -77,6 +77,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         checkVarios = new javax.swing.JCheckBox();
+        btnBuscarCliente = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -215,6 +216,24 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
         });
         jPanel3.add(checkVarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
+
+        btnBuscarCliente.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        btnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Search_32px_1.png"))); // NOI18N
+        btnBuscarCliente.setText("F4");
+        btnBuscarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarClienteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarClienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarClienteMouseExited(evt);
+            }
+        });
+        jPanel3.add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 5, 63, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 190, 880, 120));
 
@@ -746,6 +765,19 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
+    private void btnBuscarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteMouseClicked
+        VBusquedaClientes vb = new VBusquedaClientes(null, true, 1);
+        vb.setVisible(true);
+    }//GEN-LAST:event_btnBuscarClienteMouseClicked
+
+    private void btnBuscarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteMouseEntered
+        setBorde(btnBuscarCliente);
+    }//GEN-LAST:event_btnBuscarClienteMouseEntered
+
+    private void btnBuscarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteMouseExited
+        resetBorde(btnBuscarCliente);
+    }//GEN-LAST:event_btnBuscarClienteMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -787,6 +819,7 @@ public class VCrearFactura extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAdd;
+    private javax.swing.JLabel btnBuscarCliente;
     private javax.swing.JLabel btnBuscarCodigo;
     private javax.swing.JLabel btnDescuento;
     private javax.swing.JLabel btnEliminar;
@@ -884,18 +917,17 @@ public class VCrearFactura extends javax.swing.JDialog {
     }
     
     public void buscarNit(){
-        Cliente cliente = new Cliente();
-        List<Cliente> lista = new ArrayList<>();
+        Cliente cliente;
         if(!txtNit.getText().isEmpty())
-            lista = cliente.buscarNit(txtNit.getText());
+            cliente = new Cliente().buscarNit(txtNit.getText());
         else
-            lista = cliente.buscarNit("C/F");
-        if(lista != null){
-            for(int i = 0; i < lista.size(); i++){
-                txtNit.setText(lista.get(i).getNit());
-                txtNombre.setText(lista.get(i).getNombre());
-                txtDireccion.setText(lista.get(i).getDireccion());
-            }
+            cliente = new Cliente().buscarNit("C/F");
+        if(cliente != null){
+            
+            txtNit.setText(cliente.getNit());
+            txtNombre.setText(cliente.getNombre());
+            txtDireccion.setText(cliente.getDireccion());
+            
             txtCodigo.grabFocus();
         }else{
             VRegistroClientes rc = new VRegistroClientes(null, true, txtNit.getText());
