@@ -3,6 +3,7 @@ package prstd.servicios;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,7 +26,9 @@ public class ConexionDos {
         pass = "1992";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://localhost/" + db + "?userTimezone=true&serverTimezone=UTC&useSSL=false";
+        url = "jdbc:mysql://localhost/" + db 
+              + "?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone="
+              + TimeZone.getDefault().getID() + "&useSSL=false";
     }   
     
     private Connection conectar(){

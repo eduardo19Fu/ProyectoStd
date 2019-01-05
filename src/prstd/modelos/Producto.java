@@ -216,6 +216,11 @@ public class Producto {
         return cp.calcularPrecioVenta(precioCosto, porcentaje);
     }
     
+    public String calcularDescuento(String nprecio){
+        CProducto cp = new CProducto();
+        return cp.calcularDescuento(nprecio);
+    }
+    
     public List<Producto> buscarProductos(String codigo){
         CProducto cp = new CProducto();
         return cp.buscarProductos(codigo);

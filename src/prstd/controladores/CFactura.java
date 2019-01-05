@@ -39,19 +39,19 @@ public class CFactura {
     }
     
     public int crearFactura(Documento factura){
-        String sql = "insert into tbl_documento values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, factura.getIdtransaccion());
             ps.setInt(2, factura.getNo_documento());
-            ps.setTimestamp(3, factura.getFecha_emision());
-            ps.setDouble(4, factura.getTotal());
-            ps.setInt(5, factura.getIdcliente());
-            ps.setInt(6, factura.getIdvendedor());
-            ps.setString(7, factura.getSerie());
-            ps.setString(8, factura.getEstado());
-            ps.setInt(9, factura.getTipo_documento());
+            //ps.setTimestamp(3, factura.getFecha_emision());
+            ps.setDouble(3, factura.getTotal());
+            ps.setInt(4, factura.getIdcliente());
+            ps.setInt(5, factura.getIdvendedor());
+            ps.setString(6, factura.getSerie());
+            ps.setString(7, factura.getEstado());
+            ps.setInt(8, factura.getTipo_documento());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -64,7 +64,7 @@ public class CFactura {
     
     
     public int anular(int idtransaccion, int no_documento, String serie){
-        String sql = "update tbl_documento set estado = 'ANULADA' where idtransaccion = ? and no_documento = ? and serie = ?";
+        String sql = "update tbl_documento set fecha_emision = fecha_emision,estado = 'ANULADA' where idtransaccion = ? and no_documento = ? and serie = ?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class CFactura {
     }
     
     public List<Documento> consultarTransacciones(){
-        String sql = "select * from tbl_documento where tipo_documento = 1 and date(fecha_emision) = curdate()";
+        String sql = "select * from tbl_documento where tipo_documento = 1 and fecha_emision = curdate()";
         List<Documento> lista = new ArrayList<>();
         
         try {
@@ -237,7 +237,7 @@ public class CFactura {
     }
     
     public int detalleFactura(DefaultTableModel modelo, int transaccion,String serie){
-        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?)";
+        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?,?)";
         int rs = 0;
         Producto producto = new Producto();
         
@@ -247,13 +247,15 @@ public class CFactura {
                 ps.setInt(1, transaccion);
                 ps.setString(2, modelo.getValueAt(i, 1).toString());
                 ps.setInt(3, (int) modelo.getValueAt(i, 0));
-                ps.setDouble(4, Double.parseDouble(modelo.getValueAt(i, 3).toString()));
+                ps.setDouble(4, Double.parseDouble(modelo.getValueAt(i,4).toString()));
                 
                 // Validación del campo de descuento.
-                if(modelo.getValueAt(i, 4) != null){
-                    ps.setDouble(5, (double) modelo.getValueAt(i, 4)); // si el campo no esta vacio se inserta en la db
+                if(modelo.getValueAt(i, 5) != null){
+                    ps.setDouble(5, (double) modelo.getValueAt(i, 5)); // si el campo no esta vacio se inserta en la db
+                    ps.setDouble(7, (double) modelo.getValueAt(i, 3));
                 }else{
                     ps.setDouble(5, 0.00); // por el contrario si lo esta, se inserta el valor de 0.00
+                    ps.setDouble(7, 0.00);
                 }
                 ps.setString(6, serie);
                 rs = ps.executeUpdate();
