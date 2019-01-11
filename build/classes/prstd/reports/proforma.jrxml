@@ -23,7 +23,7 @@
         	date_format(dc.fecha_emision,'%d/%m/%Y'),
         	de.cantidad,
         	pro.nombre_producto,
-        	pro.precio_venta,
+        	if(de.descuento != 0, de.nprecio_venta,pro.precio_venta) as precio_venta,
         	de.subtotal,
         	dc.total,
 	$P{texto} as texto,

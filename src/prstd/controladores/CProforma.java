@@ -38,19 +38,19 @@ public class CProforma {
     }
     
     public int insert(Documento proforma){
-        String sql = "insert into tbl_documento values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, proforma.getIdtransaccion());
             ps.setInt(2, proforma.getNo_documento());
-            ps.setTimestamp(3, proforma.getFecha_emision());
-            ps.setDouble(4, proforma.getTotal());
-            ps.setInt(5, proforma.getIdcliente());
-            ps.setInt(6, proforma.getIdvendedor());
-            ps.setString(7, proforma.getSerie());
-            ps.setString(8, proforma.getEstado());
-            ps.setInt(9, proforma.getTipo_documento());
+            //ps.setTimestamp(3, proforma.getFecha_emision());
+            ps.setDouble(3, proforma.getTotal());
+            ps.setInt(4, proforma.getIdcliente());
+            ps.setInt(5, proforma.getIdvendedor());
+            ps.setString(6, proforma.getSerie());
+            ps.setString(7, proforma.getEstado());
+            ps.setInt(8, proforma.getTipo_documento());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -62,7 +62,7 @@ public class CProforma {
     }
     
     public int insertDetalle(DefaultTableModel modelo, int transaccion, String serie){
-        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?)";
+        String sql = "insert into tbl_detalle_documento values(?,?,?,?,?,?,?)";
         int rs = 0;
         Producto producto = new Producto();
         
@@ -72,11 +72,13 @@ public class CProforma {
                 ps.setInt(1, transaccion);
                 ps.setString(2, modelo.getValueAt(i, 1).toString());
                 ps.setInt(3, (int) modelo.getValueAt(i, 0));
-                ps.setDouble(4, (double) modelo.getValueAt(i, 3));
-                if(modelo.getValueAt(i, 4) != null){
-                    ps.setDouble(5, (double) modelo.getValueAt(i, 4)); // si el campo no esta vacio se inserta en la db
+                ps.setDouble(4, (double) modelo.getValueAt(i, 4));
+                if(modelo.getValueAt(i, 5) != null){
+                    ps.setDouble(5, (double) modelo.getValueAt(i, 5)); // si el campo no esta vacio se inserta en la db
+                    ps.setDouble(7, (double) modelo.getValueAt(i, 3));
                 }else{
                     ps.setDouble(5, 0.00); // por el contrario si lo esta, se inserta el valor de 0.00
+                    ps.setDouble(7, 0.00);
                 }
                 ps.setString(6, serie);
                 rs = ps.executeUpdate();        
@@ -171,7 +173,7 @@ public class CProforma {
     }
     
     public int delete(int transaccion){
-        String sql = "update tbl_documento set estado = 'ANULADA' where idtransaccion = ?";
+        String sql = "update tbl_documento set fecha_emision = fecha_emision,estado = 'ANULADA' where idtransaccion = ?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

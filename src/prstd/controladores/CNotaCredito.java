@@ -51,8 +51,8 @@ public class CNotaCredito {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             for(int i = 0; i < modelo.getRowCount(); i++){
-                if(!modelo.getValueAt(i, 5).toString().equals("")){
-                    ps.setInt(1, (int) modelo.getValueAt(i, 5));
+                if(!modelo.getValueAt(i, 6).toString().equals("")){
+                    ps.setInt(1, (int) modelo.getValueAt(i, 6));
                     rs = ps.executeUpdate();
                 }
             }

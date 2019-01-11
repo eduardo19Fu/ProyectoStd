@@ -35,9 +35,9 @@ public class CNotaTransaccion {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             for(int i = 0; i < modelo.getRowCount(); i++){
-                if(!String.valueOf(modelo.getValueAt(i, 5)).isEmpty()){
+                if(!String.valueOf(modelo.getValueAt(i, 6)).isEmpty()){
                     ps.setInt(1, transaccion);
-                    ps.setInt(2, (int) modelo.getValueAt(i, 5));
+                    ps.setInt(2, (int) modelo.getValueAt(i, 6));
                     rs = ps.executeUpdate();
                 }
             }

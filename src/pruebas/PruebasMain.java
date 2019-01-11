@@ -1,5 +1,7 @@
 package pruebas;
 
+import java.util.Date;
+import java.sql.Timestamp;
 import prstd.controladores.CProducto;
 
 /**
@@ -26,5 +28,7 @@ public class PruebasMain {
 //        System.out.println(aux.Convertir(valor, true));
         CProducto cp = new CProducto();
         System.out.println(cp.calcularPrecioVenta("25.32", "50"));
+        Timestamp tm = new Timestamp(new Date().getTime());
+        System.out.println(tm);
     }
 }

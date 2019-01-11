@@ -380,6 +380,40 @@ public class CProducto {
         return precio;
     }
     
+    public String calcularDescuento(String nprecio){
+        
+        double preciov = Double.parseDouble(nprecio);
+        
+        BigDecimal bd = new BigDecimal(preciov); // Creamos una variable BigDecimal para almacenar el precioVenta.
+        bd = bd.setScale(2,RoundingMode.HALF_UP); // Decidimos el formato de redondeo y la cantidad de decimales que deseamos.
+
+        String precio = String.format("%.2f",bd.doubleValue()); // Devolvemos el valor resultante como un String.
+        String[] partes = precio.split(Pattern.quote(".")); // Separa el valor del precio en componentes usando el . como separador
+        String entero = partes[0]; // Variable que almacena el valor entero.
+        String decimal = partes[1]; // Variable que almacena el valor decimal.
+        int valor1 = Integer.parseInt(String.valueOf(decimal.charAt(0))); // guarda el primer digito despues del punto decimal.
+        int valor2 = Integer.parseInt(String.valueOf(decimal.charAt(1))); // guarda el segundo digito despues del punto decimal.
+        int valor3 = Integer.parseInt(entero); // guarda la parte entera del valor ingresado antes del punto decimal.
+        String nvalor = "";
+        
+        if(valor2 >= 1 && valor2 <= 4){ // Si el valor del segundo dígito del decimal se encuentra entre 1 y 4
+            valor2 = 5; // Le damos el valor de 5 al segundo decimal cuando la desicion devuelve verdadero
+            nvalor = String.valueOf(valor1) + String.valueOf(valor2); // Concatena el primer y segundo decimal
+            precio = entero + "." + nvalor; // Concatena el valor entero 
+        }else if(valor2 >= 6 && valor2 <= 9){
+            valor2 = 0;
+            if(valor1 == 9){
+                valor1 = 0;
+                valor3 += 1;
+            }else{
+                valor1 += 1;
+            }
+            nvalor = String.valueOf(valor1) + String.valueOf(valor2);
+            precio = String.valueOf(valor3) + "." + nvalor;
+        }
+        return precio;
+    }
+    
     public String redondearPrecio(double precio){
         BigDecimal bd = new BigDecimal(precio);
         bd = bd.setScale(2,RoundingMode.HALF_UP);

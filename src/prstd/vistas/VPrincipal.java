@@ -58,6 +58,9 @@ public class VPrincipal extends javax.swing.JFrame {
         panelSalir = new javax.swing.JPanel();
         btnCerrarSesion = new javax.swing.JLabel();
         btnCerrarSistema = new javax.swing.JLabel();
+        panelDespacho = new javax.swing.JPanel();
+        btnCrear = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -68,6 +71,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnCobros = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnDespacho = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         btnReportes = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -440,6 +446,49 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jPanel2.add(panelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
+        panelDespacho.setOpaque(false);
+        java.awt.FlowLayout flowLayout5 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
+        flowLayout5.setAlignOnBaseline(true);
+        panelDespacho.setLayout(flowLayout5);
+
+        btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Product_72px.png"))); // NOI18N
+        btnCrear.setToolTipText("Opción que permite al usuario crear una nueva orden de despacho.");
+        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCrear.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrearMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCrearMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCrearMouseExited(evt);
+            }
+        });
+        panelDespacho.add(btnCrear);
+
+        btnConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Close_Window_72px.png"))); // NOI18N
+        btnConsultar.setToolTipText("Opción que permite al usuario realizar una consultar de las ordenes de despacho.");
+        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultar.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConsultarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConsultarMouseExited(evt);
+            }
+        });
+        panelDespacho.add(btnConsultar);
+
+        jPanel2.add(panelDespacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 0, 810, 780));
 
         panelOpciones.setBackground(new java.awt.Color(0, 153, 153));
@@ -506,6 +555,32 @@ public class VPrincipal extends javax.swing.JFrame {
         btnCobros.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
         jPanel3.add(btnCobros);
+
+        btnDespacho.setBackground(new java.awt.Color(0, 153, 153));
+        btnDespacho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDespacho.setPreferredSize(new java.awt.Dimension(393, 50));
+        btnDespacho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDespachoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDespachoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDespachoMouseExited(evt);
+            }
+        });
+        btnDespacho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_In_Transit_50px.png"))); // NOI18N
+        btnDespacho.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Ordenes de Despacho");
+        btnDespacho.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+
+        jPanel3.add(btnDespacho);
 
         btnReportes.setBackground(new java.awt.Color(0, 153, 153));
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -847,6 +922,42 @@ public class VPrincipal extends javax.swing.JFrame {
         vf.setVisible(true);
     }//GEN-LAST:event_btnFabricantesMouseClicked
 
+    private void btnDespachoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespachoMouseClicked
+        configPanelDespacho();
+    }//GEN-LAST:event_btnDespachoMouseClicked
+
+    private void btnDespachoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespachoMouseEntered
+        setColor(btnDespacho);
+    }//GEN-LAST:event_btnDespachoMouseEntered
+
+    private void btnDespachoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespachoMouseExited
+        resetColor(btnDespacho);
+    }//GEN-LAST:event_btnDespachoMouseExited
+
+    private void btnConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseExited
+        resetBorder(btnConsultar);
+    }//GEN-LAST:event_btnConsultarMouseExited
+
+    private void btnConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseEntered
+        setBorder(btnConsultar);
+    }//GEN-LAST:event_btnConsultarMouseEntered
+
+    private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
+        
+    }//GEN-LAST:event_btnConsultarMouseClicked
+
+    private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
+        resetBorder(btnCrear);
+    }//GEN-LAST:event_btnCrearMouseExited
+
+    private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
+        setBorder(btnCrear);
+    }//GEN-LAST:event_btnCrearMouseEntered
+
+    private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -886,7 +997,10 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnCerrarSistema;
     private javax.swing.JPanel btnCobros;
     private javax.swing.JLabel btnConsultaProformas;
+    private javax.swing.JLabel btnConsultar;
     private javax.swing.JLabel btnCorrelativos;
+    private javax.swing.JLabel btnCrear;
+    private javax.swing.JPanel btnDespacho;
     private javax.swing.JLabel btnFabricantes;
     private javax.swing.JLabel btnFamilias;
     private javax.swing.JLabel btnMinimizar;
@@ -904,6 +1018,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnVentas;
     private javax.swing.JLabel btnVentasMensuales;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -913,6 +1028,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -920,6 +1036,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
+    private javax.swing.JPanel panelDespacho;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelSalir;
@@ -994,6 +1111,18 @@ public class VPrincipal extends javax.swing.JFrame {
         }
     }
     
+    // Configura la visibilidad del panel de Ordenes de Despacho
+    private void configPanelDespacho(){
+        if(!panelDespacho.isVisible()){
+            initPaneles();
+            lblTitulo.setText("Módulo de Despacho");
+            panelDespacho.setVisible(true);
+        }else{
+            lblTitulo.setText("");
+            initPaneles();
+        }
+    }
+    
     // Inicializa los paneles de las opciones disponibles.
     private void initPaneles(){
         Usuario usuario = new Usuario();
@@ -1002,6 +1131,7 @@ public class VPrincipal extends javax.swing.JFrame {
         panelCobros.setVisible(false);
         panelSalir.setVisible(false);
         panelReportes.setVisible(false);
+        panelDespacho.setVisible(false);
         btnRoles.setVisible(false);
         
         // Decide las opciones visibles dependiendo del nivel de acceso que el usuario tenga.
@@ -1014,7 +1144,7 @@ public class VPrincipal extends javax.swing.JFrame {
                 break;
             case 3:
                 permisoBodega();
-                break;
+                break;                
             default:
                 break;
         }
@@ -1025,6 +1155,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnCobros.setVisible(true);
         btnReportes.setVisible(true);
         btnSalir.setVisible(true);
+        btnDespacho.setVisible(true);
     }
     
     private void permisoVendedor(){

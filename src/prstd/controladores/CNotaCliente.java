@@ -34,8 +34,8 @@ public class CNotaCliente {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             for(int i = 0; i < modelo.getRowCount(); i++){
-                if(!String.valueOf(modelo.getValueAt(i, 5)).isEmpty()){
-                    ps.setInt(1, (int) modelo.getValueAt(i, 5));
+                if(!String.valueOf(modelo.getValueAt(i, 6)).isEmpty()){
+                    ps.setInt(1, (int) modelo.getValueAt(i, 6));
                     ps.setInt(2, cliente);
                     rs = ps.executeUpdate();
                 }
