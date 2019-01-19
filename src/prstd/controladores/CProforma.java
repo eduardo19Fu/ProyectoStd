@@ -75,7 +75,7 @@ public class CProforma {
                 ps.setDouble(4, (double) modelo.getValueAt(i, 4));
                 if(modelo.getValueAt(i, 5) != null){
                     ps.setDouble(5, (double) modelo.getValueAt(i, 5)); // si el campo no esta vacio se inserta en la db
-                    ps.setDouble(7, (double) modelo.getValueAt(i, 3));
+                    ps.setDouble(7, Double.parseDouble(modelo.getValueAt(i, 3).toString()));
                 }else{
                     ps.setDouble(5, 0.00); // por el contrario si lo esta, se inserta el valor de 0.00
                     ps.setDouble(7, 0.00);

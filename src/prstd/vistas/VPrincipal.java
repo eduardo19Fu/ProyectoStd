@@ -59,8 +59,8 @@ public class VPrincipal extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JLabel();
         btnCerrarSistema = new javax.swing.JLabel();
         panelDespacho = new javax.swing.JPanel();
-        btnCrear = new javax.swing.JLabel();
-        btnConsultar = new javax.swing.JLabel();
+        btnCrearOrden = new javax.swing.JLabel();
+        btnConsultarOrdenes = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -451,41 +451,41 @@ public class VPrincipal extends javax.swing.JFrame {
         flowLayout5.setAlignOnBaseline(true);
         panelDespacho.setLayout(flowLayout5);
 
-        btnCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Product_72px.png"))); // NOI18N
-        btnCrear.setToolTipText("Opción que permite al usuario crear una nueva orden de despacho.");
-        btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCrear.setPreferredSize(new java.awt.Dimension(120, 120));
-        btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCrearOrden.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCrearOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Product_72px.png"))); // NOI18N
+        btnCrearOrden.setToolTipText("Opción que permite al usuario crear una nueva orden de despacho.");
+        btnCrearOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCrearOrden.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCrearOrden.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCrearMouseClicked(evt);
+                btnCrearOrdenMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCrearMouseEntered(evt);
+                btnCrearOrdenMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCrearMouseExited(evt);
+                btnCrearOrdenMouseExited(evt);
             }
         });
-        panelDespacho.add(btnCrear);
+        panelDespacho.add(btnCrearOrden);
 
-        btnConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Close_Window_72px.png"))); // NOI18N
-        btnConsultar.setToolTipText("Opción que permite al usuario realizar una consultar de las ordenes de despacho.");
-        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultar.setPreferredSize(new java.awt.Dimension(120, 120));
-        btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnConsultarOrdenes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsultarOrdenes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Trolley_72px_1.png"))); // NOI18N
+        btnConsultarOrdenes.setToolTipText("Opción que permite al usuario realizar una consultar de las ordenes de despacho.");
+        btnConsultarOrdenes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultarOrdenes.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnConsultarOrdenes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseClicked(evt);
+                btnConsultarOrdenesMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseEntered(evt);
+                btnConsultarOrdenesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConsultarMouseExited(evt);
+                btnConsultarOrdenesMouseExited(evt);
             }
         });
-        panelDespacho.add(btnConsultar);
+        panelDespacho.add(btnConsultarOrdenes);
 
         jPanel2.add(panelDespacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
@@ -934,29 +934,31 @@ public class VPrincipal extends javax.swing.JFrame {
         resetColor(btnDespacho);
     }//GEN-LAST:event_btnDespachoMouseExited
 
-    private void btnConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseExited
-        resetBorder(btnConsultar);
-    }//GEN-LAST:event_btnConsultarMouseExited
+    private void btnConsultarOrdenesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarOrdenesMouseExited
+        resetBorder(btnConsultarOrdenes);
+    }//GEN-LAST:event_btnConsultarOrdenesMouseExited
 
-    private void btnConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseEntered
-        setBorder(btnConsultar);
-    }//GEN-LAST:event_btnConsultarMouseEntered
+    private void btnConsultarOrdenesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarOrdenesMouseEntered
+        setBorder(btnConsultarOrdenes);
+    }//GEN-LAST:event_btnConsultarOrdenesMouseEntered
 
-    private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
-        
-    }//GEN-LAST:event_btnConsultarMouseClicked
+    private void btnConsultarOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarOrdenesMouseClicked
+        VOrdenesDespacho vd = new VOrdenesDespacho(this, false, usuario);
+        vd.setVisible(true);
+    }//GEN-LAST:event_btnConsultarOrdenesMouseClicked
 
-    private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
-        resetBorder(btnCrear);
-    }//GEN-LAST:event_btnCrearMouseExited
+    private void btnCrearOrdenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearOrdenMouseExited
+        resetBorder(btnCrearOrden);
+    }//GEN-LAST:event_btnCrearOrdenMouseExited
 
-    private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
-        setBorder(btnCrear);
-    }//GEN-LAST:event_btnCrearMouseEntered
+    private void btnCrearOrdenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearOrdenMouseEntered
+        setBorder(btnCrearOrden);
+    }//GEN-LAST:event_btnCrearOrdenMouseEntered
 
-    private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCrearMouseClicked
+    private void btnCrearOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearOrdenMouseClicked
+        VCrearOrdenes vo = new VCrearOrdenes(this,false,usuario);
+        vo.setVisible(true);
+    }//GEN-LAST:event_btnCrearOrdenMouseClicked
 
     /**
      * @param args the command line arguments
@@ -997,9 +999,9 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnCerrarSistema;
     private javax.swing.JPanel btnCobros;
     private javax.swing.JLabel btnConsultaProformas;
-    private javax.swing.JLabel btnConsultar;
+    private javax.swing.JLabel btnConsultarOrdenes;
     private javax.swing.JLabel btnCorrelativos;
-    private javax.swing.JLabel btnCrear;
+    private javax.swing.JLabel btnCrearOrden;
     private javax.swing.JPanel btnDespacho;
     private javax.swing.JLabel btnFabricantes;
     private javax.swing.JLabel btnFamilias;
