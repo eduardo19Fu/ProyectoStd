@@ -30,7 +30,7 @@
 	concat(u.nombre,' ', u.apellido) as vendedor,
 	dc.serie as serie,
  	pro.codigo,
-	de.descuento
+	(de.descuento * 100) as descuento
 from 
 	tbl_documento dc
 inner join 
@@ -63,7 +63,7 @@ where
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="123" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<rectangle radius="10">
 				<reportElement x="0" y="0" width="274" height="55"/>
 			</rectangle>
@@ -76,7 +76,7 @@ where
 Carmelita]]></text>
 			</staticText>
 			<rectangle radius="10">
-				<reportElement mode="Opaque" x="294" y="0" width="278" height="122" backcolor="#009999"/>
+				<reportElement mode="Opaque" x="294" y="0" width="278" height="107" backcolor="#009999"/>
 			</rectangle>
 			<textField>
 				<reportElement x="441" y="6" width="118" height="24" forecolor="#FFFFFF"/>
@@ -107,7 +107,7 @@ Carmelita]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{date_format(dc.fecha_emision,'%d/%m/%Y')}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="10">
-				<reportElement x="0" y="72" width="274" height="50"/>
+				<reportElement x="0" y="57" width="274" height="50"/>
 			</rectangle>
 			<textField>
 				<reportElement x="441" y="32" width="118" height="20" forecolor="#FFFFFF"/>
@@ -124,7 +124,7 @@ Carmelita]]></text>
 				<text><![CDATA[Serie:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="72" width="257" height="50"/>
+				<reportElement x="6" y="57" width="257" height="50"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
@@ -136,40 +136,40 @@ Teléfonos: 4582-1048/5728-2246]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="53" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="65" y="8" width="230" height="20"/>
+				<reportElement x="65" y="5" width="504" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="16" y="8" width="43" height="20"/>
+				<reportElement x="16" y="5" width="43" height="20"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cliente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="8" width="43" height="20"/>
+				<reportElement x="398" y="58" width="43" height="20"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nit:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="357" y="8" width="123" height="20"/>
+				<reportElement x="446" y="58" width="123" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nit}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="16" y="30" width="60" height="20"/>
+				<reportElement x="16" y="35" width="60" height="20"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="82" y="30" width="463" height="20"/>
+				<reportElement x="82" y="35" width="487" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>

@@ -2,6 +2,8 @@ package pruebas;
 
 import java.util.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import prstd.controladores.CProducto;
 
 /**
@@ -29,6 +31,7 @@ public class PruebasMain {
         CProducto cp = new CProducto();
         System.out.println(cp.calcularPrecioVenta("25.32", "50"));
         Timestamp tm = new Timestamp(new Date().getTime());
-        System.out.println(tm);
+        LocalDate date = LocalDate.now();
+        System.out.println(date);
     }
 }
