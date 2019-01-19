@@ -1041,7 +1041,7 @@
                 </Constraint>
               </Constraints>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="btnCrear">
+                <Component class="javax.swing.JLabel" name="btnCrearOrden">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -1056,16 +1056,16 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearMouseExited"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearOrdenMouseClicked"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearOrdenMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearOrdenMouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="btnConsultar">
+                <Component class="javax.swing.JLabel" name="btnConsultarOrdenes">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/prstd/images/icons8_Close_Window_72px.png"/>
+                      <Image iconType="3" name="/prstd/images/icons8_Trolley_72px_1.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Opci&#xf3;n que permite al usuario realizar una consultar de las ordenes de despacho."/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -1076,9 +1076,9 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarMouseExited"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarOrdenesMouseClicked"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarOrdenesMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultarOrdenesMouseExited"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -1153,11 +1153,11 @@
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="47_btnCrear">
-                      <CodeVariable name="btnCrear" type="8194" declaredType="javax.swing.JLabel"/>
+                    <CodeExpression id="47_btnCrearOrden">
+                      <CodeVariable name="btnCrearOrden" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="btnCrear"/>
+                          <ComponentRef name="btnCrearOrden"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>
@@ -1169,11 +1169,11 @@
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="48_btnConsultar">
-                      <CodeVariable name="btnConsultar" type="8194" declaredType="javax.swing.JLabel"/>
+                    <CodeExpression id="48_btnConsultarOrdenes">
+                      <CodeVariable name="btnConsultarOrdenes" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="btnConsultar"/>
+                          <ComponentRef name="btnConsultarOrdenes"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>

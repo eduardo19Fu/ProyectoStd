@@ -20,8 +20,8 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        cargarProductos();
         this.flag = flag;
+        cargarProductos(this.flag);
     }
 
     @SuppressWarnings("unchecked")
@@ -217,6 +217,11 @@ public class VBusquedaProductos extends javax.swing.JDialog {
                 VCreacionProforma.txtProducto.setText(nombre);
                 this.dispose();
                 VCreacionProforma.txtCantidad.grabFocus();
+            }else if(this.flag == 3){
+                VCrearOrdenes.txtCodigo.setText(codigo);
+                VCrearOrdenes.txtProducto.setText(nombre);
+                this.dispose();
+                VCrearOrdenes.txtCantidad.grabFocus();
             }
         }
     }//GEN-LAST:event_tblProductosMousePressed
@@ -283,7 +288,7 @@ public class VBusquedaProductos extends javax.swing.JDialog {
     private javax.swing.JTextField txtArticulo;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarProductos(){
+    private void cargarProductos(int flag){
         Producto producto = new Producto();
         Familia familia = new Familia();
         Fabricante fabricante = new Fabricante();
@@ -299,7 +304,10 @@ public class VBusquedaProductos extends javax.swing.JDialog {
             datos[2] = lista.get(i).getPrecio_venta();
             datos[3] = lista.get(i).getNombre_familia();
             datos[4] = lista.get(i).getNombre_fabricante();
-            datos[5] = lista.get(i).getExistencia_tienda();
+            if(flag == 3)
+                datos[5] = lista.get(i).getExistencia_bodega();
+            else
+                datos[5] = lista.get(i).getExistencia_tienda();
             modelo.addRow(datos);
         }
         tblProductos.setModel(modelo);

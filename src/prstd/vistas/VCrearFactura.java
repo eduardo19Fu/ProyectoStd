@@ -913,9 +913,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         boolean bandera = false;
         Producto producto = new Producto().buscarProducto(codigo);
         NotaCredito nc = new NotaCredito();
-//        String[] titulos = {"Cantidad","Codigo","Producto","Sub-Total","Descuento"};
-//        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-//        Object[] datos = new Object[5];
+        
         int existencia = producto.getExistencia_tienda();
         int cantidad = Integer.parseInt(txtCantidad.getText());
         
@@ -965,7 +963,8 @@ public class VCrearFactura extends javax.swing.JDialog {
                 suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
                 sumatoria += suma;
             }
-            txtTotal.setText(String.valueOf(producto.redondearPrecio(sumatoria)));
+            DecimalFormat formato = new DecimalFormat("####.##");
+            txtTotal.setText(String.valueOf(formato.format(sumatoria)));
         }else{
             // aqui va la creacion de notas de crédito
             int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
@@ -1004,7 +1003,8 @@ public class VCrearFactura extends javax.swing.JDialog {
                         suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
                         sumatoria += suma;
                     }
-                    txtTotal.setText(String.valueOf(sumatoria));
+                    DecimalFormat formato = new DecimalFormat("####.##");
+                    txtTotal.setText(String.valueOf(formato.format(sumatoria)));
                 }
             }
         }
@@ -1074,9 +1074,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         // almacena el precio por unidad del producto deseado.
         double precio_unidad = (double) producto.getPrecio_venta(); 
         // almacena el precio costo del producto elegido.
-        double precio_costo = (double) producto.getPrecio_compra(); 
-        // Almacena el subtotal calculado obtenido del modelo.
-        double precio_total = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 4);
+        double precio_costo = (double) producto.getPrecio_compra();
         // Almacena el calculo del precio costo total del producto elegido para realizar el descuento.
         double pcosto_total = (cant * precio_costo);
         // almacena el nuevo precio con descuento ya aplicado.
@@ -1085,10 +1083,11 @@ public class VCrearFactura extends javax.swing.JDialog {
         double nprecio_total = cant * nprecio_unidad;
         // Variable que almacena el precio una vez redondeado a 5 o 10.
         double precio_nuevo = 0;
+        // Variable que dará formato a nuestros decimales.
+        DecimalFormat formato = new DecimalFormat("####.##");
         
         // Validación del nuevo precio vs el precio costo total.
         if(nprecio_total >= pcosto_total){
-            DecimalFormat formato = new DecimalFormat("####.##");
             tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 5);
             BigDecimal bd = new BigDecimal(nprecio_unidad);
             // Se utiliza el metodo de redondeo bancario para aproximación más precisa.
@@ -1104,7 +1103,7 @@ public class VCrearFactura extends javax.swing.JDialog {
                 suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
                 sumatoria += suma;
             }
-            txtTotal.setText(String.valueOf(sumatoria));
+            txtTotal.setText(String.valueOf(formato.format(sumatoria)));
         }else{
             JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
             // aqui va el campo donde se ingresa el descuento a realizar
