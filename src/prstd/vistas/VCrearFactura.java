@@ -1,6 +1,5 @@
 package prstd.vistas;
 
-import static com.sun.corba.se.impl.util.Utility.printStackTrace;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.MouseInfo;
@@ -11,12 +10,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,7 +29,7 @@ import prstd.modelos.NotaTransaccion;
 import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
-import static prstd.vistas.VCreacionProforma.tblDetalle;
+import prstd.notificaciones.NotificacionFactura;
 
 public class VCrearFactura extends javax.swing.JDialog {
 
@@ -632,63 +629,66 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
-        Cliente cl= new Cliente();
-        UsuarioCorrelativo ucorr;
-        Documento documento = new Documento();
-        int transaccion;
-        if(documento.getMaxTransaccion() == 0)
-            transaccion = 1;
-        else
-            transaccion = documento.getMaxTransaccion() + 1;
-        int no_factura = Integer.parseInt(lblFactura.getText());
-        Timestamp time = new Timestamp(new Date().getTime());
-        double total = Double.parseDouble(txtTotal.getText());
-        int idusuario = usuario.consultarUsuario(vendedor);
-        ucorr = new UsuarioCorrelativo().getActual(idusuario);
-        String serie = lblSerie.getText().replaceAll("\"", "");
-        int cliente = cl.consultarCliente(txtNit.getText());
-        int actual = ucorr.getCorrelativo_act();
-        
-        if(!(no_factura == 0)){
-            if(!(no_factura > actual)){
-                documento.setIdtransaccion(transaccion);
-                documento.setNo_documento(no_factura);
-                documento.setFecha_emision(time);
-                documento.setTotal(total);
-                documento.setIdcliente(cliente);
-                documento.setIdvendedor(idusuario);
-                documento.setEstado("PAGADA");
-                documento.setTipo_documento(1);
-                documento.setSerie(serie);
-                
-                if(documento.crearFactura(documento) > 0){
-                    if(documento.detalleFactura((DefaultTableModel) tblDetalle.getModel(), transaccion, serie) > 0){
-                        if(documento.actualizarExistencias((DefaultTableModel) tblDetalle.getModel()) > 0){
-                            if(ucorr.avanzaCorrelativo(idusuario, no_factura, 1) > 0){
-                                //JOptionPane.showMessageDialog(this, "FacturaCreada");
-                                Documento dc = new Documento();
-                                NotaCredito nc = new NotaCredito();
-                                NotaTransaccion nt = new NotaTransaccion();
-                                NotaCliente ncl = new NotaCliente();
-                                
-                                nc.update((DefaultTableModel) tblDetalle.getModel());
-                                nt.crear((DefaultTableModel) tblDetalle.getModel(), transaccion);
-                                ncl.crear((DefaultTableModel) tblDetalle.getModel(), cliente);
-                                try {
-                                    dc.imprimir(documento.getMaxTransaccion(), no_factura, serie, total);
-                                } catch (SQLException ex) {
-                                    Logger.getLogger(VCrearFactura.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                init();
-                            }
+        // Carga de objetos necesarios para la creación de la factura deseada.
+        if(!(txtNit.getText().isEmpty()) && !(txtNombre.getText().isEmpty()) && !(txtDireccion.getText().isEmpty())){
+            Cliente cl= new Cliente();
+            Documento documento = new Documento();
+            UsuarioCorrelativo ucorr;
+            int idusuario = usuario.consultarUsuario(this.vendedor);
+            ucorr = new UsuarioCorrelativo().getActual(idusuario);
+            String serie = lblSerie.getText().replaceAll("\"", "");
+            Timestamp time = new Timestamp(new Date().getTime());
+            int transaccion;
+            int no_factura = Integer.parseInt(lblFactura.getText());
+            int act = ucorr.getCorrelativo_act();
+            double total = Double.parseDouble(txtTotal.getText());
+            int cliente = cl.consultarCliente(txtNit.getText());
+            if(documento.getMaxTransaccion() == 0)
+                transaccion = 1;
+            else
+                transaccion = documento.getMaxTransaccion() + 1;
+            
+            // Elección de opción de generación de factura.
+            int op = JOptionPane.showOptionDialog(this, "¿Desea imprimir una factura normal?", "Imprimir", 
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si","No"}, "Si");
+            if(op != -1){
+                if((op + 1) == 1){
+                    // Opción que genera una factura tradicional del sistema.
+                    if(!(no_factura == 0)){
+                        if(!(no_factura > act)){
+                            documento.setIdtransaccion(transaccion);
+                            documento.setNo_documento(no_factura);
+                            documento.setFecha_emision(time);
+                            documento.setTotal(total);
+                            documento.setIdcliente(cliente);
+                            documento.setIdvendedor(idusuario);
+                            documento.setEstado("PAGADA");
+                            documento.setTipo_documento(1);
+                            documento.setSerie(serie);
+                            imprimir(cl, documento, ucorr);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
                         }
+                    }else{
+                        JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
                     }
+                }else{
+                    // Opción que genera una factura de tamaño carta del sistema.
+                    documento.setIdtransaccion(transaccion);
+                    documento.setFecha_emision(time);
+                    documento.setTotal(total);
+                    documento.setIdcliente(cliente);
+                    documento.setIdvendedor(idusuario);
+                    documento.setEstado("PAGADA");
+                    documento.setTipo_documento(4);
+                    documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
+                    NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
+                    nf.setVisible(true);
                 }
-            }else{
-                JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
             }
         }else{
-            JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un cliente válido para poder continuar.");
+            txtNit.grabFocus();
         }
     }//GEN-LAST:event_btnImprimirMouseClicked
 
@@ -1169,5 +1169,32 @@ public class VCrearFactura extends javax.swing.JDialog {
         table.getColumnModel().getColumn(2).setCellRenderer(tcr);
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);
         table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+    }
+    
+    private void imprimir(Cliente cl, Documento documento, UsuarioCorrelativo ucorr){
+        if(documento.crearFactura(documento) > 0){
+            if(documento.detalleFactura((DefaultTableModel) tblDetalle.getModel(), documento.getIdtransaccion(), documento.getSerie()) > 0){
+                if(documento.actualizarExistencias((DefaultTableModel) tblDetalle.getModel()) > 0){
+                    if(ucorr.avanzaCorrelativo(documento.getIdvendedor(), documento.getNo_documento(), 1) > 0){
+                        //JOptionPane.showMessageDialog(this, "FacturaCreada");
+                        Documento dc = new Documento();
+                        NotaCredito nc = new NotaCredito();
+                        NotaTransaccion nt = new NotaTransaccion();
+                        NotaCliente ncl = new NotaCliente();
+
+                        nc.update((DefaultTableModel) tblDetalle.getModel());
+                        nt.crear((DefaultTableModel) tblDetalle.getModel(), documento.getIdtransaccion());
+                        ncl.crear((DefaultTableModel) tblDetalle.getModel(), documento.getIdcliente());
+                        try {
+                            dc.imprimir(documento.getMaxTransaccion(), documento.getNo_documento(), documento.getSerie(), documento.getTotal());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(VCrearFactura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        init();
+                    }
+                }
+            }
+        }
+    
     }
 }

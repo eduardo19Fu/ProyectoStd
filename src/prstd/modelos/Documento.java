@@ -166,6 +166,11 @@ public class Documento {
         return cf.imprimir(transac, factura, serie, total);
     }
     
+    public javax.swing.JFrame imprimir2(int transac, int factura, String serie, double total) throws SQLException{
+        CFactura cf = new CFactura();
+        return cf.imprimir2(transac, factura, serie, total);
+    }
+    
     public int insert(Documento documento){
         CProforma proforma = new CProforma();
         return proforma.insert(documento);

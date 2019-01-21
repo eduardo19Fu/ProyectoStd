@@ -5,11 +5,9 @@
         <group>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VCrearFactura.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CProforma.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/notificaciones/NotificacionFactura.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VCrearOrdenes.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VBusquedaProductos.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/COrdenDespacho.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/OrdenDespacho.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/notificaciones/NotificacionOrdenes.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VPrincipal.java</file>
         </group>
     </open-files>
