@@ -82,7 +82,7 @@ public class CFactura {
     }
     
     public List<Documento> consultarTransacciones(){
-        String sql = "select * from tbl_documento where tipo_documento = 1 and fecha_emision = curdate()";
+        String sql = "select * from tbl_documento where (tipo_documento = 1 or tipo_documento = 4) and date(fecha_emision) = curdate()";
         List<Documento> lista = new ArrayList<>();
         
         try {
@@ -112,7 +112,7 @@ public class CFactura {
     }
     
     public List<Documento> consultarTransacciones(Date fechaIni, Date fechaFin){
-        String sql = "select * from tbl_documento where tipo_documento = 1 and date(fecha_emision) between ? and ?";
+        String sql = "select * from tbl_documento where (tipo_documento = 1 or tipo_documento = 4) and date(fecha_emision) between ? and ?";
         List<Documento> lista = new ArrayList<>();
         
         try {
@@ -271,7 +271,7 @@ public class CFactura {
     }
     
     // Contrlador que se encarga de la impresion de la factura
-    public javax.swing.JFrame imprimir(int transac, int no_factura, String serie, double total) throws SQLException{
+    public javax.swing.JFrame imprimir(int transac, int no_factura, String serie, double total){
         try {
             Auxiliar aux = new Auxiliar();
             Map parametro = new HashMap();
@@ -287,7 +287,29 @@ public class CFactura {
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
             connection.close();
             return jv;
-        } catch (JRException e) {
+        } catch (SQLException | JRException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public javax.swing.JFrame imprimir2(int transac, int no_factura, String serie, double total){
+        try {
+            Auxiliar aux = new Auxiliar();
+            Map parametro = new HashMap();
+            parametro.put("no_factura", no_factura);
+            parametro.put("serie", serie);
+            parametro.put("transac", transac);
+            parametro.put("texto", aux.Convertir(String.format("%.2f",total), true));
+            reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\factura_2.jrxml");
+            JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
+            JasperViewer jv = new JasperViewer(print,false);
+            jv.setTitle("Factura No. \"" + no_factura + "\"");
+            jv.setVisible(true);
+            jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            connection.close();
+            return jv;
+        } catch (SQLException | JRException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
             return null;
         }
