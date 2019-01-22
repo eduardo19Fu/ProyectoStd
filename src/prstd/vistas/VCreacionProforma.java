@@ -7,10 +7,9 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -21,11 +20,6 @@ import prstd.modelos.Documento;
 import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
-import static prstd.vistas.VCrearFactura.tblDetalle;
-import static prstd.vistas.VCrearFactura.txtCodigo;
-import static prstd.vistas.VCrearFactura.txtDireccion;
-import static prstd.vistas.VCrearFactura.txtNit;
-import static prstd.vistas.VCrearFactura.txtNombre;
 
 public class VCreacionProforma extends javax.swing.JDialog {
     
@@ -226,9 +220,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                            .addComponent(txtNombre))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(txtDireccion))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -933,7 +927,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
             suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
             sumatoria += suma;
         }
-        txtTotal.setText(String.valueOf(producto.redondearPrecio(sumatoria)));
+        DecimalFormat formato = new DecimalFormat("####.##");
+        txtTotal.setText(String.valueOf(formato.format(sumatoria)));
     }
     
     private void descuento(double porcentaje, String codigo){
@@ -1001,6 +996,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         double nprecio_total = cant * nprecio_unidad;
         // Variable que almacena el precio una vez redondeado a 5 o 10.
         double precio_nuevo = 0;
+        DecimalFormat formato = new DecimalFormat("####.##");
         
         // Validación del nuevo precio vs el precio costo total.
         if(nprecio_total >= pcosto_total){
@@ -1010,8 +1006,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
             bd = bd.setScale(2,BigDecimal.ROUND_HALF_EVEN);
             // Almacenamos el nuevo valor obtenido después del calculo de redondeo a 5 o 10.
             precio_nuevo = Double.parseDouble(producto.calcularDescuento(String.valueOf(bd)));
-            tblDetalle.setValueAt(precio_nuevo, tblDetalle.getSelectedRow(), 3);
-            tblDetalle.setValueAt((precio_nuevo * cant), tblDetalle.getSelectedRow(), 4);
+            tblDetalle.setValueAt(formato.format(precio_nuevo), tblDetalle.getSelectedRow(), 3);
+            tblDetalle.setValueAt(formato.format((precio_nuevo * cant)), tblDetalle.getSelectedRow(), 4);
             int conteoTabla = tblDetalle.getRowCount();
             double suma = 0;
             sumatoria = 0;
@@ -1019,7 +1015,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
                 sumatoria += suma;
             }
-            txtTotal.setText(String.valueOf(sumatoria));
+            txtTotal.setText(String.valueOf(formato.format(sumatoria)));
         }else{
             JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
             // aqui va el campo donde se ingresa el descuento a realizar

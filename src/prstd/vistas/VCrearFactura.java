@@ -615,7 +615,17 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNitKeyTyped
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        
+        if(!txtNit.getText().isEmpty()){
+                agregarDetalle(txtCodigo.getText());
+                txtCodigo.setText("");
+                txtProducto.setText("");
+                txtCantidad.setText("");
+                txtCodigo.grabFocus();
+                configurarTabla(tblDetalle);
+            }else{
+                JOptionPane.showMessageDialog(this, "Nit no válido");
+                txtNit.grabFocus();
+            }
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnBuscarCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCodigoMouseClicked
