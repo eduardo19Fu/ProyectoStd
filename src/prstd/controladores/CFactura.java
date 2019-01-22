@@ -58,6 +58,7 @@ public class CFactura {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
             return 0;
         }
     }
