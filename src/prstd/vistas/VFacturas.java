@@ -393,7 +393,7 @@ public class VFacturas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarMouseExited
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
-        // TODO add your handling code here:
+        busquedaFactura(txtBusqueda.getText());
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
@@ -444,9 +444,19 @@ public class VFacturas extends javax.swing.JDialog {
             int transaccion = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 0);
             int no_factura = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 1);
             String serie = tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 2).toString();
-            dc.imprimir(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+            if(!tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 5).toString().equals("ANULADA")){
+                if(serie.equals("CA")){
+                    dc.imprimir2(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+                }else{
+                    dc.imprimir(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No se puede reimprimir una factura ya anulada.");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }catch(IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningun registro.");
         }
@@ -604,5 +614,27 @@ public class VFacturas extends javax.swing.JDialog {
         // Indicamos la alineación que tendrán las columnas.
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+    }
+
+    private void busquedaFactura(String factura) {
+        Documento documento = new Documento();
+        Usuario usuario;
+        String[] titulos = {"ID Transaccion","No. Factura","Serie","Vendedor","Fecha Emision","Estado"};
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        Object[] datos = new Object[6];
+        List<Documento> lista = documento.consultarTransacciones(factura);
+        
+        for(int i = 0; i < lista.size(); i++){
+            usuario = new Usuario();
+            datos[0] = lista.get(i).getIdtransaccion();
+            datos[1] = lista.get(i).getNo_documento();
+            datos[2] = lista.get(i).getSerie();
+            datos[3] = usuario.cargarUsuario(lista.get(i).getIdvendedor()).getUsuario();
+            datos[4] = lista.get(i).getFecha_emision();
+            datos[5] = lista.get(i).getEstado();
+            modelo.addRow(datos);
+        }
+        tableFacturas.setModel(modelo);
+        configurarTabla(tableFacturas);
     }
 }

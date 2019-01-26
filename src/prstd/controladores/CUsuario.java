@@ -142,6 +142,7 @@ public class CUsuario {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
         
@@ -171,6 +172,7 @@ public class CUsuario {
             return this.usuario;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -189,6 +191,7 @@ public class CUsuario {
             return id;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -207,6 +210,7 @@ public class CUsuario {
             return id;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -243,6 +247,7 @@ public class CUsuario {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -262,6 +267,7 @@ public class CUsuario {
             return log;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
@@ -282,6 +288,7 @@ public class CUsuario {
         }
         catch(SQLException ex){
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -301,6 +308,7 @@ public class CUsuario {
             return idrol;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -331,6 +339,7 @@ public class CUsuario {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

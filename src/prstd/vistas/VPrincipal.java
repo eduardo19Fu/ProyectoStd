@@ -908,7 +908,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPolizasMouseClicked
 
     private void btnConsultaProformasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultaProformasMouseClicked
-        VProformas proformas = new VProformas(null,true,usuario);
+        VProformas proformas = new VProformas(this,false,usuario);
         proformas.setVisible(true);
     }//GEN-LAST:event_btnConsultaProformasMouseClicked
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.NotaCredito;
 import prstd.modelos.NotaTransaccion;
@@ -46,6 +47,7 @@ public class CNotaTransaccion {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -70,6 +72,7 @@ public class CNotaTransaccion {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

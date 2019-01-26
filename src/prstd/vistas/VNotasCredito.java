@@ -3,6 +3,7 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -11,9 +12,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import prstd.modelos.Cliente;
 import prstd.modelos.NotaCredito;
-import prstd.modelos.Producto;
 
 public class VNotasCredito extends javax.swing.JDialog {
 
@@ -320,7 +319,7 @@ public class VNotasCredito extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAnularMouseExited
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
-        
+        filtrarNotas();
     }//GEN-LAST:event_btnFiltroMouseClicked
 
     private void btnFiltroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseEntered
@@ -434,6 +433,24 @@ public class VNotasCredito extends javax.swing.JDialog {
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         NotaCredito nc = new NotaCredito();
         List<Object> lista = nc.consultar();
+        
+        for(int i = 0; i < lista.size(); i++){
+           datos = (Object[]) lista.get(i);
+           modelo.addRow(datos);
+        }
+        tableNotas.setModel(modelo);
+        configurarTabla(tableNotas);
+    }
+    
+    private void filtrarNotas(){
+        String[] titulos = {"ID Nota", "Producto","Cliente","Transacción","Fecha","Estado"};
+        Object[] datos;
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        NotaCredito nc = new NotaCredito();
+        Date fecha1, fecha2;
+        fecha1 = dateIni.getDate();
+        fecha2 = dateFin.getDate();
+        List<Object> lista = nc.consultar(fecha1, fecha2);
         
         for(int i = 0; i < lista.size(); i++){
            datos = (Object[]) lista.get(i);

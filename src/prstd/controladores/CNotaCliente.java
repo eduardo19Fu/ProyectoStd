@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.NotaCliente;
 import prstd.servicios.ConexionDos;
@@ -45,6 +46,7 @@ public class CNotaCliente {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -69,6 +71,7 @@ public class CNotaCliente {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

@@ -345,7 +345,7 @@ public class VProformas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEliminarMouseExited
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
-        // TODO add your handling code here:
+        busquedaProforma(txtBusqueda.getText());
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
@@ -554,5 +554,27 @@ public class VProformas extends javax.swing.JDialog {
         // Indicamos la alineación que tendrán las columnas.
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+    }
+
+    private void busquedaProforma(String proforma) {
+        Documento documento = new Documento();
+        Usuario usuario;
+        String[] titulos = {"ID Transaccion","No. Proforma","Serie","Vendedor","Fecha Emision","Estado"};
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        Object[] datos = new Object[6];
+        List<Documento> lista = documento.consultarProformas(proforma);
+        
+        for(int i = 0; i < lista.size(); i++){
+            usuario = new Usuario();
+            datos[0] = lista.get(i).getIdtransaccion();
+            datos[1] = lista.get(i).getNo_documento();
+            datos[2] = lista.get(i).getSerie();
+            datos[3] = usuario.cargarUsuario(lista.get(i).getIdvendedor()).getUsuario();
+            datos[4] = lista.get(i).getFecha_emision();
+            datos[5] = lista.get(i).getEstado();
+            modelo.addRow(datos);
+        }
+        tableProformas.setModel(modelo);
+        configurarTabla(tableProformas);
     }
 }

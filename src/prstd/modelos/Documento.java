@@ -141,6 +141,11 @@ public class Documento {
         return cf.consultarTransacciones(fechaIni, fechaFin);
     }
     
+    public List<Documento> consultarTransacciones(String no_factura){
+        CFactura cf = new CFactura();
+        return cf.consultarTransacciones(no_factura);
+    }
+    
     public int detalleFactura(DefaultTableModel modelo, int transaccion, String serie){
         CFactura cf = new CFactura();
         return cf.detalleFactura(modelo, transaccion, serie);
@@ -204,6 +209,11 @@ public class Documento {
     public List<Documento> consultarProformas(){
         CProforma cp = new CProforma();
         return cp.consultar();
+    }
+    
+    public List<Documento> consultarProformas(String no_proforma){
+        CProforma cp = new CProforma();
+        return cp.consultar(no_proforma);
     }
     
     public List<Documento> consultarProformas(Date fechaIni, Date fechaFin){

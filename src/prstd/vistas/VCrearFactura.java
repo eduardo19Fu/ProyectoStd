@@ -615,7 +615,17 @@ public class VCrearFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNitKeyTyped
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        
+        if(!txtNit.getText().isEmpty()){
+                agregarDetalle(txtCodigo.getText());
+                txtCodigo.setText("");
+                txtProducto.setText("");
+                txtCantidad.setText("");
+                txtCodigo.grabFocus();
+                configurarTabla(tblDetalle);
+            }else{
+                JOptionPane.showMessageDialog(this, "Nit no válido");
+                txtNit.grabFocus();
+            }
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnBuscarCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCodigoMouseClicked
@@ -933,7 +943,9 @@ public class VCrearFactura extends javax.swing.JDialog {
                     if(!(nCantidad > existencia)){
                         double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
                         tblDetalle.setValueAt(nCantidad, i, 0);
+                        tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
                         tblDetalle.setValueAt(nPrecio, i, 4);
+                        tblDetalle.setValueAt(0.0, i, 5);
                         bandera = true;
                     }else{
                         // Crear nota de crédito
@@ -944,7 +956,9 @@ public class VCrearFactura extends javax.swing.JDialog {
                                 crearNotaCredito(nCantidad);
                                 double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
                                 tblDetalle.setValueAt(nCantidad, i, 0);
+                                tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
                                 tblDetalle.setValueAt(nPrecio, i, 4);
+                                tblDetalle.setValueAt(0.0, i, 5);
                                 tblDetalle.setValueAt(nc.notaMax(codigo), i, 6); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
                                 bandera = true;
                             }
@@ -966,7 +980,8 @@ public class VCrearFactura extends javax.swing.JDialog {
             DecimalFormat formato = new DecimalFormat("####.##");
             txtTotal.setText(String.valueOf(formato.format(sumatoria)));
         }else{
-            // aqui va la creacion de notas de crédito
+            // Creación directa de notas de credito en caso que no hayan suficientes existencias para
+            // satisfacer la demanda desde un inicio.
             int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
                                 "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
             if(op != -1){
@@ -987,7 +1002,9 @@ public class VCrearFactura extends javax.swing.JDialog {
                             int nCantidad = cantidad + (int) tblDetalle.getValueAt(i, 0);
                             double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
                             tblDetalle.setValueAt(nCantidad, i, 0);
+                            tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
                             tblDetalle.setValueAt(nPrecio, i, 4);
+                            tblDetalle.setValueAt(0.0, i, 5);
                             tblDetalle.setValueAt(nc.notaMax(codigo), i, 6);
                             bandera = true;
                         }

@@ -328,12 +328,12 @@ public class VUsuarios extends javax.swing.JDialog {
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         int id;
-        if(tblListaUsuarios.getValueAt(tblListaUsuarios.getSelectedRow(), 0) != null){
+        try{
             id = Integer.parseInt(tblListaUsuarios.getValueAt(tblListaUsuarios.getSelectedRow(), 0).toString());
             VCrearUsuarios cu = new VCrearUsuarios(null,true,id);
             cu.setVisible(true);
         }
-        else{
+        catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Seleccione por favor seleccione a un usuario para editar.","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarMouseClicked
