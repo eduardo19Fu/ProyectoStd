@@ -52,6 +52,7 @@ public class COrdenDespacho {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -75,7 +76,7 @@ public class COrdenDespacho {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -101,6 +102,7 @@ public class COrdenDespacho {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -128,6 +130,7 @@ public class COrdenDespacho {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -177,6 +180,7 @@ public class COrdenDespacho {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -229,6 +233,7 @@ public class COrdenDespacho {
             return max;
         } catch (SQLException ex) {
             Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -249,6 +254,7 @@ public class COrdenDespacho {
             return existe;
         } catch (SQLException ex) {
             //Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }

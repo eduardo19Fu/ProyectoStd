@@ -1,6 +1,8 @@
 package prstd.modelos;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import prstd.controladores.CNotaCredito;
@@ -100,5 +102,10 @@ public class NotaCredito {
     public List<Object> consultar(){
         CNotaCredito cn = new CNotaCredito();
         return cn.consultar();
+    }
+    
+    public List<Object> consultar(Date fechaIni, Date fechaFin){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.consultar(fechaIni,fechaFin);
     }
 }

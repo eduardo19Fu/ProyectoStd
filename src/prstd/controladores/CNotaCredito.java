@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.NotaCredito;
 import prstd.servicios.ConexionDos;
@@ -40,6 +43,7 @@ public class CNotaCredito {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -61,6 +65,7 @@ public class CNotaCredito {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -77,6 +82,7 @@ public class CNotaCredito {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -102,6 +108,7 @@ public class CNotaCredito {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -136,6 +143,45 @@ public class CNotaCredito {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public List<Object> consultar(Date fechaIni, Date fechaFin){
+        String sql = "select nc.idnota,p.nombre_producto,cl.nombre,dc.no_documento,nc.fecha_creacion,nc.estado\n" +
+                    "from tbl_nota_credito nc\n" +
+                    "inner join tbl_producto p on nc.cod_producto = p.codigo\n" +
+                    "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
+                    "inner join tbl_cliente cl on ncl.idcliente = cl.idcliente\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                    "where date(fecha_creacion) between ? and ?";
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDate(1, new java.sql.Date(fechaIni.getTime()));
+            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[6];
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getInt(4);
+                datos[4] = rs.getTimestamp(5);
+                datos[5] = rs.getString(6);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

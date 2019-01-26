@@ -67,6 +67,7 @@ public class CProducto {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -100,6 +101,7 @@ public class CProducto {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -143,6 +145,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -183,6 +186,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -220,6 +224,7 @@ public class CProducto {
             return producto;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -265,6 +270,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -284,6 +290,7 @@ public class CProducto {
             return codigo;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
         
@@ -313,6 +320,7 @@ public class CProducto {
             return stuck;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -340,6 +348,7 @@ public class CProducto {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -456,6 +465,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -495,6 +505,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -534,6 +545,7 @@ public class CProducto {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -550,6 +562,7 @@ public class CProducto {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }

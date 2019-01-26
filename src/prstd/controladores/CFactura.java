@@ -78,6 +78,7 @@ public class CFactura {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -108,6 +109,7 @@ public class CFactura {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -140,18 +142,19 @@ public class CFactura {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
         
     }
     
-    public List<Documento> consultarTransacciones(int no_factura){
-        String sql = "select * from tbl_documento where no_documento = ?";
+    public List<Documento> consultarTransacciones(String no_factura){
+        String sql = "select * from tbl_documento where cast(no_documento as char) like ?";
         List<Documento> lista = new ArrayList<>();
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, no_factura);
+            ps.setString(1, no_factura + "%");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 documento = new Documento();
@@ -172,6 +175,7 @@ public class CFactura {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -202,6 +206,7 @@ public class CFactura {
             return lista;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -233,6 +238,7 @@ public class CFactura {
             return maximo;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -357,6 +363,7 @@ public class CFactura {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -389,6 +396,7 @@ public class CFactura {
             return rs2;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -408,6 +416,7 @@ public class CFactura {
             return total;
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }

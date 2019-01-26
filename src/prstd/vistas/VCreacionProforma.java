@@ -592,6 +592,10 @@ public class VCreacionProforma extends javax.swing.JDialog {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         agregarDetalle(txtCodigo.getText());
+        txtCantidad.setText("");
+        txtCodigo.setText("");
+        txtProducto.setText("");
+        txtCodigo.grabFocus();
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseEntered
@@ -912,7 +916,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 // A diferencia de la factura no es necesario validar las existencias disponibles.
                 double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
                 tblDetalle.setValueAt(nCantidad, i, 0);
-                tblDetalle.setValueAt(nPrecio, i, 3);
+                tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
+                tblDetalle.setValueAt(nPrecio, i, 4);
+                tblDetalle.setValueAt(0.0, i, 5);
                 bandera = true;
             }
         }
@@ -931,52 +937,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtTotal.setText(String.valueOf(formato.format(sumatoria)));
     }
     
-    private void descuento(double porcentaje, String codigo){
-        Producto producto = new Producto().buscarProducto(codigo);// Instancia un objeto de la clase producto.
-        int cant = (int) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 0); // almacena la cantidad del producto ingresada
-        double precio_unidad = (double) producto.getPrecio_venta(); // almacena el precio por unidad del producto deseado
-        double precio_costo = (double) producto.getPrecio_compra(); // almacena el precio costo del producto elegido
-
-        double nprecio_unidad = (double) precio_unidad - (precio_unidad * (porcentaje/100)); // almacena el nuevo precio con descuento ya aplicado.
-        double nprecio_total = cant * nprecio_unidad; // almacena el subtotal del nuevo precio de venta con descuento ya aplicado
-        
-        if(nprecio_unidad >= precio_costo){
-            tblDetalle.setValueAt((porcentaje/100), tblDetalle.getSelectedRow(), 4);
-            BigDecimal bd = new BigDecimal(nprecio_total);
-            String original = String.valueOf(bd);
-            
-            System.out.println(nprecio_total);
-            
-            String[] partes = original.split(Pattern.quote("."));
-            String entero = partes[0];
-            String decimal = partes[1];
-            
-            int valor1 = Integer.parseInt(entero);  // variable que almacena la parte entera de nuestro valor decimal.
-            int valor2 = Integer.parseInt(String.valueOf(decimal.charAt(0))); // variable que almacena el primer digíto de la parte decimal.
-            int valor3 = Integer.parseInt(String.valueOf(decimal.charAt(1))); // variable que almacena el segundo digíto de la parte decimal.
-            int valor4 = Integer.parseInt(String.valueOf(decimal.charAt(2))); // variable que almacena el tercer digíto de la parte decimal.
-            
-            
-            if(valor4 >= 5){
-                bd = bd.setScale(2,RoundingMode.HALF_UP);
-            }else if(valor4 < 5){
-                bd = bd.setScale(2,RoundingMode.DOWN);
-            }
-
-            tblDetalle.setValueAt(bd, tblDetalle.getSelectedRow(), 3);
-            int conteoTabla = tblDetalle.getRowCount();
-            double suma = 0;
-            sumatoria = 0;
-            for(int i = 0; i <= (conteoTabla - 1); i++){
-                suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
-                sumatoria += suma;
-            }
-            txtTotal.setText(String.valueOf(sumatoria));
-        }else{
-            JOptionPane.showMessageDialog(this, "El precio costo total no puede ser mayor que el precio venta total.");
-        }
-    }
-    
     private void descuento_dos(double porcentaje, String codigo){
         // Instancia un objeto de la clase producto.
         Producto producto = new Producto().buscarProducto(codigo);
@@ -985,9 +945,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         // almacena el precio por unidad del producto deseado.
         double precio_unidad = (double) producto.getPrecio_venta(); 
         // almacena el precio costo del producto elegido.
-        double precio_costo = (double) producto.getPrecio_compra(); 
-        // Almacena el subtotal calculado obtenido del modelo.
-        double precio_total = (double) tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 4);
+        double precio_costo = (double) producto.getPrecio_compra();
         // Almacena el calculo del precio costo total del producto elegido para realizar el descuento.
         double pcosto_total = (cant * precio_costo);
         // almacena el nuevo precio con descuento ya aplicado.
@@ -997,6 +955,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         // Variable que almacena el precio una vez redondeado a 5 o 10.
         double precio_nuevo = 0;
         DecimalFormat formato = new DecimalFormat("####.##");
+        String existe = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 5).toString();
         
         // Validación del nuevo precio vs el precio costo total.
         if(nprecio_total >= pcosto_total){
@@ -1062,7 +1021,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         try {
             sumatoria = 0;
             double total = Double.parseDouble(txtTotal.getText());
-            total -= Double.parseDouble(tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 3).toString());
+            total -= Double.parseDouble(tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 4).toString());
             sumatoria = total;
             txtTotal.setText(String.valueOf(sumatoria));
             modelo.removeRow(tblDetalle.getSelectedRow());
