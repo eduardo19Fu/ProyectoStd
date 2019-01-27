@@ -395,7 +395,11 @@ public class VProformas extends javax.swing.JDialog {
             int transaccion = (int) tableProformas.getValueAt(tableProformas.getSelectedRow(), 0);
             int no_factura = (int) tableProformas.getValueAt(tableProformas.getSelectedRow(), 1);
             String serie = tableProformas.getValueAt(tableProformas.getSelectedRow(), 2).toString();
-            dc.imprimirProforma(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+            if(!tableProformas.getValueAt(tableProformas.getSelectedRow(), 5).toString().equals("ANULADA")){
+                dc.imprimirProforma(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+            }else{
+                JOptionPane.showMessageDialog(this, "No se puede imprimir una proforma ya anulada");
+            }
         }catch(IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningun registro.");
         }

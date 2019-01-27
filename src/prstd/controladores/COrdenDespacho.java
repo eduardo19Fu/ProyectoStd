@@ -254,7 +254,7 @@ public class COrdenDespacho {
             return existe;
         } catch (SQLException ex) {
             //Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -272,6 +272,7 @@ public class COrdenDespacho {
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {
+            Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE,null,e);
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error en Impresión.",JOptionPane.ERROR_MESSAGE);
             return null;
         }
