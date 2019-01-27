@@ -5,15 +5,16 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Cliente;
 import prstd.modelos.Documento;
@@ -578,6 +579,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 txtProducto.setText("");
                 txtCantidad.setText("");
                 txtCodigo.grabFocus();
+                configurarTabla(tblDetalle);
             }else{
                 JOptionPane.showMessageDialog(this, "Nit no válido");
                 txtNit.grabFocus();
@@ -596,6 +598,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtCodigo.setText("");
         txtProducto.setText("");
         txtCodigo.grabFocus();
+        configurarTabla(tblDetalle);
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseEntered
@@ -641,10 +644,12 @@ public class VCreacionProforma extends javax.swing.JDialog {
                         if(ucorr.avanzaCorrelativo(idusuario, no_proforma, 2) > 0){
                                 //JOptionPane.showMessageDialog(this, "FacturaCreada");
                             Documento dc = new Documento();
-                            if(radioNormal.isSelected())
+                            if(radioNormal.isSelected()){
                                 dc.imprimirProforma(documento.getMaxTransaccion(), no_proforma, serie, total);
-                            else if(radioSimple.isSelected())
+                            }
+                            else if(radioSimple.isSelected()){
                                 dc.imprimirSimple(documento.getMaxTransaccion(), no_proforma, serie, total);
+                            }
                             init();
                         }
                     }
@@ -875,6 +880,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         modelo = new DefaultTableModel(null,titulos);
         tblDetalle.removeAll();
         tblDetalle.setModel(modelo);
+        configurarTabla(tblDetalle);
     }
     
     private void buscarNit(){
@@ -1028,5 +1034,25 @@ public class VCreacionProforma extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+    }
+    
+    private void configurarTabla(JTable table){
+        // Configuración del tamaño que ocuparán las columnas que muestran la información
+        // del pago a realizar
+        table.getColumn("Cantidad").setPreferredWidth(20);
+        table.getColumn("Codigo").setPreferredWidth(50);
+        table.getColumn("Producto").setPreferredWidth(300);
+        table.getColumn("Precio Unitario").setPreferredWidth(30);
+        table.getColumn("Sub-total").setPreferredWidth(30);
+        table.getColumn("Descuento").setPreferredWidth(30);
+        
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        //table.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        //table.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        //table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(5).setCellRenderer(tcr);
     }
 }

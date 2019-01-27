@@ -243,7 +243,7 @@ public class CProforma {
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
@@ -266,7 +266,7 @@ public class CProforma {
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
