@@ -51,6 +51,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnFamilias = new javax.swing.JLabel();
         btnFabricantes = new javax.swing.JLabel();
         btnCorrelativos = new javax.swing.JLabel();
+        btnCustomers = new javax.swing.JLabel();
         panelCobros = new javax.swing.JPanel();
         btnVentas = new javax.swing.JLabel();
         btnProformas = new javax.swing.JLabel();
@@ -339,6 +340,24 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
         panelSistema.add(btnCorrelativos);
+
+        btnCustomers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCustomers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Customer_72px.png"))); // NOI18N
+        btnCustomers.setToolTipText("Administración de Correlativos");
+        btnCustomers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCustomers.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCustomersMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCustomersMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCustomersMouseExited(evt);
+            }
+        });
+        panelSistema.add(btnCustomers);
 
         jPanel2.add(panelSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 740, 440));
 
@@ -960,6 +979,18 @@ public class VPrincipal extends javax.swing.JFrame {
         vo.setVisible(true);
     }//GEN-LAST:event_btnCrearOrdenMouseClicked
 
+    private void btnCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomersMouseClicked
+
+    private void btnCustomersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomersMouseEntered
+
+    private void btnCustomersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomersMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1002,6 +1033,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnConsultarOrdenes;
     private javax.swing.JLabel btnCorrelativos;
     private javax.swing.JLabel btnCrearOrden;
+    private javax.swing.JLabel btnCustomers;
     private javax.swing.JPanel btnDespacho;
     private javax.swing.JLabel btnFabricantes;
     private javax.swing.JLabel btnFamilias;
