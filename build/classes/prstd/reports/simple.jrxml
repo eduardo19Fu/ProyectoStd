@@ -44,7 +44,9 @@ inner join
 inner join
 	tbl_usuario u on u.idusuario = dc.idvendedor
 where 
-	dc.no_documento = $P{no_proforma} and dc.serie = $P{serie} and dc.idtransaccion = $P{transaccion};]]>
+	dc.no_documento = $P{no_proforma} and dc.serie = $P{serie} and dc.idtransaccion = $P{transaccion}
+order by
+	pro.nombre_producto asc;]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="no_documento" class="java.lang.Integer"/>

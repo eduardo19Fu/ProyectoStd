@@ -269,6 +269,8 @@ public class COrdenDespacho {
             jv.setTitle("Orden de Despacho No. " + orden);
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {

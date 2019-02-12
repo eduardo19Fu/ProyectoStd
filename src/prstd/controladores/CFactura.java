@@ -1,5 +1,6 @@
 package prstd.controladores;
 
+import java.awt.Frame;
 import java.io.File;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -292,6 +293,8 @@ public class CFactura {
             jv.setTitle("Factura No. \"" + no_factura + "\"");
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (SQLException | JRException e) {
@@ -314,6 +317,8 @@ public class CFactura {
             jv.setTitle("Factura No. \"" + no_factura + "\"");
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (SQLException | JRException e) {
@@ -334,6 +339,8 @@ public class CFactura {
             jv.setTitle("Poliza");
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         }catch(JRException | SQLException e){

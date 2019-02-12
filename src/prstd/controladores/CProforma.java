@@ -240,6 +240,8 @@ public class CProforma {
             jv.setTitle("Proforma No. \"" + no_proforma + "\"");
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {
@@ -263,6 +265,8 @@ public class CProforma {
             jv.setTitle("Proforma Simple No. \"" + no_proforma + "\"");
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {

@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +44,8 @@ public class VCrearFactura extends javax.swing.JDialog {
     public VCrearFactura(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent, modal);
         initComponents();
+        btnBuscar_2.setMnemonic(KeyEvent.VK_F3);
+        btnBuscar_3.setMnemonic(KeyEvent.VK_F5);
         this.setLocationRelativeTo(null);
         this.vendedor = vendedor;
         usuario = new Usuario();
@@ -75,6 +76,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         btnBuscarCliente = new javax.swing.JLabel();
+        btnBuscar_2 = new javax.swing.JButton();
         btnMinimizar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -90,6 +92,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         txtCantidad = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JLabel();
+        btnBuscar_3 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         btnImprimir = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JLabel();
@@ -204,7 +207,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         btnBuscarCliente.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         btnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
         btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Search_32px_1.png"))); // NOI18N
-        btnBuscarCliente.setText("F4");
+        btnBuscarCliente.setText("F3");
         btnBuscarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -218,6 +221,15 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
         });
         jPanel3.add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 8, 63, -1));
+
+        btnBuscar_2.setBackground(java.awt.SystemColor.control);
+        btnBuscar_2.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar_2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnBuscar_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 0, 0));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 190, 1000, 120));
 
@@ -352,6 +364,15 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 4, 49, -1));
+
+        btnBuscar_3.setBackground(java.awt.SystemColor.control);
+        btnBuscar_3.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar_3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnBuscar_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 0, 0));
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 16, 980, 40));
 
@@ -762,6 +783,16 @@ public class VCrearFactura extends javax.swing.JDialog {
         resetBorde(btnBuscarCliente);
     }//GEN-LAST:event_btnBuscarClienteMouseExited
 
+    private void btnBuscar_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar_2ActionPerformed
+        VBusquedaClientes vb = new VBusquedaClientes(null, true, 2);
+        vb.setVisible(true);
+    }//GEN-LAST:event_btnBuscar_2ActionPerformed
+
+    private void btnBuscar_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar_3ActionPerformed
+        VBusquedaProductos bp = new VBusquedaProductos(null,true,1);
+        bp.setVisible(true);
+    }//GEN-LAST:event_btnBuscar_3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -805,6 +836,8 @@ public class VCrearFactura extends javax.swing.JDialog {
     private javax.swing.JLabel btnAdd;
     private javax.swing.JLabel btnBuscarCliente;
     private javax.swing.JLabel btnBuscarCodigo;
+    private javax.swing.JButton btnBuscar_2;
+    private javax.swing.JButton btnBuscar_3;
     private javax.swing.JLabel btnDescuento;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnImprimir;
@@ -1017,7 +1050,7 @@ public class VCrearFactura extends javax.swing.JDialog {
                     double suma = 0;
                     sumatoria = 0;
                     for(int i = 0; i<= (conteoTabla - 1); i++){
-                        suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 3)));
+                        suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
                         sumatoria += suma;
                     }
                     DecimalFormat formato = new DecimalFormat("####.##");

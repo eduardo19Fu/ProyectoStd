@@ -35,6 +35,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
     public VCreacionProforma(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent, modal);
         initComponents();
+        btnBuscar_2.setMnemonic(KeyEvent.VK_F3);
+        btnBuscar_3.setMnemonic(KeyEvent.VK_F5);
         this.setLocationRelativeTo(null);
         this.vendedor = vendedor;
         usuario = new Usuario();
@@ -63,7 +65,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
+        panel_busqueda_cliente = new javax.swing.JPanel();
         btnBuscarCliente = new javax.swing.JLabel();
+        btnBuscar_2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetalle = new javax.swing.JTable();
@@ -77,6 +81,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         txtCantidad = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JLabel();
+        btnBuscar_3 = new javax.swing.JButton();
         txtDescuento = new javax.swing.JTextField();
         lblDescuento = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
@@ -165,30 +170,41 @@ public class VCreacionProforma extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel3.setOpaque(false);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nit:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 45, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nombre:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         txtNit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNitKeyTyped(evt);
             }
         });
+        jPanel3.add(txtNit, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 40, 130, -1));
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 93, 310, -1));
 
         jLabel6.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Dirección:");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 149, -1, -1));
+        jPanel3.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 144, 310, -1));
 
+        panel_busqueda_cliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBuscarCliente.setBackground(new java.awt.Color(255, 255, 255));
         btnBuscarCliente.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         btnBuscarCliente.setForeground(new java.awt.Color(0, 0, 0));
         btnBuscarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Search_32px_1.png"))); // NOI18N
-        btnBuscarCliente.setText("F4");
+        btnBuscarCliente.setText("F3");
         btnBuscarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarCliente.setOpaque(true);
         btnBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBuscarClienteMouseClicked(evt);
@@ -200,52 +216,20 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 btnBuscarClienteMouseExited(evt);
             }
         });
+        panel_busqueda_cliente.add(btnBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                            .addComponent(txtDireccion))))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarCliente))
-                        .addGap(14, 14, 14)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
+        btnBuscar_2.setBackground(java.awt.SystemColor.control);
+        btnBuscar_2.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar_2ActionPerformed(evt);
+            }
+        });
+        panel_busqueda_cliente.add(btnBuscar_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 0, 0));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 93, -1, 195));
+        jPanel3.add(panel_busqueda_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 35, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 93, 455, 195));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
         jPanel4.setOpaque(false);
@@ -345,6 +329,15 @@ public class VCreacionProforma extends javax.swing.JDialog {
             }
         });
         jPanel5.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(799, 4, 49, -1));
+
+        btnBuscar_3.setBackground(java.awt.SystemColor.control);
+        btnBuscar_3.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar_3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnBuscar_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 0, 0));
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 25, 860, 40));
 
@@ -764,6 +757,16 @@ public class VCreacionProforma extends javax.swing.JDialog {
         resetBorde(btnBuscarCliente);
     }//GEN-LAST:event_btnBuscarClienteMouseExited
 
+    private void btnBuscar_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar_2ActionPerformed
+        VBusquedaClientes vb = new VBusquedaClientes(null, true, 2);
+        vb.setVisible(true);
+    }//GEN-LAST:event_btnBuscar_2ActionPerformed
+
+    private void btnBuscar_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar_3ActionPerformed
+        VBusquedaProductos bp = new VBusquedaProductos(null,true,2);
+        bp.setVisible(true);
+    }//GEN-LAST:event_btnBuscar_3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -808,6 +811,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private javax.swing.JLabel btnAdd;
     private javax.swing.JLabel btnBuscarCliente;
     private javax.swing.JLabel btnBuscarCodigo;
+    private javax.swing.JButton btnBuscar_2;
+    private javax.swing.JButton btnBuscar_3;
     private javax.swing.JLabel btnDescuento;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnImprimir;
@@ -837,6 +842,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private javax.swing.JLabel lblSerie;
     private javax.swing.JPanel panelDatos;
     private javax.swing.JPanel panelOpciones;
+    private javax.swing.JPanel panel_busqueda_cliente;
     private javax.swing.JRadioButton radioNormal;
     private javax.swing.JRadioButton radioSimple;
     public static javax.swing.JTable tblDetalle;

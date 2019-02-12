@@ -22,7 +22,8 @@ inner join tbl_documento dc on dc.idtransaccion = dp.idtransaccion
 inner join tbl_producto p on p.codigo = dp.codigo
 inner join tbl_usuario u on dc.idvendedor = u.idusuario
 where dc.estado != 'ANULADA' and dc.tipo_documento = 1 and dc.serie = dp.serie and date(dc.fecha_emision) = $P{fechaIni} and u.idusuario = $P{usuario}
-group by p.nombre_producto;]]>
+group by p.nombre_producto
+order by p.nombre_producto asc;]]>
 	</queryString>
 	<field name="sum(dp.cantidad)" class="java.math.BigDecimal"/>
 	<field name="nombre_producto" class="java.lang.String"/>

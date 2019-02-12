@@ -122,7 +122,7 @@ public class VBusquedaClientes extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Búsqueda de Productos");
+        jLabel5.setText("Búsqueda de Clientes");
         jLabel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel5MouseDragged(evt);
