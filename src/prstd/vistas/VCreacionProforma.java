@@ -903,7 +903,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
             
             txtCodigo.grabFocus();
         }else{
-            VRegistroClientes rc = new VRegistroClientes(null, true, txtNit.getText());
+            VRegistroClientes rc = new VRegistroClientes(null, true, txtNit.getText(),1);
             rc.setVisible(true);
         }
     }

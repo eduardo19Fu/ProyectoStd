@@ -104,4 +104,14 @@ public class Cliente {
         CCliente cliente = new CCliente();
         return cliente.consultarCliente(idcliente);
     }
+    
+    public int actualizar(Cliente c){
+        CCliente cliente = new CCliente();
+        return cliente.actualizar(c);
+    }
+    
+    public Cliente cargarCliente(String nit){
+        CCliente cliente = new CCliente();
+        return cliente.cargarCliente(nit);
+    }
 }

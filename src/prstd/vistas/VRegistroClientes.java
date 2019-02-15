@@ -19,14 +19,16 @@ public class VRegistroClientes extends javax.swing.JDialog {
     int x,y;
     private String texto;
     private String nit;
+    private int bandera;
     
-    public VRegistroClientes(java.awt.Frame parent, boolean modal, String nit) {
+    public VRegistroClientes(java.awt.Frame parent, boolean modal, String nit, int bandera) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         limpiar();
         this.nit = nit;
-        txtNit.setText(this.nit);
+        this.bandera = bandera;
+        init();
     }
 
     
@@ -78,7 +80,7 @@ public class VRegistroClientes extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Nit:");
+        jLabel2.setText("NIT:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 57, -1, -1));
 
         txtNit.setBackground(new java.awt.Color(255, 255, 255));
@@ -296,7 +298,7 @@ public class VRegistroClientes extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
-            VRegistroClientes dialog = new VRegistroClientes(new javax.swing.JFrame(), true, null);
+            VRegistroClientes dialog = new VRegistroClientes(new javax.swing.JFrame(), true, null,0);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -349,22 +351,50 @@ public class VRegistroClientes extends javax.swing.JDialog {
     private void registrar(){
         Cliente cliente = new Cliente();
         
-        
-        cliente.setIdcliente(Integer.parseInt(lblID.getText()));
+        if(bandera == 1)
+            cliente.setIdcliente(Integer.parseInt(lblID.getText()));
+        else if(bandera == 2)
+            cliente.setIdcliente(cliente.consultarCliente(txtNit.getText()));
         cliente.setNombre(txtNombre.getText());
         cliente.setNit(txtNit.getText());
         cliente.setDireccion(txtDireccion.getText());
         
-        // Validamos si el valor retornado por el método para grabar es mayor a 0.
-        if(cliente.grabar(cliente) > 0){
-            //JOptionPane.showMessageDialog(this, "Cliente registrado con éxito");
-            NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
-            ng.setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
-                                            "Error",JOptionPane.ERROR_MESSAGE);
-            txtNombre.grabFocus();
+        // Validamos el tipo de registro que se necesita realizar, actualización o creación.
+        if(bandera == 1){
+            // Validamos si el valor retornado por el método para grabar es mayor a 0.
+            if(cliente.grabar(cliente) > 0){
+                //JOptionPane.showMessageDialog(this, "Cliente registrado con éxito");
+                NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
+                ng.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
+                                                "Error",JOptionPane.ERROR_MESSAGE);
+                txtNombre.grabFocus();
+            }
+        }else if(bandera == 2){
+            // Se valida si el valor de retorno por el método para actualizar es mayor a 0.
+            if(cliente.actualizar(cliente) > 0){
+                NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
+                ng.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
+                                                "Error",JOptionPane.ERROR_MESSAGE);
+                txtNombre.grabFocus();
+            }
+        }
+    }
+    
+    private void init(){
+        Cliente cliente = new Cliente().cargarCliente(nit);
+        
+        if(this.bandera == 1){
+            txtNit.setText(nit);
+        }else if(this.bandera == 2){
+            txtNit.setText(cliente.getNit());
+            txtNombre.setText(cliente.getNombre());
+            txtDireccion.setText(cliente.getDireccion());
         }
     }
     

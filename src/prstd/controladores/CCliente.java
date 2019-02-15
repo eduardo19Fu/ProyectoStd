@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import prstd.modelos.Cliente;
 import prstd.servicios.ConexionDos;
 
@@ -56,6 +57,26 @@ public class CCliente {
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    public int actualizar(Cliente cliente){
+        String sql = "update tbl_cliente set nombre = ?, direccion = ?, nit = ? where idcliente = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getDireccion());
+            ps.setString(3, cliente.getNit());
+            ps.setInt(4, cliente.getIdcliente());
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -237,4 +258,28 @@ public class CCliente {
             return null;
         }
     }
+    
+    public Cliente cargarCliente(String nit){
+        String sql = "select * from tbl_cliente where nit = ?";
+        Cliente cliente = new Cliente();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, nit);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            cliente.setIdcliente(rs.getInt(1));
+            cliente.setNombre(rs.getString(2));
+            cliente.setDireccion(rs.getString(3));
+            cliente.setNit(rs.getString(4));
+            rs.close();
+            ps.close();
+            connection.close();
+            return cliente;
+        } catch (SQLException ex) {
+            Logger.getLogger(CCliente.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
 }

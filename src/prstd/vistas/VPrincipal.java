@@ -980,15 +980,16 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearOrdenMouseClicked
 
     private void btnCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseClicked
-        // TODO add your handling code here:
+        VClientes vc = new VClientes(this,true);
+        vc.setVisible(true);
     }//GEN-LAST:event_btnCustomersMouseClicked
 
     private void btnCustomersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseEntered
-        // TODO add your handling code here:
+        setBorder(btnCustomers);
     }//GEN-LAST:event_btnCustomersMouseEntered
 
     private void btnCustomersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseExited
-        // TODO add your handling code here:
+        resetBorder(btnCustomers);
     }//GEN-LAST:event_btnCustomersMouseExited
 
     /**
@@ -1209,6 +1210,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnUsuarios.setVisible(false);
         btnNotasCredito.setVisible(false);
         btnCorrelativos.setVisible(false);
+        btnCustomers.setVisible(false);
         
         // Opciones deshabilitadas para el módulo de reportes
         btnPolizas.setVisible(false);
