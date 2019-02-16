@@ -254,7 +254,7 @@ public class COrdenDespacho {
             return existe;
         } catch (SQLException ex) {
             //Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return 0;
         }
     }
@@ -269,9 +269,12 @@ public class COrdenDespacho {
             jv.setTitle("Orden de Despacho No. " + orden);
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         } catch (JRException | SQLException e) {
+            Logger.getLogger(COrdenDespacho.class.getName()).log(Level.SEVERE,null,e);
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error en Impresión.",JOptionPane.ERROR_MESSAGE);
             return null;
         }

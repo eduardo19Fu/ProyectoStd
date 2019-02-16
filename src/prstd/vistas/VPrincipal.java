@@ -45,7 +45,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnReporteNotas = new javax.swing.JLabel();
         panelSistema = new javax.swing.JPanel();
         btnUsuarios = new javax.swing.JLabel();
-        btnRoles = new javax.swing.JLabel();
+        btnCustomers = new javax.swing.JLabel();
         btnProductos = new javax.swing.JLabel();
         btnNotasCredito = new javax.swing.JLabel();
         btnFamilias = new javax.swing.JLabel();
@@ -232,23 +232,23 @@ public class VPrincipal extends javax.swing.JFrame {
         });
         panelSistema.add(btnUsuarios);
 
-        btnRoles.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRoles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Motion_Detector_72px.png"))); // NOI18N
-        btnRoles.setToolTipText("Administración de Roles");
-        btnRoles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRoles.setPreferredSize(new java.awt.Dimension(120, 120));
-        btnRoles.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCustomers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCustomers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Customer_72px.png"))); // NOI18N
+        btnCustomers.setToolTipText("Administración de Clientes");
+        btnCustomers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCustomers.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRolesMouseClicked(evt);
+                btnCustomersMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRolesMouseEntered(evt);
+                btnCustomersMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRolesMouseExited(evt);
+                btnCustomersMouseExited(evt);
             }
         });
-        panelSistema.add(btnRoles);
+        panelSistema.add(btnCustomers);
 
         btnProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Trolley_72px.png"))); // NOI18N
@@ -813,23 +813,10 @@ public class VPrincipal extends javax.swing.JFrame {
         usuario.setVisible(true); // Invoca la ventana de Administración de Usuarios.
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
-    private void btnRolesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseEntered
-        setBorder(btnRoles); // Invoca al método setBorder que se encarga de darle formato a los botones.
-    }//GEN-LAST:event_btnRolesMouseEntered
-
-    private void btnRolesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseExited
-        resetBorder(btnRoles); // Invoca al método setBorder que se encarga de quitarle formato a los botones.
-    }//GEN-LAST:event_btnRolesMouseExited
-
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         VProductos productos = new VProductos(this,true); // Instancia la Clase VProductos.
         productos.setVisible(true); //Invoca la ventana de Administración de Productos
     }//GEN-LAST:event_btnProductosMouseClicked
-
-    private void btnRolesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRolesMouseClicked
-        VRoles roles = new VRoles(this,true); // Instancia la Clase VRoles.
-        roles.setVisible(true); // Invoca la ventana de Administración de Roles.
-    }//GEN-LAST:event_btnRolesMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
         VFacturas vf = new VFacturas(this,false,usuario);
@@ -960,6 +947,19 @@ public class VPrincipal extends javax.swing.JFrame {
         vo.setVisible(true);
     }//GEN-LAST:event_btnCrearOrdenMouseClicked
 
+    private void btnCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseClicked
+        VClientes vc = new VClientes(this,true);
+        vc.setVisible(true);
+    }//GEN-LAST:event_btnCustomersMouseClicked
+
+    private void btnCustomersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseEntered
+        setBorder(btnCustomers);
+    }//GEN-LAST:event_btnCustomersMouseEntered
+
+    private void btnCustomersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseExited
+        resetBorder(btnCustomers);
+    }//GEN-LAST:event_btnCustomersMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1002,6 +1002,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnConsultarOrdenes;
     private javax.swing.JLabel btnCorrelativos;
     private javax.swing.JLabel btnCrearOrden;
+    private javax.swing.JLabel btnCustomers;
     private javax.swing.JPanel btnDespacho;
     private javax.swing.JLabel btnFabricantes;
     private javax.swing.JLabel btnFamilias;
@@ -1013,7 +1014,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnProformas;
     private javax.swing.JLabel btnReporteNotas;
     private javax.swing.JPanel btnReportes;
-    private javax.swing.JLabel btnRoles;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSistema;
     private javax.swing.JLabel btnUsuarios;
@@ -1134,7 +1134,7 @@ public class VPrincipal extends javax.swing.JFrame {
         panelSalir.setVisible(false);
         panelReportes.setVisible(false);
         panelDespacho.setVisible(false);
-        btnRoles.setVisible(false);
+        //btnRoles.setVisible(false);
         
         // Decide las opciones visibles dependiendo del nivel de acceso que el usuario tenga.
         switch(usuario.comprobarRol(usuario.consultarUsuario(this.usuario))){
@@ -1177,6 +1177,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnUsuarios.setVisible(false);
         btnNotasCredito.setVisible(false);
         btnCorrelativos.setVisible(false);
+        btnCustomers.setVisible(false);
         
         // Opciones deshabilitadas para el módulo de reportes
         btnPolizas.setVisible(false);

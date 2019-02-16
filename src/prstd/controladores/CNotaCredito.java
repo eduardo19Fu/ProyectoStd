@@ -120,7 +120,8 @@ public class CNotaCredito {
                     "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
                     "inner join tbl_cliente cl on ncl.idcliente = cl.idcliente\n" +
                     "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
-                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion";
+                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                    "where date(nc.fecha_creacion) = curdate()";
         List<Object> lista = new ArrayList<>();
         Object[] datos;
         

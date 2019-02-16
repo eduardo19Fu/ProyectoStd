@@ -31,7 +31,8 @@ from tbl_documento dc
 inner join tbl_detalle_documento de on de.idtransaccion = dc.idtransaccion
 inner join tbl_producto pro on pro.codigo = de.codigo
 inner join tbl_cliente cl on cl.idcliente = dc.idcliente
-where dc.no_documento =  $P{no_factura} and dc.serie = $P{serie} and dc.idtransaccion = $P{transac};]]>
+where dc.no_documento =  $P{no_factura} and dc.serie = $P{serie} and dc.idtransaccion = $P{transac}
+order by pro.nombre_producto asc;]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String"/>

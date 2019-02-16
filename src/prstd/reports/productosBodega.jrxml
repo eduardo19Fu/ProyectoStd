@@ -19,7 +19,9 @@ inner join
 inner join 
 	tbl_fabricante f on f.idfabricante = pr.idfabricante
 where 
-	pr.stuckBodega <= pr.stuck_minimo_bodega;]]>
+	pr.stuckBodega <= pr.stuck_minimo_bodega
+order by
+	pr.nombre_producto asc;]]>
 	</queryString>
 	<field name="codigo" class="java.lang.String"/>
 	<field name="nombre_producto" class="java.lang.String"/>

@@ -492,6 +492,7 @@ public class VCrearOrdenes extends javax.swing.JDialog {
         if(op != 1){
             if((op + 1) == 1){
                 init();
+                limpiarDetalle();
             }
         }
     }//GEN-LAST:event_btnNuevoMouseClicked
