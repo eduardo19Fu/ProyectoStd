@@ -286,7 +286,8 @@ public class VClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarMouseExited
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-        
+        VRegistroClientes vr = new VRegistroClientes(null, true, "", 3);
+        vr.setVisible(true);
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked

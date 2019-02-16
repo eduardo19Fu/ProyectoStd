@@ -395,13 +395,13 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnUsuariosMouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="btnRoles">
+                <Component class="javax.swing.JLabel" name="btnCustomers">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/prstd/images/icons8_Motion_Detector_72px.png"/>
+                      <Image iconType="3" name="/prstd/images/icons8_Customer_72px.png"/>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Administraci&#xf3;n de Roles"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Administraci&#xf3;n de Clientes"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Cursor de Mano"/>
                     </Property>
@@ -410,9 +410,9 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRolesMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRolesMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRolesMouseExited"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseClicked"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseExited"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="btnProductos">
@@ -515,26 +515,6 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCorrelativosMouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="btnCustomers">
-                  <Properties>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/prstd/images/icons8_Customer_72px.png"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Administraci&#xf3;n de Correlativos"/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor de Mano"/>
-                    </Property>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[120, 120]"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseClicked"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCustomersMouseExited"/>
-                  </Events>
-                </Component>
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
@@ -623,11 +603,11 @@
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="18_btnRoles">
-                      <CodeVariable name="btnRoles" type="8194" declaredType="javax.swing.JLabel"/>
+                    <CodeExpression id="18_btnCustomers">
+                      <CodeVariable name="btnCustomers" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="btnRoles"/>
+                          <ComponentRef name="btnCustomers"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>
@@ -713,22 +693,6 @@
                     </CodeExpression>
                   </Parameters>
                 </CodeStatement>
-                <CodeStatement>
-                  <CodeExpression id="16_panelSistema"/>
-                  <StatementProvider type="CodeMethod">
-                    <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
-                  </StatementProvider>
-                  <Parameters>
-                    <CodeExpression id="24_btnCustomers">
-                      <CodeVariable name="btnCustomers" type="8194" declaredType="javax.swing.JLabel"/>
-                      <ExpressionOrigin>
-                        <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="btnCustomers"/>
-                        </ExpressionProvider>
-                      </ExpressionOrigin>
-                    </CodeExpression>
-                  </Parameters>
-                </CodeStatement>
               </LayoutCode>
             </Container>
             <Container class="javax.swing.JPanel" name="panelCobros">
@@ -804,24 +768,24 @@
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="25_flowLayout2">
+                  <CodeExpression id="24_flowLayout2">
                     <CodeVariable name="flowLayout2" type="4096" declaredType="java.awt.FlowLayout"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="CodeConstructor">
                         <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                       </ExpressionProvider>
                       <Parameters>
-                        <CodeExpression id="26">
+                        <CodeExpression id="25">
                           <ExpressionOrigin>
                             <Value type="int" value="1"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="27">
+                        <CodeExpression id="26">
                           <ExpressionOrigin>
                             <Value type="int" value="100"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="28">
+                        <CodeExpression id="27">
                           <ExpressionOrigin>
                             <Value type="int" value="75"/>
                           </ExpressionOrigin>
@@ -830,21 +794,21 @@
                     </ExpressionOrigin>
                   </CodeExpression>
                   <StatementProvider type="CodeExpression">
-                    <CodeExpression id="25_flowLayout2"/>
+                    <CodeExpression id="24_flowLayout2"/>
                   </StatementProvider>
                   <Parameters>
+                    <CodeExpression id="25"/>
                     <CodeExpression id="26"/>
                     <CodeExpression id="27"/>
-                    <CodeExpression id="28"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="25_flowLayout2"/>
+                  <CodeExpression id="24_flowLayout2"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="29">
+                    <CodeExpression id="28">
                       <ExpressionOrigin>
                         <Value type="boolean" value="true"/>
                       </ExpressionOrigin>
@@ -852,7 +816,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="30_panelCobros">
+                  <CodeExpression id="29_panelCobros">
                     <CodeVariable name="panelCobros" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -864,16 +828,16 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="25_flowLayout2"/>
+                    <CodeExpression id="24_flowLayout2"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="30_panelCobros"/>
+                  <CodeExpression id="29_panelCobros"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="31_btnVentas">
+                    <CodeExpression id="30_btnVentas">
                       <CodeVariable name="btnVentas" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -884,12 +848,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="30_panelCobros"/>
+                  <CodeExpression id="29_panelCobros"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="32_btnProformas">
+                    <CodeExpression id="31_btnProformas">
                       <CodeVariable name="btnProformas" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -900,12 +864,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="30_panelCobros"/>
+                  <CodeExpression id="29_panelCobros"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="33_btnConsultaProformas">
+                    <CodeExpression id="32_btnConsultaProformas">
                       <CodeVariable name="btnConsultaProformas" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -970,24 +934,24 @@
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="34_flowLayout3">
+                  <CodeExpression id="33_flowLayout3">
                     <CodeVariable name="flowLayout3" type="4096" declaredType="java.awt.FlowLayout"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="CodeConstructor">
                         <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                       </ExpressionProvider>
                       <Parameters>
-                        <CodeExpression id="35">
+                        <CodeExpression id="34">
                           <ExpressionOrigin>
                             <Value type="int" value="1"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="36">
+                        <CodeExpression id="35">
                           <ExpressionOrigin>
                             <Value type="int" value="100"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="37">
+                        <CodeExpression id="36">
                           <ExpressionOrigin>
                             <Value type="int" value="75"/>
                           </ExpressionOrigin>
@@ -996,21 +960,21 @@
                     </ExpressionOrigin>
                   </CodeExpression>
                   <StatementProvider type="CodeExpression">
-                    <CodeExpression id="34_flowLayout3"/>
+                    <CodeExpression id="33_flowLayout3"/>
                   </StatementProvider>
                   <Parameters>
+                    <CodeExpression id="34"/>
                     <CodeExpression id="35"/>
                     <CodeExpression id="36"/>
-                    <CodeExpression id="37"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="34_flowLayout3"/>
+                  <CodeExpression id="33_flowLayout3"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="38">
+                    <CodeExpression id="37">
                       <ExpressionOrigin>
                         <Value type="boolean" value="true"/>
                       </ExpressionOrigin>
@@ -1018,7 +982,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="39_panelSalir">
+                  <CodeExpression id="38_panelSalir">
                     <CodeVariable name="panelSalir" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -1030,16 +994,16 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="34_flowLayout3"/>
+                    <CodeExpression id="33_flowLayout3"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="39_panelSalir"/>
+                  <CodeExpression id="38_panelSalir"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="40_btnCerrarSesion">
+                    <CodeExpression id="39_btnCerrarSesion">
                       <CodeVariable name="btnCerrarSesion" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -1050,12 +1014,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="39_panelSalir"/>
+                  <CodeExpression id="38_panelSalir"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="41_btnCerrarSistema">
+                    <CodeExpression id="40_btnCerrarSistema">
                       <CodeVariable name="btnCerrarSistema" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -1120,24 +1084,24 @@
               </SubComponents>
               <LayoutCode>
                 <CodeStatement>
-                  <CodeExpression id="42_flowLayout5">
+                  <CodeExpression id="41_flowLayout5">
                     <CodeVariable name="flowLayout5" type="4096" declaredType="java.awt.FlowLayout"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="CodeConstructor">
                         <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                       </ExpressionProvider>
                       <Parameters>
-                        <CodeExpression id="43">
+                        <CodeExpression id="42">
                           <ExpressionOrigin>
                             <Value type="int" value="1"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="44">
+                        <CodeExpression id="43">
                           <ExpressionOrigin>
                             <Value type="int" value="100"/>
                           </ExpressionOrigin>
                         </CodeExpression>
-                        <CodeExpression id="45">
+                        <CodeExpression id="44">
                           <ExpressionOrigin>
                             <Value type="int" value="75"/>
                           </ExpressionOrigin>
@@ -1146,21 +1110,21 @@
                     </ExpressionOrigin>
                   </CodeExpression>
                   <StatementProvider type="CodeExpression">
-                    <CodeExpression id="42_flowLayout5"/>
+                    <CodeExpression id="41_flowLayout5"/>
                   </StatementProvider>
                   <Parameters>
+                    <CodeExpression id="42"/>
                     <CodeExpression id="43"/>
                     <CodeExpression id="44"/>
-                    <CodeExpression id="45"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="42_flowLayout5"/>
+                  <CodeExpression id="41_flowLayout5"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="46">
+                    <CodeExpression id="45">
                       <ExpressionOrigin>
                         <Value type="boolean" value="true"/>
                       </ExpressionOrigin>
@@ -1168,7 +1132,7 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="47_panelDespacho">
+                  <CodeExpression id="46_panelDespacho">
                     <CodeVariable name="panelDespacho" type="8194" declaredType="javax.swing.JPanel"/>
                     <ExpressionOrigin>
                       <ExpressionProvider type="ComponentRef">
@@ -1180,16 +1144,16 @@
                     <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="42_flowLayout5"/>
+                    <CodeExpression id="41_flowLayout5"/>
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="47_panelDespacho"/>
+                  <CodeExpression id="46_panelDespacho"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="48_btnCrearOrden">
+                    <CodeExpression id="47_btnCrearOrden">
                       <CodeVariable name="btnCrearOrden" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
@@ -1200,12 +1164,12 @@
                   </Parameters>
                 </CodeStatement>
                 <CodeStatement>
-                  <CodeExpression id="47_panelDespacho"/>
+                  <CodeExpression id="46_panelDespacho"/>
                   <StatementProvider type="CodeMethod">
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="49_btnConsultarOrdenes">
+                    <CodeExpression id="48_btnConsultarOrdenes">
                       <CodeVariable name="btnConsultarOrdenes" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">

@@ -25,7 +25,6 @@ public class VRegistroClientes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        limpiar();
         this.nit = nit;
         this.bandera = bandera;
         init();
@@ -242,7 +241,7 @@ public class VRegistroClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarMouseExited
 
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
-        limpiar(); // Invocamos el método 
+        init(); // Invocamos el método 
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
@@ -351,63 +350,83 @@ public class VRegistroClientes extends javax.swing.JDialog {
     private void registrar(){
         Cliente cliente = new Cliente();
         
-        if(bandera == 1)
-            cliente.setIdcliente(Integer.parseInt(lblID.getText()));
-        else if(bandera == 2)
-            cliente.setIdcliente(cliente.consultarCliente(txtNit.getText()));
-        cliente.setNombre(txtNombre.getText());
-        cliente.setNit(txtNit.getText());
-        cliente.setDireccion(txtDireccion.getText());
-        
-        // Validamos el tipo de registro que se necesita realizar, actualización o creación.
-        if(bandera == 1){
-            // Validamos si el valor retornado por el método para grabar es mayor a 0.
-            if(cliente.grabar(cliente) > 0){
-                //JOptionPane.showMessageDialog(this, "Cliente registrado con éxito");
-                NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
-                ng.setVisible(true);
-                this.dispose();
+        if(!(txtNit.getText().isEmpty())){
+            if(!(txtNombre.getText().isEmpty())){
+                if(!(txtDireccion.getText().isEmpty())){
+                    if(bandera == 1)
+                        cliente.setIdcliente(Integer.parseInt(lblID.getText()));
+                    else if(bandera == 2)
+                        cliente.setIdcliente(cliente.consultarCliente(txtNit.getText()));
+                    cliente.setNombre(txtNombre.getText());
+                    cliente.setNit(txtNit.getText());
+                    cliente.setDireccion(txtDireccion.getText());
+
+                    // Validamos el tipo de registro que se necesita realizar, actualización o creación.
+                    if(bandera == 1 || bandera == 3){
+                        // Validamos si el valor retornado por el método para grabar es mayor a 0.
+                        if(cliente.grabar(cliente) > 0){
+                            //JOptionPane.showMessageDialog(this, "Cliente registrado con éxito");
+                            NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
+                            ng.setVisible(true);
+                            this.dispose();
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
+                                                            "Error",JOptionPane.ERROR_MESSAGE);
+                            txtNombre.grabFocus();
+                        }
+                    }else if(bandera == 2){
+                        // Se valida si el valor de retorno por el método para actualizar es mayor a 0.
+                        if(cliente.actualizar(cliente) > 0){
+                            NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
+                            ng.setVisible(true);
+                            this.dispose();
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
+                                                            "Error",JOptionPane.ERROR_MESSAGE);
+                            txtNombre.grabFocus();
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese una dirección válida.","Advertencia",JOptionPane.WARNING_MESSAGE);
+                }
             }else{
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
-                                                "Error",JOptionPane.ERROR_MESSAGE);
-                txtNombre.grabFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un nombre válido.","Advertencia",JOptionPane.WARNING_MESSAGE);
             }
-        }else if(bandera == 2){
-            // Se valida si el valor de retorno por el método para actualizar es mayor a 0.
-            if(cliente.actualizar(cliente) > 0){
-                NotificacionGuardado ng = new NotificacionGuardado(null,true,null);
-                ng.setVisible(true);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, por favor revise todos los campos ingresados o comuníquese con el administrador del sistemas para más información.",
-                                                "Error",JOptionPane.ERROR_MESSAGE);
-                txtNombre.grabFocus();
-            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un NIT válido.","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
     }
     
     private void init(){
-        Cliente cliente = new Cliente().cargarCliente(nit);
+        Cliente cliente;
         
         if(this.bandera == 1){
+            cliente = new Cliente();
+            if(cliente.getMaxCliente() == 0)
+                lblID.setText(String.valueOf("1"));
+            else
+                lblID.setText(String.valueOf(cliente.getMaxCliente()));
             txtNit.setText(nit);
+            txtNombre.setText("");
+            txtDireccion.setText("");
         }else if(this.bandera == 2){
+            cliente = new Cliente().cargarCliente(nit);
+            lblID.setText(String.valueOf(cliente.getIdcliente()));
             txtNit.setText(cliente.getNit());
             txtNombre.setText(cliente.getNombre());
             txtDireccion.setText(cliente.getDireccion());
+            txtNit.setEnabled(true);
+        }else if(this.bandera == 3){
+            cliente = new Cliente();
+            if(cliente.getMaxCliente() == 0)
+                lblID.setText(String.valueOf("1"));
+            else
+                lblID.setText(String.valueOf(cliente.getMaxCliente()));
+            txtNit.setText(nit);
+            txtNombre.setText("");
+            txtDireccion.setText("");
+            txtNit.setEnabled(true);
+            txtNit.grabFocus();
         }
-    }
-    
-    private void limpiar(){
-        Cliente cliente = new Cliente();
-        
-        if(cliente.getMaxCliente() == 0)
-            lblID.setText(String.valueOf("1"));
-        else
-            lblID.setText(String.valueOf(cliente.getMaxCliente()));
-        txtNombre.setText("");
-        txtDireccion.setText("");
-        txtNit.setText("");
-        txtNombre.grabFocus();
     }
 }
