@@ -114,7 +114,7 @@ order by pro.nombre_producto asc;]]>
 	<pageFooter>
 		<band height="24" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="81" y="0" width="355" height="20"/>
+				<reportElement x="81" y="0" width="307" height="20"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10"/>
 				</textElement>
