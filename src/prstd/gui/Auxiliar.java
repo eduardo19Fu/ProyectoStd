@@ -10,6 +10,8 @@ public class Auxiliar {
     private final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
         "setecientos ", "ochocientos ", "novecientos "};
     
+    private final String[] MILES = {"veinti"};
+    
     public Auxiliar(){
     
     }
@@ -67,15 +69,21 @@ public class Auxiliar {
         if (n < 10) {//para casos como -> 01 - 09
             return getUnidades(num);
         } else if (n > 19) {//para 20...99
-            String u = getUnidades(num);
-            if (u.equals("")) { //para 20,30,40,50,60,70,80,90
-                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8];
-            } else {
-                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8] + "y " + u;
+            if((n == 20) || (n>=30)){
+                String u = getUnidades(num);
+                if (u.equals("")) { //para 20,30,40,50,60,70,80,90
+                    return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8];
+                } else {
+                    return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8] + "y " + u;
+                }
+            }else{
+                String u = getUnidades(num);
+                return "veinti " + u;
             }
         } else {//numeros entre 11 y 19
             return DECENAS[n - 10];
         }
+        
     }
 
     private String getCentenas(String num) {// 999 o 099

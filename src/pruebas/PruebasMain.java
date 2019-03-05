@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import prstd.controladores.CProducto;
+import prstd.gui.Auxiliar;
 
 /**
  *
@@ -26,14 +27,14 @@ public class PruebasMain {
 //            System.out.println(producto.calcularPrecioVenta("10", "5"));
 //        }
 /*Prueba de clase para retornar total en letrass*/
-//        Auxiliar aux = new Auxiliar();
-//        String valor = "1555.50";
-//        System.out.println(aux.Convertir(valor, true));
-        CProducto cp = new CProducto();
-        System.out.println(cp.calcularPrecioVenta("25.32", "50"));
-        Timestamp tm = new Timestamp(new Date().getTime());
-        LocalDate date = LocalDate.now();
-        LocalDateTime date2 = LocalDateTime.now();
-        System.out.println(date2);
+        Auxiliar aux = new Auxiliar();
+        String valor = "20569.25";
+        System.out.println(aux.Convertir(valor, true));
+//        CProducto cp = new CProducto();
+//        System.out.println(cp.calcularPrecioVenta("25.32", "50"));
+//        Timestamp tm = new Timestamp(new Date().getTime());
+//        LocalDate date = LocalDate.now();
+//        LocalDateTime date2 = LocalDateTime.now();
+//        System.out.println(date2);
     }
 }
