@@ -162,6 +162,9 @@ public class VPrincipal extends javax.swing.JFrame {
         btnVentasMensuales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVentasMensuales.setPreferredSize(new java.awt.Dimension(120, 120));
         btnVentasMensuales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVentasMensualesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVentasMensualesMouseEntered(evt);
             }
@@ -959,6 +962,11 @@ public class VPrincipal extends javax.swing.JFrame {
     private void btnCustomersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseExited
         resetBorder(btnCustomers);
     }//GEN-LAST:event_btnCustomersMouseExited
+
+    private void btnVentasMensualesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMensualesMouseClicked
+        VReporteVentas ventas = new VReporteVentas(this, true);
+        ventas.setVisible(true);
+    }//GEN-LAST:event_btnVentasMensualesMouseClicked
 
     /**
      * @param args the command line arguments
