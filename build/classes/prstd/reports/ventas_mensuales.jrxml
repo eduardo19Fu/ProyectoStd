@@ -64,21 +64,21 @@ order by
 		<groupFooter>
 			<band height="43">
 				<textField>
-					<reportElement x="426" y="15" width="136" height="20"/>
+					<reportElement x="426" y="15" width="136" height="20" forecolor="#CC0000"/>
 					<textElement textAlignment="Right">
 						<font fontName="Arial" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_ventas}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="410" y="15" width="16" height="20"/>
+					<reportElement x="410" y="15" width="16" height="20" forecolor="#CC0000"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Q.]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="1" y="15" width="409" height="20"/>
+					<reportElement x="1" y="15" width="409" height="20" forecolor="#CC0000"/>
 					<textElement>
 						<font fontName="Arial" size="12" isBold="true"/>
 					</textElement>
@@ -88,7 +88,7 @@ order by
 					<reportElement x="396" y="6" width="176" height="1"/>
 				</line>
 				<line>
-					<reportElement x="396" y="36" width="176" height="1"/>
+					<reportElement x="396" y="36" width="176" height="1" forecolor="#CC0000"/>
 					<graphicElement>
 						<pen lineWidth="2.5" lineStyle="Double"/>
 					</graphicElement>
@@ -130,38 +130,45 @@ order by
 	<title>
 		<band height="63" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="462" y="28" width="110" height="20"/>
+				<reportElement x="462" y="38" width="110" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="48" width="571" height="1"/>
+				<reportElement x="1" y="58" width="571" height="1"/>
 			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="571" height="38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIBRERIA Y VARIEDADES CARMELITA]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="52" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="1" y="0" width="571" height="47"/>
+				<reportElement x="1" y="5" width="571" height="47"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="0" width="324" height="47"/>
+				<reportElement x="1" y="5" width="324" height="47"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE VENTAS DEL MES DE:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="324" y="0" width="158" height="47"/>
+				<reportElement x="324" y="5" width="158" height="47" forecolor="#CC0000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{getMes(month(doc.fecha_emision))}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="482" y="0" width="90" height="47"/>
+				<reportElement x="482" y="5" width="90" height="47" forecolor="#CC0000"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
@@ -176,7 +183,7 @@ order by
 		<band height="17" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="38" splitType="Stretch"/>
+		<band height="11" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">

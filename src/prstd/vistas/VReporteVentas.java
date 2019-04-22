@@ -298,7 +298,7 @@ public class VReporteVentas extends javax.swing.JDialog {
     }
     
     private void cargarAnhos(){
-        for(int i = 1990; i <= 2090; i++){
+        for(int i = 2018; i <= 2090; i++){
             comboAnho.addItem(String.valueOf(i));
         }
     }
