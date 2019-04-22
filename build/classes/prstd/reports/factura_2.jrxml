@@ -22,7 +22,6 @@
         	date_format(dc.fecha_emision, '%d/%m/%Y'),
         	de.cantidad,
         	pro.nombre_producto,
-        	-- if(de.descuento != 0,round(pro.precio_venta - (pro.precio_venta * de.descuento),2),pro.precio_venta) as precio_venta,
         	if(de.descuento != 0, de.nprecio_venta,pro.precio_venta) as precio_venta,
         	de.subtotal,
         	dc.total,

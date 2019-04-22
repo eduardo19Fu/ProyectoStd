@@ -340,10 +340,30 @@ public class CFactura {
             jv.setVisible(true);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
             jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-            jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
         }catch(JRException | SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public javax.swing.JFrame ventas_mensuales(String mes, int anho){
+        try {
+            Auxiliar aux = new Auxiliar();
+            Map parametro = new HashMap();
+            parametro.put("mes", aux.getMes(mes));
+            parametro.put("anho", anho);
+            reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\ventas_mensuales.jrxml");
+            JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
+            JasperViewer jv = new JasperViewer(print,false);
+            jv.setTitle("Ventas del mes de " + mes +" del " + anho);
+            jv.setVisible(true);
+            jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            connection.close();
+            return jv;
+        } catch (JRException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
             return null;
         }

@@ -10,6 +10,10 @@ public class Auxiliar {
     private final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
         "setecientos ", "ochocientos ", "novecientos "};
     
+    private final String[] MILES = {"veinti"};
+    
+    private final String[] meses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+    
     public Auxiliar(){
     
     }
@@ -67,15 +71,21 @@ public class Auxiliar {
         if (n < 10) {//para casos como -> 01 - 09
             return getUnidades(num);
         } else if (n > 19) {//para 20...99
-            String u = getUnidades(num);
-            if (u.equals("")) { //para 20,30,40,50,60,70,80,90
-                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8];
-            } else {
-                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8] + "y " + u;
+            if((n == 20) || (n>=30)){
+                String u = getUnidades(num);
+                if (u.equals("")) { //para 20,30,40,50,60,70,80,90
+                    return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8];
+                } else {
+                    return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8] + "y " + u;
+                }
+            }else{
+                String u = getUnidades(num);
+                return "veinti " + u;
             }
         } else {//numeros entre 11 y 19
             return DECENAS[n - 10];
         }
+        
     }
 
     private String getCentenas(String num) {// 999 o 099
@@ -119,5 +129,36 @@ public class Auxiliar {
             n = getUnidades(millon) + "millon ";
         }
         return n + getMiles(miles);        
+    }
+    
+    public int getMes(String mes){
+        switch(mes){
+            case "Enero":
+                return 1;
+            case "Febrero":
+                return 2;
+            case "Marzo":
+                return 3;
+            case "Abril":
+                return 4;
+            case "Mayo":
+                return 5;
+            case "Junio":
+                return 6;
+            case "Julio":
+                return 7;
+            case "Agosto":
+                return 8;
+            case "Septiembre":
+                return 9;
+            case "Octubre":
+                return 10;
+            case "Noviembre":
+                return 11;
+            case "Diciembre":
+                return 12;
+            default:
+                return 0;
+        }
     }
 }

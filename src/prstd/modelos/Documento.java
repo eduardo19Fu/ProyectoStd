@@ -225,4 +225,9 @@ public class Documento {
         CProforma cp = new CProforma();
         return cp.delete(transaccion);
     }
+    
+    public javax.swing.JFrame ventas_mensuales(String mes, int anho){
+        CFactura cf = new CFactura();
+        return cf.ventas_mensuales(mes, anho);
+    }
 }
