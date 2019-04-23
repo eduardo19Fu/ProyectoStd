@@ -89,6 +89,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JLabel();
         btnDescuento = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnMinimizar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -356,7 +357,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         lblDescuento.setText("Descuento:");
         jPanel4.add(lblDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 321, 872, 350));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 321, 872, 370));
 
         panelOpciones.setBackground(new java.awt.Color(255, 255, 255));
         panelOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -442,7 +443,28 @@ public class VCreacionProforma extends javax.swing.JDialog {
         });
         panelOpciones.add(btnDescuento);
 
-        jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 371, 144, 300));
+        btnEditar.setBackground(new java.awt.Color(230, 162, 78));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Edit_32px.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar producto seleccionado.");
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setOpaque(true);
+        btnEditar.setPreferredSize(new java.awt.Dimension(78, 54));
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarMouseExited(evt);
+            }
+        });
+        panelOpciones.add(btnEditar);
+
+        jPanel1.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 331, 144, 360));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -529,7 +551,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
         );
 
         pack();
@@ -767,6 +789,25 @@ public class VCreacionProforma extends javax.swing.JDialog {
         bp.setVisible(true);
     }//GEN-LAST:event_btnBuscar_3ActionPerformed
 
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        try {
+            String codigo;
+            codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
+            VRegistroProducto vrp = new VRegistroProducto(null, true, codigo);
+            vrp.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para proceder con la edición","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarMouseClicked
+
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        setFormato(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseEntered
+
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        resetFormato(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -814,6 +855,7 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar_2;
     private javax.swing.JButton btnBuscar_3;
     private javax.swing.JLabel btnDescuento;
+    private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnImprimir;
     private javax.swing.JLabel btnLimpiar;
