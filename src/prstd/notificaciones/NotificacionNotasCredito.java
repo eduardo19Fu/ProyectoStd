@@ -5,18 +5,19 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import prstd.modelos.Cliente;
 import prstd.modelos.NotaCredito;
 
 
 public class NotificacionNotasCredito extends javax.swing.JDialog {
 
     private int x,y;
-    private int idcliente;
-    
-    public NotificacionNotasCredito(java.awt.Frame parent, boolean modal, int idcliente) {
+    private Cliente cliente;
+    public NotificacionNotasCredito(java.awt.Frame parent, boolean modal, Cliente cliente) {
         super(parent, modal);
         initComponents();
-        this.idcliente = idcliente;
+        this.setLocationRelativeTo(null);
+        this.cliente = cliente;
         cargarNotasPendientes();
     }
 
@@ -33,6 +34,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         btnAceptar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(238, 236, 173));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -162,7 +164,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NotificacionNotasCredito dialog = new NotificacionNotasCredito(new javax.swing.JFrame(), true,0);
+                NotificacionNotasCredito dialog = new NotificacionNotasCredito(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -194,8 +196,13 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
     
     private void cargarNotasPendientes(){
         NotaCredito nc = new NotaCredito();
-        DefaultTableModel model = nc.notasPendientes(this.idcliente);
-        tableNotas.setModel(model);
+        if(nc.notasPendientes(cliente.getIdcliente()) != null){
+            DefaultTableModel model = nc.notasPendientes(cliente.getIdcliente());
+            tableNotas.setModel(model);
+            lblCliente.setText(cliente.getNombre().toUpperCase());
+        }else{
+            this.dispose();
+        }
     }
 
 }

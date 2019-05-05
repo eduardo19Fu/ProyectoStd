@@ -218,7 +218,7 @@ public class CNotaCredito {
                     "inner join tbl_cliente cl on cl.idcliente = ncl.idcliente\n" +
                     "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
                     "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
-                    "where cl.idcliente = ?";
+                    "where cl.idcliente = ? and nc.estado = 'ACTIVA'";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, idcliente);

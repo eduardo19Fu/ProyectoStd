@@ -29,6 +29,7 @@ import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
 import prstd.notificaciones.NotificacionFactura;
+import prstd.notificaciones.NotificacionNotasCredito;
 
 public class VCrearFactura extends javax.swing.JDialog {
 
@@ -40,6 +41,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private String[] titulos = {"Cantidad","Codigo","Producto","Precio Unitario","Sub-total","Descuento","Nota"};
     private DefaultTableModel modelo = new DefaultTableModel(null,titulos);
     private Object[] datos = new Object[7];
+    private Cliente cliente;
     
     public VCrearFactura(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent, modal);
@@ -52,6 +54,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         usuario.setUsuario(this.vendedor);
         lblVendedor.setText(usuario.getVendedor());
         sumatoria = 0;
+        cliente = new Cliente();
         init();
     }
 
@@ -654,6 +657,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private void txtNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyTyped
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             buscarNit();
+            consultarNotas();
         }        
     }//GEN-LAST:event_txtNitKeyTyped
 
@@ -975,14 +979,13 @@ public class VCrearFactura extends javax.swing.JDialog {
     }
     
     public void buscarNit(){
-        Cliente cliente;
         if(!txtNit.getText().isEmpty())
-            cliente = new Cliente().buscarNit(txtNit.getText());
+            this.cliente = new Cliente().buscarNit(txtNit.getText());
         else
-            cliente = new Cliente().buscarNit("C/F");
-        if(cliente != null){
+            this.cliente = new Cliente().buscarNit("C/F");
+        if(this.cliente != null){
             
-            txtNit.setText(cliente.getNit());
+            this.txtNit.setText(cliente.getNit());
             txtNombre.setText(cliente.getNombre());
             txtDireccion.setText(cliente.getDireccion());
             
@@ -1288,5 +1291,16 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
         }
     
+    }
+    
+    // Método encargado de realizar la búsqueda de notas de crédito pendientes por parte del cliente
+    // al que se pretende realizar la facturación.
+    private void consultarNotas(){
+        NotaCredito nc = new NotaCredito();
+        if(nc.notasPendientes(cliente.getIdcliente()).getRowCount() > 0){
+            NotificacionNotasCredito nn = new NotificacionNotasCredito(null, true, this.cliente);
+            nn.setVisible(true);
+        }else{
+        }
     }
 }
