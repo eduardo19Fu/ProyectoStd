@@ -29,6 +29,7 @@ import prstd.modelos.Producto;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
 import prstd.notificaciones.NotificacionFactura;
+import prstd.notificaciones.NotificacionNotasCredito;
 
 public class VCrearFactura extends javax.swing.JDialog {
 
@@ -40,6 +41,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private String[] titulos = {"Cantidad","Codigo","Producto","Precio Unitario","Sub-total","Descuento","Nota"};
     private DefaultTableModel modelo = new DefaultTableModel(null,titulos);
     private Object[] datos = new Object[7];
+    private Cliente cliente;
     
     public VCrearFactura(java.awt.Frame parent, boolean modal, String vendedor) {
         super(parent, modal);
@@ -52,6 +54,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         usuario.setUsuario(this.vendedor);
         lblVendedor.setText(usuario.getVendedor());
         sumatoria = 0;
+        cliente = new Cliente();
         init();
     }
 
@@ -98,6 +101,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JLabel();
         btnDescuento = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JLabel();
         txtDescuento = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -460,6 +464,27 @@ public class VCrearFactura extends javax.swing.JDialog {
         });
         jPanel6.add(btnDescuento);
 
+        btnEditar.setBackground(new java.awt.Color(230, 162, 78));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Edit_32px.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar producto seleccionado.");
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setOpaque(true);
+        btnEditar.setPreferredSize(new java.awt.Dimension(78, 54));
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarMouseExited(evt);
+            }
+        });
+        jPanel6.add(btnEditar);
+
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 255, 580, 80));
 
         txtDescuento.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
@@ -632,6 +657,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private void txtNitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNitKeyTyped
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             buscarNit();
+            consultarNotas();
         }        
     }//GEN-LAST:event_txtNitKeyTyped
 
@@ -793,6 +819,25 @@ public class VCrearFactura extends javax.swing.JDialog {
         bp.setVisible(true);
     }//GEN-LAST:event_btnBuscar_3ActionPerformed
 
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        try {
+            String codigo;
+            codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
+            VRegistroProducto vrp = new VRegistroProducto(null, true, codigo);
+            vrp.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para proceder con la edición","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarMouseClicked
+
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
+        setFormato(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseEntered
+
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
+        resetFormato(btnEditar);
+    }//GEN-LAST:event_btnEditarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -839,6 +884,7 @@ public class VCrearFactura extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar_2;
     private javax.swing.JButton btnBuscar_3;
     private javax.swing.JLabel btnDescuento;
+    private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnImprimir;
     private javax.swing.JLabel btnLimpiar;
@@ -933,14 +979,13 @@ public class VCrearFactura extends javax.swing.JDialog {
     }
     
     public void buscarNit(){
-        Cliente cliente;
         if(!txtNit.getText().isEmpty())
-            cliente = new Cliente().buscarNit(txtNit.getText());
+            this.cliente = new Cliente().buscarNit(txtNit.getText());
         else
-            cliente = new Cliente().buscarNit("C/F");
-        if(cliente != null){
+            this.cliente = new Cliente().buscarNit("C/F");
+        if(this.cliente != null){
             
-            txtNit.setText(cliente.getNit());
+            this.txtNit.setText(cliente.getNit());
             txtNombre.setText(cliente.getNombre());
             txtDireccion.setText(cliente.getDireccion());
             
@@ -1246,5 +1291,16 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
         }
     
+    }
+    
+    // Método encargado de realizar la búsqueda de notas de crédito pendientes por parte del cliente
+    // al que se pretende realizar la facturación.
+    private void consultarNotas(){
+        NotaCredito nc = new NotaCredito();
+        if(nc.notasPendientes(cliente.getIdcliente()).getRowCount() > 0){
+            NotificacionNotasCredito nn = new NotificacionNotasCredito(null, true, this.cliente);
+            nn.setVisible(true);
+        }else{
+        }
     }
 }

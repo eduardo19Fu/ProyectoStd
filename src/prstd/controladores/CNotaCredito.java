@@ -205,4 +205,36 @@ public class CNotaCredito {
             return 0;
         }
     }
+    
+    public DefaultTableModel notasPendientes(int idcliente){
+        String titulos[] = {"Codigo","Nombre","Saldo Pendiente","No. Factura","Fecha Creacion"};
+        Object[] datos = new Object[5];
+        DefaultTableModel model = new DefaultTableModel(null,titulos);
+        String sql = "select nc.cod_producto, pr.nombre_producto, " +
+                            "nc.saldo_pendiente, dc.no_documento, nc.fecha_creacion\n" +
+                    "from tbl_nota_credito nc\n" +
+                    "inner join tbl_producto pr on nc.cod_producto = pr.codigo\n" +
+                    "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
+                    "inner join tbl_cliente cl on cl.idcliente = ncl.idcliente\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                    "where cl.idcliente = ? and nc.estado = 'ACTIVA'";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idcliente);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getDouble(3);
+                datos[3] = rs.getInt(4);
+                datos[4] = rs.getTimestamp(5);
+                model.addRow(datos);
+            }
+            return model;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

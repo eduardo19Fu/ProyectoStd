@@ -108,4 +108,9 @@ public class NotaCredito {
         CNotaCredito cn = new CNotaCredito();
         return cn.consultar(fechaIni,fechaFin);
     }
+    
+    public DefaultTableModel notasPendientes(int idcliente){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.notasPendientes(idcliente);
+    }
 }
