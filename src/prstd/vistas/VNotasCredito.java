@@ -36,6 +36,8 @@ public class VNotasCredito extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        txtBusqueda = new javax.swing.JTextField();
         panelCobros = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableNotas = new javax.swing.JTable();
@@ -49,6 +51,9 @@ public class VNotasCredito extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
+        btnDespachar = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnImprimir = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -99,6 +104,20 @@ public class VNotasCredito extends javax.swing.JDialog {
 
         jPanel4.setBackground(new java.awt.Color(0, 216, 148));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Search_32px.png"))); // NOI18N
+        jPanel4.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 40, 30));
+
+        txtBusqueda.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 360, -1));
+
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 810, 120));
 
         panelCobros.setOpaque(false);
@@ -108,7 +127,7 @@ public class VNotasCredito extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID Nota", "Producto", "Cliente", "Transacción", "Fecha", "Estado"
+                "ID Cliente", "Nombre", "NIT", "Cantidad", "Factura No.", "Fecha Creacion"
             }
         ));
         tableNotas.setFillsViewportHeight(true);
@@ -211,6 +230,29 @@ public class VNotasCredito extends javax.swing.JDialog {
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 25));
+
+        btnDespachar.setBackground(new java.awt.Color(0, 153, 153));
+        btnDespachar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDespachar.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnDespachar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDespacharMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDespacharMouseExited(evt);
+            }
+        });
+        btnDespachar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Despachar");
+        btnDespachar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Small_Business_50px.png"))); // NOI18N
+        btnDespachar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.add(btnDespachar);
 
         btnImprimir.setBackground(new java.awt.Color(0, 153, 153));
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -334,6 +376,18 @@ public class VNotasCredito extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnAnularMouseClicked
 
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        filtrar();
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void btnDespacharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseEntered
+        setColor(btnDespachar);
+    }//GEN-LAST:event_btnDespacharMouseEntered
+
+    private void btnDespacharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseExited
+        resetColor(btnDespachar);
+    }//GEN-LAST:event_btnDespacharMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +436,7 @@ public class VNotasCredito extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAnular;
+    private javax.swing.JPanel btnDespachar;
     private javax.swing.JLabel btnFiltro;
     private javax.swing.JPanel btnImprimir;
     private javax.swing.JLabel btnMinimizar;
@@ -395,6 +450,8 @@ public class VNotasCredito extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -402,9 +459,11 @@ public class VNotasCredito extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCobros;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JTable tableNotas;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 
     public void cerrarVentanaPrincipal(){
@@ -428,7 +487,7 @@ public class VNotasCredito extends javax.swing.JDialog {
     }
     
     private void cargarNotas(){
-        String[] titulos = {"ID Nota", "Producto","Cliente","Transacción","Fecha","Estado"};
+        String[] titulos = {"ID Cliente", "Nombre","NIT","Cantidad","Factura No.","Fecha Creacion"};
         Object[] datos;
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         NotaCredito nc = new NotaCredito();
@@ -442,8 +501,23 @@ public class VNotasCredito extends javax.swing.JDialog {
         configurarTabla(tableNotas);
     }
     
+    private void filtrar() {
+        String[] titulos = {"ID Cliente", "Nombre","NIT","Cantidad","Factura No.","Fecha Creacion"};
+        Object[] datos;
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        NotaCredito nc = new NotaCredito();
+        List<Object> lista = nc.consultar(txtBusqueda.getText());
+        
+        for(int i = 0; i < lista.size(); i++){
+           datos = (Object[]) lista.get(i);
+           modelo.addRow(datos);
+        }
+        tableNotas.setModel(modelo);
+        configurarTabla(tableNotas);
+    }
+    
     private void filtrarNotas(){
-        String[] titulos = {"ID Nota", "Producto","Cliente","Transacción","Fecha","Estado"};
+        String[] titulos = {"ID Cliente", "Nombre","NIT","Cantidad","Factura No.","Fecha Creacion"};
         Object[] datos;
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         NotaCredito nc = new NotaCredito();
@@ -464,12 +538,12 @@ public class VNotasCredito extends javax.swing.JDialog {
     private void configurarTabla(JTable table){
         // Configuración del tamaño que ocuparán las columnas que muestran la información
         // de las cuentas disponibles bajo el nombre ingresado.
-        table.getColumn("ID Nota").setPreferredWidth(40);
-        table.getColumn("Producto").setPreferredWidth(60);
-        table.getColumn("Cliente").setPreferredWidth(100);
-        table.getColumn("Transacción").setPreferredWidth(80);
-        table.getColumn("Fecha").setPreferredWidth(180);
-        table.getColumn("Estado").setPreferredWidth(50);
+        table.getColumn("ID Cliente").setPreferredWidth(40);
+        table.getColumn("Nombre").setPreferredWidth(150);
+        table.getColumn("NIT").setPreferredWidth(75);
+        table.getColumn("Cantidad").setPreferredWidth(50);
+        table.getColumn("Factura No.").setPreferredWidth(100);
+        table.getColumn("Fecha Creacion").setPreferredWidth(180);
         
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         // Indicamos la alineación que tendrán las columnas.

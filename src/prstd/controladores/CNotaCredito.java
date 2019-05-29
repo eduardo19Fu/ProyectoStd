@@ -29,14 +29,15 @@ public class CNotaCredito {
     }
     
     public int crear(NotaCredito nc){
-        String sql = "insert into tbl_nota_credito(cod_producto,saldo_pendiente,fecha_creacion,estado) values(?,?,?,?)";
+        String sql = "insert into tbl_nota_credito(cod_producto,saldo_pendiente,cantidad,fecha_creacion,estado) values(?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, nc.getCod_producto());
             ps.setDouble(2, nc.getSaldo_pendiente());
-            ps.setTimestamp(3, nc.getFecha_creacion());
-            ps.setString(4, nc.getEstado());
+            ps.setInt(3, nc.getCantidad());
+            ps.setTimestamp(4, nc.getFecha_creacion());
+            ps.setString(5, nc.getEstado());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -114,14 +115,14 @@ public class CNotaCredito {
     }
     
     public List<Object> consultar(){
-        String sql = "select nc.idnota,p.nombre_producto,cl.nombre,dc.no_documento,nc.fecha_creacion,nc.estado\n" +
-                    "from tbl_nota_credito nc\n" +
-                    "inner join tbl_producto p on nc.cod_producto = p.codigo\n" +
-                    "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
-                    "inner join tbl_cliente cl on ncl.idcliente = cl.idcliente\n" +
-                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
-                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
-                    "where date(nc.fecha_creacion) = curdate()";
+        String sql =    "select c.idcliente, c.nombre, c.nit, count(nc.idnota) notas,dc.no_documento, dc.fecha_emision\n" +
+                        "from tbl_cliente c\n" +
+                        "inner join tbl_nota_cliente ncl on ncl.idcliente = c.idcliente \n" +
+                        "inner join tbl_nota_credito nc on nc.idnota = ncl.idnota\n" +
+                        "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                        "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                        "where nc.estado = 'ACTIVA' and date(nc.fecha_creacion) = curdate()\n" +
+                        "group by c.nombre, nt.idtransaccion;";
         List<Object> lista = new ArrayList<>();
         Object[] datos;
         
@@ -134,8 +135,8 @@ public class CNotaCredito {
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getInt(4);
-                datos[4] = rs.getTimestamp(5);
-                datos[5] = rs.getString(6);
+                datos[4] = rs.getInt(5);
+                datos[5] = rs.getTimestamp(6);
                 lista.add(datos);
             }
             rs.close();
@@ -150,14 +151,14 @@ public class CNotaCredito {
     }
     
     public List<Object> consultar(Date fechaIni, Date fechaFin){
-        String sql = "select nc.idnota,p.nombre_producto,cl.nombre,dc.no_documento,nc.fecha_creacion,nc.estado\n" +
-                    "from tbl_nota_credito nc\n" +
-                    "inner join tbl_producto p on nc.cod_producto = p.codigo\n" +
-                    "inner join tbl_nota_cliente ncl on ncl.idnota = nc.idnota\n" +
-                    "inner join tbl_cliente cl on ncl.idcliente = cl.idcliente\n" +
-                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
-                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
-                    "where date(fecha_creacion) between ? and ?";
+        String sql =    "select c.idcliente, c.nombre, c.nit, count(nc.idnota) notas,dc.no_documento, dc.fecha_emision\n" +
+                        "from tbl_cliente c\n" +
+                        "inner join tbl_nota_cliente ncl on ncl.idcliente = c.idcliente \n" +
+                        "inner join tbl_nota_credito nc on nc.idnota = ncl.idnota\n" +
+                        "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                        "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                        "where nc.estado = 'ACTIVA' and date(dc.fecha_emision) betwen ? and ?\n" +
+                        "group by c.nombre, nt.idtransaccion;";
         List<Object> lista = new ArrayList<>();
         Object[] datos;
         
@@ -172,8 +173,47 @@ public class CNotaCredito {
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getInt(4);
-                datos[4] = rs.getTimestamp(5);
-                datos[5] = rs.getString(6);
+                datos[4] = rs.getInt(5);
+                datos[5] = rs.getTimestamp(6);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public List<Object> consultar(String valor){
+        String sql =    "select c.idcliente, c.nombre, c.nit, count(nc.idnota) notas,dc.no_documento, dc.fecha_emision\n" +
+                        "from tbl_cliente c\n" +
+                        "inner join tbl_nota_cliente ncl on ncl.idcliente = c.idcliente \n" +
+                        "inner join tbl_nota_credito nc on nc.idnota = ncl.idnota\n" +
+                        "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                        "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                        "where nc.estado = 'ACTIVA' and (c.nombre like ? or cast(nt.idtransaccion as char) like ? or c.nit like ?)\n" +
+                        "group by c.nombre, nt.idtransaccion;";
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + valor + "%");
+            ps.setString(2, "%" + valor + "%");
+            ps.setString(3, "%" + valor + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[6];
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getInt(4);
+                datos[4] = rs.getInt(5);
+                datos[5] = rs.getTimestamp(6);
                 lista.add(datos);
             }
             rs.close();

@@ -18,6 +18,7 @@ public class NotaCredito {
     private double saldo_pendiente;
     private Timestamp fecha_creacion;
     private String estado;
+    private int cantidad;
 
     public NotaCredito() {
     }
@@ -65,6 +66,15 @@ public class NotaCredito {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
     /*
         Métodos controlador de Nota Credito
@@ -112,5 +122,10 @@ public class NotaCredito {
     public DefaultTableModel notasPendientes(int idcliente){
         CNotaCredito cn = new CNotaCredito();
         return cn.notasPendientes(idcliente);
+    }
+    
+    public List<Object> consultar(String valor){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.consultar(valor);
     }
 }

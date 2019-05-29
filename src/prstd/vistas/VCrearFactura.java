@@ -1233,6 +1233,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         nc.setSaldo_pendiente(saldo_total);
         nc.setFecha_creacion(time);
         nc.setEstado("PENDIENTE");
+        nc.setCantidad(cantidad);
         
         if(nc.crear(nc) > 0){
             JOptionPane.showMessageDialog(this, "Nota de Crédito para el producto " + codigo + " generada con éxito.");
