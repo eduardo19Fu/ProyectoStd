@@ -1,17 +1,25 @@
 package prstd.controladores;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import prstd.modelos.NotaCredito;
 import prstd.servicios.ConexionDos;
 
@@ -20,7 +28,7 @@ public class CNotaCredito {
     private ConexionDos conexion;
     private Connection connection;
     private NotaCredito nota_credito;
-    
+    private JasperReport reporte;
     public CNotaCredito(){
         
         conexion = new ConexionDos();
@@ -157,7 +165,7 @@ public class CNotaCredito {
                         "inner join tbl_nota_credito nc on nc.idnota = ncl.idnota\n" +
                         "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
                         "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
-                        "where nc.estado = 'ACTIVA' and date(dc.fecha_emision) betwen ? and ?\n" +
+                        "where nc.estado = 'ACTIVA' and date(dc.fecha_emision) between ? and ?\n" +
                         "group by c.nombre, nt.idtransaccion;";
         List<Object> lista = new ArrayList<>();
         Object[] datos;
@@ -274,6 +282,26 @@ public class CNotaCredito {
             return model;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    // Controlador que se encarga de la impresión de las notas de crédito pendientes de determinado cliente
+    public javax.swing.JFrame imprimirPendientes(int idcliente){
+        try {
+            Map parametro = new HashMap();
+            parametro.put("idcliente", idcliente);
+            reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\reporte_notas.jrxml");
+            JasperPrint print = JasperFillManager.fillReport(reporte, parametro, connection);
+            JasperViewer jv = new JasperViewer(print,false);
+            jv.setTitle("Notas de Crédito Pendientes");
+            jv.setVisible(true);
+            jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+            connection.close();
+            return jv;
+        } catch (SQLException | JRException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

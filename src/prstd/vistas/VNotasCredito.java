@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -258,6 +259,9 @@ public class VNotasCredito extends javax.swing.JDialog {
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.setPreferredSize(new java.awt.Dimension(250, 50));
         btnImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImprimirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnImprimirMouseEntered(evt);
             }
@@ -387,6 +391,17 @@ public class VNotasCredito extends javax.swing.JDialog {
     private void btnDespacharMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseExited
         resetColor(btnDespachar);
     }//GEN-LAST:event_btnDespacharMouseExited
+
+    private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
+        try {
+            int id = (int) tableNotas.getValueAt(tableNotas.getSelectedRow(), 0);
+            NotaCredito nc = new NotaCredito();
+            nc.imprimirPendientes(id);
+            this.dispose();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para poder proceder con el reporte.","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnImprimirMouseClicked
 
     /**
      * @param args the command line arguments

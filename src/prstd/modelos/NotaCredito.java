@@ -128,4 +128,9 @@ public class NotaCredito {
         CNotaCredito cn = new CNotaCredito();
         return cn.consultar(valor);
     }
+    
+    public javax.swing.JFrame imprimirPendientes(int idcliente){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.imprimirPendientes(idcliente);
+    }
 }
