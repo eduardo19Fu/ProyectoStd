@@ -285,4 +285,9 @@ public class Producto {
         CProducto cp = new CProducto();
         return cp.reportBodega();
     }
+    
+    public int actualizarExistencias(String codigo, int cantidad, int bandera){
+        CProducto cp = new CProducto();
+        return cp.actualizarExistencia(codigo, cantidad, bandera);
+    }
 }

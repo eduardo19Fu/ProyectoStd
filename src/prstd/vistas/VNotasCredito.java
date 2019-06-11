@@ -236,6 +236,9 @@ public class VNotasCredito extends javax.swing.JDialog {
         btnDespachar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDespachar.setPreferredSize(new java.awt.Dimension(250, 50));
         btnDespachar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDespacharMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnDespacharMouseEntered(evt);
             }
@@ -402,6 +405,17 @@ public class VNotasCredito extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para poder proceder con el reporte.","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnImprimirMouseClicked
+
+    private void btnDespacharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseClicked
+        try {
+            int id = (int) tableNotas.getValueAt(tableNotas.getSelectedRow(), 0);
+            VDespachoNotas vd = new VDespachoNotas(null, true, id);
+            vd.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para poder proceder con el despacho de las notas de crédito pendientes.",
+                                            "Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDespacharMouseClicked
 
     /**
      * @param args the command line arguments

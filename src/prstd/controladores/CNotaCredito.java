@@ -96,6 +96,30 @@ public class CNotaCredito {
         }
     }
     
+    public NotaCredito read(int idnota){
+        String sql = "select * from tbl_nota_credito where idnota = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idnota);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            nota_credito = new NotaCredito();
+            nota_credito.setIdnota(rs.getInt(1));
+            nota_credito.setCod_producto(rs.getString(2));
+            nota_credito.setSaldo_pendiente(rs.getDouble(3));
+            nota_credito.setCantidad(rs.getInt(4));
+            nota_credito.setFecha_creacion(rs.getTimestamp(5));
+            nota_credito.setEstado(rs.getString(6));
+            rs.close();
+            ps.close();
+            connection.close();
+            return nota_credito;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public List<NotaCredito> listar(){
         String sql = "select * from tbl_nota_credito";
         List<NotaCredito> lista = new ArrayList<>();
@@ -279,10 +303,132 @@ public class CNotaCredito {
                 datos[4] = rs.getTimestamp(5);
                 model.addRow(datos);
             }
+            rs.close();
+            ps.close();
+            connection.close();
             return model;
         } catch (SQLException ex) {
             Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    
+    public List<Object> notasFacturas(int idcliente){
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        String sql = "select dc.idtransaccion, dc.no_documento, count(nc.idnota) cantidad, "+
+                            "date_format(dc.fecha_emision,'%d/%m/%Y') fecha_emision\n" +
+                    "from tbl_documento dc\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idtransaccion = dc.idtransaccion\n" +
+                    "inner join tbl_nota_credito nc on nc.idnota = nt.idnota\n" +
+                    "inner join tbl_nota_cliente nl on nl.idnota = nc.idnota\n" +
+                    "where nl.idcliente = ? and nc.estado = 'ACTIVA'\n" + 
+                    "group by dc.idtransaccion";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idcliente);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[4];
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getInt(2);
+                datos[2] = rs.getInt(3);
+                datos[3] = rs.getString(4);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    // Filtro de facturas en tiempo real.
+    public List<Object> filtrarFacturas(int idcliente, int no_factura){
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        String sql = "select dc.idtransaccion, dc.no_documento, count(nc.idnota) cantidad, "+
+                            "date_format(dc.fecha_emision,'%d/%m/%Y') fecha_emision\n" +
+                    "from tbl_documento dc\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idtransaccion = dc.idtransaccion\n" +
+                    "inner join tbl_nota_credito nc on nc.idnota = nt.idnota\n" +
+                    "inner join tbl_nota_cliente nl on nl.idnota = nc.idnota\n" +
+                    "where nl.idcliente = ? and nc.estado = 'ACTIVA' and cast(dc.no_documento as char) like ?\n" + 
+                    "group by dc.idtransaccion";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idcliente);
+            ps.setString(2, "%" + String.valueOf(no_factura) + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[4];
+                datos[0] = rs.getInt(1);
+                datos[1] = rs.getInt(2);
+                datos[2] = rs.getInt(3);
+                datos[3] = rs.getString(4);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public List<Object> filtrarNotas(int idtransaccion){
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        String sql = "select p.codigo, p.nombre_producto, nc.cantidad, nc.idnota\n" +
+                    "from tbl_nota_credito nc\n" +
+                    "inner join tbl_producto p on p.codigo = nc.cod_producto\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "where nt.idtransaccion = ? and nc.estado = 'ACTIVA'";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idtransaccion);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[4];
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getInt(3);
+                datos[3] = rs.getInt(4);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    // Controlador encargado del despacho de los productos que forman parte de una nota de crédito.
+    public int despachoNotas(NotaCredito nc){
+        String sql = "update tbl_nota_credito set cantidad = ?,saldo_pendiente = ?, estado = ? where idnota = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, nc.getCantidad());
+            ps.setDouble(2, nc.getSaldo_pendiente());
+            ps.setString(3, nc.getEstado());
+            ps.setInt(4, nc.getIdnota());
+            int rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
     

@@ -52,6 +52,7 @@ public class VPrincipal extends javax.swing.JFrame {
         btnFabricantes = new javax.swing.JLabel();
         btnCorrelativos = new javax.swing.JLabel();
         panelCobros = new javax.swing.JPanel();
+        btnCrearFactura = new javax.swing.JLabel();
         btnVentas = new javax.swing.JLabel();
         btnProformas = new javax.swing.JLabel();
         btnConsultaProformas = new javax.swing.JLabel();
@@ -349,6 +350,24 @@ public class VPrincipal extends javax.swing.JFrame {
         java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 75);
         flowLayout2.setAlignOnBaseline(true);
         panelCobros.setLayout(flowLayout2);
+
+        btnCrearFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCrearFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_POS_Terminal_72px.png"))); // NOI18N
+        btnCrearFactura.setToolTipText("Crear una nueva factura.");
+        btnCrearFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCrearFactura.setPreferredSize(new java.awt.Dimension(120, 120));
+        btnCrearFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrearFacturaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCrearFacturaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCrearFacturaMouseExited(evt);
+            }
+        });
+        panelCobros.add(btnCrearFactura);
 
         btnVentas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Sell_72px.png"))); // NOI18N
@@ -968,6 +987,19 @@ public class VPrincipal extends javax.swing.JFrame {
         ventas.setVisible(true);
     }//GEN-LAST:event_btnVentasMensualesMouseClicked
 
+    private void btnCrearFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearFacturaMouseClicked
+        VCrearFactura vf = new VCrearFactura(this, true, this.usuario);
+        vf.setVisible(true);
+    }//GEN-LAST:event_btnCrearFacturaMouseClicked
+
+    private void btnCrearFacturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearFacturaMouseEntered
+        setBorder(btnCrearFactura);
+    }//GEN-LAST:event_btnCrearFacturaMouseEntered
+
+    private void btnCrearFacturaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearFacturaMouseExited
+        resetBorder(btnCrearFactura);
+    }//GEN-LAST:event_btnCrearFacturaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1009,6 +1041,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel btnConsultaProformas;
     private javax.swing.JLabel btnConsultarOrdenes;
     private javax.swing.JLabel btnCorrelativos;
+    private javax.swing.JLabel btnCrearFactura;
     private javax.swing.JLabel btnCrearOrden;
     private javax.swing.JLabel btnCustomers;
     private javax.swing.JPanel btnDespacho;
@@ -1143,6 +1176,7 @@ public class VPrincipal extends javax.swing.JFrame {
         panelReportes.setVisible(false);
         panelDespacho.setVisible(false);
         //btnRoles.setVisible(false);
+        btnReporteNotas.setVisible(false);
         
         // Decide las opciones visibles dependiendo del nivel de acceso que el usuario tenga.
         switch(usuario.comprobarRol(usuario.consultarUsuario(this.usuario))){

@@ -133,4 +133,29 @@ public class NotaCredito {
         CNotaCredito cn = new CNotaCredito();
         return cn.imprimirPendientes(idcliente);
     }
+    
+    public List<Object> notasFacturas(int idcliente){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.notasFacturas(idcliente);
+    }
+    
+    public List<Object> filtrarFacturas(int idcliente, int no_documento){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarFacturas(idcliente, no_documento);
+    }
+    
+    public List<Object> filtrarNotas(int idtransaccion){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarNotas(idtransaccion);
+    }
+    
+    public NotaCredito read(int idnota){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.read(idnota);
+    }
+    
+    public int despachoNotas(NotaCredito nc){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.despachoNotas(nc);
+    }
 }

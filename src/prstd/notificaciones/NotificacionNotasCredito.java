@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Cliente;
 import prstd.modelos.NotaCredito;
+import prstd.vistas.VDespachoNotas;
 
 
 public class NotificacionNotasCredito extends javax.swing.JDialog {
@@ -39,18 +40,19 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 212, 186));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 120, 116), 3, true));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-info-icon-64.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 79));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 79));
 
         lblCliente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 59, 570, 79));
+        jPanel1.add(lblCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 59, 570, 79));
 
         jLabel5.setBackground(new java.awt.Color(0, 153, 153));
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 20)); // NOI18N
@@ -68,7 +70,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
                 jLabel5MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 792, 50));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 794, 50));
 
         jScrollPane1.setBorder(null);
 
@@ -88,7 +90,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 740, 330));
 
-        panelControles.setOpaque(false);
+        panelControles.setBackground(new java.awt.Color(0, 153, 153));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 45, 10);
         flowLayout1.setAlignOnBaseline(true);
         panelControles.setLayout(flowLayout1);
@@ -96,6 +98,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         btnAceptar.setBackground(new java.awt.Color(230, 162, 78));
         btnAceptar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/sign-check-icon-32.png"))); // NOI18N
+        btnAceptar.setToolTipText("Confirmación de Información");
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.setOpaque(true);
         btnAceptar.setPreferredSize(new java.awt.Dimension(78, 54));
@@ -115,6 +118,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         btnImprimir.setBackground(new java.awt.Color(230, 162, 78));
         btnImprimir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Print_32px.png"))); // NOI18N
+        btnImprimir.setToolTipText("Imprimir un informe detallado sobre las notas de crédito.");
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.setOpaque(true);
         btnImprimir.setPreferredSize(new java.awt.Dimension(78, 54));
@@ -134,6 +138,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         btnDespachar.setBackground(new java.awt.Color(230, 162, 78));
         btnDespachar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnDespachar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Small_Business_32px.png"))); // NOI18N
+        btnDespachar.setToolTipText("Despachar las notas de crédito de este cliente.");
         btnDespachar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDespachar.setOpaque(true);
         btnDespachar.setPreferredSize(new java.awt.Dimension(78, 54));
@@ -150,13 +155,13 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
         });
         panelControles.add(btnDespachar);
 
-        jPanel1.add(panelControles, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 720, 70));
+        jPanel1.add(panelControles, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 500, 794, 78));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +209,9 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
     }//GEN-LAST:event_btnImprimirMouseExited
 
     private void btnDespacharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseClicked
-        // TODO add your handling code here:
+        VDespachoNotas vn = new VDespachoNotas(null, true, cliente.getIdcliente());
+        this.dispose();
+        vn.setVisible(true);
     }//GEN-LAST:event_btnDespacharMouseClicked
 
     private void btnDespacharMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDespacharMouseEntered

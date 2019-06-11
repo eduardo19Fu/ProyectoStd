@@ -597,4 +597,32 @@ public class CProducto {
             return null;
         }
     }
+    
+    public int actualizarExistencia(String codigo, int cantidad, int bandera){
+        String sql = "";
+        int rs = 0;
+        switch(bandera){
+            case 1:
+                sql = "update tbl_producto set stuckTienda = stuckTienda - ? where codigo = ?";
+                break;
+            case 2:
+                sql = "update tbl_producto set stuckBodega = stuckBodega - ? where codigo = ?";
+                break;
+            default:
+                break;
+        }
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cantidad);
+            ps.setString(2, codigo);
+            rs = ps.executeUpdate();
+            ps.close();
+            connection.close();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 }
