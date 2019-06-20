@@ -61,6 +61,9 @@ public class VProformas extends javax.swing.JDialog {
         btnReImprimir = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnGFactura = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -131,7 +134,7 @@ public class VProformas extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID Transacción", "No. Factura", "Serie", "Vendedor", "Fecha Emisión", "Estado"
+                "ID Transacción", "No. Proforma", "Serie", "Vendedor", "Fecha Emisión", "Estado"
             }
         ));
         tableProformas.setFillsViewportHeight(true);
@@ -260,6 +263,32 @@ public class VProformas extends javax.swing.JDialog {
         btnReImprimir.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel3.add(btnReImprimir);
+
+        btnGFactura.setBackground(new java.awt.Color(0, 153, 153));
+        btnGFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGFactura.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnGFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGFacturaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGFacturaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGFacturaMouseExited(evt);
+            }
+        });
+        btnGFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Generar Factura");
+        btnGFactura.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_POS_Terminal_50px.png"))); // NOI18N
+        btnGFactura.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.add(btnGFactura);
 
         btnEliminar.setBackground(new java.awt.Color(0, 153, 153));
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -405,6 +434,30 @@ public class VProformas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnReImprimirMouseClicked
 
+    private void btnGFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGFacturaMouseClicked
+        try {
+            String estado = tableProformas.getValueAt(tableProformas.getSelectedRow(), 5).toString();
+            if(!estado.equals("ANULADA")){
+                int transac = (int) tableProformas.getValueAt(tableProformas.getSelectedRow(), 0);
+                VCrearFactura vf = new VCrearFactura(null, false, this.vendedor, transac);
+                vf.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "No se puede crear una factura a partir de una proforma anulada.","Advertencia",JOptionPane.WARNING_MESSAGE);
+            }
+            this.dispose();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una proforma para poder generar la factura correspondiente.","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnGFacturaMouseClicked
+
+    private void btnGFacturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGFacturaMouseEntered
+        setColor(btnGFactura);
+    }//GEN-LAST:event_btnGFacturaMouseEntered
+
+    private void btnGFacturaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGFacturaMouseExited
+        resetColor(btnGFactura);
+    }//GEN-LAST:event_btnGFacturaMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -454,6 +507,7 @@ public class VProformas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnEliminar;
     private javax.swing.JLabel btnFiltro;
+    private javax.swing.JPanel btnGFactura;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JPanel btnReImprimir;
     private org.jdesktop.swingx.JXDatePicker dateFin;
@@ -466,6 +520,8 @@ public class VProformas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

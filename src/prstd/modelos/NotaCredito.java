@@ -19,6 +19,7 @@ public class NotaCredito {
     private Timestamp fecha_creacion;
     private String estado;
     private int cantidad;
+    private Timestamp fecha_despacho;
 
     public NotaCredito() {
     }
@@ -74,6 +75,15 @@ public class NotaCredito {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public Timestamp getFecha_despacho() {
+        return fecha_despacho;
+    }
+
+    public void setFecha_despacho(Timestamp fecha_despacho) {
+        this.fecha_despacho = fecha_despacho;
+    }
+    
     
     
     /*
@@ -99,9 +109,9 @@ public class NotaCredito {
         return cn.update(modelo);
     }
     
-    public int anular(int idnota){
+    public int anular(int no_documento){
         CNotaCredito cn = new CNotaCredito();
-        return cn.anular(idnota);
+        return cn.anular(no_documento);
     }
     
     public List<NotaCredito> listar(){
@@ -129,9 +139,9 @@ public class NotaCredito {
         return cn.consultar(valor);
     }
     
-    public javax.swing.JFrame imprimirPendientes(int idcliente){
+    public javax.swing.JFrame imprimirPendientes(int idcliente, String estado){
         CNotaCredito cn = new CNotaCredito();
-        return cn.imprimirPendientes(idcliente);
+        return cn.imprimirPendientes(idcliente, estado);
     }
     
     public List<Object> notasFacturas(int idcliente){
@@ -157,5 +167,10 @@ public class NotaCredito {
     public int despachoNotas(NotaCredito nc){
         CNotaCredito cn = new CNotaCredito();
         return cn.despachoNotas(nc);
+    }
+    
+    public javax.swing.JFrame imprimirDespachadas(Date fecha_ini, Date fecha_fin){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.imprimirDespachadas(fecha_ini, fecha_fin);
     }
 }

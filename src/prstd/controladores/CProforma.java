@@ -21,6 +21,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import prstd.gui.Auxiliar;
+import prstd.modelos.DetalleDocumento;
 import prstd.modelos.Documento;
 import prstd.modelos.Producto;
 import prstd.servicios.ConexionDos;
@@ -140,6 +141,64 @@ public class CProforma {
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public Documento consultar(int idtransaccion){
+        String sql = "select * from tbl_documento where idtransaccion = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idtransaccion);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            documento = new Documento();
+            documento.setIdtransaccion(rs.getInt(1));
+            documento.setNo_documento(rs.getInt(2));
+            documento.setFecha_emision(rs.getTimestamp(3));
+            documento.setTotal(rs.getDouble(4));
+            documento.setIdcliente(rs.getInt(5));
+            documento.setIdvendedor(rs.getInt(6));
+            documento.setSerie(rs.getString(7));
+            documento.setEstado(rs.getString(8));
+            documento.setTipo_documento(rs.getInt(9));
+            rs.close();
+            ps.close();
+            connection.close();
+            return documento;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProforma.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public List<DetalleDocumento> getDetalleProforma(int idtransaccion){
+        String sql = "select * from tbl_detalle_documento where idtransaccion = ?";
+        List<DetalleDocumento> lista = new ArrayList<>();
+        DetalleDocumento dd;
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idtransaccion);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                dd = new DetalleDocumento();
+                dd.setIdtransaccion(rs.getInt(1));
+                dd.setCodigo(rs.getString(2));
+                dd.setCantidad(rs.getInt(3));
+                dd.setSubtotal(rs.getDouble(4));
+                dd.setDescuento(rs.getDouble(5));
+                dd.setSerie(rs.getString(6));
+                dd.setNprecio_venta(rs.getDouble(7));
+                lista.add(dd);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProforma.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

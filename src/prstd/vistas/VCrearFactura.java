@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -21,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import prstd.modelos.Cliente;
+import prstd.modelos.DetalleDocumento;
 import prstd.modelos.Documento;
 import prstd.modelos.NotaCliente;
 import prstd.modelos.NotaCredito;
@@ -42,8 +44,9 @@ public class VCrearFactura extends javax.swing.JDialog {
     private DefaultTableModel modelo = new DefaultTableModel(null,titulos);
     private Object[] datos = new Object[7];
     private Cliente cliente;
+    private int idtransaccion;
     
-    public VCrearFactura(java.awt.Frame parent, boolean modal, String vendedor) {
+    public VCrearFactura(java.awt.Frame parent, boolean modal, String vendedor, int idtransaccion) {
         super(parent, modal);
         initComponents();
         btnBuscar_2.setMnemonic(KeyEvent.VK_F3);
@@ -55,7 +58,9 @@ public class VCrearFactura extends javax.swing.JDialog {
         lblVendedor.setText(usuario.getVendedor());
         sumatoria = 0;
         cliente = new Cliente();
-        init();
+        //init();
+        this.idtransaccion = idtransaccion;
+        cargarDatos();
     }
 
     
@@ -865,7 +870,7 @@ public class VCrearFactura extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VCrearFactura dialog = new VCrearFactura(new javax.swing.JFrame(), true, null);
+                VCrearFactura dialog = new VCrearFactura(new javax.swing.JFrame(), true, null, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1031,14 +1036,19 @@ public class VCrearFactura extends javax.swing.JDialog {
                                 "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
                         if(op != -1){
                             if((op + 1) == 1){
-                                crearNotaCredito(nCantidad);
-                                double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
-                                tblDetalle.setValueAt(nCantidad, i, 0);
-                                tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
-                                tblDetalle.setValueAt(nPrecio, i, 4);
-                                tblDetalle.setValueAt(0.0, i, 5);
-                                tblDetalle.setValueAt(nc.notaMax(codigo), i, 6); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
-                                bandera = true;
+                                if(!txtNit.getText().equals("C/F")){
+                                    crearNotaCredito(nCantidad);
+                                    double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
+                                    tblDetalle.setValueAt(nCantidad, i, 0);
+                                    tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
+                                    tblDetalle.setValueAt(nPrecio, i, 4);
+                                    tblDetalle.setValueAt(0.0, i, 5);
+                                    tblDetalle.setValueAt(nc.notaMax(codigo), i, 6); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
+                                    bandera = true;
+                                }else{
+                                    JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
+                                    bandera = false;
+                                }
                             }
                         }
                     }
@@ -1057,7 +1067,7 @@ public class VCrearFactura extends javax.swing.JDialog {
             }
             DecimalFormat formato = new DecimalFormat("####.##");
             txtTotal.setText(String.valueOf(formato.format(sumatoria)));
-        }else{
+        }else if(!txtNit.getText().equals("C/F")){
             // Creación directa de notas de credito en caso que no hayan suficientes existencias para
             // satisfacer la demanda desde un inicio.
             int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
@@ -1102,6 +1112,9 @@ public class VCrearFactura extends javax.swing.JDialog {
                     txtTotal.setText(String.valueOf(formato.format(sumatoria)));
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
+            bandera = false;
         }
     }
     
@@ -1304,4 +1317,56 @@ public class VCrearFactura extends javax.swing.JDialog {
         }else{
         }
     }
+    
+    /* 
+    Método encargado de realizar la carga de datos en los campos requeridos en caso de que la ventana
+    sea llamada desde la ventana de proformas. 
+    */
+    
+    private void cargarDatos(){
+        if(this.idtransaccion == 0)
+            init();
+        else if(this.idtransaccion > 0){
+            Documento doc = new Documento().consultar(idtransaccion);
+            Producto producto;
+            this.cliente = new Cliente().consultarCliente(doc.getIdcliente());
+            UsuarioCorrelativo ucorr = new UsuarioCorrelativo().getActual(usuario.consultarUsuario(this.vendedor));
+            List<DetalleDocumento> lista = doc.getDetalleProforma(idtransaccion);
+            Object[] datos = new Object[7];
+            
+            if(doc.getMaxTransaccion() == 0)
+                lblTransac.setText("1");
+            else
+                lblTransac.setText(String.valueOf(doc.getMaxTransaccion() + 1));
+            lblFactura.setText(String.valueOf(ucorr.getCorrelativo_act()));
+            lblSerie.setText("\"" + ucorr.getSerie() + "\"");
+            txtNit.setText(this.cliente.getNit());
+            txtNombre.setText(this.cliente.getNombre());
+            txtDireccion.setText(this.cliente.getDireccion());
+            txtCodigo.grabFocus();
+            txtTotal.setText(String.valueOf(doc.getTotal()));
+            txtDescuento.setVisible(false);
+            modelo = new DefaultTableModel(null,titulos);
+            
+            // Parte del codigo que se encarga de rellenar el detalle de factura con los datos de
+            // la proforma.
+            for(int i = 0; i < lista.size(); i++){
+                datos[0] = lista.get(i).getCantidad();
+                datos[1] = lista.get(i).getCodigo();
+                datos[2] = new Producto().buscarProducto(lista.get(i).getCodigo()).getNombre();
+                if(lista.get(i).getNprecio_venta() == 0.00)
+                    datos[3] = new Producto().buscarProducto(lista.get(i).getCodigo()).getPrecio_venta();
+                else
+                    datos[3] = lista.get(i).getNprecio_venta();
+                datos[4] = lista.get(i).getSubtotal();
+                datos[5] = lista.get(i).getDescuento();
+                datos[6] = "";
+                modelo.addRow(datos);
+            }
+            
+            tblDetalle.setModel(modelo);
+            configurarTabla(tblDetalle);
+        }
+    }
+    
 }

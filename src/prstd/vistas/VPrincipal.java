@@ -884,7 +884,8 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProductosDisponiblesMouseExited
 
     private void btnReporteNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteNotasMouseClicked
-        // TODO add your handling code here:
+        VReporteNotas vrn = new VReporteNotas(this, true);
+        vrn.setVisible(true);
     }//GEN-LAST:event_btnReporteNotasMouseClicked
 
     private void btnReporteNotasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteNotasMouseEntered
@@ -988,7 +989,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasMensualesMouseClicked
 
     private void btnCrearFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearFacturaMouseClicked
-        VCrearFactura vf = new VCrearFactura(this, true, this.usuario);
+        VCrearFactura vf = new VCrearFactura(this, false, this.usuario,0);
         vf.setVisible(true);
     }//GEN-LAST:event_btnCrearFacturaMouseClicked
 
@@ -1176,7 +1177,7 @@ public class VPrincipal extends javax.swing.JFrame {
         panelReportes.setVisible(false);
         panelDespacho.setVisible(false);
         //btnRoles.setVisible(false);
-        btnReporteNotas.setVisible(false);
+        //btnReporteNotas.setVisible(false);
         
         // Decide las opciones visibles dependiendo del nivel de acceso que el usuario tenga.
         switch(usuario.comprobarRol(usuario.consultarUsuario(this.usuario))){

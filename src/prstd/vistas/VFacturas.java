@@ -361,7 +361,7 @@ public class VFacturas extends javax.swing.JDialog {
         UsuarioCorrelativo uc = new UsuarioCorrelativo();
         Usuario usuario = new Usuario();
         if(uc.verificarUsuario(usuario.consultarUsuario(this.vendedor))){
-            VCrearFactura vcf = new VCrearFactura(null,false,vendedor); // Instancia de un objeto de la Clase VCrearFactura.
+            VCrearFactura vcf = new VCrearFactura(null,false,vendedor,0); // Instancia de un objeto de la Clase VCrearFactura.
             vcf.setVisible(true); // Visualización de la ventana que sirve para crear facturas.
         }else{
             JOptionPane.showMessageDialog(this, "Este usuario no cuenta con un correlativo asignado");

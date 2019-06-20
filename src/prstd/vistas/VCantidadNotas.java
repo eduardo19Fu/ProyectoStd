@@ -3,6 +3,7 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.sql.Timestamp;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -303,8 +304,7 @@ public class VCantidadNotas extends javax.swing.JDialog {
                         bandera = 1;
                         nota.setSaldo_pendiente(nCantidad * producto.getPrecio_venta());
                         nota.setCantidad(nCantidad);
-                        nota.setEstado("COMPLETADA");
-                        System.out.println("estas aqui");
+                        nota.setEstado("DESPACHADA");
                         if(nota.despachoNotas(nota) > 0){
                             producto.actualizarExistencias(nota.getCod_producto(), cantidad, bandera);
                             JOptionPane.showMessageDialog(this, "Nota despachada con éxito.");
@@ -338,7 +338,7 @@ public class VCantidadNotas extends javax.swing.JDialog {
                         bandera = 2;
                         nota.setSaldo_pendiente(nCantidad * producto.getPrecio_venta());
                         nota.setCantidad(nCantidad);
-                        nota.setEstado("COMPLETADA");
+                        nota.setEstado("DESPACHADA");
                         if(nota.despachoNotas(nota) > 0){
                             producto.actualizarExistencias(nota.getCod_producto(), cantidad, bandera);
                             JOptionPane.showMessageDialog(this, "Nota despachada con éxito.");

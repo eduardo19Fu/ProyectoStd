@@ -6,6 +6,9 @@
 	<parameter name="idcliente" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="estado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select 
 	c.idcliente, 
@@ -30,7 +33,7 @@ inner join
 inner join 
 	tbl_producto p on p.codigo = nc.cod_producto
 where 
-	nc.estado = 'ACTIVA' and c.idcliente = $P{idcliente}
+	nc.estado = $P{estado} and c.idcliente = $P{idcliente}
 group by 
 	p.codigo,dc.no_documento
 order by 

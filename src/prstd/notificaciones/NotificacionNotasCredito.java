@@ -196,7 +196,7 @@ public class NotificacionNotasCredito extends javax.swing.JDialog {
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
         NotaCredito nc = new NotaCredito();
         System.out.println(cliente.getIdcliente());
-        nc.imprimirPendientes(cliente.getIdcliente());
+        nc.imprimirPendientes(cliente.getIdcliente(), "ACTIVA");
         this.dispose();
     }//GEN-LAST:event_btnImprimirMouseClicked
 

@@ -380,6 +380,18 @@ public class VNotasCredito extends javax.swing.JDialog {
     }//GEN-LAST:event_btnFiltroMouseExited
 
     private void btnAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseClicked
+        try {
+            int no_documento = (int) tableNotas.getValueAt(tableNotas.getSelectedRow(), 4);
+            NotaCredito nc = new NotaCredito();
+            if(nc.anular(no_documento) > 0){
+                JOptionPane.showMessageDialog(this, "Notas de crédito anuladas con éxito.","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                cargarNotas();
+            }else{
+                JOptionPane.showMessageDialog(this, "No fué posible anular las notas de crédito correspondientes a la factura no. " + no_documento,"Advertencia",JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un registro para poder continuar con el proceso de anulación.","Error",JOptionPane.WARNING_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnAnularMouseClicked
 
@@ -399,7 +411,7 @@ public class VNotasCredito extends javax.swing.JDialog {
         try {
             int id = (int) tableNotas.getValueAt(tableNotas.getSelectedRow(), 0);
             NotaCredito nc = new NotaCredito();
-            nc.imprimirPendientes(id);
+            nc.imprimirPendientes(id, "ACTIVA");
             this.dispose();
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para poder proceder con el reporte.","Advertencia",JOptionPane.WARNING_MESSAGE);

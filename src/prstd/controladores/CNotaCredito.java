@@ -79,12 +79,16 @@ public class CNotaCredito {
         }
     }
     
-    public int anular(int idnota){
-        String sql = "update tbl_nota_credito set estado = 'ANULADA' where idnota = ?";
+    public int anular(int no_documento){
+        String sql = "update tbl_nota_credito nc \n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "inner join tbl_documento dc on dc.idtransaccion = nt.idtransaccion\n" +
+                    "set nc.estado = 'ANULADA'\n" +
+                    "where dc.no_documento = ? and nc.estado = 'ACTIVA'";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idnota);
+            ps.setInt(1, no_documento);
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -414,7 +418,9 @@ public class CNotaCredito {
     
     // Controlador encargado del despacho de los productos que forman parte de una nota de crédito.
     public int despachoNotas(NotaCredito nc){
-        String sql = "update tbl_nota_credito set cantidad = ?,saldo_pendiente = ?, estado = ? where idnota = ?";
+        String sql = "update tbl_nota_credito " + 
+                    "set cantidad = ?,saldo_pendiente = ?, estado = ?, fecha_despacho = current_timestamp() " +
+                    "where idnota = ?";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -433,10 +439,11 @@ public class CNotaCredito {
     }
     
     // Controlador que se encarga de la impresión de las notas de crédito pendientes de determinado cliente
-    public javax.swing.JFrame imprimirPendientes(int idcliente){
+    public javax.swing.JFrame imprimirPendientes(int idcliente, String estado){
         try {
             Map parametro = new HashMap();
             parametro.put("idcliente", idcliente);
+            parametro.put("estado", estado);
             reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\reporte_notas.jrxml");
             JasperPrint print = JasperFillManager.fillReport(reporte, parametro, connection);
             JasperViewer jv = new JasperViewer(print,false);
@@ -449,6 +456,26 @@ public class CNotaCredito {
         } catch (SQLException | JRException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
             return null;
+        }
+    }
+    
+    public javax.swing.JFrame imprimirDespachadas(Date fecha_ini, Date fecha_fin){
+        try{
+        Map parametro = new HashMap();
+        parametro.put("fecha_ini", fecha_ini);
+        parametro.put("fecha_fin", fecha_fin);
+        reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\notas_despachadas.jrxml");
+        JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
+        JasperViewer jv = new JasperViewer(print,false);
+        jv.setTitle("Notas de creditos despachadas");
+        jv.setVisible(true);
+        jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
+        jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        connection.close();
+        return jv;
+        } catch(SQLException | JRException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error de Facturación",JOptionPane.ERROR_MESSAGE);
+            return null;            
         }
     }
 }
