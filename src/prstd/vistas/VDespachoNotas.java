@@ -275,6 +275,11 @@ public class VDespachoNotas extends javax.swing.JDialog {
 
         txtFiltroNotas.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtFiltroNotas.setForeground(new java.awt.Color(0, 0, 0));
+        txtFiltroNotas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltroNotasKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -408,11 +413,11 @@ public class VDespachoNotas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAnularMouseClicked
 
     private void btnAnularMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseEntered
-        // TODO add your handling code here:
+        setFormato(btnAnular);
     }//GEN-LAST:event_btnAnularMouseEntered
 
     private void btnAnularMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseExited
-        // TODO add your handling code here:
+        resetFormato(btnAnular);
     }//GEN-LAST:event_btnAnularMouseExited
 
     private void tablaFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMouseClicked
@@ -433,6 +438,15 @@ public class VDespachoNotas extends javax.swing.JDialog {
         if(!Character.isDigit(evt.getKeyChar()))
             evt.consume();
     }//GEN-LAST:event_txtFiltroFacturasKeyTyped
+
+    private void txtFiltroNotasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroNotasKeyReleased
+        try {
+            int transac = (int) tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 0);
+            String nombre = txtFiltroNotas.getText();
+            filtrarNotas(transac, nombre);
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+    }//GEN-LAST:event_txtFiltroNotasKeyReleased
 
     /**
      * @param args the command line arguments
@@ -561,6 +575,20 @@ public class VDespachoNotas extends javax.swing.JDialog {
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         NotaCredito nc = new NotaCredito();
         List<Object> lista = nc.filtrarNotas(idtransaccion);
+        
+        for(int i = 0; i < lista.size(); i++){
+            datos = (Object[]) lista.get(i);
+            modelo.addRow(datos);
+        }
+        tablaNotas.setModel(modelo);
+    }
+    
+    private void filtrarNotas(int transac, String nombre){
+        String[] titulos = {"Codigo","Producto","Cantidad","Nota"};
+        Object[] datos;
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        NotaCredito nc = new NotaCredito();
+        List<Object> lista = nc.filtrarProducto(transac, nombre);
         
         for(int i = 0; i < lista.size(); i++){
             datos = (Object[]) lista.get(i);

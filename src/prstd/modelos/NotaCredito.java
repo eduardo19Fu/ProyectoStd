@@ -173,4 +173,9 @@ public class NotaCredito {
         CNotaCredito cn = new CNotaCredito();
         return cn.imprimirDespachadas(fecha_ini, fecha_fin);
     }
+    
+    public List<Object> filtrarProducto(int transac, String nombre){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarProducto(transac, nombre);
+    }
 }

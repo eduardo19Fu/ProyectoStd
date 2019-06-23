@@ -316,9 +316,7 @@ public class CProforma {
             parametro.put("no_proforma", no_proforma);
             parametro.put("serie", serie);
             parametro.put("transaccion", transac);
-            parametro.put("texto", aux.Convertir(String.format("%.2f",total), true));
             reporte = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\simple.jrxml");
-            System.out.println(new File("").getAbsolutePath()+"\\src\\prstd\\reports\\simple.jrxml");
             JasperPrint print = JasperFillManager.fillReport(reporte, parametro,connection);
             JasperViewer jv = new JasperViewer(print,false);
             jv.setTitle("Proforma Simple No. \"" + no_proforma + "\"");

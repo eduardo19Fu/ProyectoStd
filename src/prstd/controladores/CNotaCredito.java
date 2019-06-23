@@ -438,6 +438,39 @@ public class CNotaCredito {
         }
     }
     
+    public List<Object> filtrarProducto(int transac, String nombre){
+        List<Object> lista = new ArrayList<>();
+        Object[] datos;
+        String sql = "select p.codigo, p.nombre_producto, nc.cantidad, nc.idnota\n" +
+                    "from tbl_nota_credito nc\n" +
+                    "inner join tbl_producto p on p.codigo = nc.cod_producto\n" +
+                    "inner join tbl_nota_transaccion nt on nt.idnota = nc.idnota\n" +
+                    "where nt.idtransaccion = ? and p.nombre_producto like ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, transac);
+            ps.setString(2, "%" + nombre + "%");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos = new Object[4];
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getInt(3);
+                datos[3] = rs.getInt(4);
+                lista.add(datos);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(CNotaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    
+    }
+    
     // Controlador que se encarga de la impresión de las notas de crédito pendientes de determinado cliente
     public javax.swing.JFrame imprimirPendientes(int idcliente, String estado){
         try {
