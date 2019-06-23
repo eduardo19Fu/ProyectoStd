@@ -657,7 +657,6 @@ public class VCreacionProforma extends javax.swing.JDialog {
                 if(documento.insert(documento) > 0){
                     if(documento.insertDetalle((DefaultTableModel) tblDetalle.getModel(), transaccion, serie) > 0){
                         if(ucorr.avanzaCorrelativo(idusuario, no_proforma, 2) > 0){
-                                //JOptionPane.showMessageDialog(this, "FacturaCreada");
                             Documento dc = new Documento();
                             if(radioNormal.isSelected()){
                                 dc.imprimirProforma(documento.getMaxTransaccion(), no_proforma, serie, total);

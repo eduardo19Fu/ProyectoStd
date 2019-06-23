@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="simple" pageWidth="612" pageHeight="792" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="simple" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -10,9 +10,6 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="no_proforma" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<parameter name="texto" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -29,10 +26,10 @@
         	round((pro.precio_venta*0.07) + pro.precio_venta,2) as precio_venta,
         	round((de.subtotal * 0.07) + de.subtotal,2) as sub_total,
         	round((dc.total * 0.07) + dc.total,2) as total,
-	$P{texto} as letras,
 	concat(u.nombre,' ', u.apellido) as vendedor,
 	dc.serie as serie,
- 	pro.codigo
+ 	pro.codigo,
+	letras(round((dc.total * 0.07) + dc.total,2)) as letras
 from 
 	tbl_documento dc
 inner join 
@@ -60,10 +57,10 @@ order by
 	<field name="precio_venta" class="java.math.BigDecimal"/>
 	<field name="sub_total" class="java.math.BigDecimal"/>
 	<field name="total" class="java.math.BigDecimal"/>
-	<field name="letras" class="java.lang.Object"/>
 	<field name="vendedor" class="java.lang.String"/>
 	<field name="serie" class="java.lang.String"/>
 	<field name="codigo" class="java.lang.String"/>
+	<field name="letras" class="java.lang.String"/>
 	<variable name="suma" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{precio_venta}]]></variableExpression>
 	</variable>
@@ -196,12 +193,12 @@ NIT: 4514625-5]]></text>
 			<staticText>
 				<reportElement x="9" y="1" width="65" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Adobe Garamond Pro" size="18"/>
+					<font fontName="Adobe Garamond Pro" size="16"/>
 				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="21" width="571" height="1"/>
+				<reportElement x="1" y="20" width="571" height="1"/>
 			</line>
 			<line>
 				<reportElement x="1" y="1" width="571" height="1"/>
@@ -245,74 +242,67 @@ NIT: 4514625-5]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="44" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="8" y="1" width="66" height="20"/>
+				<reportElement x="8" y="0" width="66" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Adobe Garamond Pro" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="97" y="1" width="207" height="20"/>
+				<reportElement x="97" y="0" width="207" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Adobe Garamond Pro" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_producto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="320" y="1" width="100" height="20"/>
+				<reportElement x="320" y="0" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Adobe Garamond Pro" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{precio_venta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="447" y="1" width="105" height="20"/>
+				<reportElement x="447" y="0" width="105" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Adobe Garamond Pro" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sub_total}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="22" width="572" height="1"/>
+				<reportElement x="1" y="21" width="572" height="1"/>
 			</line>
 			<line>
-				<reportElement x="86" y="-1" width="1" height="23"/>
+				<reportElement x="86" y="-2" width="1" height="23"/>
 			</line>
 			<line>
-				<reportElement x="317" y="-2" width="1" height="24"/>
+				<reportElement x="317" y="-3" width="1" height="24"/>
 			</line>
 			<line>
-				<reportElement x="433" y="-1" width="1" height="23"/>
+				<reportElement x="433" y="-2" width="1" height="23"/>
 			</line>
 			<line>
-				<reportElement x="1" y="-2" width="1" height="24"/>
+				<reportElement x="1" y="-3" width="1" height="24"/>
 			</line>
 			<line>
-				<reportElement x="572" y="-2" width="1" height="24"/>
+				<reportElement x="572" y="-3" width="1" height="24"/>
 			</line>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="9" y="7" width="117" height="20"/>
+				<reportElement x="9" y="7" width="88" height="20"/>
 				<textElement>
-					<font fontName="Adobe Garamond Pro Bold" size="16"/>
+					<font fontName="Adobe Garamond Pro Bold" size="14"/>
 				</textElement>
 				<text><![CDATA[Total a Pagar:]]></text>
 			</staticText>
 			<line>
 				<reportElement x="433" y="0" width="1" height="35"/>
 			</line>
-			<textField>
-				<reportElement x="125" y="7" width="295" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Adobe Garamond Pro" size="14"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{letras}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="1" y="-1" width="572" height="1"/>
 			</line>
@@ -328,9 +318,16 @@ NIT: 4514625-5]]></text>
 			<textField>
 				<reportElement x="452" y="7" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Adobe Garamond Pro Bold" size="14"/>
+					<font fontName="Adobe Garamond Pro Bold" size="12"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="97" y="7" width="323" height="20"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{letras}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

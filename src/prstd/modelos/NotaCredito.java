@@ -18,6 +18,8 @@ public class NotaCredito {
     private double saldo_pendiente;
     private Timestamp fecha_creacion;
     private String estado;
+    private int cantidad;
+    private Timestamp fecha_despacho;
 
     public NotaCredito() {
     }
@@ -65,6 +67,24 @@ public class NotaCredito {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Timestamp getFecha_despacho() {
+        return fecha_despacho;
+    }
+
+    public void setFecha_despacho(Timestamp fecha_despacho) {
+        this.fecha_despacho = fecha_despacho;
+    }
+    
+    
     
     /*
         Métodos controlador de Nota Credito
@@ -89,9 +109,9 @@ public class NotaCredito {
         return cn.update(modelo);
     }
     
-    public int anular(int idnota){
+    public int anular(int no_documento){
         CNotaCredito cn = new CNotaCredito();
-        return cn.anular(idnota);
+        return cn.anular(no_documento);
     }
     
     public List<NotaCredito> listar(){
@@ -112,5 +132,50 @@ public class NotaCredito {
     public DefaultTableModel notasPendientes(int idcliente){
         CNotaCredito cn = new CNotaCredito();
         return cn.notasPendientes(idcliente);
+    }
+    
+    public List<Object> consultar(String valor){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.consultar(valor);
+    }
+    
+    public javax.swing.JFrame imprimirPendientes(int idcliente, String estado){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.imprimirPendientes(idcliente, estado);
+    }
+    
+    public List<Object> notasFacturas(int idcliente){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.notasFacturas(idcliente);
+    }
+    
+    public List<Object> filtrarFacturas(int idcliente, int no_documento){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarFacturas(idcliente, no_documento);
+    }
+    
+    public List<Object> filtrarNotas(int idtransaccion){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarNotas(idtransaccion);
+    }
+    
+    public NotaCredito read(int idnota){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.read(idnota);
+    }
+    
+    public int despachoNotas(NotaCredito nc){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.despachoNotas(nc);
+    }
+    
+    public javax.swing.JFrame imprimirDespachadas(Date fecha_ini, Date fecha_fin){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.imprimirDespachadas(fecha_ini, fecha_fin);
+    }
+    
+    public List<Object> filtrarProducto(int transac, String nombre){
+        CNotaCredito cn = new CNotaCredito();
+        return cn.filtrarProducto(transac, nombre);
     }
 }

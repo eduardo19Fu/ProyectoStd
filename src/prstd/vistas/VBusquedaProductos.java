@@ -22,6 +22,7 @@ public class VBusquedaProductos extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.flag = flag;
         cargarProductos(this.flag);
+        txtArticulo.grabFocus();
     }
 
     @SuppressWarnings("unchecked")

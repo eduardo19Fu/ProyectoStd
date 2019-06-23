@@ -230,4 +230,14 @@ public class Documento {
         CFactura cf = new CFactura();
         return cf.ventas_mensuales(mes, anho);
     }
+    
+    public Documento consultar(int idtransaccion){
+        CProforma cp = new CProforma();
+        return cp.consultar(idtransaccion);
+    }
+    
+    public List<DetalleDocumento> getDetalleProforma(int idtransaccion){
+        CProforma cp = new CProforma();
+        return cp.getDetalleProforma(idtransaccion);
+    }
 }
