@@ -30,7 +30,7 @@ public class CFabricante {
     }
     
     public List<Fabricante> listar(){
-        String sql = "select * from tbl_fabricante";
+        String sql = "select * from tbl_fabricante order by nombre_fabricante asc";
         List<Fabricante> lista = new ArrayList<>();
         
         try {

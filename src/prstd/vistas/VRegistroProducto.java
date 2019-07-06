@@ -89,6 +89,8 @@ public class VRegistroProducto extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         choiceFamilia = new javax.swing.JComboBox<>();
         choiceFabricante = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        choiceEstado = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         btnLimpiar = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
@@ -415,7 +417,16 @@ public class VRegistroProducto extends javax.swing.JDialog {
         choiceFabricante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel7.add(choiceFabricante, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 176, 160, -1));
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, 920, 270));
+        jLabel9.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Estado:");
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+
+        choiceEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "DESCONTINUADO" }));
+        choiceEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel7.add(choiceEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 225, 210, -1));
+
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, 920, 280));
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3), "Controles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -685,6 +696,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JLabel btnLimpiar;
     private javax.swing.JCheckBox checkVencimiento;
+    private javax.swing.JComboBox<String> choiceEstado;
     public static javax.swing.JComboBox<String> choiceFabricante;
     public static javax.swing.JComboBox<String> choiceFamilia;
     private org.jdesktop.swingx.JXDatePicker dateCompra;
@@ -708,6 +720,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -762,6 +775,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
         producto.setFecha_vencimiento(dateVencimiento.getDate());
         producto.setFamilia(familia.getId(choiceFamilia.getSelectedItem().toString()));
         producto.setFabricante(fabricante.getId(choiceFabricante.getSelectedItem().toString()));
+        producto.setEstado(choiceEstado.getSelectedItem().toString());
         
         // Datos de Venta y Almacén:
         producto.setPrecio_compra(Double.parseDouble(txtPrecioC.getText()));
@@ -825,6 +839,7 @@ public class VRegistroProducto extends javax.swing.JDialog {
             dateVencimiento.setDate(null);
         choiceFabricante.setSelectedItem(producto.getNombre_fabricante());
         choiceFamilia.setSelectedItem(producto.getNombre_familia());
+        choiceEstado.setSelectedItem(producto.getEstado());
         
         txtPrecioC.setText(String.valueOf(producto.getPrecio_compra()));
         txtPrecioVenta.setText(String.valueOf(producto.getPrecio_venta()));

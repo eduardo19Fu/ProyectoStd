@@ -290,4 +290,9 @@ public class Producto {
         CProducto cp = new CProducto();
         return cp.actualizarExistencia(codigo, cantidad, bandera);
     }
+    
+    public String getEstadoProducto(String codigo){
+        CProducto cp = new CProducto();
+        return cp.getEstadoProducto(codigo);
+    }
 }

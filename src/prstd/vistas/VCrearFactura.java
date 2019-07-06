@@ -1138,9 +1138,13 @@ public class VCrearFactura extends javax.swing.JDialog {
     private void buscarProducto(){
         if(new Producto().buscarProducto(txtCodigo.getText()) != null){
             Producto producto = new Producto().buscarProducto(txtCodigo.getText());
-            txtCodigo.setText(producto.getCodigo());
-            txtProducto.setText(producto.getNombre());
-            txtCantidad.grabFocus();
+            if(!(producto.getEstadoProducto(txtCodigo.getText()).equals("DESCONTINUADO"))){
+                txtCodigo.setText(producto.getCodigo());
+                txtProducto.setText(producto.getNombre());
+                txtCantidad.grabFocus();
+            }else{
+                JOptionPane.showMessageDialog(this, "El producto que desea buscar se encuentra descontinuado, por lo que no es posible facturarlo.","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }else{
             JOptionPane.showMessageDialog(this, "El código del próducto que desea no se encuentra registrado, por favor verifiquelo de nuevo.","Advertencia",JOptionPane.WARNING_MESSAGE);
             txtCodigo.grabFocus();
