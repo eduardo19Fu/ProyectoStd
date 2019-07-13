@@ -710,43 +710,61 @@ public class VCrearFactura extends javax.swing.JDialog {
             else
                 transaccion = documento.getMaxTransaccion() + 1;
             
+            int renglones = tblDetalle.getRowCount();
+            // Validar si la factura tiene mas de 12 renglones para factura pequeñas, asi el usuario tendrá las dos opciones disponibles.
+            if(!(renglones > 12)){
             // Elección de opción de generación de factura.
-            int op = JOptionPane.showOptionDialog(this, "¿Desea imprimir una factura normal?", "Imprimir", 
-                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si","No"}, "Si");
-            if(op != -1){
-                if((op + 1) == 1){
-                    // Opción que genera una factura tradicional del sistema.
-                    if(!(no_factura == 0)){
-                        if(!(no_factura > act)){
-                            documento.setIdtransaccion(transaccion);
-                            documento.setNo_documento(no_factura);
-                            documento.setFecha_emision(time);
-                            documento.setTotal(total);
-                            documento.setIdcliente(cliente);
-                            documento.setIdvendedor(idusuario);
-                            documento.setEstado("PAGADA");
-                            documento.setTipo_documento(1);
-                            documento.setSerie(serie);
-                            imprimir(cl, documento, ucorr);
+                int op = JOptionPane.showOptionDialog(this, "¿Desea imprimir una factura normal?", "Imprimir", 
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si","No"}, "Si");
+                if(op != -1){
+                    if((op + 1) == 1){
+                        // Opción que genera una factura tradicional del sistema.
+                        if(!(no_factura == 0)){
+                            if(!(no_factura > act)){
+                                documento.setIdtransaccion(transaccion);
+                                documento.setNo_documento(no_factura);
+                                documento.setFecha_emision(time);
+                                documento.setTotal(total);
+                                documento.setIdcliente(cliente);
+                                documento.setIdvendedor(idusuario);
+                                documento.setEstado("PAGADA");
+                                documento.setTipo_documento(1);
+                                documento.setSerie(serie);
+                                imprimir(cl, documento, ucorr);
+                            }else{
+                                JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
+                            }
                         }else{
-                            JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
+                            JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
                         }
                     }else{
-                        JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
+                        // Opción que genera una factura de tamaño carta del sistema.
+                        documento.setIdtransaccion(transaccion);
+                        documento.setFecha_emision(time);
+                        documento.setTotal(total);
+                        documento.setIdcliente(cliente);
+                        documento.setIdvendedor(idusuario);
+                        documento.setEstado("PAGADA");
+                        documento.setTipo_documento(4);
+                        documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
+                        NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
+                        nf.setVisible(true);
                     }
-                }else{
-                    // Opción que genera una factura de tamaño carta del sistema.
-                    documento.setIdtransaccion(transaccion);
-                    documento.setFecha_emision(time);
-                    documento.setTotal(total);
-                    documento.setIdcliente(cliente);
-                    documento.setIdvendedor(idusuario);
-                    documento.setEstado("PAGADA");
-                    documento.setTipo_documento(4);
-                    documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
-                    NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
-                    nf.setVisible(true);
                 }
+            // Caso contrario, unicamente podrá imprimir en     
+            }else if(renglones < 25){
+                        documento.setIdtransaccion(transaccion);
+                        documento.setFecha_emision(time);
+                        documento.setTotal(total);
+                        documento.setIdcliente(cliente);
+                        documento.setIdvendedor(idusuario);
+                        documento.setEstado("PAGADA");
+                        documento.setTipo_documento(4);
+                        documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
+                        NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
+                        nf.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "La cantidad de renglones sobrepasa la capacidad maxima de impresión fisica.","Advertencia",JOptionPane.WARNING_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(this, "Debe ingresar un cliente válido para poder continuar.");
