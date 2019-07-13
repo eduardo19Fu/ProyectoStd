@@ -210,13 +210,6 @@ Teléfonos: 4582-1048/5728-2246]]></text>
 				</textElement>
 				<text><![CDATA[Subtotal]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="418" y="6" width="70" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Descuento]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -248,15 +241,6 @@ Teléfonos: 4582-1048/5728-2246]]></text>
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{subtotal}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="417" y="2" width="71" height="20">
-					<printWhenExpression><![CDATA[$F{descuento}.intValue()>0]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{descuento}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
