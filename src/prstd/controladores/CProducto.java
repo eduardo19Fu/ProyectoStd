@@ -195,7 +195,7 @@ public class CProducto {
     
     public Producto buscarProducto(String codigo){
         String sql = "select p.codigo, p.nombre_producto, p.precio_compra, p.precio_venta, p.fecha_compra, p.fecha_vencimiento, f.nombre_fabricante, fa.nombre_familia,"
-                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega "
+                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega, p.estado "
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
                     + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
@@ -220,6 +220,7 @@ public class CProducto {
             producto.setPorcentaje_ganancia(rs.getDouble(11));
             producto.setExistencia_minima_tienda(rs.getInt(12));
             producto.setExistencia_minima_bodega(rs.getInt(13));
+            producto.setEstado(rs.getString(14));
             rs.close();
             ps.close();
             connection.close();

@@ -589,7 +589,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
     private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             if(!txtNit.getText().isEmpty()){
-                agregarDetalle(txtCodigo.getText());
+                int cantidad = Integer.parseInt(txtCantidad.getText());
+                agregarDetalle(txtCodigo.getText(),cantidad);
                 txtCodigo.setText("");
                 txtProducto.setText("");
                 txtCantidad.setText("");
@@ -608,7 +609,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        agregarDetalle(txtCodigo.getText());
+        int cantidad = Integer.parseInt(txtCantidad.getText());
+        agregarDetalle(txtCodigo.getText(),cantidad);
         txtCantidad.setText("");
         txtCodigo.setText("");
         txtProducto.setText("");
@@ -794,6 +796,9 @@ public class VCreacionProforma extends javax.swing.JDialog {
             codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
             VRegistroProducto vrp = new VRegistroProducto(null, true, codigo);
             vrp.setVisible(true);
+            if(!vrp.isVisible()){
+                agregarDetalle(codigo, 0);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para proceder con la edición","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
@@ -949,11 +954,11 @@ public class VCreacionProforma extends javax.swing.JDialog {
         }
     }
     
-    private void agregarDetalle(String codigo){
+    private void agregarDetalle(String codigo, int cant){
         boolean bandera = false;
         Producto producto = new Producto().buscarProducto(codigo);
         //int existencia = producto.getExistencia_tienda();
-        int cantidad = Integer.parseInt(txtCantidad.getText());
+        int cantidad = cant;
         
         datos[0] = cantidad;
         datos[1] = producto.getCodigo();
