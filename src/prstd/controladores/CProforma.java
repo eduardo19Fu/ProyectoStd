@@ -326,7 +326,7 @@ public class CProforma {
             //jv.setAlwaysOnTop(true);
             connection.close();
             return jv;
-        } catch (JRException | SQLException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             return null;
         }

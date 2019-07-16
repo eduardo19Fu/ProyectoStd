@@ -668,16 +668,17 @@ public class VCrearFactura extends javax.swing.JDialog {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         if(!txtNit.getText().isEmpty()){
-                agregarDetalle(txtCodigo.getText());
-                txtCodigo.setText("");
-                txtProducto.setText("");
-                txtCantidad.setText("");
-                txtCodigo.grabFocus();
-                configurarTabla(tblDetalle);
-            }else{
-                JOptionPane.showMessageDialog(this, "Nit no válido");
-                txtNit.grabFocus();
-            }
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            agregarDetalle(txtCodigo.getText(), cantidad);
+            txtCodigo.setText("");
+            txtProducto.setText("");
+            txtCantidad.setText("");
+            txtCodigo.grabFocus();
+            configurarTabla(tblDetalle);
+        }else{
+            JOptionPane.showMessageDialog(this, "Nit no válido");
+            txtNit.grabFocus();
+        }
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnBuscarCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCodigoMouseClicked
@@ -710,43 +711,61 @@ public class VCrearFactura extends javax.swing.JDialog {
             else
                 transaccion = documento.getMaxTransaccion() + 1;
             
+            int renglones = tblDetalle.getRowCount();
+            // Validar si la factura tiene mas de 12 renglones para factura pequeñas, asi el usuario tendrá las dos opciones disponibles.
+            if(!(renglones > 12)){
             // Elección de opción de generación de factura.
-            int op = JOptionPane.showOptionDialog(this, "¿Desea imprimir una factura normal?", "Imprimir", 
-                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si","No"}, "Si");
-            if(op != -1){
-                if((op + 1) == 1){
-                    // Opción que genera una factura tradicional del sistema.
-                    if(!(no_factura == 0)){
-                        if(!(no_factura > act)){
-                            documento.setIdtransaccion(transaccion);
-                            documento.setNo_documento(no_factura);
-                            documento.setFecha_emision(time);
-                            documento.setTotal(total);
-                            documento.setIdcliente(cliente);
-                            documento.setIdvendedor(idusuario);
-                            documento.setEstado("PAGADA");
-                            documento.setTipo_documento(1);
-                            documento.setSerie(serie);
-                            imprimir(cl, documento, ucorr);
+                int op = JOptionPane.showOptionDialog(this, "¿Desea imprimir una factura normal?", "Imprimir", 
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si","No"}, "Si");
+                if(op != -1){
+                    if((op + 1) == 1){
+                        // Opción que genera una factura tradicional del sistema.
+                        if(!(no_factura == 0)){
+                            if(!(no_factura > act)){
+                                documento.setIdtransaccion(transaccion);
+                                documento.setNo_documento(no_factura);
+                                documento.setFecha_emision(time);
+                                documento.setTotal(total);
+                                documento.setIdcliente(cliente);
+                                documento.setIdvendedor(idusuario);
+                                documento.setEstado("PAGADA");
+                                documento.setTipo_documento(1);
+                                documento.setSerie(serie);
+                                imprimir(cl, documento, ucorr);
+                            }else{
+                                JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
+                            }
                         }else{
-                            JOptionPane.showMessageDialog(this, "El usuario ha alcanzado el máximo de facturas permitido");
+                            JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
                         }
                     }else{
-                        JOptionPane.showMessageDialog(this, "El usuario no posee un correlativo válido");
+                        // Opción que genera una factura de tamaño carta del sistema.
+                        documento.setIdtransaccion(transaccion);
+                        documento.setFecha_emision(time);
+                        documento.setTotal(total);
+                        documento.setIdcliente(cliente);
+                        documento.setIdvendedor(idusuario);
+                        documento.setEstado("PAGADA");
+                        documento.setTipo_documento(4);
+                        documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
+                        NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
+                        nf.setVisible(true);
                     }
-                }else{
-                    // Opción que genera una factura de tamaño carta del sistema.
-                    documento.setIdtransaccion(transaccion);
-                    documento.setFecha_emision(time);
-                    documento.setTotal(total);
-                    documento.setIdcliente(cliente);
-                    documento.setIdvendedor(idusuario);
-                    documento.setEstado("PAGADA");
-                    documento.setTipo_documento(4);
-                    documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
-                    NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
-                    nf.setVisible(true);
                 }
+            // Caso contrario, unicamente podrá imprimir en     
+            }else if(renglones < 25){
+                        documento.setIdtransaccion(transaccion);
+                        documento.setFecha_emision(time);
+                        documento.setTotal(total);
+                        documento.setIdcliente(cliente);
+                        documento.setIdvendedor(idusuario);
+                        documento.setEstado("PAGADA");
+                        documento.setTipo_documento(4);
+                        documento.setSerie("CA");// Indica que la factura sera de tamaño carta.
+                        NotificacionFactura nf = new NotificacionFactura(null,true,documento,cl,ucorr, (DefaultTableModel) tblDetalle.getModel());
+                        nf.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "La cantidad de renglones sobrepasa la capacidad maxima de impresión fisica.","Advertencia",JOptionPane.WARNING_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(this, "Debe ingresar un cliente válido para poder continuar.");
@@ -757,7 +776,8 @@ public class VCrearFactura extends javax.swing.JDialog {
     private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
         if(evt.getKeyChar() == KeyEvent.VK_ENTER){
             if(!txtNit.getText().isEmpty()){
-                agregarDetalle(txtCodigo.getText());
+                int cantidad = Integer.parseInt(txtCantidad.getText());
+                agregarDetalle(txtCodigo.getText(), cantidad);
                 txtCodigo.setText("");
                 txtProducto.setText("");
                 txtCantidad.setText("");
@@ -830,6 +850,9 @@ public class VCrearFactura extends javax.swing.JDialog {
             codigo = tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 1).toString();
             VRegistroProducto vrp = new VRegistroProducto(null, true, codigo);
             vrp.setVisible(true);
+            if(!vrp.isVisible()){
+                agregarDetalle(codigo, 0);
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para proceder con la edición","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
@@ -1002,13 +1025,13 @@ public class VCrearFactura extends javax.swing.JDialog {
     }
     
     
-    private void agregarDetalle(String codigo){
+    private void agregarDetalle(String codigo, int cant){
         boolean bandera = false;
         Producto producto = new Producto().buscarProducto(codigo);
         NotaCredito nc = new NotaCredito();
         
         int existencia = producto.getExistencia_tienda();
-        int cantidad = Integer.parseInt(txtCantidad.getText());
+        int cantidad = cant;
         
         if(cantidad <= existencia){
             datos[0] = cantidad;
@@ -1138,9 +1161,13 @@ public class VCrearFactura extends javax.swing.JDialog {
     private void buscarProducto(){
         if(new Producto().buscarProducto(txtCodigo.getText()) != null){
             Producto producto = new Producto().buscarProducto(txtCodigo.getText());
-            txtCodigo.setText(producto.getCodigo());
-            txtProducto.setText(producto.getNombre());
-            txtCantidad.grabFocus();
+            if(!(producto.getEstadoProducto(txtCodigo.getText()).equals("DESCONTINUADO"))){
+                txtCodigo.setText(producto.getCodigo());
+                txtProducto.setText(producto.getNombre());
+                txtCantidad.grabFocus();
+            }else{
+                JOptionPane.showMessageDialog(this, "El producto que desea buscar se encuentra descontinuado, por lo que no es posible facturarlo.","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }else{
             JOptionPane.showMessageDialog(this, "El código del próducto que desea no se encuentra registrado, por favor verifiquelo de nuevo.","Advertencia",JOptionPane.WARNING_MESSAGE);
             txtCodigo.grabFocus();

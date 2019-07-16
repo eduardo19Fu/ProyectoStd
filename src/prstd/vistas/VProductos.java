@@ -391,12 +391,20 @@ public class VProductos extends javax.swing.JDialog {
             if(op != -1){
                 if((op + 1) == 1){
                     codigo = tblProductos.getValueAt(tblProductos.getSelectedRow(), 0).toString();
-                    Producto producto = new Producto();
-                    producto.descontinuar(codigo);
+                    Producto producto = new Producto().buscarProducto(codigo);
+                    if(producto.getExistencia_tienda() > 0 || producto.getExistencia_bodega() > 0)
+                        JOptionPane.showMessageDialog(this, "No se puede descontinuar un producto que aun posee existencias en tienda o bodega.","Alerta",JOptionPane.WARNING_MESSAGE);
+                    else if(producto.descontinuar(codigo) > 0){
+                        JOptionPane.showMessageDialog(this, "Producto descontinuado con éxito.");
+                        cargarProductos();
+                    }else
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un problemas al tratar de descontinuar el producto.","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
         }catch(ArrayIndexOutOfBoundsException ex){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para continuar");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
 

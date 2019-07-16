@@ -29,11 +29,14 @@ order by
 	<field name="nombre" class="java.lang.String"/>
 	<field name="day(doc.fecha_emision)" class="java.lang.Long"/>
 	<field name="getMes(month(doc.fecha_emision))" class="java.lang.String"/>
-	<variable name="suma_ventas" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+	<variable name="suma_ventas" class="java.math.BigDecimal" resetType="Group" resetGroup="dia_venta" incrementType="Group" incrementGroup="vendedor" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 	<variable name="total_mes" class="java.math.BigDecimal" incrementType="Group" incrementGroup="dia_venta" calculation="Sum">
 		<variableExpression><![CDATA[$V{suma_ventas}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
 	</variable>
 	<group name="dia_venta" keepTogether="true">
 		<groupExpression><![CDATA[$F{day(doc.fecha_emision)}]]></groupExpression>
@@ -54,7 +57,7 @@ order by
 					<text><![CDATA[DÍA]]></text>
 				</staticText>
 				<line>
-					<reportElement x="1" y="33" width="137" height="1" forecolor="#006600"/>
+					<reportElement x="1" y="33" width="570" height="1" forecolor="#006600"/>
 					<graphicElement>
 						<pen lineWidth="2.0" lineStyle="Double"/>
 					</graphicElement>
@@ -62,14 +65,7 @@ order by
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="43">
-				<textField>
-					<reportElement x="426" y="15" width="136" height="20" forecolor="#CC0000"/>
-					<textElement textAlignment="Right">
-						<font fontName="Arial" size="12" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_ventas}]]></textFieldExpression>
-				</textField>
+			<band height="39">
 				<staticText>
 					<reportElement x="410" y="15" width="16" height="20" forecolor="#CC0000"/>
 					<textElement>
@@ -93,13 +89,20 @@ order by
 						<pen lineWidth="2.5" lineStyle="Double"/>
 					</graphicElement>
 				</line>
+				<textField>
+					<reportElement x="426" y="15" width="136" height="20" forecolor="#CC0000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{suma_ventas}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
 	<group name="vendedor">
 		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
 		<groupHeader>
-			<band height="33">
+			<band height="24">
 				<textField>
 					<reportElement x="0" y="3" width="384" height="20"/>
 					<textElement>
@@ -151,7 +154,7 @@ order by
 	<pageHeader>
 		<band height="52" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="1" y="5" width="571" height="47"/>
+				<reportElement x="1" y="5" width="571" height="47" backcolor="#33CC00"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="1" y="5" width="324" height="47"/>
@@ -161,14 +164,14 @@ order by
 				<text><![CDATA[REPORTE DE VENTAS DEL MES DE:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="324" y="5" width="158" height="47" forecolor="#CC0000"/>
+				<reportElement x="324" y="5" width="158" height="47" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{getMes(month(doc.fecha_emision))}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="482" y="5" width="90" height="47" forecolor="#CC0000"/>
+				<reportElement x="482" y="5" width="90" height="47" forecolor="#FFFFFF"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
@@ -180,10 +183,42 @@ order by
 		<band height="12" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="17" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="11" splitType="Stretch"/>
+		<band height="49" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="5" width="572" height="40"/>
+			</rectangle>
+			<textField>
+				<reportElement x="426" y="13" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="13" width="16" height="20" forecolor="#000000"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Q.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="126" height="20" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DEL MES DE ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="13" width="284" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{getMes(month(doc.fecha_emision))}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
@@ -192,14 +227,14 @@ order by
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="531" y="0" width="40" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

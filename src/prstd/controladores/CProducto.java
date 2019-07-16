@@ -40,7 +40,7 @@ public class CProducto {
     
     public int actualizarProducto(Producto producto){
         String sql = "update tbl_producto set nombre_producto = ?, precio_compra = ?, precio_venta = ?,fecha_compra = ?,fecha_vencimiento = ?,idfabricante = ?,idfamilia = ?,"
-                    + "stuckTienda = ?,stuckBodega = ?,porcentaje_ganancia = ?,stuck_minimo_tienda = ?,stuck_minimo_bodega = ? "
+                    + "stuckTienda = ?,stuckBodega = ?,porcentaje_ganancia = ?,stuck_minimo_tienda = ?,stuck_minimo_bodega = ?,estado = ? "
                     + "where codigo = ?";
         
         try {
@@ -60,7 +60,8 @@ public class CProducto {
             ps.setDouble(10, producto.getPorcentaje_ganancia());
             ps.setInt(11, producto.getExistencia_minima_tienda());
             ps.setInt(12, producto.getExsitencia_minima_bodega());
-            ps.setString(13, producto.getCodigo().toUpperCase());
+            ps.setString(13, producto.getEstado());
+            ps.setString(14, producto.getCodigo().toUpperCase());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -94,7 +95,7 @@ public class CProducto {
             ps.setDouble(11, productos.getPorcentaje_ganancia());
             ps.setInt(12, productos.getExistencia_minima_tienda());
             ps.setInt(13, productos.getExsitencia_minima_bodega());
-            ps.setString(14, "ACTIVO");
+            ps.setString(14, productos.getEstado());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -116,7 +117,8 @@ public class CProducto {
                     + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega, p.estado "
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
-                    + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia ";
+                    + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
+                    + "where p.estado != 'DESCONTINUADO'";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -193,7 +195,7 @@ public class CProducto {
     
     public Producto buscarProducto(String codigo){
         String sql = "select p.codigo, p.nombre_producto, p.precio_compra, p.precio_venta, p.fecha_compra, p.fecha_vencimiento, f.nombre_fabricante, fa.nombre_familia,"
-                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega "
+                    + "p.stuckTienda, p.stuckBodega, p.porcentaje_ganancia, p.stuck_minimo_tienda, p.stuck_minimo_bodega, p.estado "
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
                     + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
@@ -218,6 +220,7 @@ public class CProducto {
             producto.setPorcentaje_ganancia(rs.getDouble(11));
             producto.setExistencia_minima_tienda(rs.getInt(12));
             producto.setExistencia_minima_bodega(rs.getInt(13));
+            producto.setEstado(rs.getString(14));
             rs.close();
             ps.close();
             connection.close();
@@ -225,6 +228,25 @@ public class CProducto {
         } catch (SQLException ex) {
             Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public String getEstadoProducto(String codigo){
+        String sql = "select estado from tbl_producto where codigo = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            String valor = rs.getString(1);
+            rs.close();
+            ps.close();
+            connection.close();
+            return valor;
+        } catch (SQLException ex) {
+            Logger.getLogger(CProducto.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -436,7 +458,7 @@ public class CProducto {
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
                     + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
-                    + "where p.nombre_producto like ?";
+                    + "where p.nombre_producto like ? and p.estado != 'DESCONTINUADO'";
         List<Producto> lista = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -476,7 +498,7 @@ public class CProducto {
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
                     + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
-                    + "where fa.nombre_familia like ?";
+                    + "where fa.nombre_familia like ? and p.estado != 'DESCONTINUADO'";
         List<Producto> lista = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -516,7 +538,7 @@ public class CProducto {
                     + "from tbl_producto p "
                     + "inner join tbl_fabricante f on p.idfabricante = f.idfabricante "
                     + "inner join tbl_producto_familia fa on p.idfamilia = fa.idproducto_familia "
-                    + "where f.nombre_fabricante like ?";
+                    + "where f.nombre_fabricante like ? and p.estado != 'DESCONTINUADO'";
         List<Producto> lista = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

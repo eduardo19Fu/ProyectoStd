@@ -30,7 +30,7 @@ public class CFamilia {
     }
     
     public List<Familia> listar(){
-        String sql = "select * from tbl_producto_familia";
+        String sql = "select * from tbl_producto_familia order by nombre_familia asc";
         List<Familia> lista = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
