@@ -1077,11 +1077,12 @@ public class VCreacionProforma extends javax.swing.JDialog {
     
     private void eliminarProducto(DefaultTableModel modelo){
         try {
+            DecimalFormat formato = new DecimalFormat("####.##");
             sumatoria = 0;
             double total = Double.parseDouble(txtTotal.getText());
             total -= Double.parseDouble(tblDetalle.getValueAt(tblDetalle.getSelectedRow(), 4).toString());
             sumatoria = total;
-            txtTotal.setText(String.valueOf(sumatoria));
+            txtTotal.setText(formato.format(sumatoria));
             modelo.removeRow(tblDetalle.getSelectedRow());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
