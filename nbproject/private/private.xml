@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Documento.java</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/controladores/CProforma.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/Cliente.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/servicios/ConexionDos.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/ClienteMayor.java</file>
-            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/modelos/OrdenDespacho.java</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/reports/simple.jrxml</file>
+            <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/reports/proforma.jrxml</file>
             <file>file:/C:/Users/Edfu-Pro/Documents/prstd/ProyectoStd/src/prstd/vistas/VPrincipal.java</file>
         </group>
     </open-files>
