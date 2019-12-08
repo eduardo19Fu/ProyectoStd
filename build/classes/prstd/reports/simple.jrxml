@@ -23,13 +23,13 @@
 	year(dc.fecha_emision),
         	de.cantidad,
         	pro.nombre_producto,
-        	round((pro.precio_venta*0.07) + pro.precio_venta,2) as precio_venta,
-        	round((de.subtotal * 0.07) + de.subtotal,2) as sub_total,
-        	round((dc.total * 0.07) + dc.total,2) as total,
+        	round((pro.precio_venta*0.10) + pro.precio_venta,2) as precio_venta,
+        	round((de.subtotal * 0.10) + de.subtotal,2) as sub_total,
+        	round((dc.total * 0.10) + dc.total,2) as total,
 	concat(u.nombre,' ', u.apellido) as vendedor,
 	dc.serie as serie,
  	pro.codigo,
-	letras(round((dc.total * 0.07) + dc.total,2)) as letras
+	letras(round((dc.total * 0.10) + dc.total,2)) as letras
 from 
 	tbl_documento dc
 inner join 
