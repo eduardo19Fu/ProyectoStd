@@ -70,19 +70,18 @@ order by
 	<title>
 		<band height="120" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="2" width="196" height="39"/>
+				<reportElement x="1" y="2" width="331" height="72"/>
 				<textElement>
 					<font fontName="SansSerif" size="28" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Libreria Mary]]></text>
+				<text><![CDATA[Libreria Y Variedades Carmelita]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="41" width="207" height="59"/>
-				<textElement>
+				<reportElement x="1" y="64" width="207" height="54"/>
+				<textElement verticalAlignment="Bottom">
 					<font fontName="SansSerif" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Barrio el Porvenir Jalapa, Jalapa
-
 NIT: 4514625-5]]></text>
 			</staticText>
 			<staticText>
