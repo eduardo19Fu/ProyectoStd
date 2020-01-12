@@ -668,13 +668,18 @@ public class VCrearFactura extends javax.swing.JDialog {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         if(!txtNit.getText().isEmpty()){
-            int cantidad = Integer.parseInt(txtCantidad.getText());
-            agregarDetalle(txtCodigo.getText(), cantidad);
-            txtCodigo.setText("");
-            txtProducto.setText("");
-            txtCantidad.setText("");
-            txtCodigo.grabFocus();
-            configurarTabla(tblDetalle);
+            try{
+                int cantidad = Integer.parseInt(txtCantidad.getText());
+                agregarDetalle(txtCodigo.getText(), cantidad);
+                txtCodigo.setText("");
+                txtProducto.setText("");
+                txtCantidad.setText("");
+                txtCodigo.grabFocus();
+                configurarTabla(tblDetalle);
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida","Advertencia",JOptionPane.WARNING_MESSAGE);
+                txtCantidad.grabFocus();
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Nit no válido");
             txtNit.grabFocus();
@@ -752,7 +757,7 @@ public class VCrearFactura extends javax.swing.JDialog {
                         nf.setVisible(true);
                     }
                 }
-            // Caso contrario, unicamente podrá imprimir en     
+            // Caso contrario, unicamente podrá imprimir en facturas tamaño carta  
             }else if(renglones < 25){
                         documento.setIdtransaccion(transaccion);
                         documento.setFecha_emision(time);
@@ -1026,6 +1031,10 @@ public class VCrearFactura extends javax.swing.JDialog {
     
     
     private void agregarDetalle(String codigo, int cant){
+        
+        // Almacenamos la cantidad de renglones agregados al detalle de factura.
+        int renglones = tblDetalle.getRowCount();
+        
         boolean bandera = false;
         Producto producto = new Producto().buscarProducto(codigo);
         NotaCredito nc = new NotaCredito();
@@ -1033,111 +1042,115 @@ public class VCrearFactura extends javax.swing.JDialog {
         int existencia = producto.getExistencia_tienda();
         int cantidad = cant;
         
-        if(cantidad <= existencia){
-            datos[0] = cantidad;
-            datos[1] = producto.getCodigo();
-            datos[2] = producto.getNombre();
-            datos[3] = producto.getPrecio_venta();
-            datos[4] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
-            datos[5] = 0.00;
-            datos[6] = "";
-            
-            //Evitar datos duplicados en el detalle de la factura
-            for(int i = 0; i < tblDetalle.getRowCount(); i++){
-                if(tblDetalle.getValueAt(i, 1).toString().trim().equals(codigo)){
-                    int nCantidad = cantidad + (int) tblDetalle.getValueAt(i, 0);
-                    if(!(nCantidad > existencia)){
-                        double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
-                        tblDetalle.setValueAt(nCantidad, i, 0);
-                        tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
-                        tblDetalle.setValueAt(nPrecio, i, 4);
-                        tblDetalle.setValueAt(0.0, i, 5);
-                        bandera = true;
-                    }else{
-                        // Crear nota de crédito
-                        int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
-                                "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
-                        if(op != -1){
-                            if((op + 1) == 1){
-                                if(!txtNit.getText().equals("C/F")){
-                                    crearNotaCredito(nCantidad);
-                                    double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
-                                    tblDetalle.setValueAt(nCantidad, i, 0);
-                                    tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
-                                    tblDetalle.setValueAt(nPrecio, i, 4);
-                                    tblDetalle.setValueAt(0.0, i, 5);
-                                    tblDetalle.setValueAt(nc.notaMax(codigo), i, 6); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
-                                    bandera = true;
-                                }else{
-                                    JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
-                                    bandera = false;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if(bandera == false){
-                modelo.addRow(datos);
-                tblDetalle.setModel(modelo);
-            }
-            int conteoTabla = tblDetalle.getRowCount();
-            double suma = 0;
-            sumatoria = 0;
-            for(int i = 0; i<= (conteoTabla - 1); i++){
-                suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
-                sumatoria += suma;
-            }
-            DecimalFormat formato = new DecimalFormat("####.##");
-            txtTotal.setText(String.valueOf(formato.format(sumatoria)));
-        }else if(!txtNit.getText().equals("C/F")){
-            // Creación directa de notas de credito en caso que no hayan suficientes existencias para
-            // satisfacer la demanda desde un inicio.
-            int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
-                                "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
-            if(op != -1){
-                if((op + 1) == 1){
-                    
-                    datos[0] = cantidad;
-                    datos[1] = producto.getCodigo();
-                    datos[2] = producto.getNombre();
-                    datos[3] = producto.getPrecio_venta();
-                    datos[4] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
-                    datos[5] = 0.00;
-                    crearNotaCredito(cantidad); 
-                    datos[6] = nc.notaMax(codigo); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
-                    
-                    // Evitar Datos Duplicados
-                    for(int i = 0; i < tblDetalle.getRowCount(); i++){
-                        if(tblDetalle.getValueAt(i, 1).toString().trim().equals(codigo)){
-                            int nCantidad = cantidad + (int) tblDetalle.getValueAt(i, 0);
+        if(!(renglones > 25)){ // Se comprueba que la cantidad de renglones no sea mayor a 25.
+            if(cantidad <= existencia){
+                datos[0] = cantidad;
+                datos[1] = producto.getCodigo();
+                datos[2] = producto.getNombre();
+                datos[3] = producto.getPrecio_venta();
+                datos[4] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
+                datos[5] = 0.00;
+                datos[6] = "";
+
+                //Evitar datos duplicados en el detalle de la factura
+                for(int i = 0; i < tblDetalle.getRowCount(); i++){
+                    if(tblDetalle.getValueAt(i, 1).toString().trim().equals(codigo)){
+                        int nCantidad = cantidad + (int) tblDetalle.getValueAt(i, 0);
+                        if(!(nCantidad > existencia)){
                             double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
                             tblDetalle.setValueAt(nCantidad, i, 0);
                             tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
                             tblDetalle.setValueAt(nPrecio, i, 4);
                             tblDetalle.setValueAt(0.0, i, 5);
-                            tblDetalle.setValueAt(nc.notaMax(codigo), i, 6);
                             bandera = true;
+                        }else{
+                            // Crear nota de crédito
+                            int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
+                                    "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+                            if(op != -1){
+                                if((op + 1) == 1){
+                                    if(!txtNit.getText().equals("C/F")){
+                                        crearNotaCredito(nCantidad);
+                                        double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
+                                        tblDetalle.setValueAt(nCantidad, i, 0);
+                                        tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
+                                        tblDetalle.setValueAt(nPrecio, i, 4);
+                                        tblDetalle.setValueAt(0.0, i, 5);
+                                        tblDetalle.setValueAt(nc.notaMax(codigo), i, 6); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
+                                        bandera = true;
+                                    }else{
+                                        JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
+                                        bandera = false;
+                                    }
+                                }
+                            }
                         }
                     }
-                    if(bandera == false){
-                        modelo.addRow(datos);
-                        tblDetalle.setModel(modelo);
-                    }
-                    int conteoTabla = tblDetalle.getRowCount();
-                    double suma = 0;
-                    sumatoria = 0;
-                    for(int i = 0; i<= (conteoTabla - 1); i++){
-                        suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
-                        sumatoria += suma;
-                    }
-                    DecimalFormat formato = new DecimalFormat("####.##");
-                    txtTotal.setText(String.valueOf(formato.format(sumatoria)));
                 }
+                if(bandera == false){
+                    modelo.addRow(datos);
+                    tblDetalle.setModel(modelo);
+                }
+                int conteoTabla = tblDetalle.getRowCount();
+                double suma = 0;
+                sumatoria = 0;
+                for(int i = 0; i<= (conteoTabla - 1); i++){
+                    suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
+                    sumatoria += suma;
+                }
+                DecimalFormat formato = new DecimalFormat("####.##");
+                txtTotal.setText(String.valueOf(formato.format(sumatoria)));
+            }else if(!txtNit.getText().equals("C/F")){
+                // Creación directa de notas de credito en caso que no hayan suficientes existencias para
+                // satisfacer la demanda desde un inicio.
+                int op = JOptionPane.showOptionDialog(this, "Existencias insuficientes. ¿Desea crear una nota de crédito para este producto?", 
+                                    "Advertencia", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
+                if(op != -1){
+                    if((op + 1) == 1){
+
+                        datos[0] = cantidad;
+                        datos[1] = producto.getCodigo();
+                        datos[2] = producto.getNombre();
+                        datos[3] = producto.getPrecio_venta();
+                        datos[4] = Double.parseDouble(producto.redondearPrecio((producto.getPrecio_venta() * cantidad)));
+                        datos[5] = 0.00;
+                        crearNotaCredito(cantidad); 
+                        datos[6] = nc.notaMax(codigo); // Colocar la nota de crédito recién creada en la tabla de detalle Factura
+
+                        // Evitar Datos Duplicados
+                        for(int i = 0; i < tblDetalle.getRowCount(); i++){
+                            if(tblDetalle.getValueAt(i, 1).toString().trim().equals(codigo)){
+                                int nCantidad = cantidad + (int) tblDetalle.getValueAt(i, 0);
+                                double nPrecio = Double.parseDouble(producto.redondearPrecio(nCantidad * (double) producto.getPrecio_venta()));
+                                tblDetalle.setValueAt(nCantidad, i, 0);
+                                tblDetalle.setValueAt(producto.getPrecio_venta(), i, 3);
+                                tblDetalle.setValueAt(nPrecio, i, 4);
+                                tblDetalle.setValueAt(0.0, i, 5);
+                                tblDetalle.setValueAt(nc.notaMax(codigo), i, 6);
+                                bandera = true;
+                            }
+                        }
+                        if(bandera == false){
+                            modelo.addRow(datos);
+                            tblDetalle.setModel(modelo);
+                        }
+                        int conteoTabla = tblDetalle.getRowCount();
+                        double suma = 0;
+                        sumatoria = 0;
+                        for(int i = 0; i<= (conteoTabla - 1); i++){
+                            suma = Double.parseDouble(String.valueOf(tblDetalle.getValueAt(i, 4)));
+                            sumatoria += suma;
+                        }
+                        DecimalFormat formato = new DecimalFormat("####.##");
+                        txtTotal.setText(String.valueOf(formato.format(sumatoria)));
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
+                bandera = false;
             }
         }else{
-            JOptionPane.showMessageDialog(this, "No se puede generar notas de crédito al cliente \"Consumidor Final\"","Advertencia",JOptionPane.WARNING_MESSAGE);
-            bandera = false;
+            JOptionPane.showMessageDialog(this, "No es posible agregar más de 25 productos a una sola factura","Advertencia",JOptionPane.WARNING_MESSAGE);
         }
     }
     
