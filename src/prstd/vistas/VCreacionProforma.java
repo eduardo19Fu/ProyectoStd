@@ -609,13 +609,18 @@ public class VCreacionProforma extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        int cantidad = Integer.parseInt(txtCantidad.getText());
-        agregarDetalle(txtCodigo.getText(),cantidad);
-        txtCantidad.setText("");
-        txtCodigo.setText("");
-        txtProducto.setText("");
-        txtCodigo.grabFocus();
-        configurarTabla(tblDetalle);
+        try{
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            agregarDetalle(txtCodigo.getText(),cantidad);
+            txtCantidad.setText("");
+            txtCodigo.setText("");
+            txtProducto.setText("");
+            txtCodigo.grabFocus();
+            configurarTabla(tblDetalle);
+        }catch(NumberFormatException ex){
+             JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida","Advertencia",JOptionPane.WARNING_MESSAGE);
+             txtCantidad.grabFocus();
+        }
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseEntered
@@ -959,6 +964,8 @@ public class VCreacionProforma extends javax.swing.JDialog {
         Producto producto = new Producto().buscarProducto(codigo);
         //int existencia = producto.getExistencia_tienda();
         int cantidad = cant;
+        
+        int renglones = tblDetalle.getRowCount();
         
         datos[0] = cantidad;
         datos[1] = producto.getCodigo();
