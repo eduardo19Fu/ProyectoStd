@@ -26,7 +26,7 @@ public class ConexionDos {
         pass = "1992";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://localhost/" + db 
+        url = "jdbc:mysql://192.168.0.103/" + db 
               + "?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone="
               + TimeZone.getDefault().getID() + "&useSSL=false";
     }   
