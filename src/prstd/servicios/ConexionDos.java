@@ -22,8 +22,8 @@ public class ConexionDos {
     private final String url;
 
     public ConexionDos() {
-        user = "root";
-        pass = "1992";
+        user = "detodoadmin";
+        pass = "detodoadmin2017";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
         url = "jdbc:mysql://192.168.0.103/" + db 
