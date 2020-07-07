@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte" pageWidth="612" pageHeight="792" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="mes" class="java.lang.Integer">
@@ -19,7 +19,7 @@ from
 inner join 
 	tbl_usuario u on u.idusuario = doc.idvendedor
 where 
-	month(doc.fecha_emision) = $P{mes} and year(curdate()) = $P{anho}
+	month(doc.fecha_emision) = $P{mes} and year(doc.fecha_emision) = $P{anho} and doc.tipo_documento = 1
 group by 
 	u.usuario, day(doc.fecha_emision)
 order by
@@ -131,30 +131,41 @@ order by
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="63" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="462" y="38" width="110" height="20"/>
+				<reportElement x="462" y="62" width="110" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="58" width="571" height="1"/>
+				<reportElement x="1" y="82" width="571" height="1"/>
 			</line>
+			<image>
+				<reportElement x="1" y="0" width="167" height="82"/>
+				<imageExpression class="java.lang.String"><![CDATA[new File("").getAbsolutePath()+"\\src\\prstd\\images\\logo-dtodo.jpg"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="1" y="0" width="571" height="38"/>
+				<reportElement x="1" y="13" width="570" height="47"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[LIBRERIA Y VARIEDADES CARMELITA]]></text>
+				<text><![CDATA[RESUMEN DE VENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="62" width="108" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de emisión:]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="52" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="1" y="5" width="571" height="47" backcolor="#33CC00"/>
+				<reportElement x="1" y="5" width="571" height="47" backcolor="#00CC99"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="1" y="5" width="324" height="47"/>

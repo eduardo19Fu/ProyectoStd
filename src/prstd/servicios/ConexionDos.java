@@ -22,11 +22,11 @@ public class ConexionDos {
     private final String url;
 
     public ConexionDos() {
-        user = "root";
-        pass = "1992";
+        user = "detodoadmin";
+        pass = "detodoadmin2020";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://localhost/" + db 
+        url = "jdbc:mysql://192.168.0.103/" + db 
               + "?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone="
               + TimeZone.getDefault().getID() + "&useSSL=false";
     }   

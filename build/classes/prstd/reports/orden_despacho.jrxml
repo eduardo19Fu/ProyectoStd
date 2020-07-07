@@ -45,56 +45,53 @@ order by
 		<band height="5" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="126" splitType="Stretch">
+		<band height="160" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="94" width="85" height="20"/>
+				<reportElement x="0" y="133" width="85" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Emitida Por:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="35" width="150" height="25"/>
-				<textElement>
-					<font fontName="Arial" size="18"/>
-				</textElement>
-				<text><![CDATA[Libreria Carmelita]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="275" y="0" width="142" height="45"/>
+				<reportElement x="1" y="25" width="142" height="45"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Orden No.:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="47" y="60" width="136" height="20"/>
+				<reportElement x="47" y="99" width="136" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_creacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="60" width="47" height="20"/>
+				<reportElement x="0" y="99" width="47" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="85" y="94" width="469" height="20"/>
+				<reportElement x="85" y="133" width="469" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="417" y="0" width="137" height="45"/>
+				<reportElement x="143" y="25" width="137" height="45"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{idorden}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="371" y="0" width="183" height="99"/>
+				<imageExpression class="java.lang.String"><![CDATA[new File("").getAbsolutePath() + "\\src\\prstd\\images\\logo-dtodo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>

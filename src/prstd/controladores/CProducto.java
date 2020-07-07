@@ -596,6 +596,7 @@ public class CProducto {
             JasperViewer jv = new JasperViewer(print,false);
             jv.setTitle("Productos en Tienda agotados");
             jv.setVisible(true);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
             connection.close();
             return jv;
@@ -611,6 +612,7 @@ public class CProducto {
             JasperPrint print = JasperFillManager.fillReport(this.reporte, null,connection);
             JasperViewer jv = new JasperViewer(print,false);
             jv.setVisible(true);
+            jv.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
             jv.setDefaultCloseOperation(JasperViewer.DISPOSE_ON_CLOSE);
             connection.close();
             return jv;
