@@ -181,9 +181,9 @@ public class VLogin extends javax.swing.JFrame {
         });
         panelPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 3, 460, 50));
 
-        iconoLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/candado.png"))); // NOI18N
+        iconoLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Logo Dtodo3.png"))); // NOI18N
         iconoLogo.setToolTipText("");
-        panelPrincipal.add(iconoLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+        panelPrincipal.add(iconoLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 212));
         panelPrincipal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 468, 520));
