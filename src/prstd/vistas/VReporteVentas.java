@@ -3,7 +3,6 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.time.Year;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import prstd.modelos.Documento;
@@ -218,9 +217,11 @@ public class VReporteVentas extends javax.swing.JDialog {
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
         Documento doc = new Documento();
-        int anho = Year.now().getValue();
+        // int anho = Year.now().getValue();
+        int anho = Integer.parseInt(comboAnho.getSelectedItem().toString());
         String mes = comboMes.getSelectedItem().toString();
         doc.ventas_mensuales(mes, anho);
+        this.dispose();
     }//GEN-LAST:event_btnImprimirMouseClicked
 
     private void btnImprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseEntered

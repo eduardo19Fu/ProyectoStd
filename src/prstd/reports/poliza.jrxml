@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poliza" pageWidth="612" pageHeight="792" columnWidth="582" leftMargin="20" rightMargin="10" topMargin="20" bottomMargin="45">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="311"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fechaIni" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -44,24 +44,21 @@ order by p.nombre_producto asc;]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="86" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="0" y="0" width="565" height="47"/>
+				<reportElement x="0" y="0" width="572" height="72"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="14" y="8" width="536" height="30"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="26" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Libreria Carmelita]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="139" y="59" width="297" height="20"/>
+				<reportElement x="131" y="19" width="385" height="39"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="26" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RESUMEN DE INGRESOS]]></text>
 			</staticText>
+			<image>
+				<reportElement x="11" y="1" width="120" height="70"/>
+				<imageExpression class="java.lang.String"><![CDATA[new File("").getAbsolutePath()+"\\src\\prstd\\images\\logo-dtodo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -94,6 +91,12 @@ order by p.nombre_producto asc;]]>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaIni}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="36" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="40" width="572" height="1"/>
+			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>

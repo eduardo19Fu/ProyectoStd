@@ -519,9 +519,9 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ventana Principal");
-        panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 370, 50));
-        panelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 122, 360, 10));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/Logo Dtodo3.png"))); // NOI18N
+        panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 240, 130));
+        panelOpciones.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 360, 10));
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 25));
