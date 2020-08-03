@@ -1,9 +1,9 @@
 package prstd.vistas;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;

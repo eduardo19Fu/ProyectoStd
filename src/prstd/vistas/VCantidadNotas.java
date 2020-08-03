@@ -3,7 +3,6 @@ package prstd.vistas;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.sql.Timestamp;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

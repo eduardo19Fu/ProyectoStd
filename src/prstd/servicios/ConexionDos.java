@@ -26,7 +26,7 @@ public class ConexionDos {
         pass = "detodoadmin2020";
         db = "std_db";
         driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://192.168.0.103/" + db 
+        url = "jdbc:mysql://localhost/" + db 
               + "?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone="
               + TimeZone.getDefault().getID() + "&useSSL=false";
     }   
