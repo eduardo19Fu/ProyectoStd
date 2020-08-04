@@ -24,7 +24,7 @@ public class ConexionDos {
     private String pass;
     private String db;
     private String driver;
-    private String url;
+    private final String url;
     private String host;
 
     public ConexionDos() {
