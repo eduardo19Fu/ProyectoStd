@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poliza" pageWidth="612" pageHeight="792" columnWidth="582" leftMargin="20" rightMargin="10" topMargin="20" bottomMargin="45">
-	<property name="ireport.zoom" value="1.53947435469212"/>
+	<property name="ireport.zoom" value="1.3995221406292004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fechaIni" class="java.util.Date">
@@ -40,9 +40,19 @@ order by p.nombre_producto asc;]]>
 	<variable name="gananciaTotal" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{ganancia}]]></variableExpression>
 	</variable>
-	<variable name="variable1" class="java.math.BigDecimal" calculation="Sum">
+	<variable name="total_facturado" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{pv_total}]]></variableExpression>
 		<initialValueExpression><![CDATA[$F{pv_total}]]></initialValueExpression>
+	</variable>
+	<variable name="pcTotal_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{pc_total}]]></variableExpression>
+	</variable>
+	<variable name="pvTotal_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{pv_total}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="gananciaTotal_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{ganancia}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -68,105 +78,112 @@ order by p.nombre_producto asc;]]>
 	<pageHeader>
 		<band height="50" splitType="Stretch">
 			<textField>
-				<reportElement x="60" y="17" width="294" height="16"/>
+				<reportElement x="60" y="0" width="294" height="16"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendedor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="17" width="60" height="16"/>
+				<reportElement x="0" y="0" width="60" height="16"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Vendedor:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="386" y="17" width="48" height="16"/>
+				<reportElement x="0" y="20" width="60" height="16"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fecha:]]></text>
+				<text><![CDATA[Ventas:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="434" y="17" width="100" height="16"/>
+				<reportElement x="60" y="20" width="100" height="16"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaIni}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="482" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 			<line>
-				<reportElement x="0" y="36" width="572" height="1"/>
+				<reportElement x="0" y="39" width="580" height="1"/>
 			</line>
 			<line>
-				<reportElement x="0" y="40" width="572" height="1"/>
+				<reportElement x="0" y="46" width="580" height="1"/>
 			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="36" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="8" width="70" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="78" y="8" width="172" height="20"/>
+				<reportElement x="78" y="8" width="165" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="358" y="8" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[P.V. Total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="251" y="8" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[P.C. Total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="465" y="8" width="100" height="20"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ganancia]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="34" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sum(dp.cantidad)}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="78" y="0" width="172" height="20"/>
-				<textElement/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="78" y="0" width="165" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_producto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="249" y="0" width="18" height="20"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Q.]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="267" y="0" width="86" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pc_total}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="375" y="0" width="83" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pv_total}]]></textFieldExpression>
@@ -174,11 +191,11 @@ order by p.nombre_producto asc;]]>
 			<staticText>
 				<reportElement x="358" y="0" width="18" height="20"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Q.]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="482" y="0" width="83" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ganancia}]]></textFieldExpression>
@@ -186,100 +203,139 @@ order by p.nombre_producto asc;]]>
 			<staticText>
 				<reportElement x="464" y="0" width="18" height="20"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Q.]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="3" splitType="Stretch"/>
+		<band height="1" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="47" splitType="Stretch">
-			<rectangle radius="10">
-				<reportElement mode="Transparent" x="0" y="1" width="572" height="40" backcolor="#CCCCCC"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="120" y="9" width="61" height="20"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Totales:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="191" y="9" width="18" height="18"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Q.]]></text>
-			</staticText>
+		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="208" y="9" width="107" height="18"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+				<reportElement x="0" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{pcTotal}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="317" y="9" width="18" height="18"/>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="0" width="40" height="20"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Q.]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="335" y="9" width="107" height="18"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{pvTotal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="442" y="9" width="18" height="18"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Q.]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="460" y="9" width="100" height="18"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{gananciaTotal}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="44">
+		<band height="113">
 			<rectangle radius="10">
-				<reportElement x="177" y="5" width="227" height="36"/>
+				<reportElement x="249" y="2" width="333" height="86"/>
 			</rectangle>
 			<textField pattern="#,##0.00">
-				<reportElement x="295" y="12" width="100" height="18"/>
+				<reportElement x="466" y="68" width="100" height="18"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{variable1}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{total_facturado}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="195" y="12" width="76" height="20"/>
-				<textElement>
+				<reportElement x="326" y="68" width="116" height="20"/>
+				<textElement textAlignment="Right">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Gran Total:]]></text>
+				<text><![CDATA[Total Facturado:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="12" width="18" height="18"/>
+				<reportElement x="448" y="68" width="18" height="18"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Q.]]></text>
 			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="465" y="5" width="100" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{pcTotal_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="465" y="25" width="100" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{pvTotal_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="465" y="45" width="100" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{gananciaTotal_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="341" y="5" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.C. Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="25" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.V. Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="45" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ganancia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="5" width="18" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Q.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="25" width="18" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Q.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="45" width="18" height="18"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Q.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="267" y="65" width="304" height="1"/>
+			</line>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="93" width="40" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="93" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 	<summary>
