@@ -59,11 +59,17 @@ public class ConexionDos {
         try {
             properties.load(new FileReader(new File("").getAbsolutePath()+"\\src\\prstd\\properties\\properties.properties"));
             
-            db = properties.getProperty("db");
+            /*db = properties.getProperty("db");
             user = properties.getProperty("user");
             pass = properties.getProperty("password");
             driver = properties.getProperty("driver");
-            host = properties.getProperty("host");
+            host = properties.getProperty("host");*/
+            
+            db = "std_db";
+            user = "detodoadmin";
+            pass = "detodoadmin2020";
+            driver = "com.mysql.cj.jdbc.Driver";
+            host = "localhost";
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ConexionDos.class.getName()).log(Level.SEVERE, null, ex);
