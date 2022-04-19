@@ -27,12 +27,15 @@ public class Documento {
     private String certificacion_sat;
     private String serie_sat;
     private String mensaje_sat;
+    private String fecha_certificacion_sat;
 
     public Documento(){
     }
     
     public Documento(int idtransaccion, int no_documento, Timestamp fecha_emision, Double total, int idcliente, int idvendedor, 
-            String estado,String serie, int tipo_documento, String correlativo_sat, String certificacion_sat, String serie_sat, String mensaje_sat) {
+            String estado,String serie, int tipo_documento, String correlativo_sat, String certificacion_sat, String serie_sat, String mensaje_sat,
+            String fecha_certificacion_sat) {
+        
         this.idtransaccion = idtransaccion;
         this.no_documento = no_documento;
         this.fecha_emision = fecha_emision;
@@ -46,6 +49,7 @@ public class Documento {
         this.certificacion_sat = certificacion_sat;
         this.serie_sat = serie_sat;
         this.mensaje_sat = mensaje_sat;
+        this.fecha_certificacion_sat = fecha_certificacion_sat;
     }
 
     public int getIdtransaccion() {
@@ -151,6 +155,14 @@ public class Documento {
     public void setMensaje_sat(String mensaje_sat) {
         this.mensaje_sat = mensaje_sat;
     }
+
+    public String getFecha_certificacion_sat() {
+        return fecha_certificacion_sat;
+    }
+
+    public void setFecha_certificacion_sat(String fecha_certificacion_sat) {
+        this.fecha_certificacion_sat = fecha_certificacion_sat;
+    }
     
     
     
@@ -161,6 +173,10 @@ public class Documento {
     public int getMaxTransaccion(){
         CFactura cf = new CFactura();
         return cf.getMaxTransaccion();
+    }
+    
+    public Documento buscarFactura(int idtransaccion){
+        return new CFactura().buscarFactura(idtransaccion);
     }
     
     public int crearFactura(Documento documento){

@@ -1662,6 +1662,8 @@ public class VCrearFactura extends javax.swing.JDialog {
                         documento.setCertificacion_sat(respuesta_servicio.getUuid());
                         documento.setSerie_sat(respuesta_servicio.getSerie());
                         documento.setMensaje_sat(respuesta_servicio.getInfo());
+                        documento.setFecha_certificacion_sat(respuesta_servicio.getFecha());
+                        
                         imprimir(cl, documento, ucorr);
                         
                         // AQUI VA EL CODIGO QUE ABRE EL ENLACE CON LA FACTURA

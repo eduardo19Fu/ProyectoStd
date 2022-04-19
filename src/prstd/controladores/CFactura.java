@@ -40,7 +40,7 @@ public class CFactura {
     }
     
     public int crearFactura(Documento factura){
-        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -56,6 +56,7 @@ public class CFactura {
             ps.setString(10, factura.getCertificacion_sat());
             ps.setString(11, factura.getSerie_sat());
             ps.setString(12, factura.getMensaje_sat());
+            ps.setString(13, factura.getFecha_certificacion_sat());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();
@@ -180,6 +181,41 @@ public class CFactura {
         } catch (SQLException ex) {
             Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+    
+    public Documento buscarFactura(int idtransaccion){
+        String sql = "Select * from tbl_documento where idtransaccion = ?";
+        Documento documento = new Documento();
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idtransaccion);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            documento.setIdtransaccion(rs.getInt(1));
+            documento.setNo_documento(rs.getInt(2));
+            documento.setFecha_emision(rs.getTimestamp(3));
+            documento.setTotal(rs.getDouble(4));
+            documento.setIdcliente(rs.getInt(5));
+            documento.setIdvendedor(rs.getInt(6));
+            documento.setSerie(rs.getString(7));
+            documento.setEstado(rs.getString(8));
+            documento.setTipo_documento(rs.getInt(9));
+            documento.setCorrelatvio_sat(rs.getString(10));
+            documento.setCertificacion_sat(rs.getString(11));
+            documento.setSerie_sat(rs.getString(12));
+            documento.setMensaje_sat(rs.getString(13));
+            documento.setFecha_certificacion_sat(rs.getString(14));
+            
+            rs.close();
+            ps.close();
+            connection.close();
+            return documento;
+        } catch (SQLException ex) {
+            Logger.getLogger(CFactura.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
