@@ -40,19 +40,22 @@ public class CFactura {
     }
     
     public int crearFactura(Documento factura){
-        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?)";
+        String sql = "insert into tbl_documento values(?,?,current_timestamp(),?,?,?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, factura.getIdtransaccion());
             ps.setInt(2, factura.getNo_documento());
-            //ps.setTimestamp(3, factura.getFecha_emision());
             ps.setDouble(3, factura.getTotal());
             ps.setInt(4, factura.getIdcliente());
             ps.setInt(5, factura.getIdvendedor());
             ps.setString(6, factura.getSerie());
             ps.setString(7, factura.getEstado());
             ps.setInt(8, factura.getTipo_documento());
+            ps.setString(9, factura.getCorrelatvio_sat());
+            ps.setString(10, factura.getCertificacion_sat());
+            ps.setString(11, factura.getSerie_sat());
+            ps.setString(12, factura.getMensaje_sat());
             int rs = ps.executeUpdate();
             ps.close();
             connection.close();

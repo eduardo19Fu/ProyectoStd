@@ -2719,8 +2719,8 @@ org.netbeans.lib.awtextra.AbsoluteLayout
 [Ljavax.swing.UIManager$LookAndFeelInfo;
 java.text.SimpleDateFormat
 prstd.vistas.VCreacionProforma$18
-javax.swing.GroupLayout$SequentialGroup
 prstd.vistas.VCreacionProforma$12
+javax.swing.GroupLayout$SequentialGroup
 prstd.vistas.VCreacionProforma$13
 org.netbeans.lib.awtextra.AbsoluteConstraints
 prstd.vistas.VCreacionProforma$10
@@ -2729,8 +2729,8 @@ prstd.vistas.VCreacionProforma$16
 prstd.vistas.VCreacionProforma$17
 prstd.vistas.VCreacionProforma$14
 prstd.vistas.VCreacionProforma$15
-javax.swing.LayoutStyle$ComponentPlacement
 javax.swing.ImageIcon
+javax.swing.LayoutStyle$ComponentPlacement
 java.lang.String
 java.awt.Container
 java.awt.FlowLayout
@@ -2759,10 +2759,11 @@ prstd.vistas.VBusquedaClientes
 java.lang.IllegalAccessException
 javax.swing.table.DefaultTableModel
 java.awt.Font
-javax.swing.GroupLayout$Alignment
 java.sql.Timestamp
+javax.swing.GroupLayout$Alignment
 javax.swing.BorderFactory
 java.util.logging.Logger
+[[Ljava.lang.Object;
 java.awt.Dimension
 prstd.modelos.Cliente
 javax.swing.JTable

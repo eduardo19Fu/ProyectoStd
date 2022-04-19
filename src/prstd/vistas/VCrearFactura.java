@@ -772,7 +772,7 @@ public class VCrearFactura extends javax.swing.JDialog {
                                 System.out.println(cl.getNit());
                                 try {
                                     generarFEL(cl, documento, ucorr, user);
-                                    imprimir(cl, documento, ucorr);
+                                    // imprimir(cl, documento, ucorr);
                                 } catch (ParserConfigurationException ex) {
                                     Logger.getLogger(VCrearFactura.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (SAXException ex) {
@@ -1585,9 +1585,17 @@ public class VCrearFactura extends javax.swing.JDialog {
             impuestos_resumen.setTotalMontoImpuesto(totalImpuestos);
             documento_fel.setImpuestos_resumen(impuestos_resumen);
         }
+        
+        // SUMATORIA DE TODOS LOS ELEMENTOS TOTAL DE CADA UN DE LOS ITEMS
+        double granTotal =  0.0;
+        
+        for (int i = 0; i < documento_fel.getItems().size(); i++) {
+            granTotal += documento_fel.getItems().get(i).getTotal();
+        }
 
         Totales totales = new Totales();
-        totales.setGranTotal(Double.parseDouble(txtTotal.getText()));
+        // totales.setGranTotal(Double.parseDouble(txtTotal.getText()));
+        totales.setGranTotal(granTotal);
         documento_fel.setTotales(totales);
 
         // Adendas
@@ -1610,12 +1618,12 @@ public class VCrearFactura extends javax.swing.JDialog {
         // Comprobacion de Datos.
         if (respuesta.getResultado()) {
 
-            System.out.println("--> FIRMA POR PARTE DEL EMISOR ");
+            // System.out.println("--> FIRMA POR PARTE DEL EMISOR ");
 
             FirmaEmisor firma_emisor = new FirmaEmisor();
             RespuestaServicioFirma respuesta_firma_emisor = new RespuestaServicioFirma();
 
-            System.out.println("--> Enviando Documento al Servicio de Firma del Emisor...");
+            // System.out.println("--> Enviando Documento al Servicio de Firma del Emisor...");
 
             try {
                 respuesta_firma_emisor = firma_emisor.Firmar(respuesta.getXml(), "45146276", "a3c079b60c23f5a105e61f56ceb2dd43");
@@ -1645,22 +1653,15 @@ public class VCrearFactura extends javax.swing.JDialog {
 
                     ServicioFel servicio = new ServicioFel();
 
-                    RespuestaServicioFel respuesta_servicio = servicio.Certificar(conexion, respuesta_firma_emisor.getArchivo(), "86669656", "N/A", "CERTIFICACION");
+                    RespuestaServicioFel respuesta_servicio = servicio.Certificar(conexion, respuesta_firma_emisor.getArchivo(), emisor.getNit(), "N/A", "CERTIFICACION");
 
                     if (respuesta_servicio.getResultado()) {
-
-                        System.out.println("--> Resultado: " + respuesta_servicio.getResultado());
-                        System.out.println("--> Origen: " + respuesta_servicio.getOrigen());
-                        System.out.println("--> Descripcion: " + respuesta_servicio.getDescripcion());
-                        System.out.println("--> Cantidad Errores: " + respuesta_servicio.getCantidad_errores());
-                        System.out.println("--> INFO: " + respuesta_servicio.getInfo());
-
-                        System.out.println("UUID: " + respuesta_servicio.getUuid());
-                        System.out.println("Serie: " + respuesta_servicio.getSerie());
-                        System.out.println("Numero: " + respuesta_servicio.getNumero());
-                        System.out.println("Fecha_certificacion: " + respuesta_servicio.getFecha());
                         
                         // INSERCIÓN DE FACTURA EN LA BASE DE DATOS DE LA EMPRESA
+                        documento.setCorrelatvio_sat(respuesta_servicio.getNumero());
+                        documento.setCertificacion_sat(respuesta_servicio.getUuid());
+                        documento.setSerie_sat(respuesta_servicio.getSerie());
+                        documento.setMensaje_sat(respuesta_servicio.getInfo());
                         imprimir(cl, documento, ucorr);
                         
                         // AQUI VA EL CODIGO QUE ABRE EL ENLACE CON LA FACTURA
@@ -1679,16 +1680,22 @@ public class VCrearFactura extends javax.swing.JDialog {
 
                     } else {
 
-                        System.out.println("--> Resultado: " + respuesta_servicio.getResultado());
-                        System.out.println("--> Origen: " + respuesta_servicio.getOrigen());
-                        System.out.println("--> Descripcion: " + respuesta_servicio.getDescripcion());
-                        System.out.println("--> Cantidad Errores: " + respuesta_servicio.getCantidad_errores());
-                        System.out.println("--> INFO: " + respuesta_servicio.getInfo());
+//                        System.out.println("--> Resultado: " + respuesta_servicio.getResultado());
+//                        System.out.println("--> Origen: " + respuesta_servicio.getOrigen());
+//                        System.out.println("--> Descripcion: " + respuesta_servicio.getDescripcion());
+//                        System.out.println("--> Cantidad Errores: " + respuesta_servicio.getCantidad_errores());
+//                        System.out.println("--> INFO: " + respuesta_servicio.getInfo());
+                        
+                        // MOSTRAR ERRORES EN PANTALLA
+                        String errores = "";
 
                         for (int i = 0; i < respuesta_servicio.getCantidad_errores(); i++) {
-                            System.out.println(respuesta_servicio.getDescripcion_errores().get(i).getMensaje_error());
-
+                            // System.out.println(respuesta_servicio.getDescripcion_errores().get(i).getMensaje_error());
+                            errores += respuesta_servicio.getDescripcion_errores().get(i).getMensaje_error() + "\n";
                         }
+                        
+                        JOptionPane.showMessageDialog(this, errores, "Errores -> Cantidad: " + respuesta_servicio.getCantidad_errores(), JOptionPane.ERROR_MESSAGE);
+                        init();
                     }
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(VCrearFactura.class.getName()).log(Level.SEVERE, null, ex);
