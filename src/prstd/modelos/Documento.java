@@ -23,12 +23,19 @@ public class Documento {
     private String serie;
     private String estado;
     private int tipo_documento;
+    private String correlatvio_sat;
+    private String certificacion_sat;
+    private String serie_sat;
+    private String mensaje_sat;
+    private String fecha_certificacion_sat;
 
     public Documento(){
     }
     
     public Documento(int idtransaccion, int no_documento, Timestamp fecha_emision, Double total, int idcliente, int idvendedor, 
-            String estado,String serie, int tipo_documento) {
+            String estado,String serie, int tipo_documento, String correlativo_sat, String certificacion_sat, String serie_sat, String mensaje_sat,
+            String fecha_certificacion_sat) {
+        
         this.idtransaccion = idtransaccion;
         this.no_documento = no_documento;
         this.fecha_emision = fecha_emision;
@@ -38,6 +45,11 @@ public class Documento {
         this.serie = serie;
         this.estado = estado;
         this.tipo_documento = tipo_documento;
+        this.correlatvio_sat = correlativo_sat;
+        this.certificacion_sat = certificacion_sat;
+        this.serie_sat = serie_sat;
+        this.mensaje_sat = mensaje_sat;
+        this.fecha_certificacion_sat = fecha_certificacion_sat;
     }
 
     public int getIdtransaccion() {
@@ -111,6 +123,48 @@ public class Documento {
     public void setTipo_documento(int tipo_documento) {
         this.tipo_documento = tipo_documento;
     }
+
+    public String getCorrelatvio_sat() {
+        return correlatvio_sat;
+    }
+
+    public void setCorrelatvio_sat(String correlatvio_sat) {
+        this.correlatvio_sat = correlatvio_sat;
+    }
+
+    public String getCertificacion_sat() {
+        return certificacion_sat;
+    }
+
+    public void setCertificacion_sat(String certificacion_sat) {
+        this.certificacion_sat = certificacion_sat;
+    }
+
+    public String getSerie_sat() {
+        return serie_sat;
+    }
+
+    public void setSerie_sat(String serie_sat) {
+        this.serie_sat = serie_sat;
+    }
+
+    public String getMensaje_sat() {
+        return mensaje_sat;
+    }
+
+    public void setMensaje_sat(String mensaje_sat) {
+        this.mensaje_sat = mensaje_sat;
+    }
+
+    public String getFecha_certificacion_sat() {
+        return fecha_certificacion_sat;
+    }
+
+    public void setFecha_certificacion_sat(String fecha_certificacion_sat) {
+        this.fecha_certificacion_sat = fecha_certificacion_sat;
+    }
+    
+    
     
     /*
         Métodos de controlado de documento
@@ -119,6 +173,10 @@ public class Documento {
     public int getMaxTransaccion(){
         CFactura cf = new CFactura();
         return cf.getMaxTransaccion();
+    }
+    
+    public Documento buscarFactura(int idtransaccion){
+        return new CFactura().buscarFactura(idtransaccion);
     }
     
     public int crearFactura(Documento documento){

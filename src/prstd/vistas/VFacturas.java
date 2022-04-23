@@ -1,11 +1,29 @@
 package prstd.vistas;
 
+import com.fel.firma.emisor.FirmaEmisor;
+import com.fel.firma.emisor.RespuestaServicioFirma;
+import com.fel.validaciones.documento.AnulacionFel;
+import com.fel.validaciones.documento.ConexionServicioFel;
+import com.fel.validaciones.documento.GenerarXml;
+import com.fel.validaciones.documento.Respuesta;
+import com.fel.validaciones.documento.RespuestaServicioFel;
+import com.fel.validaciones.documento.ServicioFel;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -16,7 +34,11 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import prstd.modelos.Cliente;
 import prstd.modelos.Documento;
+import prstd.modelos.Emisor;
 import prstd.modelos.Usuario;
 import prstd.modelos.UsuarioCorrelativo;
 
@@ -61,10 +83,10 @@ public class VFacturas extends javax.swing.JDialog {
         btnNuevo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JPanel();
+        btnImprimir = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JPanel();
+        btnAnular = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
@@ -77,7 +99,7 @@ public class VFacturas extends javax.swing.JDialog {
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Multiply_32px.png"))); // NOI18N
         btnMinimizar.setToolTipText("Minimiza la Pantalla Principal");
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
@@ -159,7 +181,7 @@ public class VFacturas extends javax.swing.JDialog {
         btnFiltro.setForeground(new java.awt.Color(0, 0, 0));
         btnFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Filter_30px.png"))); // NOI18N
-        btnFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFiltroMouseClicked(evt);
@@ -239,7 +261,7 @@ public class VFacturas extends javax.swing.JDialog {
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 25));
 
         btnNuevo.setBackground(new java.awt.Color(0, 153, 153));
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevo.setPreferredSize(new java.awt.Dimension(250, 50));
         btnNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,58 +286,58 @@ public class VFacturas extends javax.swing.JDialog {
 
         jPanel3.add(btnNuevo);
 
-        btnEditar.setBackground(new java.awt.Color(0, 153, 153));
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditar.setPreferredSize(new java.awt.Dimension(250, 50));
-        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnImprimir.setBackground(new java.awt.Color(0, 153, 153));
+        btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnImprimir.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnImprimir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEditarMouseClicked(evt);
+                btnImprimirMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarMouseEntered(evt);
+                btnImprimirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarMouseExited(evt);
+                btnImprimirMouseExited(evt);
             }
         });
-        btnEditar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnImprimir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Re Imprimir");
-        btnEditar.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        btnImprimir.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_Print_50px.png"))); // NOI18N
-        btnEditar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnImprimir.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.add(btnEditar);
+        jPanel3.add(btnImprimir);
 
-        btnEliminar.setBackground(new java.awt.Color(0, 153, 153));
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminar.setPreferredSize(new java.awt.Dimension(250, 50));
-        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAnular.setBackground(new java.awt.Color(0, 153, 153));
+        btnAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAnular.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnAnular.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseClicked(evt);
+                btnAnularMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseEntered(evt);
+                btnAnularMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseExited(evt);
+                btnAnularMouseExited(evt);
             }
         });
-        btnEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnAnular.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Anular Factura");
         jLabel9.setToolTipText("");
-        btnEliminar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        btnAnular.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/prstd/images/icons8_File_Delete_50px.png"))); // NOI18N
-        btnEliminar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnAnular.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.add(btnEliminar);
+        jPanel3.add(btnAnular);
 
         panelOpciones.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 250, 610));
 
@@ -376,21 +398,21 @@ public class VFacturas extends javax.swing.JDialog {
         resetColor(btnNuevo);
     }//GEN-LAST:event_btnNuevoMouseExited
 
-    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
-        setColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseEntered
+    private void btnImprimirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseEntered
+        setColor(btnImprimir);
+    }//GEN-LAST:event_btnImprimirMouseEntered
 
-    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
-        resetColor(btnEditar);
-    }//GEN-LAST:event_btnEditarMouseExited
+    private void btnImprimirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseExited
+        resetColor(btnImprimir);
+    }//GEN-LAST:event_btnImprimirMouseExited
 
-    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
-        setColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseEntered
+    private void btnAnularMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseEntered
+        setColor(btnAnular);
+    }//GEN-LAST:event_btnAnularMouseEntered
 
-    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
-        resetColor(btnEliminar);
-    }//GEN-LAST:event_btnEliminarMouseExited
+    private void btnAnularMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseExited
+        resetColor(btnAnular);
+    }//GEN-LAST:event_btnAnularMouseExited
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         busquedaFactura(txtBusqueda.getText());
@@ -408,26 +430,22 @@ public class VFacturas extends javax.swing.JDialog {
         resetBorde(btnFiltro);
     }//GEN-LAST:event_btnFiltroMouseExited
 
-    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+    private void btnAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseClicked
         try{
             Documento documento = new Documento();
             int idtransaccion = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 0);
             int no_factura = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 1);
             String serie = String.valueOf(tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 2));
             String estado = String.valueOf(tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 5));
+            documento = documento.buscarFactura(idtransaccion);
 
             if(!estado.equals("ANULADA")){
                 int op = JOptionPane.showOptionDialog(this, "¿Desa anular la factura seleccionada?", "Anular", 
                                             JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{"Aceptar","Cancelar"}, "Cancelar");
                 if(op != -1){
                     if((op + 1) == 1){
-                        if(documento.anular(idtransaccion, no_factura, serie) > 0){
-                            documento.restaurarExistencias(idtransaccion, no_factura, serie);
-                            JOptionPane.showMessageDialog(this, "**** Factura anulada con éxito ****");
-                            cargarFacturas();
-                        }else{
-                            JOptionPane.showMessageDialog(this, "La factura " + no_factura + " no pudo ser anulada","Error",JOptionPane.ERROR_MESSAGE);
-                        }
+                        // METODO DE ANULACION FEL
+                        this.anulacionFel(documento);
                     }
                 }
             }else{
@@ -435,32 +453,59 @@ public class VFacturas extends javax.swing.JDialog {
             }
         }catch(ArrayIndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un registro para poder proceder con la anulación.","Advertencia",JOptionPane.WARNING_MESSAGE);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnEliminarMouseClicked
+    }//GEN-LAST:event_btnAnularMouseClicked
 
-    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+    private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
         try {
             Documento dc = new Documento();
             int transaccion = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 0);
             int no_factura = (int) tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 1);
             String serie = tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 2).toString();
+            
+            dc = dc.buscarFactura(transaccion);
             if(!tableFacturas.getValueAt(tableFacturas.getSelectedRow(), 5).toString().equals("ANULADA")){
-                if(serie.equals("CA")){
-                    dc.imprimir2(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
-                }else{
-                    dc.imprimir(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+//                if(serie.equals("CA")){
+//                    dc.imprimir2(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+//                }else{
+//                    dc.imprimir(transaccion, no_factura, serie, dc.totalDocumento(transaccion));
+//                }
+
+                // AQUI VA EL CODIGO QUE ABRE EL ENLACE CON LA FACTURA
+                if(java.awt.Desktop.isDesktopSupported()){
+                    java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+                    if(desktop.isSupported(java.awt.Desktop.Action.BROWSE)){
+                        java.net.URI uri = new java.net.URI("https://report.feel.com.gt/ingfacereport/ingfacereport_documento?uuid=" + dc.getCertificacion_sat());
+                        desktop.browse(uri);
+                    }
                 }
             }
             else{
                 JOptionPane.showMessageDialog(this, "No se puede reimprimir una factura ya anulada.");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }catch(IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningun registro.");
+        } catch (IOException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnEditarMouseClicked
+    }//GEN-LAST:event_btnImprimirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,9 +550,9 @@ public class VFacturas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnEditar;
-    private javax.swing.JPanel btnEliminar;
+    private javax.swing.JPanel btnAnular;
     private javax.swing.JLabel btnFiltro;
+    private javax.swing.JPanel btnImprimir;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JPanel btnNuevo;
     private org.jdesktop.swingx.JXDatePicker dateFin;
@@ -636,5 +681,145 @@ public class VFacturas extends javax.swing.JDialog {
         }
         tableFacturas.setModel(modelo);
         configurarTabla(tableFacturas);
+    }
+    
+    /********* ANULACION FEL **********/
+    
+    private void anulacionFel(Documento documento)throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ParseException{
+        
+        Cliente cliente = new Cliente();
+        cliente = cliente.consultarCliente(documento.getIdcliente());
+        
+        Emisor emisor = new Emisor();
+        emisor = emisor.datosEmisor();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'-06:00'", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
+        
+        // CAPTURAR FECHA DE EMISIÓN DE CERTIFICACION DE LA BASE DE DATOS
+        String fechaCertificacion = "";
+        fechaCertificacion = documento.getFecha_certificacion_sat().replace("T", "'T'").replace("-06:00", "'-06:00'");
+        
+        SimpleDateFormat sdf_anulacion = new SimpleDateFormat(fechaCertificacion);
+        sdf_anulacion.setTimeZone(TimeZone.getTimeZone("America/Guatemala"));
+        
+        AnulacionFel anulacion_fel = new AnulacionFel();
+        
+        anulacion_fel.setFechaEmisionDocumentoAnular(sdf_anulacion.format(new Date()));
+        anulacion_fel.setFechaHoraAnulacion(sdf.format(new Date()));
+        
+        if(cliente.getNit().equals("C/F"))
+            anulacion_fel.setIDReceptor(cliente.getNit().replace("/", ""));
+        else
+            anulacion_fel.setIDReceptor(cliente.getNit().replace("-", ""));
+        
+        anulacion_fel.setNITEmisor(emisor.getNit());
+        anulacion_fel.setMotivoAnulacion("Prueba");
+        anulacion_fel.setNumeroDocumentoAAnular(documento.getCertificacion_sat());
+        
+        Respuesta respuesta;
+
+        // Objeto para enviar los datos para generacion del XML
+        GenerarXml generar_xml = new GenerarXml();
+        respuesta = generar_xml.ToXml(anulacion_fel);
+        System.out.println(respuesta.getXml());
+        
+        // Comprobacion de Datos.
+        if (respuesta.getResultado()) {
+
+            try {
+                System.out.println("--> FIRMA POR PARTE DEL EMISOR ");
+                
+                FirmaEmisor firma_emisor = new FirmaEmisor();
+                RespuestaServicioFirma respuesta_firma_emisor = new RespuestaServicioFirma();
+                
+                System.out.println("--> Enviando Documento al Servicio de Firma del Emisor...");
+                
+                respuesta_firma_emisor = firma_emisor.Firmar(respuesta.getXml(), "45146276", "a3c079b60c23f5a105e61f56ceb2dd43");
+                
+                System.out.println("--> Resultado: " + respuesta_firma_emisor.isResultado());
+                System.out.println("--> Descripcion: " + respuesta_firma_emisor.getDescripcion());
+                
+                if (respuesta_firma_emisor.isResultado()) {
+                    
+                    System.out.println("--> ENVIO AL API DE INFILE");
+                    
+                    ConexionServicioFel conexion = new ConexionServicioFel();
+                    conexion.setUrl("");
+                    conexion.setMetodo("POST");
+                    conexion.setContent_type("application/json");
+                    conexion.setUsuario("45146276");
+                    conexion.setLlave("ECB7BEBC7DD0145F94B3F01F859E5C3F");
+                    conexion.setIdentificador("ANULACION_" + documento.getNo_documento());
+                    
+                    System.out.println("--> Enviando Documento al Servicio FEL...");
+                    
+                    ServicioFel servicio = new ServicioFel();
+                    
+                    RespuestaServicioFel respuesta_servicio = servicio.Certificar(conexion, respuesta_firma_emisor.getArchivo(), emisor.getNit(), "N/A", "ANULACION");
+                    
+                    if (respuesta_servicio.getResultado()) {
+                        
+                        System.out.println("--> Resultado: " + respuesta_servicio.getResultado());
+                        System.out.println("--> Origen: " + respuesta_servicio.getOrigen());
+                        System.out.println("--> Descripcion: " + respuesta_servicio.getDescripcion());
+                        System.out.println("--> Cantidad Errores: " + respuesta_servicio.getCantidad_errores());
+                        System.out.println("--> INFO: " + respuesta_servicio.getInfo());
+                        
+                        System.out.println("UUID: " + respuesta_servicio.getUuid());
+                        System.out.println("Serie: " + respuesta_servicio.getSerie());
+                        System.out.println("Numero: " + respuesta_servicio.getNumero());
+                        
+                        if(documento.anular(documento.getIdtransaccion(), documento.getNo_documento(), documento.getSerie()) > 0){
+                            documento.restaurarExistencias(documento.getIdtransaccion(), documento.getNo_documento(), documento.getSerie());
+                            JOptionPane.showMessageDialog(this, "**** Factura anulada con éxito ****");
+                            cargarFacturas();
+                        }else{
+                            JOptionPane.showMessageDialog(this, "La factura no pudo ser anulada","Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                    } else {
+                        
+                        System.out.println("--> Resultado: " + respuesta_servicio.getResultado());
+                        System.out.println("--> Origen: " + respuesta_servicio.getOrigen());
+                        System.out.println("--> Descripcion: " + respuesta_servicio.getDescripcion());
+                        System.out.println("--> Cantidad Errores: " + respuesta_servicio.getCantidad_errores());
+                        System.out.println("--> INFO: " + respuesta_servicio.getInfo());
+                        
+                        String errores = "";
+                        for (int i = 0; i < respuesta_servicio.getCantidad_errores(); i++) {
+                            System.out.println(respuesta_servicio.getDescripcion_errores().get(i).getMensaje_error());
+                            errores += respuesta_servicio.getDescripcion_errores().get(i).getMensaje_error() + "\n";
+                        }
+                        
+                        JOptionPane.showMessageDialog(this, errores, "Error -> Cantidad de Errores" + respuesta_servicio.getCantidad_errores(), JOptionPane.ERROR_MESSAGE);
+                        
+                    }
+                    
+                }
+            } catch (KeyManagementException ex) {
+                Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(VFacturas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+           
+        } else {
+           
+            //System.out.println(respuesta.getDescripcion());
+            //System.out.println(respuesta.getCantidad_errores());
+            // Ciclo para recorrer los errores.    
+            respuesta.getErrores().forEach((error) -> {
+                System.out.println(error);
+            });
+
+        }
+
+        // Luego de obtener el resultado entonces se procede a enviar el xml al servicio de FEL de INFILE
+        if (respuesta.getResultado()) {
+
+        }
     }
 }
