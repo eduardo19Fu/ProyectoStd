@@ -1538,7 +1538,6 @@ public class VCrearFactura extends javax.swing.JDialog {
         }
 
         // DATOS DEL DETALLE DE LA FACTURA
-        
         for (int i = 0; i < modelo.getRowCount(); i++) {
             producto = new Producto();
             producto = producto.buscarProducto(modelo.getValueAt(i, 1).toString());
